@@ -1,0 +1,121 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: "Arial";
+}
+
+body {
+    
+}
+
+#home-page {
+    background-image: url('../img/splash-screen.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+}
+
+#btnContainer{
+	position: absolute;
+	right: 0;
+	margin: 10px;
+	bottom: 0;
+}
+
+#btnGo{
+	padding: 10px;
+	border: none;
+	font-size: 20px;
+	background-color: transparent;
+}
+
+#top-menu{
+	background-color: #212121;
+	width: 100%;
+	height: 35px;
+}
+
+#top-menu #tools-right{
+	height: inherit;
+	float: left;
+}
+
+#top-menu #tools-right img{
+	width: 20px;
+	padding: 7px 12px;
+}
+
+#active{
+	background-color: #575656;
+}
+
+#tools-right #pen-width{
+	width: 30%;
+	padding: 7px 12px;
+}
+
+input[type="color"] {
+	-webkit-appearance: none;
+	border: none;
+	width: 32px;
+	height: inherit;
+	border-radius: 50%;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+	border-radius: 50%;
+}
+
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+	border-radius: 50%;
+}
+
+#top-menu #menu-left{
+	height: inherit;
+	float: right;
+}
+
+#menu-left i{
+ 	font-size: 20px;
+ 	padding: 7px 7px;
+ 	color: white;
+}
+
+#left-menu{
+	background-color: #d3d0d0;
+	height: 89%;
+	position: absolute;
+	width: 44px;
+	opacity: .9;
+}
+
+#left-menu img{
+	width: 25px;
+	padding: 9px;
+}
+
+#sketch{
+	z-index: -1;
+	width: 100%;
+	height: 85%;
+	position: absolute;
+}
+
+#tmp_canvas {
+    position: absolute;
+    left: 0px; 
+    right: 0;
+    bottom: 0; 
+    top: 0;
+}
+
+#bottom-menu{
+	position: absolute;
+	bottom: 0;
+	background-color: white;
+	height: 21px;
+	width: 100%;
+	box-shadow: 0px -1px 10px gray;
+}
