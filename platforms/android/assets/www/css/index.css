@@ -29,30 +29,56 @@ body {
 	background-color: transparent;
 }
 
-#top-menu{
+.top-menu{
 	background-color: #212121;
 	width: 100%;
-	height: 37px;
+	height: 38px;
+	transition: .325s;
 }
 
-#top-menu #tools-right{
+/*collapse button*/
+
+
+.tools-hidden{
+	display: none;
+	transition: .325s;
+}
+
+.tools-hiddens{
+	width: 45px;
+	transition: .325s;
+}
+
+/*collapse  button ends here*/
+
+.active-grid{
+	background-color: #afafaf;
+}
+
+.top-menu #tools-left{
 	height: inherit;
 	float: left;
+	width: 450px;
 }
 
-#top-menu #tools-right img{
+.top-menu #tools-left img{
 	width: 20px;
 	padding: 7px 12px;
 }
 
 .active{
 	background-color: #313131;
-	border-top: 2px solid white;
+	border-top: 3px solid #ff5d00;
 }
 
-#tools-right #pen-width{
+.active-left{
+	background-color: white;
+	border-left: 3px solid #ff5d00;
+}
+
+#tools-left #pen-width{
 	width: 30%;
-	padding: 7px 12px;
+	padding: 7px 32px;
 }
 
 input[type="color"] {
@@ -73,26 +99,26 @@ input[type="color"]::-webkit-color-swatch {
 	border-radius: 50%;
 }
 
-#top-menu #menu-left{
+.top-menu #menu-right{
 	height: inherit;
 	float: right;
 }
 
-#menu-left i{
+#menu-right i{
  	font-size: 20px;
  	padding: 7px 7px;
  	color: white;
 }
 
-#left-menu{
+.left-menu{
 	background-color: #d3d0d0;
-	height: 89%;
+	height: 87%;
 	position: absolute;
 	width: 44px;
 	opacity: .9;
 }
 
-#left-menu img{
+.left-menu img{
 	width: 25px;
 	padding: 9px;
 }
@@ -100,7 +126,7 @@ input[type="color"]::-webkit-color-swatch {
 #sketch{
 	z-index: -1;
 	width: 100%;
-	height: 85%;
+	height: 95%;
 	position: absolute;
 }
 

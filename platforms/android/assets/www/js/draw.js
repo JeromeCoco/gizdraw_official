@@ -26,17 +26,16 @@
 
 	/* Mouse Capturing Work */
 	tmp_canvas.addEventListener('touchmove', function(e) {
-		var targetYval = e.targetTouches[0].pageY - 17;
-		var targetXval = e.targetTouches[0].pageX - 17;
+		var targetYval = e.targetTouches[0].pageY - 40;
+		var targetXval = e.targetTouches[0].pageX - 0;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 	}, false);
 	
 	/* Drawing on Paint App */
 	$('#pen-width').change(function () {
-		markerWidth = parseInt($('#pen-width').val());
+		markerWidth = parseInt($(this).val());
 		tmp_ctx.lineWidth = markerWidth;
-		$('#pen-width-label').val(markerWidth);
 	});
 
 	// tmp_ctx.lineWidth = markerWidth;
@@ -51,8 +50,8 @@
 	
 	tmp_canvas.addEventListener('touchstart', function(e) {
 		tmp_canvas.addEventListener('touchmove', onPaint, false);
-		var targetYval = e.targetTouches[0].pageY - 17;
-		var targetXval = e.targetTouches[0].pageX - 17;
+		var targetYval = e.targetTouches[0].pageY - 40;
+		var targetXval = e.targetTouches[0].pageX - 0;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 		ppts.push({x: mouse.x, y: mouse.y});
@@ -145,7 +144,7 @@
 	});
 
 	$('#redo').click(function(){
-		if (cStep < cPushArray.length-1)
+		if (cStep < cPushArray.length - 1)
 		{
 	        cStep++;
 	        var canvasPic = new Image();
