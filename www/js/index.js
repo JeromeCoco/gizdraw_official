@@ -60,4 +60,8 @@ $(document).ready(function(){
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active-left');
 	});
+
+	$('#grid').click(function(){
+		$(this).toggleClass('active-grid');
+	});
 });

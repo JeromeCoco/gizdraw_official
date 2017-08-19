@@ -51,6 +51,10 @@ body {
 
 /*collapse  button ends here*/
 
+.active-grid{
+	background-color: #afafaf;
+}
+
 .top-menu #tools-left{
 	height: inherit;
 	float: left;
