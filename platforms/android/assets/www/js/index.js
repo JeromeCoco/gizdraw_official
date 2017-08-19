@@ -4,14 +4,6 @@ $(document).ready(function(){
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
 
-	/*$("#show").click(function(target){
-		$("#popover").show(target);
-	});
-
-	$("#hide").click(function(target){
-		$("#popover").hide();
-	});*/
-
 	$('#pencil').click(function(){
 		$('.tools-item').removeClass('active');
 		$(this).addClass('active');
@@ -27,22 +19,7 @@ $(document).ready(function(){
 		$(this).addClass('active');
 	});
 
-	$('#shapes').click(function(){
-		$('.tools-item').removeClass('active');
-		$(this).addClass('active');
-	});
-
-	$('#move').click(function(){
-		$('.tools-item').removeClass('active');
-		$(this).addClass('active');
-	});
-
-	$('#paintbucket').click(function(){
-		$('.tools-item').removeClass('active');
-		$(this).addClass('active');
-	});
-
-	$('#colorpicker').click(function(){
+	$('#blender').click(function(){
 		$('.tools-item').removeClass('active');
 		$(this).addClass('active');
 	});

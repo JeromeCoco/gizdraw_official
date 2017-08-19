@@ -4,46 +4,60 @@ $(document).ready(function(){
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
 
-	/*$("#show").click(function(target){
-		$("#popover").show(target);
+	$("#collapse-tools").click(function(){
+		$(".left-menu").toggleClass('tools-hidden');
+		$(".top-menu").toggleClass('tools-hiddens');
+		$(".tools-item").toggleClass('tools-hidden');
+		$("#pen-width").toggleClass('tools-hidden');
+		$("#menu-right").toggleClass('tools-hidden');
+		$(".tools-left").toggleClass('tools-hidden');
 	});
-
-	$("#hide").click(function(target){
-		$("#popover").hide();
-	});*/
 
 	$('#pencil').click(function(){
 		$('.tools-item').removeClass('active');
+		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active');
 	});
 
 	$('#brush').click(function(){
 		$('.tools-item').removeClass('active');
+		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active');
 	});
 
 	$('#eraser').click(function(){
 		$('.tools-item').removeClass('active');
+		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active');
+	});
+
+	$('#blender').click(function(){
+		$('.tools-item').removeClass('active');
+		$('.tools-left').removeClass('active-left');
+		$(this).addClass('active');
+	});
+
+	$('#color-picker').click(function(){
+		$('.tools-item').removeClass('active');	
+		$('.tools-left').removeClass('active-left');
+		$(this).addClass('active-left');
+	});
+
+	$('#paint-bucket').click(function(){
+		$('.tools-item').removeClass('active');	
+		$('.tools-left').removeClass('active-left');
+		$(this).addClass('active-left');
 	});
 
 	$('#shapes').click(function(){
-		$('.tools-item').removeClass('active');
-		$(this).addClass('active');
+		$('.tools-item').removeClass('active');	
+		$('.tools-left').removeClass('active-left');
+		$(this).addClass('active-left');
 	});
 
-	$('#move').click(function(){
-		$('.tools-item').removeClass('active');
-		$(this).addClass('active');
-	});
-
-	$('#paintbucket').click(function(){
-		$('.tools-item').removeClass('active');
-		$(this).addClass('active');
-	});
-
-	$('#colorpicker').click(function(){
-		$('.tools-item').removeClass('active');
-		$(this).addClass('active');
+	$('#move-tool').click(function(){
+		$('.tools-item').removeClass('active');	
+		$('.tools-left').removeClass('active-left');
+		$(this).addClass('active-left');
 	});
 });

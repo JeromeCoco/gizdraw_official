@@ -1,4 +1,5 @@
 (function() {	
+	//screen.orientation.lock('landscape');
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth = 5;	

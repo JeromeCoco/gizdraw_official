@@ -1,0 +1,100 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-plugin-screenorientation-landscape",
+        "scope": null,
+        "escapedName": "cordova-plugin-screenorientation-landscape",
+        "name": "cordova-plugin-screenorientation-landscape",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\users\\jerom\\desktop\\gizdraw\\node_modules"
+    ]
+  ],
+  "_from": "cordova-plugin-screenorientation-landscape@latest",
+  "_id": "cordova-plugin-screenorientation-landscape@1.0.22",
+  "_inCache": true,
+  "_location": "/cordova-plugin-screenorientation-landscape",
+  "_npmOperationalInternal": {
+    "host": "packages-9-west.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-screenorientation-landscape-1.0.22.tgz_1456385694984_0.6054105726070702"
+  },
+  "_npmUser": {
+    "name": "cranberrygame",
+    "email": "cranberrygame@yahoo.com"
+  },
+  "_npmVersion": "1.4.28",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-plugin-screenorientation-landscape",
+    "scope": null,
+    "escapedName": "cordova-plugin-screenorientation-landscape",
+    "name": "cordova-plugin-screenorientation-landscape",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-screenorientation-landscape/-/cordova-plugin-screenorientation-landscape-1.0.22.tgz",
+  "_shasum": "8b5b9037402a104c14535c9f2840fbdf8f7d2c2e",
+  "_shrinkwrap": null,
+  "_spec": "cordova-plugin-screenorientation-landscape",
+  "_where": "C:\\users\\jerom\\desktop\\gizdraw\\node_modules",
+  "author": {
+    "name": "cranberrygame"
+  },
+  "bugs": {
+    "url": "https://github.com/cranberrygame/cordova-plugin-screenorientation-landscape/issues"
+  },
+  "cordova": {
+    "id": "cordova-plugin-screenorientation-landscape",
+    "platforms": [
+      "ios"
+    ]
+  },
+  "dependencies": {},
+  "description": "auto lock screen orientation landscape. (fix xdk not locking ios orientation issue, for example: not restore landscape after taking camera picture)",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "8b5b9037402a104c14535c9f2840fbdf8f7d2c2e",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-screenorientation-landscape/-/cordova-plugin-screenorientation-landscape-1.0.22.tgz"
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "gitHead": "dba73f36861ffcf4b9bbaec32c09f64e13778c10",
+  "homepage": "https://github.com/cranberrygame/cordova-plugin-screenorientation-landscape#readme",
+  "keywords": [
+    "cordova",
+    "screen",
+    "orientation",
+    "landscape",
+    "ecosystem:cordova",
+    "cordova-ios"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "cranberrygame",
+      "email": "cranberrygame@yahoo.com"
+    }
+  ],
+  "name": "cordova-plugin-screenorientation-landscape",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cranberrygame/cordova-plugin-screenorientation-landscape.git"
+  },
+  "scripts": {},
+  "version": "1.0.22"
+}

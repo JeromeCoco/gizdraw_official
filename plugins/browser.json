@@ -12,6 +12,12 @@
         },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.example.GizDraw"
+        },
+        "cordova-plugin-screenorientation-landscape": {
+            "PACKAGE_NAME": "com.example.GizDraw"
+        },
+        "cordova-plugin-screen-orientation": {
+            "PACKAGE_NAME": "com.example.GizDraw"
         }
     },
     "dependent_plugins": {}
