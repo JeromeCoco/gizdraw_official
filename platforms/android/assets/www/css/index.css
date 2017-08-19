@@ -33,7 +33,7 @@ body {
 	background-color: #212121;
 	width: 100%;
 	height: 38px;
-	transition: .325s;
+	transition: .225s;
 }
 
 /*collapse button*/
@@ -41,12 +41,12 @@ body {
 
 .tools-hidden{
 	display: none;
-	transition: .325s;
+	transition: .225s;
 }
 
 .tools-hiddens{
 	width: 45px;
-	transition: .325s;
+	transition: .225s;
 }
 
 /*collapse  button ends here*/
