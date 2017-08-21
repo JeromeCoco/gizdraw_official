@@ -33,7 +33,7 @@ body {
 	background-color: #212121;
 	width: 100%;
 	height: 38px;
-	transition: .225s;
+	transition: .325s;
 }
 
 /*collapse button*/
@@ -41,12 +41,12 @@ body {
 
 .tools-hidden{
 	display: none;
-	transition: .225s;
+	transition: .325s;
 }
 
 .tools-hiddens{
 	width: 45px;
-	transition: .225s;
+	transition: .325s;
 }
 
 /*collapse  button ends here*/
@@ -132,7 +132,7 @@ input[type="color"]::-webkit-color-swatch {
 
 #tmp_canvas {
     position: absolute;
-    left: 0px; 
+    left: 0px;
     right: 0;
     bottom: 0; 
     top: 0;

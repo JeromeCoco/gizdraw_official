@@ -26,8 +26,8 @@
 
 	/* Mouse Capturing Work */
 	tmp_canvas.addEventListener('touchmove', function(e) {
-		var targetYval = e.targetTouches[0].pageY - 40;
-		var targetXval = e.targetTouches[0].pageX - 0;
+		var targetYval = e.targetTouches[0].pageY;
+		var targetXval = e.targetTouches[0].pageX;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 	}, false);
@@ -50,8 +50,8 @@
 	
 	tmp_canvas.addEventListener('touchstart', function(e) {
 		tmp_canvas.addEventListener('touchmove', onPaint, false);
-		var targetYval = e.targetTouches[0].pageY - 40;
-		var targetXval = e.targetTouches[0].pageX - 0;
+		var targetYval = e.targetTouches[0].pageY;
+		var targetXval = e.targetTouches[0].pageX;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 		ppts.push({x: mouse.x, y: mouse.y});
