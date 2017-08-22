@@ -146,3 +146,16 @@ input[type="color"]::-webkit-color-swatch {
 	width: 100%;
 	box-shadow: 0px -1px 10px gray;
 }
+
+.grid-svg{
+	position: absolute;
+    left: 0px;
+    right: 0;
+    bottom: 0; 
+    top: 0;
+    display: none;
+}
+
+.show-grid{
+	display: block;
+}

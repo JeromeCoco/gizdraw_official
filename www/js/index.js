@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+	var grid = 0;
 	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
@@ -63,5 +63,6 @@ $(document).ready(function(){
 
 	$('#grid').click(function(){
 		$(this).toggleClass('active-grid');
+		$('.grid-svg').toggleClass('show-grid');
 	});
 });
