@@ -1,4 +1,5 @@
 (function() {	
+	
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth = 5;	
@@ -244,6 +245,5 @@
 		clrpckr = false;
 		console.log(clrpckr);
 	});
-
-
+	
 }());
