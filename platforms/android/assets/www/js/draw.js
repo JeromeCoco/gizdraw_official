@@ -1,6 +1,5 @@
 (function() {	
 	
-
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth = 5;	
@@ -246,19 +245,5 @@
 		clrpckr = false;
 		console.log(clrpckr);
 	});
-
-	var pinchZoom = new PinchZoomCanvas({
-    canvas: document.querySelector('#paint'),
-    path: cPushArray,
-    momentum: true,
-    zoomMax: 2,
-    doubletap: true,
-    onZoomEnd: function (zoom, zoomed) {
-        console.log("---> is zoomed: %s", zoomed);
-        console.log("---> zoom end at %s", zoom);
-    },
-    onZoom: function (zoom) {
-        console.log("---> zoom is %s", zoom);
-    }
-    });
+	
 }());

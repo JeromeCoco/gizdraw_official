@@ -1,9 +1,5 @@
 $(document).ready(function(){
 
-	$("#colorpicker").spectrum({
-    	color: "#121212"
-	});
-
 	var grid = 0;
 	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
