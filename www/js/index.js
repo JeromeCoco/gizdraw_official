@@ -65,4 +65,13 @@ $(document).ready(function(){
 		$(this).toggleClass('active-grid');
 		$('.grid-svg').toggleClass('show-grid');
 	});
+
+	$('#settings').click(function(){
+		$(this).toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
+	});
+
+	$('#new-canvas').click(function(){
+		alert("clear canvas");
+	});
 });

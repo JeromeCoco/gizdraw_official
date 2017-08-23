@@ -17,7 +17,8 @@
     "cordova-plugin-splashscreen": "^4.0.3",
     "cordova-plugin-whitelist": "^1.3.2",
     "es6-promise-plugin": "git+https://github.com/vstirbu/PromisesPlugin.git",
-    "material-components-web": "^0.18.0"
+    "material-components-web": "^0.18.0",
+    "rangeslider.js": "^2.3.1"
   },
   "cordova": {
     "plugins": {
