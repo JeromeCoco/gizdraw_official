@@ -8,11 +8,26 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/onsen-css-components.css">
         <link rel="stylesheet" type="text/css" href="css/onsenui.css">
+        <link rel="stylesheet" type="text/css" href="css/spectrum.css">
         <title>GIZDRAW</title>
     </head>
     <body>
         <ons-page>
 	        <div id="sketch">
+	        	<div class="grid-svg">
+  					<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+	    				<defs>
+	      					<pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+	        					<path d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" stroke-width="0.5"/>
+	      					</pattern>
+	      					<pattern id="grids" width="80" height="80" patternUnits="userSpaceOnUse">
+	        					<rect width="80" height="80" fill="url(#smallGrid)"/>
+	        					<path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="1"/>
+	      					</pattern>
+	    				</defs>
+	    				<rect width="100%" height="100%" fill="url(#grids)" />
+  					</svg>
+				</div>
 	            <canvas id="paint"></canvas>
 	        </div>
 			<div class="top-menu">
@@ -22,13 +37,23 @@
 		    		<img src="img/brush-stroke.svg" class="tools-item" id="brush">
 		    		<img src="img/rubber.svg" class="tools-item" id="eraser">
 		    		<img src="img/chalk.svg" class="tools-item" id="blender">
-		    		<!-- <input type="color" name="penColor" id="pen-color"/> -->
+		    		<input type="color" name="penColor" id="pen-color"/>
+		    		<!-- <span><input id="colorpicker"></span> -->
 		    		<input type="range" class="slider" name="penWidth" max="50" min="1" value="1" id="pen-width"/>
 		    	</div>
 		    	<div id="menu-right">
 		    		<i class="fa fa-undo" aria-hidden="true" id="undo"></i>
 		    		<i class="fa fa-repeat" aria-hidden="true" id="redo"></i>
 		    		<i class="fa fa-bars" aria-hidden="true" id="settings"></i>
+		    		<div class="drop-menu">
+		    			<ul>
+		    				<li id="new-canvas">New canvas</li>
+		    				<li>Open file...</li>
+		    				<li>Share</li>
+		    				<li>Save as...</li>
+		    				<li>Canvas Settings</li>
+		    			</ul>
+		    		</div>
 		    	</div>
 		  	</div>
 		  	<div class="left-menu">
@@ -39,11 +64,11 @@
 		  		<img class="tools-left" id="grid" src="img/grid.svg">
 		  	</div>
 	        <div id="bottom-menu">
-	        	
 	        </div>
         </ons-page>
         <script type="text/javascript" src="js/onsenui.js"></script>
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/spectrum.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script src="js/draw.js"></script>
     </body>

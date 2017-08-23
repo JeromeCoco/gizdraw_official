@@ -1,12 +1,12 @@
 (function() {	
-	//screen.orientation.lock('landscape');
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth = 5;	
 	var markerColor = '#000';
 	var sketch = document.querySelector('#sketch');
 	var sketch_style = getComputedStyle(sketch);
-
+	var clrpckr = false;
+	var pen = true;
 	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
 	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 	
@@ -34,8 +34,9 @@
 	
 	/* Drawing on Paint App */
 	$('#pen-width').change(function () {
-		markerWidth = parseInt($(this).val());
+		markerWidth = parseInt($('#pen-width').val());
 		tmp_ctx.lineWidth = markerWidth;
+		$('#pen-width-label').val(markerWidth);
 	});
 
 	// tmp_ctx.lineWidth = markerWidth;
@@ -55,6 +56,45 @@
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 		ppts.push({x: mouse.x, y: mouse.y});
+		if (clrpckr == true) {
+			var canvasPic = new Image();
+			canvasPic.src = cPushArray[cStep];
+
+			canvasPic.onload = function () {
+				ctx.drawImage(canvasPic, 0, 0);
+			}
+			// user coordinates
+			var targetYval = e.targetTouches[0].pageY;
+			var targetXval = e.targetTouches[0].pageX;
+			mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+			mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+			// console.log(mouse.x + ',' + mouse.y);
+
+			// image data and RGB values 
+			var img_data = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
+			var R = img_data[0];
+			var G = img_data[1];
+			var B = img_data[2];
+			var A = img_data[3];
+			console.log(img_data);
+			var rgb = R + ',' + G + ',' + B + ',' + A;
+
+			var hex = rgbToHex(R, G, B);
+
+			// if (hex)
+			console.log(rgb + ',' + hex + ',' + A );
+			if (A == 0) {
+				markerColor = '#FFF';
+			}
+			else {
+				markerColor = '#'+ hex;
+			}
+				console.log(markerColor);
+				$('#pen-color').value = markerColor;
+				tmp_ctx.strokeStyle = markerColor;
+				tmp_ctx.fillStyle = markerColor;
+
+		}
 		onPaint();
 	}, false);
 	
@@ -140,11 +180,12 @@
 	        	ctx.drawImage(canvasPic, 0, 0); 
 	        }
 	        canvasPic.src = cPushArray[cStep];
+	        // console.log(canvasPic);
 	    }
 	});
 
 	$('#redo').click(function(){
-		if (cStep < cPushArray.length - 1)
+		if (cStep < cPushArray.length-1)
 		{
 	        cStep++;
 	        var canvasPic = new Image();
@@ -152,4 +193,57 @@
 	        canvasPic.onload = function () { ctx.drawImage(canvasPic, 0, 0); }
    		}
 	});
+
+	function rgbToHex(R,G,B) {
+		return toHex(R)+toHex(G)+toHex(B)
+	}
+	function toHex(n) {
+	  n = parseInt(n,10);
+	  if (isNaN(n)) return "00";
+	  n = Math.max(0,Math.min(n,255));
+	  return "0123456789ABCDEF".charAt((n-n%16)/16)  + "0123456789ABCDEF".charAt(n%16);
+	}
+
+	// function colorpick() {
+	// 	var canvasPic = new Image();
+	// 	canvasPic.src = cPushArray[cStep];
+	// 	canvasPic.onload = function () {
+	// 		ctx.drawImage(canvasPic, 0, 0);
+	// 	}
+	// 		// console.log(canvasPic);
+	// 	// user coordinates
+	// 	var targetYval = e.targetTouches[0].pageY;
+	// 	var targetXval = e.targetTouches[0].pageX;
+	// 	mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+	// 	mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+	// 	// console.log(mouse.x + ',' + mouse.y);
+
+	// 	// image data and RGB values 
+	// 	var img_data = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
+	// 	var R = img_data[0];
+	// 	var G = img_data[1];
+	// 	var B = img_data[2];
+
+	// 	var rgb = R + ',' + G + ',' + B;
+
+	// 	var hex = rgbToHex(R, G, B);
+
+
+	// 	markerColor = '#'+ hex;
+	// 	console.log(markerColor);
+	// 	tmp_ctx.strokeStyle = markerColor;
+	// 	tmp_ctx.fillStyle = markerColor;
+	// }
+
+	$('#color-picker').click(function(){
+		clrpckr = true;
+		console.log(clrpckr);
+	});
+
+	$('#pencil').click(function(){
+		clrpckr = false;
+		console.log(clrpckr);
+	});
+
+
 }());

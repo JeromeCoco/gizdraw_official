@@ -1,5 +1,10 @@
 $(document).ready(function(){
 
+	$("#colorpicker").spectrum({
+    	color: "#121212"
+	});
+
+	var grid = 0;
 	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
@@ -9,6 +14,7 @@ $(document).ready(function(){
 		$(".top-menu").toggleClass('tools-hiddens');
 		$(".tools-item").toggleClass('tools-hidden');
 		$("#pen-width").toggleClass('tools-hidden');
+		$("span").toggleClass('tools-hidden');
 		$("#menu-right").toggleClass('tools-hidden');
 		$(".tools-left").toggleClass('tools-hidden');
 	});
@@ -63,5 +69,15 @@ $(document).ready(function(){
 
 	$('#grid').click(function(){
 		$(this).toggleClass('active-grid');
+		$('.grid-svg').toggleClass('show-grid');
+	});
+
+	$('#settings').click(function(){
+		$(this).toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
+	});
+
+	$('#new-canvas').click(function(){
+		alert("clear canvas");
 	});
 });

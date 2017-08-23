@@ -1,4 +1,9 @@
 $(document).ready(function(){
+
+	$("#colorpicker").spectrum({
+    	color: "#121212"
+	});
+
 	var grid = 0;
 	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
@@ -9,6 +14,7 @@ $(document).ready(function(){
 		$(".top-menu").toggleClass('tools-hiddens');
 		$(".tools-item").toggleClass('tools-hidden');
 		$("#pen-width").toggleClass('tools-hidden');
+		$("span").toggleClass('tools-hidden');
 		$("#menu-right").toggleClass('tools-hidden');
 		$(".tools-left").toggleClass('tools-hidden');
 	});
