@@ -72,8 +72,5 @@ $(document).ready(function(){
 		$(this).toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
 	});
-
-	$('#new-canvas').click(function(){
-		alert("clear canvas");
-	});
+	
 });

@@ -1,0 +1,24 @@
+LAST TASKING (DEADLINE: August 30, 2017)
+
+MOBILE
+	Brush/Eraser (Function)
+	Color Swatch Plugin (UI)
+	Blender Tool/Paint Bucket (Function)
+
+	Menu (UI)
+		New Canvas (Function)
+		Canvas Settings (UI)
+	Settings (UI)
+		Set Background Color (UI/Function)
+		Connect To PC (UI)
+
+DESKTOP
+	New Canvas
+		Set Limitation of Canvas Size (Function)
+		Preview (UI)
+	Open file... (UI)
+	About GizDraw (UI)
+
+Testing / Planning for Defense (August 31 - September 1)
+
+

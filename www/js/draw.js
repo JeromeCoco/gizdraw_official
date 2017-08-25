@@ -90,11 +90,10 @@
 			else {
 				markerColor = '#'+ hex;
 			}
-				console.log(markerColor);
-				$('#pen-color').value = markerColor;
-				tmp_ctx.strokeStyle = markerColor;
-				tmp_ctx.fillStyle = markerColor;
-
+			console.log(markerColor);
+			$('#pen-color').value = markerColor;
+			tmp_ctx.strokeStyle = markerColor;
+			tmp_ctx.fillStyle = markerColor;
 		}
 		onPaint();
 	}, false);
@@ -162,7 +161,7 @@
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
-	$('#new').click(function(){
+	$('#new-canvas').click(function(){
 		resetCanvas();
 	});
 

@@ -10,7 +10,7 @@ $(document).ready(function(){
 		$(".top-menu").toggleClass('tools-hiddens');
 		$(".tools-item").toggleClass('tools-hidden');
 		$("#pen-width").toggleClass('tools-hidden');
-		$("span").toggleClass('tools-hidden');
+		$("#pen-color").toggleClass('tools-hidden');
 		$("#menu-right").toggleClass('tools-hidden');
 		$(".tools-left").toggleClass('tools-hidden');
 	});
