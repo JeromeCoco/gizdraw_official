@@ -4,6 +4,8 @@ $(document).ready(function(){
 	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
+	$('#canvas-settings-modal').css("display", "none");
+	$('#custom-bg-color').css("display", "none");
 
 	$("#collapse-tools").click(function(){
 		$(".left-menu").toggleClass('tools-hidden');
@@ -73,4 +75,20 @@ $(document).ready(function(){
 		$('.drop-menu').toggleClass('show-menu');
 	});
 	
+	$('#canvas-settings').click(function(){
+		$('#canvas-settings-modal').css("display", "block");
+	});
+
+	$('.close').click(function(){
+		$('#canvas-settings-modal').css("display", "none");
+	});
+
+	$('#canvas-type').change(function(){
+		var canvasType = $(this).val();
+		if (canvasType == "Color") {
+			$('#custom-bg-color').fadeIn('fast');
+		} else {
+			$('#custom-bg-color').fadeOut('fast');
+		}
+	});
 });

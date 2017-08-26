@@ -50,7 +50,8 @@
 		    				<li>Open file...</li>
 		    				<li>Share</li>
 		    				<li>Save as...</li>
-		    				<li>Canvas Settings</li>
+		    				<li id="canvas-settings">Canvas Options...</li>
+		    				<li>Connect to PC...</li>
 		    			</ul>
 		    		</div>
 		    	</div>
@@ -66,6 +67,20 @@
 
 	        </div>
         </ons-page>
+        <div id="canvas-settings-modal" class="modal">
+  			<div class="modal-content">
+    			<div class="modal-body">
+    				<span>Set canvas background:</span>
+    				<select id="canvas-type">
+    					<option>Transparent</option>
+    					<option>Color</option>
+    					<option>White</option>
+    				</select>
+    				<input type="color" id="custom-bg-color" />
+    				<button class="close">Set</button>
+    			</div>
+  			</div>
+		</div>
         <script type="text/javascript" src="js/onsenui.js"></script>
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

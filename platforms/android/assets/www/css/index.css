@@ -125,18 +125,18 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 #sketch{
-	z-index: -1;
+  z-index: -1;
 	width: 100%;
 	height: 95%;
 	position: absolute;
 }
 
 #tmp_canvas {
-    position: absolute;
-    left: 0px;
-    right: 0;
-    bottom: 0; 
-    top: 0;
+  position: absolute;
+  left: 0px;
+  right: 0;
+  bottom: 0; 
+  top: 0;
 }
 
 #bottom-menu{
@@ -150,16 +150,15 @@ input[type="color"]::-webkit-color-swatch {
 
 .grid-svg{
 	position: absolute;
-    left: 0px;
-    right: 0;
-    bottom: 0; 
-    top: 0;
-    display: none;
+  left: 0px;
+  right: 0;
+  bottom: 0; 
+  top: 0;
+  display: none;
 }
 
 .show-grid{
 	display: block;
-	z-index: -3;
 }
 
 .drop-menu{
@@ -187,8 +186,8 @@ input[type="color"]::-webkit-color-swatch {
 /*slider css*/
 input[type=range].slider {
   -webkit-appearance: none;
-  width: 205px;
-  margin: -1px 5px;
+  width: 170px;
+  margin: -1px 15px;
   position: absolute;
   top: 20px;
 }
