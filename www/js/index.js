@@ -1,11 +1,14 @@
 $(document).ready(function(){
 
 	var grid = 0;
+
 	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
+
 	$('#canvas-settings-modal').css("display", "none");
 	$('#custom-bg-color').css("display", "none");
+	$('#connect-modal').css("display", "none");
 
 	$("#collapse-tools").click(function(){
 		$(".left-menu").toggleClass('tools-hidden');
@@ -83,12 +86,20 @@ $(document).ready(function(){
 		$('#canvas-settings-modal').css("display", "none");
 	});
 
+	$('.close-connect').click(function(){
+		$('#connect-modal').css("display", "none");
+	});
+
 	$('#canvas-type').change(function(){
 		var canvasType = $(this).val();
 		if (canvasType == "Color") {
-			$('#custom-bg-color').fadeIn('fast');
+			$('#custom-bg-color').fadeIn('slow');
 		} else {
-			$('#custom-bg-color').fadeOut('fast');
+			$('#custom-bg-color').fadeOut('slow');
 		}
+	});
+
+	$('#connect-pc').click(function(){
+		$('#connect-modal').css("display", "block");
 	});
 });
