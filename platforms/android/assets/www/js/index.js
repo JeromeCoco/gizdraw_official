@@ -8,6 +8,7 @@ $(document).ready(function(){
 
 	$('#canvas-settings-modal').css("display", "none");
 	$('#custom-bg-color').css("display", "none");
+	$('#connect-modal').css("display", "none");
 
 	$("#collapse-tools").click(function(){
 		$(".left-menu").toggleClass('tools-hidden');
@@ -85,6 +86,10 @@ $(document).ready(function(){
 		$('#canvas-settings-modal').css("display", "none");
 	});
 
+	$('.close-connect').click(function(){
+		$('#connect-modal').css("display", "none");
+	});
+
 	$('#canvas-type').change(function(){
 		var canvasType = $(this).val();
 		if (canvasType == "Color") {
@@ -92,5 +97,9 @@ $(document).ready(function(){
 		} else {
 			$('#custom-bg-color').fadeOut('slow');
 		}
+	});
+
+	$('#connect-pc').click(function(){
+		$('#connect-modal').css("display", "block");
 	});
 });

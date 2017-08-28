@@ -4,21 +4,17 @@ MOBILE
 	Brush/Eraser (Function)
 	Color Swatch Plugin (UI)
 	Blender Tool/Paint Bucket (Function)
-
-	Menu (UI)
-		New Canvas (Function)
-		Canvas Settings (UI)
+	
 	Settings (UI)
-		Set Background Color (UI/Function)
-		Connect To PC (UI)
+		Open File...
+		Save as...
+		Set Background Color (UI/Function)		
 
 DESKTOP
 	New Canvas
-		Set Limitation of Canvas Size (Function)
-		Preview (UI)
+		Create Canvas
 	Open file... (UI)
-	About GizDraw (UI)
+	Save as...
+	About (Developers)
 
 Testing / Planning for Defense (August 31 - September 1)
-
-
