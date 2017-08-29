@@ -1,9 +1,9 @@
-LAST TASKING (DEADLINE: August 30, 2017)
+LAST TASKING (DEADLINE: August 31, 2017)
 
 MOBILE
 	Brush/Eraser (Function)
 	Color Swatch Plugin (UI)
-	Blender Tool/Paint Bucket (Function)
+	Blender/Paint Bucket (Function)
 	
 	Settings (UI)
 		Open File...
@@ -12,9 +12,8 @@ MOBILE
 
 DESKTOP
 	New Canvas
-		Create Canvas
+		Show Canvas
 	Open file... (UI)
-	Save as...
 	About (Developers)
 
 Testing / Planning for Defense (August 31 - September 1)
