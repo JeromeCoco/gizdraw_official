@@ -94,6 +94,7 @@ $(document).ready(function(){
 		var canvasType = $(this).val();
 		if (canvasType == "Color") {
 			$('#custom-bg-color').fadeIn('slow');
+
 		} else {
 			$('#custom-bg-color').fadeOut('slow');
 		}
@@ -101,5 +102,15 @@ $(document).ready(function(){
 
 	$('#connect-pc').click(function(){
 		$('#connect-modal').css("display", "block");
+	});
+
+	$('#setCanvasType').click(function(){
+		var canvasType = $('#canvas-type').val();
+		if (canvasType == "Color") {
+			var colorSet = $('#custom-bg-color').val();
+			$('#sketch').css("background-color", colorSet);
+		} else if (canvasType == "White") {
+			$('#sketch').css("background-color", "white");
+		}
 	});
 });
