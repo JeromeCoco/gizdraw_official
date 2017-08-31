@@ -73,12 +73,12 @@ body {
 
 .active{
 	background-color: #313131;
-	border-top: 3px solid #ff5d00;
+	border-top: 3px solid white;
 }
 
 .active-left{
-	background-color: white;
-	border-left: 1px solid #ff5d00;
+	background-color: #d0cece;
+	border-left: 1px solid #212121;
 }
 
 #pen-color {
@@ -208,7 +208,7 @@ input[type=range].slider::-webkit-slider-thumb {
   height: 17px;
   width: 8px;
   border-radius: 0px;
-  background: #ff5d00;
+  background: white;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -6px;
