@@ -7,8 +7,7 @@ MOBILE
 	
 	Settings (UI)
 		Open File...
-		Save as...
-		Set Background Color (UI/Function)		
+		Save as...		
 
 DESKTOP
 	New Canvas
