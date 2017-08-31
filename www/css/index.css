@@ -78,7 +78,7 @@ body {
 
 .active-left{
 	background-color: white;
-	border-left: 3px solid #ff5d00;
+	border-left: 1px solid #ff5d00;
 }
 
 #pen-color {

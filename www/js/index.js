@@ -94,7 +94,6 @@ $(document).ready(function(){
 		var canvasType = $(this).val();
 		if (canvasType == "Color") {
 			$('#custom-bg-color').fadeIn('slow');
-
 		} else {
 			$('#custom-bg-color').fadeOut('slow');
 		}
