@@ -85,9 +85,12 @@
 			// if (hex)
 			console.log(rgb + ',' + hex + ',' + A );
 			if (A == 0) {
-				markerColor = '#FFF';
-			}
-			else {
+				if (bgIsColored) {
+					markerColor = bgColor;
+				} else {
+					markerColor = '#FFF';
+				}
+			} else {
 				markerColor = '#'+ hex;
 			}
 			console.log(markerColor);
@@ -243,6 +246,18 @@
 	$('#pencil').click(function(){
 		clrpckr = false;
 		console.log(clrpckr);
+	});
+
+	var bgColor;
+	var bgIsColored = false;
+
+	$('#setCanvasType').click(function(){
+		if ($('#canvas-type').val() == "Color") {
+			bgColor = $('#custom-bg-color').val();
+			bgIsColored = true;
+		} else {
+			bgIsColored = false;
+		}
 	});
 	
 }());
