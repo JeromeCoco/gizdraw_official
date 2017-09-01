@@ -93,7 +93,7 @@
 			} else {
 				markerColor = '#'+ hex;
 			}
-			console.log(markerColor);
+			
 			$('#pen-color').value = markerColor;
 			tmp_ctx.strokeStyle = markerColor;
 			tmp_ctx.fillStyle = markerColor;

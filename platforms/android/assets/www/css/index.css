@@ -20,8 +20,8 @@ body {
 	right: 0;
 	margin: 10px;
 	bottom: 0;
-  animation-name: moves;
-  animation-duration: .325s;
+  -webkit-animation-name: moves;
+  -webkit-animation-duration: .325s;
   animation-timing-function: linear;
   animation-delay: 1s;
   animation-iteration-count: infinite;
@@ -45,9 +45,9 @@ body {
 }
 
 .top-menu{
-	background-color: #212121;
+	background-color: #111;
 	width: 100%;
-	height: 38px;
+	height: 39px;
 	transition: .325s;
 }
 
@@ -83,7 +83,7 @@ body {
 
 .top-menu #tools-left img{
 	width: 20px;
-	padding: 7px 12px;
+	padding: 8px 12px;
 }
 
 .active{
@@ -97,21 +97,10 @@ body {
 }
 
 #pen-color {
-	-webkit-appearance: none;
-	border: none;
-	width: 32px;
-	height: inherit;
-	border-radius: 50%;
-}
-
-#pen-color::-webkit-color-swatch-wrapper {
-	padding: 0;
-	border-radius: 50%;
-}
-
-#pen-color::-webkit-color-swatch {
-	border: none;
-	border-radius: 50%;
+	position: relative;
+  top: -12px;
+  width: 25px;
+  padding: 1px;
 }
 
 .top-menu #menu-right{
@@ -160,7 +149,7 @@ body {
 	background-color: white;
 	height: 21px;
 	width: 100%;
-	box-shadow: 0px -1px 10px gray;
+	box-shadow: 0px 4px 14px grey;
 }
 
 .grid-svg{
@@ -191,6 +180,10 @@ body {
 	list-style: none;
 	font-size: 15px;
 	line-height: 23px;
+}
+
+.drop-menu ul li:focus{
+  background-color: #b9b9b9;
 }
 
 .show-menu{

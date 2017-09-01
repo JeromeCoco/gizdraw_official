@@ -6,7 +6,6 @@ $(document).ready(function(){
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
 
-	$('#canvas-settings-modal').css("display", "none");
 	$('#custom-bg-color').css("display", "none");
 	$('#connect-modal').css("display", "none");
 
