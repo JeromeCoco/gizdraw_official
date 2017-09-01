@@ -20,12 +20,20 @@ body {
 	right: 0;
 	margin: 10px;
 	bottom: 0;
-  -webkit-animation-name: moves;
-  -webkit-animation-duration: .325s;
-  animation-timing-function: linear;
-  animation-delay: 1s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation:moves 1000ms infinite;
+  -webkit-animation:moves 1000ms infinite;
+}
+
+@keyframes moves {
+    from { right: 0;}
+    50% { right: 20px;}
+    to { right: 0;}
+}
+ 
+@-webkit-keyframes moves {
+    from { right: 0;}
+    50% { right: 20px;}
+    to { right: 0;}
 }
 
 #btnGo{
@@ -33,11 +41,6 @@ body {
 	border: none;
 	font-size: 20px;
 	background-color: transparent;
-}
-
-@-webkit-keyframes moves {
-    0%   {right:0;}
-    100% {right:10px;}
 }
 
 #btnGo img{
@@ -62,6 +65,11 @@ body {
 .tools-hiddens{
 	width: 45px;
 	transition: .325s;
+}
+
+.tools-left-hidden{
+  height: 0%;
+  transition: .325s;
 }
 
 /*collapse  button ends here*/
@@ -123,6 +131,7 @@ body {
 	position: absolute;
 	width: 45px;
 	opacity: .9;
+  transition: .325s;
 }
 
 .left-menu img{
@@ -182,10 +191,6 @@ body {
 	list-style: none;
 	font-size: 15px;
 	line-height: 23px;
-}
-
-.drop-menu ul li:focus{
-  background-color: #b9b9b9;
 }
 
 .show-menu{
@@ -389,7 +394,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 .modal-body select{
   padding: 7px;
-  width: 200px;
+  width: 130px;
 }
 
 .modal-body button{
