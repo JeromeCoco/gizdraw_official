@@ -23,48 +23,56 @@ $(document).ready(function(){
 		$('.tools-item').removeClass('active');
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active');
+		$('.presets').css("display", "none");
 	});
 
 	$('#brush').click(function(){
 		$('.tools-item').removeClass('active');
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active');
+		$('.presets').css("display", "inline-block");
 	});
 
 	$('#eraser').click(function(){
 		$('.tools-item').removeClass('active');
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active');
+		$('.presets').css("display", "none");
 	});
 
 	$('#blender').click(function(){
 		$('.tools-item').removeClass('active');
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active');
+		$('.presets').css("display", "none");
 	});
 
 	$('#color-picker').click(function(){
 		$('.tools-item').removeClass('active');	
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active-left');
+		$('.presets').css("display", "none");
 	});
 
 	$('#paint-bucket').click(function(){
 		$('.tools-item').removeClass('active');	
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active-left');
+		$('.presets').css("display", "none");
 	});
 
 	$('#shapes').click(function(){
 		$('.tools-item').removeClass('active');	
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active-left');
+		$('.presets').css("display", "none");
 	});
 
 	$('#move-tool').click(function(){
 		$('.tools-item').removeClass('active');	
 		$('.tools-left').removeClass('active-left');
 		$(this).addClass('active-left');
+		$('.presets').css("display", "none");
 	});
 
 	$('#grid').click(function(){
