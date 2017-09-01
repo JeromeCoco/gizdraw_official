@@ -7,9 +7,4 @@ MOBILE
 	
 	Settings (UI)
 		Open File...
-		Save as...		
-
-DESKTOP
-	New Canvas
-		Show Canvas
-	Open file... (UI)
+		Save as...
