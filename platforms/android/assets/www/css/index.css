@@ -16,31 +16,28 @@ body {
 }
 
 #btnContainer{
-	position: absolute;
-	right: 0;
-	margin: 10px;
-	bottom: 0;
-  animation:moves 1000ms infinite;
-  -webkit-animation:moves 1000ms infinite;
-}
-
-@keyframes moves {
-    from { right: 0;}
-    50% { right: 20px;}
-    to { right: 0;}
-}
- 
-@-webkit-keyframes moves {
-    from { right: 0;}
-    50% { right: 20px;}
-    to { right: 0;}
+  position: absolute;
+  right: 0;
+  margin: 10px;
+  bottom: 0;
+  -webkit-animation-name: moves;
+  -webkit-animation-duration: .325s;
+  animation-timing-function: linear;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #btnGo{
-	padding: 10px;
-	border: none;
-	font-size: 20px;
-	background-color: transparent;
+  padding: 10px;
+  border: none;
+  font-size: 20px;
+  background-color: transparent;
+}
+
+@-webkit-keyframes moves {
+    0%   {right:0;}
+    100% {right:10px;}
 }
 
 #btnGo img{
@@ -48,23 +45,23 @@ body {
 }
 
 .top-menu{
-	background-color: #111;
-	width: 100%;
-	height: 39px;
-	transition: .325s;
+  background-color: #111;
+  width: 100%;
+  height: 39px;
+  transition: .325s;
 }
 
 /*collapse button*/
 
 
 .tools-hidden{
-	display: none;
-	transition: .999s;
+  display: none;
+  transition: .999s;
 }
 
 .tools-hiddens{
-	width: 45px;
-	transition: .325s;
+  width: 45px;
+  transition: .325s;
 }
 
 .tools-left-hidden{
@@ -75,75 +72,75 @@ body {
 /*collapse  button ends here*/
 
 .active-grid{
-	background-color: #cecece;
+  background-color: #cecece;
 }
 
 .active-menu{
-	background-color: #313131;
-	border-top: 3px solid white;
+  background-color: #313131;
+  border-top: 3px solid white;
 }
 
 .top-menu #tools-left{
-	height: inherit;
-	float: left;
-	width: 450px;
+  height: inherit;
+  float: left;
+  width: 450px;
 }
 
 .top-menu #tools-left img{
-	width: 20px;
-	padding: 8px 12px;
+  width: 20px;
+  padding: 8px 12px;
   border-top: 3px solid transparent;
 
 }
 
 .active{
-	background-color: #313131;
-	border-top: 3px solid white !important;
+  background-color: #313131;
+  border-top: 3px solid white !important;
 }
 
 .active-left{
-	background-color: #d0cece;
-	border-left: 2px solid #212121;
+  background-color: #d0cece;
+  border-left: 2px solid #212121;
 }
 
 #pen-color {
-	position: relative;
+  position: relative;
   top: -12px;
   width: 25px;
   padding: 1px;
 }
 
 .top-menu #menu-right{
-	height: inherit;
-	float: right;
+  height: inherit;
+  float: right;
 }
 
 #menu-right i{
-	border-top: 3px solid transparent;
- 	font-size: 20px;
- 	padding: 7px 7px;
- 	color: white;
+  border-top: 3px solid transparent;
+  font-size: 20px;
+  padding: 7px 7px;
+  color: white;
 }
 
 .left-menu{
-	background-color: #e1e1e1;
-	height: 87%;
-	position: absolute;
-	width: 45px;
-	opacity: .9;
+  background-color: #e1e1e1;
+  height: 87%;
+  position: absolute;
+  width: 45px;
+  opacity: .9;
   transition: .325s;
 }
 
 .left-menu img{
-	width: 25px;
-	padding: 9px;
+  width: 25px;
+  padding: 9px;
 }
 
 #sketch{
   z-index: -1;
-	width: 100%;
-	height: 95%;
-	position: absolute;
+  width: 100%;
+  height: 95%;
+  position: absolute;
 }
 
 #tmp_canvas {
@@ -155,16 +152,21 @@ body {
 }
 
 #bottom-menu{
-	position: absolute;
-	bottom: 0;
-	background-color: white;
-	height: 21px;
-	width: 100%;
-	box-shadow: 0px 4px 14px grey;
+  position: absolute;
+  bottom: 0;
+  background-color: white;
+  height: 30px;
+  width: 100%;
+  box-shadow: 0px 4px 14px grey;
+}
+.presets{
+  list-style: none;
+  margin: 5px 10px;
+  display: none;
 }
 
 .grid-svg{
-	position: absolute;
+  position: absolute;
   left: 0px;
   right: 0;
   bottom: 0; 
@@ -173,28 +175,28 @@ body {
 }
 
 .show-grid{
-	display: block;
+  display: block;
 }
 
 .drop-menu{
-	position: absolute; 
-	top: 45px;
-	right: 5px;
-	background-color: #e1e1e1;
-	color: black;
-	padding: 10px;
-	border-radius: 5px;
-	display: none;
+  position: absolute; 
+  top: 45px;
+  right: 5px;
+  background-color: #e1e1e1;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
 }
 
 .drop-menu ul li{
-	list-style: none;
-	font-size: 15px;
-	line-height: 23px;
+  list-style: none;
+  font-size: 15px;
+  line-height: 23px;
 }
 
 .show-menu{
-	display: block;
+  display: block;
   transition: .325s;
 }
 
@@ -398,7 +400,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-body button{
-  background-color: #ff5d00;
+  background-color: #5a80f8;
   padding: 10px;
   border: none;
   width: 70px;
