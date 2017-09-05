@@ -37,7 +37,7 @@ body {
 
 @-webkit-keyframes moves {
     0%   {right:0;}
-    100% {right:10px;}
+    100% {right:20px;}
 }
 
 #btnGo img{

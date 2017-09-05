@@ -173,7 +173,11 @@
 
 	var onErase = function() {
 		
-		markerColor = 'rgba(0,0,0,1)';
+		if (bgIsColored) {
+			markerColor = bgColor;
+		} else {
+			markerColor = '#FFF';
+		}
 		tmp_ctx.strokeStyle = markerColor;
 		tmp_ctx.fillStyle = markerColor;
 
