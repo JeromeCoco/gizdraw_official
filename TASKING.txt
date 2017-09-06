@@ -3,10 +3,9 @@ TO DO
 		___________________________________
 		Splash Screen bug
 		Brush Presets (Image, Other Preset)
-		Eraser bug
+		Color Palette Plugin
 		___________________________________
 		Blender
-		Color Palette Plugin
 		Paint Bucket
 		Shapes
 		Move

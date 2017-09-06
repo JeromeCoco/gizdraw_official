@@ -91,6 +91,8 @@ $(document).ready(function(){
 
 	$('.close').click(function(){
 		$('#canvas-settings-modal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
 	});
 
 	$('.close-connect').click(function(){
