@@ -174,13 +174,19 @@ body {
   display: none;
 }
 
+#svg-drop-menu {
+  position:absolute;
+  right:0px;
+  top:-35px;
+}
+
 .show-grid{
   display: block;
 }
 
 .drop-menu{
   position: absolute; 
-  top: 45px;
+  top: 55px;
   right: 5px;
   background-color: #e1e1e1;
   color: black;
