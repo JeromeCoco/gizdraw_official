@@ -14,6 +14,7 @@
         <ons-page>
 	        <div id="sketch">
 	            <canvas id="paint"></canvas>
+	            <div id="imageFile"></div>
 	            <div class="grid-svg">
 					<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
 						<defs>
@@ -46,7 +47,8 @@
 		    		<div class="drop-menu">
 		    			<ul>
 		    				<li id="new-canvas">Clear canvas</li>
-		    				<li>Open file...</li>
+		    				<!-- <li><input id="selectedFile" type="file" value="Browse"/></li> -->
+		    				<li id="open-file">Open file...</li>
 		    				<li>Share</li>
 		    				<li>Save as...</li>
 		    				<li id="canvas-settings">Canvas Options...</li>
@@ -78,6 +80,7 @@
     					<option>Transparent</option>
     					<option>Color</option>
     					<option>White</option>
+    					<option>Paper Texture</option>
     				</select>
     				<input type="color" id="custom-bg-color" />
     				<button class="close" id="setCanvasType">Set</button>

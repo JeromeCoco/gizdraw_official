@@ -18,7 +18,17 @@
         },
         "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "com.example.GizDraw"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.example.GizDraw"
+        },
+        "com.dbaq.cordova.filepickerio": {
+            "PACKAGE_NAME": "com.example.GizDraw"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.example.GizDraw"
+        }
+    }
 }

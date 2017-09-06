@@ -12,6 +12,9 @@
     "dependencies": {
         "cordova-android": "^6.2.3",
         "cordova-browser": "^4.1.0",
+        "cordova-plugin-compat": "^1.0.0",
+        "cordova-plugin-file": "^4.3.3",
+        "cordova-plugin-filepickerio": "0.0.6",
         "cordova-plugin-screen-orientation": "^2.0.1",
         "cordova-plugin-screenorientation-landscape": "^1.0.22",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -20,14 +23,17 @@
         "jquery-colpick": "^3.1.0",
         "material-components-web": "^0.18.0",
         "pinch-zoom-canvas": "^1.0.2",
-        "rangeslider.js": "^2.3.1"
+        "rangeslider.js": "^2.3.1",
+        "com.dbaq.cordova.filepickerio": "~0.0.6"
     },
     "cordova": {
         "plugins": {
             "cordova-plugin-whitelist": {},
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-screenorientation-landscape": {},
-            "cordova-plugin-screen-orientation": {}
+            "cordova-plugin-screen-orientation": {},
+            "cordova-plugin-file": {},
+            "com.dbaq.cordova.filepickerio": {}
         },
         "platforms": [
             "android",

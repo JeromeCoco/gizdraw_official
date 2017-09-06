@@ -18,10 +18,19 @@
         },
         "cordova-plugin-screen-orientation": {
             "PACKAGE_NAME": "com.example.GizDraw"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.example.GizDraw"
+        },
+        "com.dbaq.cordova.filepickerio": {
+            "PACKAGE_NAME": "com.example.GizDraw"
         }
     },
     "dependent_plugins": {
         "es6-promise-plugin": {
+            "PACKAGE_NAME": "com.example.GizDraw"
+        },
+        "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.example.GizDraw"
         }
     }

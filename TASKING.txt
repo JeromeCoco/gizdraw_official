@@ -1,7 +1,25 @@
-App Revision
+TO DO
+	Mobile Application
+		___________________________________
+		Splash Screen bug
+		Brush Presets (Image, Other Preset)
+		Eraser bug
+		___________________________________
+		Blender
+		Color Palette Plugin
+		Paint Bucket
+		Shapes
+		Move
+		___________________________________
+		Open File
+		Save
+		Share
+		Connect to PC
+		Canvas Options(Add paper texture)
 
-	Mobile App
-		Brush Preset names
-	
-	Overall
-		Connection	
+	Desktop Application
+		Show Preview Full screen button
+		Recognize Pin
+		Display recent canvas (.gdw)
+		Open file
+		Send Canvas details to mobile (OnCanvasCreate) [CanvasName, Height, Width, Background]

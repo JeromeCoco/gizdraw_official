@@ -241,6 +241,8 @@
 	$('#new-canvas').click(function(){
 		resetCanvas();
 		var cPushArray = new Array();
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
 	});
 
 	$('#undo').click(function(){

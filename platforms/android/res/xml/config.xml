@@ -11,6 +11,14 @@
     <feature name="CDVOrientation">
         <param name="android-package" value="cordova.plugins.screenorientation.CDVOrientation" />
     </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <feature name="filepickerio">
+        <param name="android-package" value="com.dbaq.cordova.filepickerio.FilePickerIO" />
+    </feature>
     <name>GizDraw</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -29,6 +37,7 @@
     <allow-intent href="market:*" />
     <icon src="www/img/logo2.png" />
     <preference name="loglevel" value="DEBUG" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="SplashScreen" value="www/img/splash-screen.jpg" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="SplashMaintainAspectRatio" value="true" />
