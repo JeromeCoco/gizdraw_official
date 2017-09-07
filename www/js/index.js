@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+	$('.simple_color_live_preview').simpleColor({ livePreview: true, cellWidth: 15, cellHeight: 15 });
+
 	var grid = 0;
 	
 	//set pencil as starting tool onload
@@ -14,7 +16,7 @@ $(document).ready(function(){
 		$(".top-menu").toggleClass('tools-hiddens');
 		$(".tools-item").toggleClass('tools-hidden');
 		$("#pen-width").toggleClass('tools-hidden');
-		$("#pen-color").toggleClass('tools-hidden');
+		$(".simpleColorDisplay").toggleClass('tools-hidden');
 		$("#menu-right").toggleClass('tools-hidden');
 		$(".tools-left").toggleClass('tools-hidden');
 	});

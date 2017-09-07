@@ -106,7 +106,7 @@ body {
 #pen-color {
   position: relative;
   top: -12px;
-  width: 25px;
+  width: 2px;
   padding: 1px;
 }
 
@@ -213,6 +213,7 @@ input[type=range].slider {
   margin: -1px 15px;
   position: absolute;
   top: 20px;
+  left: 270px;
 }
 input[type=range].slider:focus {
   outline: none;

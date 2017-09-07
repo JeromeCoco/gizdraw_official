@@ -111,6 +111,7 @@
 			console.log(markerColor);
 			tmp_ctx.strokeStyle = markerColor;
 			tmp_ctx.fillStyle = markerColor;
+			$('.simpleColorDisplay').css('background-color', markerColor);
 		}
 		else if (pen == true) {
 			ctx.globalCompositeOperation = 'source-over';
@@ -295,7 +296,7 @@
 		clrpckr = true;
 		eraser = false;
 		pen = false;
-		brush =false;
+		brush = false;
 		console.log(clrpckr);
 	});
 
