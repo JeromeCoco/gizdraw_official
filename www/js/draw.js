@@ -1,4 +1,18 @@
-(function() {	
+(function() {
+
+	var currentIPaddress;
+	var socket;
+
+	$("#btnConnect").click(function(){
+		
+        currentIPaddress = $('#ipaddress').val();
+        socket = io('http://'+currentIPaddress+':3000');
+
+        socket.on("connect", function(){
+            alert("You are now connected...");
+        });
+
+    });
 	
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
