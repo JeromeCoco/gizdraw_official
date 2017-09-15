@@ -1,22 +1,4 @@
-(function() {
-
-	var currentIPaddress;
-	var socket;
-
-	$("#btnConnect").click(function(){
-        currentIPaddress = $('#ipaddress').val();
-        socket = io('http://'+currentIPaddress+':3000');
-
-        socket.on("connect", function(){
-            alert("You are now connected...");
-            socket.emit("closeModalOnPC", "closing modal...");
-        });
-
-        /*socket.on("disconnect", function(){
-            alert("disconnected");
-        });*/
-
-    });
+(function() {	
 	
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
@@ -29,6 +11,10 @@
 	var blend = false;
 	var erase = false;
 	var brush = false;
+	var preset1 = false;
+	var preset2 = false;
+	var preset3 = false;
+	var preset4 = false;
 	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
 	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 	
@@ -61,24 +47,15 @@
 		$('#pen-width-label').val(markerWidth);
 	});
 
-	// tmp_ctx.lineWidth = markerWidth;
 	tmp_ctx.lineJoin = 'round';
 	tmp_ctx.lineCap = 'round';
 
 	$('#pen-color').change(function () {
 		markerColor = $(this).val();
+		console.log(markerColor);
 		tmp_ctx.strokeStyle = markerColor;
 		tmp_ctx.fillStyle = markerColor;
 	});
-		
-	// $('#blender').click(function() {
-	// 	markerColor = 'rgba(0,0,0,0.7)';
-	// 	tmp_ctx.strokeStyle = markerColor;
-	// 	tmp_ctx.fillStyle = markerColor;
-	// 	markerWidth = parseInt($('#pen-width').val());
-	// 	tmp_ctx.lineWidth = markerWidth;
-	// 	blend = true;
-	// });
 
 	tmp_canvas.addEventListener('touchstart', function(e) {
 		tmp_canvas.addEventListener('touchmove', onPaint, false);
@@ -101,6 +78,7 @@
 			var targetXval = e.targetTouches[0].pageX;
 			mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 			mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+			// console.log(mouse.x + ',' + mouse.y);
 
 			// image data and RGB values 
 			var img_data = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
@@ -113,6 +91,7 @@
 			var hex = rgbToHex(R, G, B);
 
 			// if (hex)
+			console.log(rgb + ',' + hex + ',' + A );
 			if (A == 0) {
 				if (bgIsColored) {
 					markerColor = bgColor;
@@ -123,18 +102,21 @@
 				markerColor = '#'+ hex;
 			}
 			$('#pen-color').val(markerColor);
+			console.log(markerColor);
 			tmp_ctx.strokeStyle = markerColor;
 			tmp_ctx.fillStyle = markerColor;
 			$('.simpleColorDisplay').css('background-color', markerColor);
 		}
-		else if (pen == true) {
+		else if (pen) {
 			ctx.globalCompositeOperation = 'source-over';
 			markerColor = $('#pen-color').val();
 			tmp_ctx.strokeStyle = markerColor;
 			tmp_ctx.fillStyle = markerColor;
+			tmp_ctx.shadowBlur = 0;
 			onPaint();
+			console.log("onpaint");
 		}
-		else if (eraser == true) {
+		else if (eraser) {
 			onErase();
 		}
 
@@ -197,6 +179,7 @@
 		}
 		tmp_ctx.strokeStyle = eraserColor;
 		tmp_ctx.fillStyle = eraserColor;
+		tmp_ctx.shadowBlur = 0;
 
 		// Saving all the points in an array
 		ppts.push({x: mouse.x, y: mouse.y});
@@ -293,21 +276,16 @@
    		}
 	});
 
-	function rgbToHex(R,G,B) {
-		return toHex(R)+toHex(G)+toHex(B)
-	}
-	function toHex(n) {
-	  n = parseInt(n,10);
-	  if (isNaN(n)) return "00";
-	  n = Math.max(0,Math.min(n,255));
-	  return "0123456789ABCDEF".charAt((n-n%16)/16)  + "0123456789ABCDEF".charAt(n%16);
-	}
-
 	$('#color-picker').click(function(){
 		clrpckr = true;
 		eraser = false;
 		pen = false;
 		brush = false;
+		preset1 = false;
+		preset2 = false;
+		preset3 = false;
+		preset4 = false;
+		console.log(clrpckr);
 	});
 
 	$('#pencil').click(function(){
@@ -315,13 +293,20 @@
 		clrpckr = false;
 		eraser = false;
 		brush =false;
+		preset1 = false;
+		preset2 = false;
+		preset3 = false;
+		preset4 = false;
 	});
-
 	$('#eraser').click(function() {
 		eraser = true;
 		pen = false;
 		clrpckr = false;
 		brush =false;
+		preset1 = false;
+		preset2 = false;
+		preset3 = false;
+		preset4 = false;
 	});
 
 	var bgColor;
@@ -336,26 +321,272 @@
 		}
 	});
 
-	$('#brush').click(function (){
+	// Brush Tool
+
+
+	// First Preset
+
+	$('#first-preset').click(function (){
 		brush= true;
+		preset1 = true;
+		preset2 = false;
+		preset3 = false;
+		preset4 = false;
 		eraser = false;
 		clrpckr = false;
 		pen = false;
 		tmp_ctx.lineWidth = 1;
 		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
-	
+
 		tmp_canvas.addEventListener('touchstart', function(e) {
-		tmp_canvas.addEventListener('touchmove', OnDraw, false);
+			tmp_canvas.addEventListener('touchmove', OnDraw, false);
+			
+			points = [ ];
+			isDrawing = true;
 		
+			var targetYval = e.targetTouches[0].pageY;
+			var targetXval = e.targetTouches[0].pageX;
+			mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+			mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+
+			points.push({ x: mouse.x, y: mouse.y });
+			if (clrpckr == true) {
+				return;
+			}
+			else if (pen == true) {
+				return;
+			}
+			else if (eraser == true) {
+				onErase();
+			}
+			else if (brush == true && preset1 == true) {
+				var rgbaval = hexToRgbA(markerColor);
+				tmp_ctx.strokeStyle = rgbaval+',0.3)';
+				tmp_ctx.fillStyle = rgbaval+',0.3)';
+				ctx.globalCompositeOperation = 'source-over';
+				OnDraw();
+				// console.log(rgbaval);
+			}
+		});
+
+		var OnDraw = function (){
+				if (!isDrawing) return;
+				points.push({ x: mouse.x, y: mouse.y });
+				tmp_ctx.beginPath();
+				tmp_ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
+				tmp_ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+				tmp_ctx.stroke();
+
+				var lastPoint = points[points.length-1];
+
+			  	for (var i = 0, len = points.length; i < len; i++) {
+				    dx = points[i].x - lastPoint.x;
+				    dy = points[i].y - lastPoint.y;
+				    d = dx * dx + dy * dy;
+				    if (brush == true  && preset1 == true) {
+					    if (d < 1000) {
+					      ctx.beginPath();
+					      $('#pen-color').val(markerColor);
+					      var rgbaval = hexToRgbA(markerColor);
+						  ctx.strokeStyle = rgbaval+',0.3)';
+						  tmp_ctx.lineWidth = 1;
+					      ctx.moveTo(lastPoint.x + (dx * 0.2), lastPoint.y + (dy * 0.2));
+					      ctx.lineTo(points[i].x - (dx * 0.2), points[i].y - (dy * 0.2));
+					      ctx.stroke();
+					    }
+				    }
+				    else {
+				    	return;
+					  }
+			    }	
+		};
+		tmp_canvas.addEventListener('touchend', function(){
+			isDrawing = false;
+			points.length = 0;
+		});
+
+	});
+	//End of First Preset
+
+	// Second Preset
+	$('#second-preset').click(function (){
+		brush= true;
+		preset1 = false;
+		preset2 =true;
+		preset3 = false;
+		preset4 = false;
+		eraser = false;
+		clrpckr = false;
+		pen = false;
+		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
+				
 		points = [ ];
-		isDrawing = true;
+		tmp_canvas.addEventListener('touchstart', function(e) {
+			tmp_canvas.addEventListener('touchmove', OnDraw, false);
+			
+			isDrawing = true;
+		
+			var targetYval = e.targetTouches[0].pageY;
+			var targetXval = e.targetTouches[0].pageX;
+			mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+			mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+
+			points.push({ x: mouse.x, y: mouse.y });
+			if (clrpckr == true) {
+				return;
+			}
+			else if (pen == true) {
+				return;
+			}
+			else if (eraser == true) {
+				onErase();
+			}
+			else if (brush == true && preset2 == true) {
+				tmp_ctx.strokeStyle = markerColor;
+				ctx.globalCompositeOperation = 'source-over';
+				OnDraw();
+			}
+		});
+
+		var OnDraw = function (){
+
+				if (!isDrawing) return;
+			    if (brush == true  && preset2 == true) {
+				      ctx.beginPath();
+				      $('#pen-color').val(markerColor);
+					  ctx.strokeStyle = markerColor;
+					  tmp_ctx.shadowBlur = 10;
+					  tmp_ctx.shadowColor = markerColor;
+					  tmp_ctx.lineWidth = markerWidth;
+				      ctx.stroke();
+			    }
+			    else {
+			    	return;
+				  }
+		};
+
+		
+		tmp_canvas.addEventListener('touchend', function(){
+			isDrawing = false;
+			points.length = 0;
+		});
+
+	});
+	// End of Second Preset
+
+	// 3rd Preset
+	$('#third-preset').click(function (){
+		brush= true;
+		preset1 = false;
+		preset2 = false;
+		preset3 = true;
+		preset4 = false;
+		eraser = false;
+		clrpckr = false;
+		pen = false;
+		function distanceBetween(point1, point2) {
+		  return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
+		}
+
+		function angleBetween(point1, point2) {
+		  return Math.atan2( point2.x - point1.x, point2.y - point1.y );
+		}
+
+		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
+		  
+		var isDrawing, lastPoint;
+		  
+		tmp_canvas.addEventListener('touchstart', function(e) {
+			tmp_canvas.addEventListener('touchmove', OnDrawBrush, false);
+			
+			var targetYval = e.targetTouches[0].pageY;
+			var targetXval = e.targetTouches[0].pageX;
+			mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+			mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+
+
+			isDrawing = true;
+			lastPoint = { x: mouse.x, y: mouse.y };
+
+			if (clrpckr == true) {
+				return;
+			}
+			else if (pen == true) {
+				return;
+			}
+			else if (eraser == true) {
+				onErase();
+			}
+			else if (brush == true && preset3 == true) {
+				ctx.strokeStyle = markerColor;
+				ctx.globalCompositeOperation = 'source-over';
+				OnDrawBrush();
+			}
+
+	 });
+
+		var OnDrawBrush = function(){
+		
+		if (!isDrawing) return;
+  
+		  var currentPoint = { x: mouse.x, y: mouse.y };
+		  var dist = distanceBetween(lastPoint, currentPoint);
+		  var angle = angleBetween(lastPoint, currentPoint);
+		  
+		  for (var i = 0; i < dist; i+=5) {
+		    
+		    x = lastPoint.x + (Math.sin(angle) * i);
+		    y = lastPoint.y + (Math.cos(angle) * i);
+		    
+		    var radgrad = ctx.createRadialGradient(x,y,5,x,y,10);
+
+		    $('#pen-color').val(markerColor);
+			var rgbaval = hexToRgbA(markerColor);
+		    radgrad.addColorStop(0, markerColor);
+		    radgrad.addColorStop(0.5, rgbaval+',0.5)');
+		    radgrad.addColorStop(1, rgbaval+',0)');
+		    
+		    ctx.fillStyle = radgrad;
+		    ctx.fillRect(x-15, y-15, 30, 30);
+		  }
+		  
+  			lastPoint = currentPoint;
+	  };
+	  
+		tmp_canvas.addEventListener("touchend", function() {
+			isDrawing = false;
+		  });
+});
+
+	// End of Third Preset
 	
+	// Fourth Preset
+	$('#fourth-preset').click(function (){
+		brush= true;
+		preset1 = false;
+		preset2 =false;
+		preset3 = false;
+		preset4 = true;
+		eraser = false;
+		clrpckr = false;
+		pen = false;
+	 	ctx.lineWidth = 1;
+	 	ctx.lineJoin = tmp_ctx.lineCap = 'round';
+	  
+	  var isDrawing, points = [ ];
+	  
+	  tmp_canvas.addEventListener('touchstart', function(e) {
+		tmp_canvas.addEventListener('touchmove', OnDrawBrushAgain, false);
+		
 		var targetYval = e.targetTouches[0].pageY;
 		var targetXval = e.targetTouches[0].pageX;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 
-		points.push({ x: mouse.x, y: mouse.y });
+		points = [ ];
+  		isDrawing = true;
+  		points.push({ x: mouse.x, y: mouse.y });
+		
 		if (clrpckr == true) {
 			return;
 		}
@@ -365,59 +596,71 @@
 		else if (eraser == true) {
 			onErase();
 		}
-		else if (brush == true) {
+		else if (brush == true && preset4 == true) {
+			ctx.strokeStyle = markerColor;
 			ctx.globalCompositeOperation = 'source-over';
-			OnDraw();
+			OnDrawBrushAgain();
 		}
 	});
 
-	var OnDraw = function () {
-			if (!isDrawing) return;
-			points.push({ x: mouse.x, y: mouse.y });
-			tmp_ctx.beginPath();
-			tmp_ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
-			tmp_ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
-			tmp_ctx.stroke();
+		var OnDrawBrushAgain = function(){
+			
+		if (!isDrawing) return;
 
-			var lastPoint = points[points.length-1];
-		  	for (var i = 0, len = points.length; i < len; i++) {
-		    dx = points[i].x - lastPoint.x;
-		    dy = points[i].y - lastPoint.y;
-		    d = dx * dx + dy * dy;
-		    if (brush == true) {
-			    if (d < 1000) {
+			  //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+			  points.push({ x: mouse.x, y: mouse.y });
+
+			  ctx.beginPath();
+			  ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
+			  ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+			  ctx.stroke();
+			  
+			  for (var i = 0, len = points.length; i < len; i++) {
+			    dx = points[i].x - points[points.length-1].x;
+			    dy = points[i].y - points[points.length-1].y;
+			    d = dx * dx + dy * dy;
+
+			    if (d < 2000 && Math.random() > d / 2000) {
 			      ctx.beginPath();
 			      $('#pen-color').val(markerColor);
-			      var rgbaval = hexToRgbA(markerColor);
-				  ctx.strokeStyle = rgbaval;
-			      ctx.moveTo(lastPoint.x + (dx * 0.2), lastPoint.y + (dy * 0.2));
-			      ctx.lineTo(points[i].x - (dx * 0.2), points[i].y - (dy * 0.2));
+				  var rgbaval = hexToRgbA(markerColor);
+				  ctx.strokeStyle = rgbaval+',0.3)';
+			      ctx.moveTo( points[points.length-1].x + (dx * 0.5), points[points.length-1].y + (dy * 0.5));
+			      ctx.lineTo( points[points.length-1].x - (dx * 0.5), points[points.length-1].y - (dy * 0.5));
 			      ctx.stroke();
 			    }
-		    }
-		    else {
-		    	return;
 			  }
-		    }
-	};
-	
-	tmp_canvas.addEventListener('touchend', function(){
-		isDrawing = false;
-		points.length = 0;
-	})
+			};
+		tmp_canvas.addEventListener("touchend", function() {
+				isDrawing = false;
+				points.length = 0;
+	  });
+	});	
 
-});
+
 	// hex to rgba conversion
 	function hexToRgbA(hex){
-    var c;
-    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
-        c= hex.substring(1).split('');
-        if(c.length== 3){
-            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
-        }
-        c= '0x'+c.join('');
-        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255].join(',')+',0.3)';
-    }
+	    var c;
+	    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
+	        c= hex.substring(1).split('');
+	        if(c.length== 3){
+	            c= [c[0], c[0], c[1], c[1], c[2], c[2]];
+	        }
+	        c= '0x'+c.join('');
+	        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255];
+	    }
     // throw new Error('Bad Hex');
+	}
+
+
+	// rgb to hex conversion
+	function rgbToHex(R,G,B) {
+		return toHex(R)+toHex(G)+toHex(B)
+	}
+	function toHex(n) {
+	  n = parseInt(n,10);
+	  if (isNaN(n)) return "00";
+	  n = Math.max(0,Math.min(n,255));
+	  return "0123456789ABCDEF".charAt((n-n%16)/16)  + "0123456789ABCDEF".charAt(n%16);
 	}
 }());

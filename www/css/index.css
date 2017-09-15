@@ -155,7 +155,7 @@ body {
   position: absolute;
   bottom: 0;
   background-color: white;
-  height: 30px;
+  height: 35px;
   width: 100%;
   box-shadow: 0px 4px 14px grey;
 }
@@ -177,7 +177,7 @@ body {
 #svg-drop-menu {
   position:absolute;
   right:0px;
-  top:-29px;
+  top:-35px;
 }
 
 .show-grid{
@@ -186,7 +186,7 @@ body {
 
 .drop-menu{
   position: absolute; 
-  top: 47px;
+  top: 55px;
   right: 5px;
   background-color: #e1e1e1;
   color: black;
@@ -352,9 +352,9 @@ input[type=range].slider:focus::-ms-fill-upper {
     position: relative;
     background-color: white;
     margin: auto;
-    padding: 20px;
+    padding: 20px 0px 0px 0px;
     border: 1px solid #888;
-    width: 80%;
+    width: 40%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
@@ -362,9 +362,17 @@ input[type=range].slider:focus::-ms-fill-upper {
     animation-duration: 0.4s;
     margin-top: -90px;
 }
+/*.modal-button-cont {
+    display: inline-block;
+    background-color: blue;
+    padding: 9px;
+    width: 43%;
+    margin: 0px -2px;
+}*/
 
 .modal-content-connect .modal-body{
-  margin-left: 80px;
+  /*margin-left: 80px;*/
+  text-align: center;
 }
 
 .modal-content-connect .modal-body input{
@@ -393,7 +401,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-body{
-  padding: 0px 8px;
+  /*padding: 0px 8px;*/
   margin: auto;
 }
 
@@ -406,12 +414,22 @@ input[type=range].slider:focus::-ms-fill-upper {
   width: 130px;
 }
 
-.modal-body button{
+.modal-content-connect .modal-body button{
+  background-color: #ff8b00;
+  padding: 15px;
+  border: none;
+  width: 50%;
+  color: white;
+  margin: 20px -2px 0px -2px;
+}
+
+.modal-content .modal-body button{
   background-color: #ff8b00;
   padding: 10px;
   border: none;
   width: 70px;
   color: white;
+  /*margin: 20px -2px 0px -2px;*/
 }
 
 .modal-body #custom-bg-color{
