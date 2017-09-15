@@ -3,7 +3,7 @@
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth = 5;	
-	var markerColor = '#000';
+	var markerColor = $('#pen-color').val();
 	var sketch = document.querySelector('#sketch');
 	var sketch_style = getComputedStyle(sketch);
 	var clrpckr = false;
@@ -49,19 +49,18 @@
 
 	$('#pen-color').change(function () {
 		markerColor = $(this).val();
-		console.log(markerColor);
 		tmp_ctx.strokeStyle = markerColor;
 		tmp_ctx.fillStyle = markerColor;
 	});
 		
-	$('#blender').click(function() {
-		markerColor = 'rgba(0,0,0,0.7)';
-		tmp_ctx.strokeStyle = markerColor;
-		tmp_ctx.fillStyle = markerColor;
-		markerWidth = parseInt($('#pen-width').val());
-		tmp_ctx.lineWidth = markerWidth;
-		blend = true;
-	});
+	// $('#blender').click(function() {
+	// 	markerColor = 'rgba(0,0,0,0.7)';
+	// 	tmp_ctx.strokeStyle = markerColor;
+	// 	tmp_ctx.fillStyle = markerColor;
+	// 	markerWidth = parseInt($('#pen-width').val());
+	// 	tmp_ctx.lineWidth = markerWidth;
+	// 	blend = true;
+	// });
 
 	tmp_canvas.addEventListener('touchstart', function(e) {
 		tmp_canvas.addEventListener('touchmove', onPaint, false);
@@ -84,7 +83,6 @@
 			var targetXval = e.targetTouches[0].pageX;
 			mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 			mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
-			// console.log(mouse.x + ',' + mouse.y);
 
 			// image data and RGB values 
 			var img_data = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
@@ -97,7 +95,6 @@
 			var hex = rgbToHex(R, G, B);
 
 			// if (hex)
-			console.log(rgb + ',' + hex + ',' + A );
 			if (A == 0) {
 				if (bgIsColored) {
 					markerColor = bgColor;
@@ -107,15 +104,17 @@
 			} else {
 				markerColor = '#'+ hex;
 			}
-			console.log(markerColor);
-			$('#pen-color').value = markerColor;
+			$('#pen-color').val(markerColor);
 			tmp_ctx.strokeStyle = markerColor;
 			tmp_ctx.fillStyle = markerColor;
+			$('.simpleColorDisplay').css('background-color', markerColor);
 		}
 		else if (pen == true) {
 			ctx.globalCompositeOperation = 'source-over';
+			markerColor = $('#pen-color').val();
+			tmp_ctx.strokeStyle = markerColor;
+			tmp_ctx.fillStyle = markerColor;
 			onPaint();
-			console.log("onpaint");
 		}
 		else if (eraser == true) {
 			onErase();
@@ -174,12 +173,12 @@
 	var onErase = function() {
 		
 		if (bgIsColored) {
-			markerColor = bgColor;
+			eraserColor = bgColor;
 		} else {
-			markerColor = '#FFF';
+			eraserColor = '#FFF';
 		}
-		tmp_ctx.strokeStyle = markerColor;
-		tmp_ctx.fillStyle = markerColor;
+		tmp_ctx.strokeStyle = eraserColor;
+		tmp_ctx.fillStyle = eraserColor;
 
 		// Saving all the points in an array
 		ppts.push({x: mouse.x, y: mouse.y});
@@ -217,7 +216,7 @@
 			ppts[i + 1].y
 		);
 		ctx.stroke();
-		
+
 	};
 
 	var cPushArray = new Array();
@@ -241,6 +240,8 @@
 	$('#new-canvas').click(function(){
 		resetCanvas();
 		var cPushArray = new Array();
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
 	});
 
 	$('#undo').click(function(){
@@ -258,7 +259,6 @@
 	        	ctx.drawImage(canvasPic, 0, 0); 
 	        }
 	        canvasPic.src = cPushArray[cStep];
-	        // console.log(canvasPic);
 	    }
 	});
 
@@ -289,8 +289,7 @@
 		clrpckr = true;
 		eraser = false;
 		pen = false;
-		brush =false;
-		console.log(clrpckr);
+		brush = false;
 	});
 
 	$('#pencil').click(function(){
@@ -299,6 +298,7 @@
 		eraser = false;
 		brush =false;
 	});
+
 	$('#eraser').click(function() {
 		eraser = true;
 		pen = false;
@@ -325,8 +325,7 @@
 		pen = false;
 		tmp_ctx.lineWidth = 1;
 		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
-				
-
+	
 		tmp_canvas.addEventListener('touchstart', function(e) {
 		tmp_canvas.addEventListener('touchmove', OnDraw, false);
 		
@@ -354,8 +353,7 @@
 		}
 	});
 
-	var OnDraw = function (){
-
+	var OnDraw = function () {
 			if (!isDrawing) return;
 			points.push({ x: mouse.x, y: mouse.y });
 			tmp_ctx.beginPath();
@@ -364,7 +362,6 @@
 			tmp_ctx.stroke();
 
 			var lastPoint = points[points.length-1];
-
 		  	for (var i = 0, len = points.length; i < len; i++) {
 		    dx = points[i].x - lastPoint.x;
 		    dy = points[i].y - lastPoint.y;
@@ -372,7 +369,7 @@
 		    if (brush == true) {
 			    if (d < 1000) {
 			      ctx.beginPath();
-			      $('#pen-color').value = markerColor;
+			      $('#pen-color').val(markerColor);
 			      var rgbaval = hexToRgbA(markerColor);
 				  ctx.strokeStyle = rgbaval;
 			      ctx.moveTo(lastPoint.x + (dx * 0.2), lastPoint.y + (dy * 0.2));

@@ -20,12 +20,17 @@ body {
   right: 0;
   margin: 10px;
   bottom: 0;
-  -webkit-animation-name: moves;
+  -webkit-animation-name: movers;
   -webkit-animation-duration: .325s;
   animation-timing-function: linear;
-  animation-delay: 1s;
+  animation-delay: 0;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+
+@-webkit-keyframes movers {
+    0%   {right:0;}
+    100% {right:10px;}
 }
 
 #btnGo{
@@ -33,11 +38,6 @@ body {
   border: none;
   font-size: 20px;
   background-color: transparent;
-}
-
-@-webkit-keyframes moves {
-    0%   {right:0;}
-    100% {right:20px;}
 }
 
 #btnGo img{
@@ -52,7 +52,6 @@ body {
 }
 
 /*collapse button*/
-
 
 .tools-hidden{
   display: none;
@@ -107,7 +106,7 @@ body {
 #pen-color {
   position: relative;
   top: -12px;
-  width: 25px;
+  width: 2px;
   padding: 1px;
 }
 
@@ -175,13 +174,19 @@ body {
   display: none;
 }
 
+#svg-drop-menu {
+  position:absolute;
+  right:0px;
+  top:-29px;
+}
+
 .show-grid{
   display: block;
 }
 
 .drop-menu{
   position: absolute; 
-  top: 45px;
+  top: 47px;
   right: 5px;
   background-color: #e1e1e1;
   color: black;
@@ -193,7 +198,7 @@ body {
 .drop-menu ul li{
   list-style: none;
   font-size: 15px;
-  line-height: 23px;
+  line-height: 27px;
 }
 
 .show-menu{
@@ -208,6 +213,7 @@ input[type=range].slider {
   margin: -1px 15px;
   position: absolute;
   top: 20px;
+  left: 270px;
 }
 input[type=range].slider:focus {
   outline: none;
@@ -217,7 +223,7 @@ input[type=range].slider::-webkit-slider-runnable-track {
   height: 5px;
   cursor: pointer;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: #484d4d;
+  background: #292c2c;
   border-radius: 0px;
   border: 0px solid #ffffff;
 }
@@ -401,7 +407,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-body button{
-  background-color: #5a80f8;
+  background-color: #ff8b00;
   padding: 10px;
   border: none;
   width: 70px;

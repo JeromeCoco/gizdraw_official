@@ -1,7 +1,9 @@
 $(document).ready(function(){
 
-	var grid = 0;
+	$('.simple_color_live_preview').simpleColor({ livePreview: true, cellWidth: 15, cellHeight: 15 });
 
+	var grid = 0;
+	
 	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
@@ -14,7 +16,7 @@ $(document).ready(function(){
 		$(".top-menu").toggleClass('tools-hiddens');
 		$(".tools-item").toggleClass('tools-hidden');
 		$("#pen-width").toggleClass('tools-hidden');
-		$("#pen-color").toggleClass('tools-hidden');
+		$(".simpleColorDisplay").toggleClass('tools-hidden');
 		$("#menu-right").toggleClass('tools-hidden');
 		$(".tools-left").toggleClass('tools-hidden');
 	});
@@ -91,6 +93,8 @@ $(document).ready(function(){
 
 	$('.close').click(function(){
 		$('#canvas-settings-modal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
 	});
 
 	$('.close-connect').click(function(){
@@ -121,9 +125,9 @@ $(document).ready(function(){
 	});
 
 	$('#open-file').click(function(){
-		filepicker.setKey('com.example.GizDraw');
-	    filepicker.setName('GizDraw');
-	    filepicker.pickAndStore({
+		window.filepicker.setKey('com.example.GizDraw');
+	    window.filepicker.setName('GizDraw');
+	    window.filepicker.pickAndStore({
 	        multiple: false,
 	        mimeTypes: ['image/*',],
 	        services : ['GALLERY'],
@@ -137,6 +141,13 @@ $(document).ready(function(){
 	    }, function(e) {
 	       	alert("Error:"+e);
 	    });
+	    //console.log(window);
+	});
+
+	$('#save-file').click(function(){
+		var canvas = document.querySelector('#paint');
+		var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        window.location.href  = image; // it will save locally
 	});
 
 });

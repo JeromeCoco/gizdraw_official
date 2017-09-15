@@ -20,12 +20,17 @@ body {
   right: 0;
   margin: 10px;
   bottom: 0;
-  -webkit-animation-name: moves;
+  -webkit-animation-name: movers;
   -webkit-animation-duration: .325s;
   animation-timing-function: linear;
-  animation-delay: 1s;
+  animation-delay: 0;
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+
+@-webkit-keyframes movers {
+    0%   {right:0;}
+    100% {right:10px;}
 }
 
 #btnGo{
@@ -33,11 +38,6 @@ body {
   border: none;
   font-size: 20px;
   background-color: transparent;
-}
-
-@-webkit-keyframes moves {
-    0%   {right:0;}
-    100% {right:20px;}
 }
 
 #btnGo img{
@@ -177,7 +177,7 @@ body {
 #svg-drop-menu {
   position:absolute;
   right:0px;
-  top:-35px;
+  top:-29px;
 }
 
 .show-grid{
@@ -186,7 +186,7 @@ body {
 
 .drop-menu{
   position: absolute; 
-  top: 55px;
+  top: 47px;
   right: 5px;
   background-color: #e1e1e1;
   color: black;

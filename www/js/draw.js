@@ -1,4 +1,22 @@
-(function() {	
+(function() {
+
+	var currentIPaddress;
+	var socket;
+
+	$("#btnConnect").click(function(){
+        currentIPaddress = $('#ipaddress').val();
+        socket = io('http://'+currentIPaddress+':3000');
+
+        socket.on("connect", function(){
+            alert("You are now connected...");
+            socket.emit("closeModalOnPC", "closing modal...");
+        });
+
+        /*socket.on("disconnect", function(){
+            alert("disconnected");
+        });*/
+
+    });
 	
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
@@ -49,7 +67,6 @@
 
 	$('#pen-color').change(function () {
 		markerColor = $(this).val();
-		console.log(markerColor);
 		tmp_ctx.strokeStyle = markerColor;
 		tmp_ctx.fillStyle = markerColor;
 	});
@@ -84,7 +101,6 @@
 			var targetXval = e.targetTouches[0].pageX;
 			mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 			mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
-			// console.log(mouse.x + ',' + mouse.y);
 
 			// image data and RGB values 
 			var img_data = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
@@ -97,7 +113,6 @@
 			var hex = rgbToHex(R, G, B);
 
 			// if (hex)
-			console.log(rgb + ',' + hex + ',' + A );
 			if (A == 0) {
 				if (bgIsColored) {
 					markerColor = bgColor;
@@ -108,7 +123,6 @@
 				markerColor = '#'+ hex;
 			}
 			$('#pen-color').val(markerColor);
-			console.log(markerColor);
 			tmp_ctx.strokeStyle = markerColor;
 			tmp_ctx.fillStyle = markerColor;
 			$('.simpleColorDisplay').css('background-color', markerColor);
@@ -119,8 +133,6 @@
 			tmp_ctx.strokeStyle = markerColor;
 			tmp_ctx.fillStyle = markerColor;
 			onPaint();
-			console.log("onpaint");
-			console.log(markerColor);
 		}
 		else if (eraser == true) {
 			onErase();
@@ -265,7 +277,6 @@
 	        	ctx.drawImage(canvasPic, 0, 0); 
 	        }
 	        canvasPic.src = cPushArray[cStep];
-	        // console.log(canvasPic);
 	    }
 	});
 
@@ -297,7 +308,6 @@
 		eraser = false;
 		pen = false;
 		brush = false;
-		console.log(clrpckr);
 	});
 
 	$('#pencil').click(function(){
@@ -306,6 +316,7 @@
 		eraser = false;
 		brush =false;
 	});
+
 	$('#eraser').click(function() {
 		eraser = true;
 		pen = false;
@@ -332,8 +343,7 @@
 		pen = false;
 		tmp_ctx.lineWidth = 1;
 		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
-				
-
+	
 		tmp_canvas.addEventListener('touchstart', function(e) {
 		tmp_canvas.addEventListener('touchmove', OnDraw, false);
 		
@@ -361,8 +371,7 @@
 		}
 	});
 
-	var OnDraw = function (){
-
+	var OnDraw = function () {
 			if (!isDrawing) return;
 			points.push({ x: mouse.x, y: mouse.y });
 			tmp_ctx.beginPath();
@@ -371,7 +380,6 @@
 			tmp_ctx.stroke();
 
 			var lastPoint = points[points.length-1];
-
 		  	for (var i = 0, len = points.length; i < len; i++) {
 		    dx = points[i].x - lastPoint.x;
 		    dy = points[i].y - lastPoint.y;

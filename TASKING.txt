@@ -3,7 +3,6 @@ TO DO
 		___________________________________
 		Splash Screen bug
 		Brush Presets (Image, Other Preset)
-		Color Palette Plugin
 		___________________________________
 		Blender
 		Paint Bucket
@@ -22,3 +21,4 @@ TO DO
 		Display recent canvas (.gdw)
 		Open file
 		Send Canvas details to mobile (OnCanvasCreate) [CanvasName, Height, Width, Background]
+		File name extension (.gdw) [Write and Read File]

@@ -1,6 +1,0 @@
-framework module Filestack {
-  umbrella header "Filestack-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -141,6 +141,14 @@ $(document).ready(function(){
 	    }, function(e) {
 	       	alert("Error:"+e);
 	    });
+	    //console.log(window);
+	});
+
+	$('#save-file').click(function(){
+		var canvas = document.querySelector('#paint');
+		var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+        window.location.href  = image; // it will save locally
+        alert(1);
 	});
 
 });
