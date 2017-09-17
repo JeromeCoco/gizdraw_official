@@ -163,6 +163,7 @@ body {
   list-style: none;
   margin: 5px 5px;
   display: none;
+  margin: 1px;
 }
 
 .grid-svg{
@@ -441,4 +442,10 @@ input[type=range].slider:focus::-ms-fill-upper {
 .modal-body button:nth-child(3){
   background-color: #d9d9d9;
   color: black;
+}
+
+.active-preset {
+  background-color: #dddddd;
+  border: 1px solid #b4b4b4;
+  padding: 3px;
 }

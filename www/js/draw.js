@@ -322,6 +322,87 @@
 		preset3 = false;
 		preset4 = false;
 	});
+	$('#brush').click(function() {
+		eraser = false;
+		pen = false;
+		clrpckr = false;
+		brush = true;
+		preset1 = true;
+		preset2 = false;
+		preset3 = false;
+		preset4 = false;
+
+		tmp_ctx.lineWidth = 1;
+		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
+
+		tmp_canvas.addEventListener('touchstart', function(e) {
+			tmp_canvas.addEventListener('touchmove', OnDraw, false);
+			
+			points = [ ];
+			isDrawing = true;
+		
+			var targetYval = e.targetTouches[0].pageY;
+			var targetXval = e.targetTouches[0].pageX;
+			mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+			mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+
+			points.push({ x: mouse.x, y: mouse.y });
+			if (clrpckr == true) {
+				return;
+			}
+			else if (pen == true) {
+				return;
+			}
+			else if (eraser == true) {
+				onErase();
+			}
+			else if (brush == true && preset1 == true) {
+				var rgbaval = hexToRgbA(markerColor);
+				tmp_ctx.strokeStyle = rgbaval+',0.3)';
+				tmp_ctx.fillStyle = rgbaval+',0.3)';
+				ctx.globalCompositeOperation = 'source-over';
+				OnDraw();
+				// console.log(rgbaval);
+			}
+		});
+
+		var OnDraw = function (){
+				if (!isDrawing) return;
+				points.push({ x: mouse.x, y: mouse.y });
+				tmp_ctx.beginPath();
+				tmp_ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
+				tmp_ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+				tmp_ctx.stroke();
+
+				var lastPoint = points[points.length-1];
+
+			  	for (var i = 0, len = points.length; i < len; i++) {
+				    dx = points[i].x - lastPoint.x;
+				    dy = points[i].y - lastPoint.y;
+				    d = dx * dx + dy * dy;
+				    if (brush == true  && preset1 == true) {
+					    if (d < 1000) {
+					      ctx.beginPath();
+					      $('#pen-color').val(markerColor);
+					      var rgbaval = hexToRgbA(markerColor);
+						  ctx.strokeStyle = rgbaval+',0.3)';
+						  tmp_ctx.lineWidth = 1;
+					      ctx.moveTo(lastPoint.x + (dx * 0.2), lastPoint.y + (dy * 0.2));
+					      ctx.lineTo(points[i].x - (dx * 0.2), points[i].y - (dy * 0.2));
+					      ctx.stroke();
+					    }
+				    }
+				    else {
+				    	return;
+					  }
+			    }	
+		};
+		tmp_canvas.addEventListener('touchend', function(){
+			isDrawing = false;
+			points.length = 0;
+		});
+
+	});
 
 	var bgColor;
 	var bgIsColored = false;

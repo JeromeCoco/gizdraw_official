@@ -125,7 +125,7 @@ $(document).ready(function(){
 	});
 
 	$('#open-file').click(function(){
-		window.filepicker.setKey('com.example.GizDraw');
+		/*window.filepicker.setKey('com.example.GizDraw');
 	    window.filepicker.setName('GizDraw');
 	    window.filepicker.pickAndStore({
 	        multiple: false,
@@ -140,14 +140,28 @@ $(document).ready(function(){
 	        alert("Success:"+res);
 	    }, function(e) {
 	       	alert("Error:"+e);
-	    });
-	    //console.log(window);
+	    });*/
+	    console.log(window);
 	});
 
-	$('#save-file').click(function(){
-		var canvas = document.querySelector('#paint');
-		var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-        window.location.href  = image; // it will save locally
+	// $('.presets').click(function() {
+	// 	$(this).toggleClass('active-preset');
+	// });
+	$('#preset-first').click(function(){
+		$('.presets').removeClass('active-preset');
+		$(this).addClass('active-preset');
+	});
+	$('#preset-second').click(function(){
+		$('.presets').removeClass('active-preset');
+		$(this).addClass('active-preset');
+	});
+	$('#preset-third').click(function(){
+		$('.presets').removeClass('active-preset');
+		$(this).addClass('active-preset');
+	});
+	$('#preset-fourth').click(function(){
+		$('.presets').removeClass('active-preset');
+		$(this).addClass('active-preset');
 	});
 
 });

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -51,10 +51,10 @@
 						</svg>
 		    			<ul>
 		    				<li id="new-canvas">Clear canvas</li>
-		    				<li><input id="selectedFile" type="file" value="Browse"/></li>
-		    				<li id="open-file">Open file...</li>
+		    				<!-- <li><input id="selectedFile" type="file" value="Browse"/></li> -->
+		    				<!-- <li id="open-file">Open file...</li> -->
 		    				<li>Share</li>
-		    				<li id="save-file">Save as...</li>
+		    				<li>Save as...</li>
 		    				<li id="canvas-settings">Canvas Options...</li>
 		    				<li id="connect-pc">Connect to PC...</li>
 		    			</ul>
@@ -70,9 +70,10 @@
 		  	</div>
 	        <div id="bottom-menu">
 				<ul>
-	        		<li class="presets" id="preset1">Preset 1</li>
-	        		<li class="presets">Preset 2</li>
-	        		<li class="presets">Preset 3</li>
+	        		<li class="presets active-preset" id="preset-first"><img src="img/preset.png" width="120" height="19" id="first-preset"/></li>
+	        		<li class="presets" id="preset-second"><img src="img/secondpreset.PNG" width="120" height="20" id="second-preset"/> </li>
+	        		<li class="presets" id="preset-third"><img src="img/thirdpreset.PNG" width="120" height="20" id="third-preset"/></li>
+	        		<li class="presets" id="preset-fourth"><img src="img/fourthpreset.PNG" width="120" height="20" id="fourth-preset"/></li>
 	        	</ul>
 	        </div>
         </ons-page>
@@ -94,9 +95,9 @@
 		<div id="connect-modal" class="modal-connect">
   			<div class="modal-content-connect">
     			<div class="modal-body">
-    				<input type="text" placeholder="Enter PIN here...">
-    				<button class="close-connect">Connect</button>
-    				<button class="close-connect">Cancel</button>
+    				<input type="text" id="ipaddress" placeholder="Enter IP here..."><br>
+    					<button class="close-connect" id="btnConnect">Connect</button>
+    					<button class="close-connect">Cancel</button>
     			</div>
   			</div>
 		</div>
@@ -104,6 +105,7 @@
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script src="js/draw.js"></script>
+        <script src="js/socket.io.js"></script>
         <script src="js/jquery.simple-color.js"></script>
     </body>
 </html>

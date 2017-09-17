@@ -144,4 +144,24 @@ $(document).ready(function(){
 	    console.log(window);
 	});
 
+	// $('.presets').click(function() {
+	// 	$(this).toggleClass('active-preset');
+	// });
+	$('#preset-first').click(function(){
+		$('.presets').removeClass('active-preset');
+		$(this).addClass('active-preset');
+	});
+	$('#preset-second').click(function(){
+		$('.presets').removeClass('active-preset');
+		$(this).addClass('active-preset');
+	});
+	$('#preset-third').click(function(){
+		$('.presets').removeClass('active-preset');
+		$(this).addClass('active-preset');
+	});
+	$('#preset-fourth').click(function(){
+		$('.presets').removeClass('active-preset');
+		$(this).addClass('active-preset');
+	});
+
 });
