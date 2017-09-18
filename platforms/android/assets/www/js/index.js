@@ -140,8 +140,8 @@ $(document).ready(function(){
 	        alert("Success:"+res);
 	    }, function(e) {
 	       	alert("Error:"+e);
-	    });*/
-	    console.log(window);
+	    });
+	    console.log(window);*/
 	});
 
 	// $('.presets').click(function() {

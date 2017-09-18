@@ -9,7 +9,7 @@
         socket = io('http://'+currentIPaddress+':3000');
 
         socket.on("connect", function(){
-            alert("You are now connected...");
+            socket.emit("sender", "start com");
         });
 
     });

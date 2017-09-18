@@ -1,9 +1,6 @@
 TO DO
 	Mobile Application
 		___________________________________
-		Splash Screen bug
-		Brush Presets (Image, Other Preset)
-		___________________________________
 		Blender
 		Paint Bucket
 		Shapes
@@ -12,12 +9,9 @@ TO DO
 		Open File
 		Save
 		Share
-		Connect to PC
 		Canvas Options(Add paper texture)
 
 	Desktop Application
-		Show Preview Full screen button
-		Recognize Pin
 		Display recent canvas (.gdw)
 		Open file
 		Send Canvas details to mobile (OnCanvasCreate) [CanvasName, Height, Width, Background]
