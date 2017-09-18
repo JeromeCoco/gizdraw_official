@@ -10,6 +10,11 @@
 
         socket.on("connect", function(){
             socket.emit("sender", "start com");
+            $("#ipaddress").css("display", "none");
+            $(".close-connect").css("display", "none");
+            $("#btnConnect").css("display", "none");
+            $("#waiting-state").html("<img style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
+            $("#waiting-state").css("padding", "20px");
         });
 
     });
