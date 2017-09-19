@@ -416,7 +416,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-content-connect .modal-body button{
-  background-color: #ff8b00;
+  background-color: #e44d2e;
   padding: 15px;
   border: none;
   width: 50%;
@@ -425,7 +425,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-content .modal-body button{
-  background-color: #ff8b00;
+  background-color: #e44d2e;
   padding: 10px;
   border: none;
   width: 70px;

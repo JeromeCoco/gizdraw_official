@@ -1,10 +1,10 @@
 Scoresheet
-	Desktop App
-	Mobile App
+	Mobile App - 3page
+	Desktop App - 3page
 
-Documentation / 
-Enhancement form / 
-VTOC /
+Documentation - 3 - 36pages
+Enhancement form - 1page
+VTOC - 3 - 21page
 
 Application
 	Display Canvas
