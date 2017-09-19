@@ -3,10 +3,13 @@
 	var currentIPaddress;
 	var socket;
 
+	if (socket != undefined) {
+		connects();
+	}
+
 	$("#btnConnect").click(function(){
 		
-        currentIPaddress = $('#ipaddress').val();
-        socket = io('http://'+currentIPaddress+':3000');
+        connects();
 
         socket.on("connect", function(){
             socket.emit("sender", "start com");
@@ -19,6 +22,16 @@
 
     });
 	
+	function connects(){
+		currentIPaddress = $('#ipaddress').val();
+        socket = io('http://'+currentIPaddress+':3000');
+
+        socket.on("createCanvasToMobile", function(data){
+        	$("#waiting-state").html(" ");
+        	$("#waiting-state").html("Canvas Name: " + data.canvasName + "<br/> Width: " + data.canvasWidth + "px" +  "<br/> Height: " + data.canvasHeight + "px");
+        });
+	}
+
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth = 5;	
