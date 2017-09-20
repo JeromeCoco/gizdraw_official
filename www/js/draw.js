@@ -1,7 +1,38 @@
 (function() {
-
+	// con
 	var currentIPaddress;
 	var socket;
+
+	// canvas
+	var canvas = document.querySelector('#paint');
+	var ctx = canvas.getContext('2d');
+	var markerWidth = 5;	
+	var markerColor = $('#pen-color').val();
+	var sketch = document.querySelector('#sketch');
+	var sketch_style = getComputedStyle(sketch);
+	var clrpckr = false;
+	var pen = true;
+	var blend = false;
+	var erase = false;
+	var brush = false;
+	var preset1 = false;
+	var preset2 = false;
+	var preset3 = false;
+	var preset4 = false;
+	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
+	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+
+	
+	// Creating a tmp canvas
+	var tmp_canvas = document.createElement('canvas');
+	var tmp_ctx = tmp_canvas.getContext('2d');
+	tmp_canvas.id = 'tmp_canvas';
+	tmp_canvas.width = canvas.width;
+	tmp_canvas.height = canvas.height;
+	sketch.appendChild(tmp_canvas);
+
+	var mouse = {x: 0, y: 0};
+	var last_mouse = {x: 0, y: 0};
 
 	if (socket != undefined) {
 		connects();
@@ -28,38 +59,20 @@
 
         socket.on("createCanvasToMobile", function(data){
 			//create canvas
-			$('#connect-modal').css("display", "none");
+			$("#connect-modal").css("display", "none");
+
+			canvas.width = parseInt(data.canvasWidth);
+			canvas.height = parseInt(data.canvasHeight);
+			tmp_canvas.width = parseInt(data.canvasWidth);
+			tmp_canvas.height = parseInt(data.canvasHeight);
+			
+			$("#paint").css("background-color", "white");
+			$("#paint").css("box-shadow", "0px 4px 14px grey");
+			$("#sketch").css("background-color", "#d8d8d8");
         });
 	}
 
-	var canvas = document.querySelector('#paint');
-	var ctx = canvas.getContext('2d');
-	var markerWidth = 5;	
-	var markerColor = $('#pen-color').val();
-	var sketch = document.querySelector('#sketch');
-	var sketch_style = getComputedStyle(sketch);
-	var clrpckr = false;
-	var pen = true;
-	var blend = false;
-	var erase = false;
-	var brush = false;
-	var preset1 = false;
-	var preset2 = false;
-	var preset3 = false;
-	var preset4 = false;
-	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
-	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 	
-	// Creating a tmp canvas
-	var tmp_canvas = document.createElement('canvas');
-	var tmp_ctx = tmp_canvas.getContext('2d');
-	tmp_canvas.id = 'tmp_canvas';
-	tmp_canvas.width = canvas.width;
-	tmp_canvas.height = canvas.height;
-	sketch.appendChild(tmp_canvas);
-
-	var mouse = {x: 0, y: 0};
-	var last_mouse = {x: 0, y: 0};
 	
 	// Pencil Points
 	var ppts = [];
@@ -91,10 +104,13 @@
 
 	tmp_canvas.addEventListener('touchstart', function(e) {
 		tmp_canvas.addEventListener('touchmove', onPaint, false);
-		var targetYval = e.targetTouches[0].pageY;
-		var targetXval = e.targetTouches[0].pageX;
-		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
-		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+		var parentOffset = $(this).parent().offset();
+		var xval = e.pageX - parentOffset.left;
+		var yval = e.pageY - parentOffset.top;
+		// var targetYval = e.targetTouches[0].pageY;
+		// var targetXval = e.targetTouches[0].pageX;
+		mouse.x = typeof xval !== 'undefined' ? xval : e.layerX;
+		mouse.y = typeof yval  !== 'undefined' ? yval  : e.layerY;
 		ppts.push({x: mouse.x, y: mouse.y});
 
 		if (clrpckr == true) {
