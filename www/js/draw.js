@@ -27,8 +27,8 @@
         socket = io('http://'+currentIPaddress+':3000');
 
         socket.on("createCanvasToMobile", function(data){
-        	$("#waiting-state").html(" ");
-        	$("#waiting-state").html("Canvas Name: " + data.canvasName + "<br/> Width: " + data.canvasWidth + "px" +  "<br/> Height: " + data.canvasHeight + "px");
+			//create canvas
+			$('#connect-modal').css("display", "none");
         });
 	}
 

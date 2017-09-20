@@ -95,12 +95,12 @@ body {
 
 .active{
   background-color: #292c2c;
-  border-top: 3px solid #ff8b00 !important;
+  border-top: 3px solid #e44d2e !important;
 }
 
 .active-left{
   background-color: #c1c1c1;
-  border-left: 2px solid #ff8b00;
+  border-left: 2px solid #e44d2e;
 }
 
 #pen-color {
@@ -233,7 +233,7 @@ input[type=range].slider::-webkit-slider-thumb {
   height: 17px;
   width: 8px;
   border-radius: 0px;
-  background: #e67e22;
+  background: #e44d2e;
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -6px;
@@ -336,7 +336,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 .modal-connect {
     position: fixed;
     z-index: 2;
-    padding-top: 200px;
+    padding-top: 135px;
     left: 0;
     top: 0;
     width: 100%; 
@@ -378,6 +378,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 .modal-content-connect .modal-body input{
   padding: 8px;
+  font-size: 15px;
 }
 
 /* Add Animation */
@@ -416,7 +417,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-content-connect .modal-body button{
-  background-color: #ff8b00;
+  background-color: #e44d2e;
   padding: 15px;
   border: none;
   width: 50%;
@@ -425,7 +426,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-content .modal-body button{
-  background-color: #ff8b00;
+  background-color: #e44d2e;
   padding: 10px;
   border: none;
   width: 70px;
