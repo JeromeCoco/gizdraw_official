@@ -14,5 +14,5 @@ TO DO
 	Desktop Application
 		Display recent canvas (.gdw)
 		Open file
-		Send Canvas details to mobile (OnCanvasCreate) [CanvasName, Height, Width, Background]
+		Send Canvas details to mobile (OnCanvasCreate) [CanvasName, Height/, Width/, Background/]
 		File name extension (.gdw) [Write and Read File]
