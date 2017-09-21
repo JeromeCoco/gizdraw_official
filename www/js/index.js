@@ -101,6 +101,10 @@ $(document).ready(function(){
 		$('#connect-modal').css("display", "none");
 	});
 
+	$('#close-share').click(function(){
+		$('#share-modal').css("display", "none");
+	});	
+
 	$('#canvas-type').change(function(){
 		var canvasType = $(this).val();
 		if (canvasType == "Color") {
@@ -112,6 +116,10 @@ $(document).ready(function(){
 
 	$('#connect-pc').click(function(){
 		$('#connect-modal').css("display", "block");
+	});
+
+	$('#share').click(function(){
+		$('#share-modal').css("display", "block");
 	});
 
 	$('#setCanvasType').click(function(){

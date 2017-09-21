@@ -202,6 +202,12 @@ body {
   line-height: 27px;
 }
 
+#selectedFile{
+  background-color: #d9d9d9;
+  font-size: 15px;
+  width: 205px;
+}
+
 .show-menu{
   display: block;
   transition: .325s;
@@ -348,6 +354,21 @@ input[type=range].slider:focus::-ms-fill-upper {
     display: none;
 }
 
+.modal-share {
+    position: fixed;
+    z-index: 2;
+    padding-top: 135px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 5px;
+    display: none;
+}
+
 /* Modal Content */
 .modal-content-connect {
     position: relative;
@@ -363,6 +384,22 @@ input[type=range].slider:focus::-ms-fill-upper {
     animation-duration: 0.4s;
     margin-top: -90px;
 }
+
+.modal-content-share {
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 20px 0px 0px 0px;
+    border: 1px solid #888;
+    width: 40%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    margin-top: -90px;
+}
+
 /*.modal-button-cont {
     display: inline-block;
     background-color: blue;
@@ -379,6 +416,26 @@ input[type=range].slider:focus::-ms-fill-upper {
 .modal-content-connect .modal-body input{
   padding: 8px;
   font-size: 15px;
+}
+
+.modal-content-share .modal-body p:first-child{
+  margin-top: -15px;
+  padding: 10px;
+  font-weight: bold;
+  color: #747474;
+  border-bottom: 2px solid dodgerblue;
+}
+
+.modal-content-share .modal-body img{
+  width: 45px;
+  display: inline-block;
+  margin: 15px;
+}
+
+.modal-content-share .modal-body div{
+  text-align: center;
+  background: #e3e3e3;
+  padding: 10px;
 }
 
 /* Add Animation */

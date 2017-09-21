@@ -66,14 +66,14 @@
 			tmp_canvas.width = parseInt(data.canvasWidth);
 			tmp_canvas.height = parseInt(data.canvasHeight);
 			
-			$("#paint").css("background-color", "white");
+			$("#paint").css("background-color", data.canvasBackgroundColor);
 			$("#paint").css("box-shadow", "0px 4px 14px grey");
 			$("#sketch").css("background-color", "#d8d8d8");
+			$("#settings").toggleClass('active-menu');
+			$('.drop-menu').toggleClass('show-menu');
         });
 	}
 
-	
-	
 	// Pencil Points
 	var ppts = [];
 
