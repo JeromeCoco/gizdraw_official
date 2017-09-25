@@ -14,6 +14,9 @@
 	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
 	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 
+	// Connection
+	var currentIPaddress;
+	var socket;
 	
 	// Creating a tmp canvas
 	var tmp_canvas = document.createElement('canvas');
@@ -27,6 +30,45 @@
 
 	var mouse = {x: 0, y: 0};
 	var last_mouse = {x: 0, y: 0};
+
+	// Detect Connection
+	if (socket != undefined) {
+		connects();
+	}
+
+	// Request Connection
+	$("#btnConnect").click(function(){
+        connects();
+        socket.on("connect", function(){
+            socket.emit("sender", "start com");
+            $("#ipaddress").css("display", "none");
+            $(".close-connect").css("display", "none");
+            $("#btnConnect").css("display", "none");
+            $("#waiting-state").html("<img style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
+            $("#waiting-state").css("padding", "20px");
+        });
+    });
+
+	// Connection Function
+    function connects(){
+		currentIPaddress = $('#ipaddress').val();
+        socket = io('http://'+currentIPaddress+':3000');
+
+        socket.on("createCanvasToMobile", function(data){
+			$("#connect-modal").css("display", "none");
+			// Set Canvas Property
+			canvas.width = parseInt(data.canvasWidth);
+			canvas.height = parseInt(data.canvasHeight);
+			tmp_canvas.width = parseInt(data.canvasWidth);
+			tmp_canvas.height = parseInt(data.canvasHeight);
+			// Display Canvas
+			$("#paint").css("background-color", data.canvasBackgroundColor);
+			$("#paint").css("box-shadow", "0px 4px 14px grey");
+			$("#sketch").css("background-color", "#d8d8d8");
+			$("#settings").toggleClass('active-menu');
+			$('.drop-menu').toggleClass('show-menu');
+        });
+	}
 
 	// Get Current Tool ID
 	$('.tool').click( function () {
