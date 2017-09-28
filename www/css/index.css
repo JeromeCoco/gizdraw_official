@@ -237,7 +237,7 @@ input[type=range].slider::-webkit-slider-runnable-track {
 input[type=range].slider::-webkit-slider-thumb {
   box-shadow: 0px 0px 1px #670000, 0px 0px 0px #810000;
   height: 17px;
-  width: 8px;
+  width: 15px;
   border-radius: 0px;
   background: #e44d2e;
   cursor: pointer;
@@ -449,7 +449,7 @@ input[type=range].slider:focus::-ms-fill-upper {
     to {top:0; opacity:1}
 }
 
-/* The Close Button */
+/* Close Button */
 .close {
   
 }
