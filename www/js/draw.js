@@ -73,7 +73,6 @@
 	// Get Current Tool ID
 	$('.tool').click( function () {
 		toolID = $(this).attr('id');
-
 		if (toolID == "brush") {
 			brushpreset1();
 		}
