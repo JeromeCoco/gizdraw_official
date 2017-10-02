@@ -67,6 +67,10 @@
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#settings").toggleClass('active-menu');
 			$('.drop-menu').toggleClass('show-menu');
+			//Display Connected State
+			$('#connectedState').css("display", "block");
+			$('.slider').css("top", "30px");
+			$('.left-menu').css("height", "80%");
         });
 	}
 

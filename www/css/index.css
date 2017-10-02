@@ -507,3 +507,10 @@ input[type=range].slider:focus::-ms-fill-upper {
   border: 1px solid #b4b4b4;
   padding: 3px;
 }
+
+#connectedState{
+  display: none;
+  width: 100%;
+  background: lime;
+  height: 5px;
+}
