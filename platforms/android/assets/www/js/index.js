@@ -126,9 +126,9 @@ $(document).ready(function(){
 		var canvasType = $('#canvas-type').val();
 		if (canvasType == "Color") {
 			var colorSet = $('#custom-bg-color').val();
-			$('#sketch').css("background-color", colorSet);
+			$('#paint').css("background-color", colorSet);
 		} else if (canvasType == "White") {
-			$('#sketch').css("background-color", "white");
+			$('#paint').css("background-color", "white");
 		}
 	});
 

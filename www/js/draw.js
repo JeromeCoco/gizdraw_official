@@ -11,6 +11,7 @@
 	var cStep = -1;
 	var isDrawing, lastPoint; // Brush preset 3
 	var points = [ ]; // Brush Preset 4
+	var isConnected = false;
 	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
 	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 
@@ -46,6 +47,7 @@
             $("#btnConnect").css("display", "none");
             $("#waiting-state").html("<img style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
             $("#waiting-state").css("padding", "20px");
+            isConnected = true;
         });
     });
 
@@ -71,12 +73,18 @@
 			$('#connectedState').css("display", "block");
 			$('.slider').css("top", "30px");
 			$('.left-menu').css("height", "80%");
+			//Change menu options
+			$(".primary").css("display", "none");
+			$(".secondary").css("display", "block");
         });
 	}
 
 	// Get Current Tool ID
 	$('.tool').click( function () {
 		toolID = $(this).attr('id');
+		if (isConnected) {
+			socket.emit("sendActiveTool", toolID);
+		}
 		if (toolID == "brush") {
 			brushpreset1();
 		}
@@ -117,6 +125,9 @@
 		var targetXval = e.targetTouches[0].pageX;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+		if (isConnected) {
+			socket.emit("sendCoordinates", {x: mouse.x, y: mouse.y});
+		}
 	}, false);
 
 	$('#pen-width').change(function () {
@@ -144,18 +155,20 @@
 		}
 	});
 
-
 	// OnPaint TouchStart
 	tmp_canvas.addEventListener('touchstart', function(e) {
 		tmp_canvas.addEventListener('touchmove', onPaint, false);
 		var parentOffset = $(this).parent().offset();
-		var xval = e.pageX - parentOffset.left;
-		var yval = e.pageY - parentOffset.top;
+		var targetYval = e.targetTouches[0].pageY;
+		var targetXval = e.targetTouches[0].pageX;
+		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 
-		mouse.x = typeof xval !== 'undefined' ? xval : e.layerX;
-		mouse.y = typeof yval  !== 'undefined' ? yval  : e.layerY;
 		ppts.push({x: mouse.x, y: mouse.y});
-
+		console.log(ppts);
+		if (isConnected) {
+		socket.emit("onTouchStart", "touchstart");
+		}
 		switch (toolID) {
 			case 'pencil':
 				ctx.globalCompositeOperation = 'source-over';
@@ -223,6 +236,9 @@
 		tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
 		// Emptying up Pencil Points
 		ppts = [];
+		if (isConnected) {
+		socket.emit("onTouchEnd", "touchend");
+		}
 	}, false);
 	
 	$('#new-canvas').click(function(){
