@@ -26,8 +26,7 @@
 	tmp_canvas.width = canvas.width;
 	tmp_canvas.height = canvas.height;
 	sketch.appendChild(tmp_canvas);
-	tmp_ctx.lineJoin = 'round';
-	tmp_ctx.lineCap = 'round';
+	
 
 	var mouse = {x: 0, y: 0};
 	var last_mouse = {x: 0, y: 0};
@@ -93,8 +92,10 @@
 	// Get Current Preset ID
 	$('.presets').click( function () {
 		currpreset = $(this).attr('id');
-		console.log(currpreset);
 
+		if (isConnected) {
+			socket.emit("sendActivePreset", currpreset);
+		}
 		if (toolID == "brush"){
 			switch (currpreset) {
 				case 'preset-first':
@@ -134,13 +135,18 @@
 		markerWidth = parseInt($('#pen-width').val());
 		tmp_ctx.lineWidth = markerWidth;
 		$('#pen-width-label').val(markerWidth);
+		if (isConnected) {
+			socket.emit("sendPenWidth", markerWidth);
+		}	
 	});
 
 	$('#pen-color').change(function () {
 		markerColor = $(this).val();
-		console.log(markerColor);
 		tmp_ctx.strokeStyle = markerColor;
 		tmp_ctx.fillStyle = markerColor;
+		if (isConnected) {
+			socket.emit("sendPenColor", markerColor);
+		}		
 	});
 	
 	var bgColor;
@@ -165,7 +171,6 @@
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 
 		ppts.push({x: mouse.x, y: mouse.y});
-		console.log(ppts);
 		if (isConnected) {
 		socket.emit("onTouchStart", "touchstart");
 		}
@@ -176,8 +181,9 @@
 				tmp_ctx.strokeStyle = markerColor;
 				tmp_ctx.fillStyle = markerColor;
 				tmp_ctx.shadowBlur = 0;
+				tmp_ctx.lineJoin = 'round';
+				tmp_ctx.lineCap = 'round';
 				onPaint();
-				console.log("onpaint");
 			break;
 			case 'color-picker': 
 				ctx.globalCompositeOperation = 'source-over';
@@ -204,7 +210,6 @@
 				var hex = rgbToHex(R, G, B);
 
 				// if (hex)
-				console.log(rgb + ',' + hex + ',' + A );
 				if (A == 0) {
 					if (bgIsColored) {
 						markerColor = bgColor;
@@ -214,8 +219,8 @@
 				} else {
 					markerColor = '#'+ hex;
 				}
+
 				$('#pen-color').val(markerColor);
-				console.log(markerColor);
 				tmp_ctx.strokeStyle = markerColor;
 				tmp_ctx.fillStyle = markerColor;
 				$('.simpleColorDisplay').css('background-color', markerColor);
@@ -237,7 +242,7 @@
 		// Emptying up Pencil Points
 		ppts = [];
 		if (isConnected) {
-		socket.emit("onTouchEnd", "touchend");
+			socket.emit("onTouchEnd", "touchend");
 		}
 	}, false);
 	
@@ -381,12 +386,18 @@
 				tmp_ctx.fillStyle = rgbaval+',0.3)';
 				ctx.globalCompositeOperation = 'source-over';
 				OnDrawFirst();
+			} 
+			if (isConnected) {
+			socket.emit("onTouchBrushStart", "brushtouchstart");
 			}
 		});
 
 		tmp_canvas.addEventListener('touchend', function(){
 			isDrawing = false;
 			points.length = 0;
+			if (isConnected) {
+			socket.emit("onTouchBrushEnd", "brushtouchend");
+			}
 		});
 	};
 	// Preset 2 TouchStart Function
@@ -487,9 +498,9 @@
 		var lastPoint = points[points.length-1];
 
 	  	for (var i = 0, len = points.length; i < len; i++) {
-		    dx = points[i].x - lastPoint.x;
-		    dy = points[i].y - lastPoint.y;
-		    d = dx * dx + dy * dy;
+		    var dx = points[i].x - lastPoint.x;
+		    var dy = points[i].y - lastPoint.y;
+		    var d = dx * dx + dy * dy;
 		    if (toolID == "brush" && currpreset == "preset-first") {
 			    if (d < 1000) {
 			      ctx.beginPath();
