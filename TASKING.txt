@@ -5,14 +5,23 @@ TO DO
 		Paint Bucket
 		Shapes
 		Move
+		Zoom In / Zoom Out
 		___________________________________
-		Open File
+		Open image
 		Save
 		Share
 		Canvas Options(Add paper texture)
+		Disconnect
 
 	Desktop Application
 		Display recent canvas (.gdw)
-		Open file
-		Send Canvas details to mobile (OnCanvasCreate) [CanvasName, Height/, Width/, Background/]
+		Open image
 		File name extension (.gdw) [Write and Read File]
+
+
+	TASKING [FOCUS]
+		Sending of Tools [pencil, brush presets, eraser, undo, redo, grid, resizer, color picker] - Krisha
+
+		Resolution, Aspect Ratio - Ako
+
+		Canvas Options while connected [rotate, background color, resize] - Isog

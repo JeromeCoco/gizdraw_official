@@ -152,9 +152,6 @@ $(document).ready(function(){
 	    console.log(window);*/
 	});
 
-	// $('.presets').click(function() {
-	// 	$(this).toggleClass('active-preset');
-	// });
 	$('#preset-first').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');

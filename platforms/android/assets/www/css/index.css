@@ -512,5 +512,9 @@ input[type=range].slider:focus::-ms-fill-upper {
   display: none;
   width: 100%;
   background: lime;
-  height: 5px;
+  height: 8px;
+}
+
+.secondary{
+  display: none;
 }
