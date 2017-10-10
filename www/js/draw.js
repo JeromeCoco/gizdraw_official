@@ -76,6 +76,10 @@
 			$(".primary").css("display", "none");
 			$(".secondary").css("display", "block");
         });
+
+        socket.on("onResetCanvasToMobile", function(data){
+        	resetCanvas();
+        });
 	}
 
 	// Get Current Tool ID
