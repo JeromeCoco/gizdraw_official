@@ -20,7 +20,7 @@ TO DO
 
 
 	TASKING [FOCUS]
-		Sending of Tools [pencil, brush presets, eraser, undo, redo, grid, resizer, color picker] - Krisha
+		Sending of Tools [undo, redo, grid, color picker, color swatch] - Krisha
 
 		Resolution, Aspect Ratio - Ako
 
