@@ -76,10 +76,6 @@
 			$(".primary").css("display", "none");
 			$(".secondary").css("display", "block");
         });
-
-        socket.on("onResetCanvasToMobile", function(data){
-        	resetCanvas();
-        });
 	}
 
 	// Get Current Tool ID
@@ -178,6 +174,9 @@
 		if (isConnected) {
 		socket.emit("onTouchStart", "touchstart");
 		}
+		if (isConnected) {
+			socket.emit("sendCoordinates", {x: mouse.x, y: mouse.y});
+		}
 		switch (toolID) {
 			case 'pencil':
 				ctx.globalCompositeOperation = 'source-over';
@@ -194,9 +193,6 @@
 				var canvasPic = new Image();
 				canvasPic.src = cPushArray[cStep];
 
-				canvasPic.onload = function () {
-					ctx.drawImage(canvasPic, 0, 0);
-				}
 				// user coordinates
 				var targetYval = e.targetTouches[0].pageY;
 				var targetXval = e.targetTouches[0].pageX;
@@ -224,10 +220,15 @@
 					markerColor = '#'+ hex;
 				}
 
+
 				$('#pen-color').val(markerColor);
 				tmp_ctx.strokeStyle = markerColor;
 				tmp_ctx.fillStyle = markerColor;
 				$('.simpleColorDisplay').css('background-color', markerColor);
+
+				if (isConnected) {
+					socket.emit("onColorSend", markerColor);
+				}
 			break;
 			case 'eraser':
 				onErase();
@@ -240,8 +241,9 @@
 		tmp_canvas.removeEventListener('touchmove', onPaint, false);
 		// Writing down to real canvas now
 		ctx.drawImage(tmp_canvas, 0, 0);
-		// Clearing tmp canvas
+		// Storing every strokes to Array
 		cPush();
+		// Clearing tmp canvas
 		tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
 		// Emptying up Pencil Points
 		ppts = [];
@@ -267,13 +269,21 @@
 		{
 	        cStep--;
 	        var canvasPic = new Image();
-	        var srca = cPushArray[cStep];
+	        var src = cPushArray[cStep];
 	        canvasPic.onload = function (){ 
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0); 
 	        }
 	        canvasPic.src = cPushArray[cStep];
+	        console.log('undo');
+		 	if (isConnected) {
+				socket.emit("onUndo", cPushArray[cStep]);
+			}
 	    }
+	    if (isConnected) {
+			socket.emit("cStep", cStep);
+		}
+		console.log(cStep);
 	});
 
 	// REDO event
@@ -284,10 +294,17 @@
 	        var canvasPic = new Image();
 	        canvasPic.src = cPushArray[cStep];
 	        canvasPic.onload = function () { 
+	        		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        		ctx.drawImage(canvasPic, 0, 0); 
-	        		// ctx.replaceWith(canvasPic, 0, 0);
 	        	}
+	   		console.log('redo');
+	        if (isConnected) {
+				socket.emit("onRedo", cPushArray[cStep]);
+			}
    		}
+   		if (isConnected) {
+			socket.emit("cStep", cStep);
+		}
 	});
 
 	// 
@@ -330,42 +347,38 @@
 		} else {
 			eraserColor = '#FFF';
 		}
+		// Saving all the points in an array
+		ppts.push({x: mouse.x, y: mouse.y});
 		tmp_ctx.strokeStyle = eraserColor;
 		tmp_ctx.fillStyle = eraserColor;
 		tmp_ctx.shadowBlur = 0;
-		// Saving all the points in an array
-		ppts.push({x: mouse.x, y: mouse.y});
-
+		tmp_ctx.lineWidth = markerWidth;
 		ctx.globalCompositeOperation = 'destination-out';
-		ctx.fillStyle = 'rgba(0,0,0,0)';
-		ctx.strokeStyle = 'rgba(0,0,0,0)';
-		ctx.lineWidth = 5;
 		if (ppts.length < 3) {
 			var b = ppts[0];
-			ctx.beginPath();
-			ctx.arc(b.x, b.y, ctx.lineWidth / 2, 0, Math.PI * 2, !0);
-			ctx.fill();
-			ctx.closePath();
-			
+			tmp_ctx.beginPath();
+			tmp_ctx.arc(b.x, b.y, tmp_ctx.lineWidth / 2, 0, Math.PI * 2, !0);
+			tmp_ctx.fill();
+			tmp_ctx.closePath();
 			return;
 		}
-		ctx.beginPath();
-		ctx.moveTo(ppts[0].x, ppts[0].y);
-		
+		// Tmp canvas is always cleared up before drawing.
+		tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
+		tmp_ctx.beginPath();
+		tmp_ctx.moveTo(ppts[0].x, ppts[0].y);
 		for (var i = 1; i < ppts.length - 2; i++) {
 			var c = (ppts[i].x + ppts[i + 1].x) / 2;
 			var d = (ppts[i].y + ppts[i + 1].y) / 2;
-			
-			ctx.quadraticCurveTo(ppts[i].x, ppts[i].y, c, d);
+			tmp_ctx.quadraticCurveTo(ppts[i].x, ppts[i].y, c, d);
 		}
 		// For the last 2 points
-		ctx.quadraticCurveTo(
+		tmp_ctx.quadraticCurveTo(
 			ppts[i].x,
 			ppts[i].y,
 			ppts[i + 1].x,
 			ppts[i + 1].y
 		);
-		ctx.stroke();
+		tmp_ctx.stroke();
 	};
 
 	// Preset 1 TouchStart Function
@@ -397,6 +410,7 @@
 		});
 
 		tmp_canvas.addEventListener('touchend', function(){
+			tmp_canvas.removeEventListener('touchmove', OnDrawFirst, false);
 			isDrawing = false;
 			points.length = 0;
 			if (isConnected) {
@@ -428,12 +442,21 @@
 				ctx.globalCompositeOperation = 'source-over';
 				OnDrawSec();
 			}
-			
+			else {
+				return;
+			}
+			if (isConnected) {
+			socket.emit("onTouchBrushStart", "brushtouchstart");
+			}
 		});
 
 		tmp_canvas.addEventListener('touchend', function(){
+			tmp_canvas.removeEventListener('touchmove', OnDrawSec, false);
 			isDrawing = false;
 			points.length = 0;
+			if (isConnected) {
+			socket.emit("onTouchBrushEnd", "brushtouchend");
+			}
 		});
 	};
 	// Preset 3 TouchStart Function
@@ -455,12 +478,13 @@
 			lastPoint = { x: mouse.x, y: mouse.y };
 
 			if (toolID == "brush" && currpreset == "preset-third") {
-				ctx.strokeStyle = markerColor;
 				ctx.globalCompositeOperation = 'source-over';
+				ctx.strokeStyle = markerColor;
 				OnDrawThird();
 			}
 		});
 		tmp_canvas.addEventListener("touchend", function() {
+			tmp_canvas.removeEventListener('touchmove', OnDrawThird, false);
 			isDrawing = false;
 		});
 	};
@@ -484,10 +508,14 @@
 	  		points.push({ x: mouse.x, y: mouse.y });
 			
 			if (toolID == "brush" && currpreset == "preset-fourth") {
-				ctx.strokeStyle = markerColor;
 				ctx.globalCompositeOperation = 'source-over';
+				ctx.strokeStyle = markerColor;
 				OnDrawFourth();
 			}
+		});
+		tmp_canvas.addEventListener("touchend", function() {
+			tmp_canvas.removeEventListener('touchmove', OnDrawFourth, false);
+			isDrawing = false;
 		});
 	};
 
@@ -512,6 +540,7 @@
 			      var rgbaval = hexToRgbA(markerColor);
 				  ctx.strokeStyle = rgbaval+',0.3)';
 				  tmp_ctx.lineWidth = 1;
+				  tmp_ctx.strokeStyle = markerColor;
 			      ctx.moveTo(lastPoint.x + (dx * 0.2), lastPoint.y + (dy * 0.2));
 			      ctx.lineTo(points[i].x - (dx * 0.2), points[i].y - (dy * 0.2));
 			      ctx.stroke();
@@ -589,6 +618,7 @@
 				  var rgbaval = hexToRgbA(markerColor);
 				  tmp_ctx.shadowBlur = 0;
 				  tmp_ctx.lineWidth = 1;
+				  tmp_ctx.strokeStyle = markerColor;
 				  ctx.strokeStyle = rgbaval+',0.3)';
 			      ctx.moveTo( points[points.length-1].x + (dx * 0.5), points[points.length-1].y + (dy * 0.5));
 			      ctx.lineTo( points[points.length-1].x - (dx * 0.5), points[points.length-1].y - (dy * 0.5));
@@ -634,6 +664,7 @@
 	        c= '0x'+c.join('');
 	        return 'rgba('+[(c>>16)&255, (c>>8)&255, c&255];
 	    }
+	    console.log('dumaan');
     // throw new Error('Bad Hex');
 	}
 
@@ -648,4 +679,15 @@
 	  n = Math.max(0,Math.min(n,255));
 	  return "0123456789ABCDEF".charAt((n-n%16)/16)  + "0123456789ABCDEF".charAt(n%16);
 	}
+
+	$("#grid").click(function(){
+		var gridState = $('.grid-svg').hasClass('show-grid');
+		if (isConnected) {
+			if (gridState) {
+				socket.emit("onSendGrid", "showGrid");
+			} else {
+				socket.emit("onSendGrid", "hideGrid");
+			}
+		}
+	});
 }());
