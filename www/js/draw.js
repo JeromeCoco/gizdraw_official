@@ -48,6 +48,11 @@
             $("#waiting-state").css("padding", "20px");
             isConnected = true;
         });
+        
+        socket.on("onClearCanvasToMobile", function(data){
+        	resetCanvas();
+			var cPushArray = new Array();
+        });
     });
 
 	// Connection Function
