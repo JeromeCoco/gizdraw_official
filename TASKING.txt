@@ -20,8 +20,6 @@ TO DO
 
 
 	TASKING [FOCUS]
-		Sending of Tools [undo, redo, grid, color picker, color swatch] - Krisha
-
 		Resolution, Aspect Ratio - Ako
 
 		Canvas Options while connected [rotate, background color, resize] - Isog
