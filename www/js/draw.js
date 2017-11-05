@@ -79,6 +79,11 @@
 			$('.left-menu').css("height", "80%");
 			//Change menu options
 			$(".primary").css("display", "none");
+			$("#canvas-settings").css("display", "block");
+			$("#canvas-settings").html("Set Background");
+			$("#open-file").css("display", "block");
+			$("#share").css("display", "block");
+			$("#new-canvas").css("display", "block");
 			$(".secondary").css("display", "block");
         });
 	}

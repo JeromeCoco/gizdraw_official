@@ -1,25 +1,37 @@
-TO DO
-	Mobile Application
-		___________________________________
-		Blender
-		Paint Bucket
-		Shapes
-		Move
-		Zoom In / Zoom Out
-		___________________________________
-		Open image
-		Save
+Mobile App
+	Paint Bucket
+	Blender
+	Grid (Straight line [vertical,horizontal] )
+	Brush Preset (Add)
+	Zoom in / Zoom out
+	Shapes
+	Move Tool
+
+	Settings
+		Open File
 		Share
-		Canvas Options(Add paper texture)
+		Save (png, jpg, gdw)
+		Canvas Options (paper, white)
+		Connect To PC (PC name)
+	
+	Settings(Canvas View) [while connected]
+		Clear Canvas
+		Open File (transfer image to PC)
+		Share
+		Canvas Options (clear, bgcolor, resize, rotate)
 		Disconnect
 
-	Desktop Application
-		Display recent canvas (.gdw)
-		Open image
-		File name extension (.gdw) [Write and Read File]
+Desktop App
+	Connect (PC name instead of IP address)	
+	List recently opened files
+	Create new (Size options [aspect ratio, custom])
+	Open file (transfer image to mobile)
+	Save (png, jpg, gdw)
+	Canvas Options (clear, bgcolor, resize, rotate)
+	Disconnect
 
-
-	TASKING [FOCUS]
-		Resolution, Aspect Ratio - Ako
-
-		Canvas Options while connected [rotate, background color, resize] - Isog
+	Settings(Canvas View) [while connected]
+		Open file (transfer image to mobile)
+		Save (png, jpg, gdw)
+		Canvas Options (clear, bgcolor, resize, rotate)
+		Disconnect

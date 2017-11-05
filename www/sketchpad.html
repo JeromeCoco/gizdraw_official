@@ -47,12 +47,14 @@
 		    		<div class="drop-menu">
 		    			<ul>
 		    				<li class="primary" id="new-canvas">Clear canvas</li>
-		    				<li class="primary" ><input id="selectedFile" type="file" value=""/></li>
-		    				<li class="primary" id="share">Share</li>
-		    				<li class="primary" >Save as...</li>
+		    				<li class="primary" id="open-file"><input id="selectedFile" type="file" value=""/></li>
+		    				<li class="primary">Save as...</li>
 		    				<li class="primary" id="canvas-settings">Canvas Options...</li>
+		    				<li class="primary" id="share">Share</li>
 		    				<li class="primary" id="connect-pc">Connect to PC...</li>
 		    				<!-- <li class="secondary" id="discard">Discard</li> -->
+		    				<li class="secondary" id="disconnect">Rotate...</li>
+		    				<li class="secondary" id="disconnect">Resize...</li>
 		    				<li class="secondary" id="disconnect">Disconnect</li>
 		    			</ul>
 		    		</div>
@@ -94,7 +96,7 @@
     			<div class="modal-body" id="waiting-state">
     				<input type="text" id="ipaddress" placeholder="Enter IP Address here..."><br>
     				<button class="close-connect">Cancel</button>
-    				<button id="btnConnect">Connect</button>
+    				<button id="btnConnect"><i class="fa fa-wifi" aria-hidden="true"></i> Connect</button>
     			</div>
   			</div>
 		</div>

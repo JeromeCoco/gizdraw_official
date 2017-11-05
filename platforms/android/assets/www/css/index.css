@@ -414,8 +414,10 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-content-connect .modal-body input{
+  border: none;
   padding: 8px;
   font-size: 15px;
+  border-bottom: 1px solid gray;
 }
 
 .modal-content-share .modal-body p:first-child{
