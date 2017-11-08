@@ -7,7 +7,7 @@ $(document).ready(function(){
 	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
-
+	
 	$('#custom-bg-color').css("display", "none");
 	$('#connect-modal').css("display", "none");
 
@@ -156,17 +156,19 @@ $(document).ready(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
 	});
+
 	$('#preset-second').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
 	});
+
 	$('#preset-third').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
 	});
+
 	$('#preset-fourth').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
 	});
-
 });
