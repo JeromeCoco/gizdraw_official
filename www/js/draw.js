@@ -269,6 +269,11 @@
 	$('#new-canvas').click(function(){
 		resetCanvas();
 		var cPushArray = new Array();
+
+		if (isConnected) {
+			socket.emit("onClearCanvasFromMobile", 'clear');
+		}
+
 		$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
 	});
