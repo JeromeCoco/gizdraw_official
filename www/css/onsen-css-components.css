@@ -5695,7 +5695,7 @@ input[type="search"].search-input::-webkit-search-cancel-button {
   font-weight: 400;
   font-size: 17px;
   overflow: hidden;
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0,0,0,0.9);
   position: absolute;
   left: 0;
   right: 0;

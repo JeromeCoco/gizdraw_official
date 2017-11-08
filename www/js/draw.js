@@ -75,7 +75,7 @@
 			$('.drop-menu').toggleClass('show-menu');
 			//Display Connected State
 			$('#connectedState').css("display", "block");
-			$('.slider').css("top", "30px");
+			$('.slider').css("top", "25px");
 			$('.left-menu').css("height", "80%");
 			//Change menu options
 			$(".primary").css("display", "none");
