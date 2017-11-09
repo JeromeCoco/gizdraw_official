@@ -1,4 +1,5 @@
 (function() {
+
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth = 5;	
@@ -707,4 +708,13 @@
 			}
 		}
 	});
+
+	$("#disconnect").click(function(){
+		var confirmation = confirm("Are you sure you want to disconnect?");
+		if (confirmation) {
+			socket.emit("onDisconnectFromMobile", 'disconnect');
+			location.reload();
+		}
+	});
+
 }());

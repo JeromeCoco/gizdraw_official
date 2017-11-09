@@ -1,7 +1,7 @@
 Mobile App
 	Paint Bucket
 	Blender
-	Grid (Straight line [vertical,horizontal] )
+	Grid (Straight line [vertical,horizontal])
 	Brush Preset (Add)
 	Zoom in / Zoom out
 	Shapes
