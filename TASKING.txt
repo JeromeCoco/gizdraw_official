@@ -18,10 +18,9 @@ Mobile App
 		Open File (transfer image to PC)
 		Share
 		Canvas Options (bgcolor, resize, rotate)
-		Disconnect
 
 Desktop App
-	Connect (PC name instead of IP address or converted CODE)	
+	Connect (PC name instead of IP address or converted CODE)
 	List recently opened files
 	Create new (Size options [aspect ratio, custom])
 	Open file (transfer image to mobile)

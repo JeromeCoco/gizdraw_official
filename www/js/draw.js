@@ -54,6 +54,10 @@
         	resetCanvas();
 			var cPushArray = new Array();
         });
+
+        socket.on("onDisconnectToMobile", function(data){
+        	location.reload();
+        });
     });
 
 	// Connection Function
@@ -87,6 +91,8 @@
 			$("#new-canvas").css("display", "block");
 			$(".secondary").css("display", "block");
         });
+
+
 	}
 
 	// Get Current Tool ID
