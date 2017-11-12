@@ -202,6 +202,14 @@ module.exports = [
         "clobbers": [
             "window.filepicker"
         ]
+    },
+    {
+        "id": "org.solderzzc.base64imagesaverplugin.Base64ImageSaverPlugin",
+        "file": "plugins/org.solderzzc.base64imagesaverplugin/www/Base64ImageSaverPlugin.js",
+        "pluginId": "org.solderzzc.base64imagesaverplugin",
+        "clobbers": [
+            "window.Base64ImageSaverPlugin"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -214,7 +222,8 @@ module.exports.metadata =
     "cordova-plugin-screen-orientation": "2.0.1",
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-file": "4.3.3",
-    "com.dbaq.cordova.filepickerio": "0.0.6"
+    "com.dbaq.cordova.filepickerio": "0.0.6",
+    "org.solderzzc.base64imagesaverplugin": "0.6.0"
 };
 // BOTTOM OF METADATA
 });

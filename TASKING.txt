@@ -17,6 +17,7 @@ Mobile App
 	Settings(Canvas View) [while connected]
 		Open File (transfer image to PC)
 		Share
+		Save (png, jpg, gdw)
 		Canvas Options (bgcolor, resize, rotate)
 
 Desktop App
@@ -26,10 +27,8 @@ Desktop App
 	Open file (transfer image to mobile)
 	Save (png, jpg, gdw)
 	Canvas Options (bgcolor, resize, rotate)
-	Disconnect
 
 	Settings(Canvas View) [while connected]
 		Open file (transfer image to mobile)
 		Save (png, jpg, gdw)
 		Canvas Options (bgcolor, resize, rotate)
-		Disconnect

@@ -12,6 +12,7 @@
     "dependencies": {
         "com.dbaq.cordova.filepickerio": "~0.0.6",
         "cordova-android": "^6.2.3",
+        "cordova-base64-image-saver": "file:node_modules\\cordova-base64-image-saver",
         "cordova-browser": "^4.1.0",
         "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-file": "^4.3.3",

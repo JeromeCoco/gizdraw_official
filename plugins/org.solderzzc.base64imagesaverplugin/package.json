@@ -1,0 +1,115 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "cordova-base64-image-saver",
+        "scope": null,
+        "escapedName": "cordova-base64-image-saver",
+        "name": "cordova-base64-image-saver",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\jerom\\Desktop\\GizDrawOfficial"
+    ],
+    [
+      {
+        "raw": "cordova-base64-image-saver",
+        "scope": null,
+        "escapedName": "cordova-base64-image-saver",
+        "name": null,
+        "rawSpec": "cordova-base64-image-saver",
+        "spec": "C:\\Users\\jerom\\Desktop\\GizDrawOfficial\\node_modules\\cordova-base64-image-saver",
+        "type": "directory"
+      },
+      "C:\\Users\\jerom\\Desktop\\GizDrawOfficial\\node_modules"
+    ]
+  ],
+  "_from": "cordova-base64-image-saver@latest",
+  "_id": "cordova-base64-image-saver@0.6.0",
+  "_inCache": true,
+  "_location": "/cordova-base64-image-saver",
+  "_nodeVersion": "0.12.7",
+  "_npmUser": {
+    "name": "solderzzc",
+    "email": "solderzzc@gmail.com"
+  },
+  "_npmVersion": "2.11.3",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "cordova-base64-image-saver",
+    "scope": null,
+    "escapedName": "cordova-base64-image-saver",
+    "name": null,
+    "rawSpec": "cordova-base64-image-saver",
+    "spec": "C:\\Users\\jerom\\Desktop\\GizDrawOfficial\\node_modules\\cordova-base64-image-saver",
+    "type": "directory"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/cordova-base64-image-saver/-/cordova-base64-image-saver-0.6.0.tgz",
+  "_shasum": "49d9180519233847cd7575b0d18411ae4cdc2e4b",
+  "_shrinkwrap": null,
+  "_spec": "cordova-base64-image-saver",
+  "_where": "C:\\Users\\jerom\\Desktop\\GizDrawOfficial\\node_modules",
+  "author": {
+    "name": "Simba Zhang",
+    "email": "solderzzc@gmail.com",
+    "url": "http://www.tiegushi.com"
+  },
+  "bugs": {
+    "url": "https://github.com/solderzzc/Base64ImageSaverPlugin/issues"
+  },
+  "cordova": {
+    "id": "org.solderzzc.base64imagesaverplugin",
+    "platforms": [
+      "ios",
+      "android",
+      "wp8"
+    ]
+  },
+  "dependencies": {},
+  "description": "This plugin allows you to save the contents of an HTML canvas tag to the iOS Photo Library, or Android Gallery from your app.",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "49d9180519233847cd7575b0d18411ae4cdc2e4b",
+    "tarball": "https://registry.npmjs.org/cordova-base64-image-saver/-/cordova-base64-image-saver-0.6.0.tgz"
+  },
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "gitHead": "d2d91a6ddfd8b0003a39ee09f25e0bd2ca185e14",
+  "homepage": "https://github.com/solderzzc/Base64ImageSaverPlugin#readme",
+  "keywords": [
+    "image",
+    "base64",
+    "save",
+    "photo library",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android",
+    "cordova-wp8"
+  ],
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "solderzzc",
+      "email": "solderzzc@gmail.com"
+    }
+  ],
+  "name": "cordova-base64-image-saver",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/solderzzc/Base64ImageSaverPlugin.git"
+  },
+  "scripts": {},
+  "version": "0.6.0"
+}

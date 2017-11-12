@@ -24,6 +24,9 @@
         },
         "com.dbaq.cordova.filepickerio": {
             "PACKAGE_NAME": "com.example.GizDraw"
+        },
+        "org.solderzzc.base64imagesaverplugin": {
+            "PACKAGE_NAME": "com.example.GizDraw"
         }
     },
     "dependent_plugins": {

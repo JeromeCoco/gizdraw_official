@@ -165,7 +165,7 @@
 		tmp_ctx.fillStyle = markerColor;
 		if (isConnected) {
 			socket.emit("sendPenColor", markerColor);
-		}		
+		}
 	});
 
 	var bgColor;
@@ -360,6 +360,7 @@
 			ppts[i + 1].y
 		);
 		tmp_ctx.stroke();
+		console.log(window.Base)
 	};
 
 	// Eraser Function
@@ -721,6 +722,22 @@
 			socket.emit("onDisconnectFromMobile", 'disconnect');
 			location.reload();
 		}
+	});
+
+	$("#save-image").click(function(){
+		alert("clicked");
+
+		window.Base64ImageSaverPlugin.saveImageDataToLibrary(
+	        function(msg){
+	            console.log(msg);
+	        },
+	        function(err){
+	            console.log(err);
+	        },
+	        canvas.toDataURL()
+	    );
+
+	    alert("Worked"); 
 	});
 
 }());

@@ -19,6 +19,9 @@
     <feature name="filepickerio">
         <param name="android-package" value="com.dbaq.cordova.filepickerio.FilePickerIO" />
     </feature>
+    <feature name="Base64ImageSaverPlugin">
+        <param name="android-package" value="org.solderzzc.Base64ImageSaverPlugin.Base64ImageSaverPlugin" />
+    </feature>
     <name>GizDraw</name>
     <description>
         A drawing app that will turn your mobile device to a graphic tablet.
