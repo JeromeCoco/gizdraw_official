@@ -90,8 +90,8 @@ public class Base64ImageSaverPlugin extends CordovaPlugin {
 			 */
 			if (check >= 1) {
 				folder = Environment
-					.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-				
+					.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES + "/GizDraw");
+
 				if(!folder.exists()) {
 					folder.mkdirs();
 				}
@@ -99,7 +99,7 @@ public class Base64ImageSaverPlugin extends CordovaPlugin {
 				folder = Environment.getExternalStorageDirectory();
 			}
 			
-			File imageFile = new File(folder, "c2i_" + date.toString() + ".png");
+			File imageFile = new File(folder, "gizdraw_" + date.toString() + ".png");
 
 			FileOutputStream out = new FileOutputStream(imageFile);
 			bmp.compress(Bitmap.CompressFormat.PNG, 100, out);

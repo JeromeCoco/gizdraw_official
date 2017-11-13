@@ -1,34 +1,34 @@
 Mobile App
-	Paint Bucket
-	Blender
-	Grid (Straight line [vertical,horizontal])
-	Brush Preset (Add)
-	Zoom in / Zoom out
-	Shapes
-	Move Tool
+	Paint Bucket - krisha
+	Blender - krisha
+	Grid (Straight line [vertical,horizontal]) - isog
+	Brush Preset (Add) - isog
+	Zoom in / Zoom out - coco
+	Shapes - 
+	Move Tool - 
 
 	Settings
-		Open File
+		Open File - coco
 		Share
-		Save (jpg, gdw)
+		Save (jpg, gdw) - coco
 		Canvas Options (paper, white)
-		Connect To PC (PC name)
+		Connect To PC (PC name) - coco
 	
 	Settings(Canvas View) [while connected]
-		Open File (transfer image to PC)
+		Open File (transfer image to PC) - coco
 		Share
-		Save (png, jpg, gdw)
-		Canvas Options (bgcolor, resize, rotate)
+		Save (png, jpg, gdw) - coco
+		Canvas Options (bgcolor, resize, rotate) - isog
 
 Desktop App
-	Connect (PC name instead of IP address or converted CODE)
-	List recently opened files
-	Create new (Size options [aspect ratio, custom])
-	Open file (transfer image to mobile)
-	Save (png, jpg, gdw)
-	Canvas Options (bgcolor, resize, rotate)
+	Connect (PC name instead of IP address or converted CODE) - coco
+	List recently opened files - coco
+	Create new (Size options [aspect ratio, custom]) - coco
+	Open file (transfer image to mobile) - coco
+	Save (png, jpg, gdw) - coco
+	Canvas Options (bgcolor, resize, rotate) - isog
 
 	Settings(Canvas View) [while connected]
-		Open file (transfer image to mobile)
-		Save (png, jpg, gdw)
-		Canvas Options (bgcolor, resize, rotate)
+		Open file (transfer image to mobile) - coco
+		Save (png, jpg, gdw) - coco
+		Canvas Options (bgcolor, resize, rotate) - isog

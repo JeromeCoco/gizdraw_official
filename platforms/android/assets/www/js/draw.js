@@ -360,7 +360,6 @@
 			ppts[i + 1].y
 		);
 		tmp_ctx.stroke();
-		console.log(window.Base)
 	};
 
 	// Eraser Function
