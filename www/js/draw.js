@@ -360,7 +360,6 @@
 			ppts[i + 1].y
 		);
 		tmp_ctx.stroke();
-		console.log(window.Base)
 	};
 
 	// Eraser Function
@@ -725,8 +724,6 @@
 	});
 
 	$("#save-image").click(function(){
-		alert("clicked");
-
 		window.Base64ImageSaverPlugin.saveImageDataToLibrary(
 	        function(msg){
 	            console.log(msg);
@@ -737,7 +734,15 @@
 	        canvas.toDataURL()
 	    );
 
-	    alert("Worked"); 
+	    window.plugins.toast.showShortBottom(
+	    	'Image saved to device', 
+	    	function(a){
+	    		console.log('toast success: ' + a)
+	    	},
+	    	function(b){
+	    		alert('toast error: ' + b)
+	    	}
+	    );
 	});
 
 }());

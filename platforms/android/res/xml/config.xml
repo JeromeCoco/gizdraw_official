@@ -22,6 +22,9 @@
     <feature name="Base64ImageSaverPlugin">
         <param name="android-package" value="org.solderzzc.Base64ImageSaverPlugin.Base64ImageSaverPlugin" />
     </feature>
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
     <name>GizDraw</name>
     <description>
         A drawing app that will turn your mobile device to a graphic tablet.

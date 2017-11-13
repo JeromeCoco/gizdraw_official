@@ -122,7 +122,7 @@ body {
 }
 
 .left-menu{
-  background-color: #e1e1e1;
+  background-color: #e6e6e6;
   height: 87%;
   position: absolute;
   width: 45px;
@@ -185,11 +185,10 @@ body {
 }
 
 .drop-menu{
-  box-shadow: 0px 6px 48px -5px #bbbaba;
   position: absolute; 
   top: 50px;
   right: 5px;
-  background-color: #e1e1e1;
+  background-color: #e6e6e6;
   color: black;
   padding: 10px;
   border-radius: 5px;
@@ -204,7 +203,7 @@ body {
 }
 
 #selectedFile{
-  background-color: #d9d9d9;
+  background-color: #dcdada;
   font-size: 15px;
   width: 205px;
 }
@@ -459,7 +458,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 .modal-content-share .modal-body div{
   text-align: center;
-  background: #e3e3e3;
+  background: #e6e6e6;
   padding: 10px;
 }
 
@@ -527,7 +526,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-body button:nth-child(4){
-  background-color: #d9d9d9;
+  background-color: #e6e6e6;
   color: black;
 }
 

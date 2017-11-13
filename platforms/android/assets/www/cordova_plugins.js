@@ -210,6 +210,19 @@ module.exports = [
         "clobbers": [
             "window.Base64ImageSaverPlugin"
         ]
+    },
+    {
+        "id": "cordova-plugin-x-toast.Toast",
+        "file": "plugins/cordova-plugin-x-toast/www/Toast.js",
+        "pluginId": "cordova-plugin-x-toast",
+        "clobbers": [
+            "window.plugins.toast"
+        ]
+    },
+    {
+        "id": "cordova-plugin-x-toast.tests",
+        "file": "plugins/cordova-plugin-x-toast/test/tests.js",
+        "pluginId": "cordova-plugin-x-toast"
     }
 ];
 module.exports.metadata = 
@@ -223,7 +236,8 @@ module.exports.metadata =
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-file": "4.3.3",
     "com.dbaq.cordova.filepickerio": "0.0.6",
-    "org.solderzzc.base64imagesaverplugin": "0.6.0"
+    "org.solderzzc.base64imagesaverplugin": "0.6.0",
+    "cordova-plugin-x-toast": "2.6.0"
 };
 // BOTTOM OF METADATA
 });

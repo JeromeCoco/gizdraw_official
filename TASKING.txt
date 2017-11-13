@@ -10,7 +10,7 @@ Mobile App
 	Settings
 		Open File
 		Share
-		Save (png, jpg, gdw)
+		Save (jpg, gdw)
 		Canvas Options (paper, white)
 		Connect To PC (PC name)
 	
