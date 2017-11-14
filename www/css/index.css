@@ -193,6 +193,10 @@ body {
   padding: 10px;
   border-radius: 5px;
   display: none;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 .drop-menu ul li{

@@ -176,7 +176,12 @@
 			bgColor = $('#custom-bg-color').val();
 			bgIsColored = true;
 		} else {
+			bgColor = "#FFFFFF";
 			bgIsColored = false;
+		}
+		
+		if (isConnected) {
+			socket.emit("onBgChangeFromMobile", bgColor);
 		}
 	});
 

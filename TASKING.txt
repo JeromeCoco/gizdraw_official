@@ -4,8 +4,8 @@ Mobile App
 	Grid (Straight line [vertical,horizontal]) - isog
 	Brush Preset (Add) - isog
 	Zoom in / Zoom out - coco
-	Shapes - 
-	Move Tool - 
+	Shapes - krisha
+	Move Tool - krisha
 
 	Settings
 		Open File - coco
@@ -22,7 +22,7 @@ Mobile App
 
 Desktop App
 	Connect (PC name instead of IP address or converted CODE) - coco
-	List recently opened files - coco
+	List recently opened files
 	Create new (Size options [aspect ratio, custom]) - coco
 	Open file (transfer image to mobile) - coco
 	Save (png, jpg, gdw) - coco
@@ -32,3 +32,13 @@ Desktop App
 		Open file (transfer image to mobile) - coco
 		Save (png, jpg, gdw) - coco
 		Canvas Options (bgcolor, resize, rotate) - isog
+
+Tasking (Focus)
+	isog - rotate(urgent), resize(urgent), splashscreen image(urgent), add new preset(anytime)
+	krisha - tools new UI(urgent), blender(anytime), paint bucket(anytime), grid auto straight(anytime)
+	coco - algo(urgent), save options(urgent), bgcolor while connected(urgent), open file(anytime), zoom(anytime)
+
+DEADLINE
+	urgent - 17
+	enhance 18-20
+	merge - 21
