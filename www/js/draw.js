@@ -28,7 +28,6 @@
 	tmp_canvas.height = canvas.height;
 	sketch.appendChild(tmp_canvas);
 	
-
 	var mouse = {x: 0, y: 0};
 	var last_mouse = {x: 0, y: 0};
 

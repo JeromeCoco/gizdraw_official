@@ -345,6 +345,13 @@ input[type=range].slider:focus::-ms-fill-upper {
     margin-top: 100px;
 }
 
+#canvas-settings-modal .modal-content .modal-body img{
+  width: 25px;
+  float: right;
+  margin-top: -10px;
+  margin-right: -10px;
+}
+
 .modal-content .modal-body div{
   font-weight: bold;
   padding: 12px;
@@ -419,17 +426,24 @@ input[type=range].slider:focus::-ms-fill-upper {
     margin-top: -90px;
 }
 
-/*.modal-button-cont {
-    display: inline-block;
-    background-color: blue;
-    padding: 9px;
-    width: 43%;
-    margin: 0px -2px;
-}*/
+.modal-content-share .modal-body #close-share{
+  width: 25px;
+  float: right;
+  margin: 0;
+  margin-top: -15px;
+  margin-right: -13px;
+}
 
 .modal-content-connect .modal-body{
   /*margin-left: 80px;*/
   text-align: center;
+}
+
+.modal-content-connect .modal-body img{
+  width: 25px;
+  float: right;
+  margin-top: -15px;
+  margin-right: -13px;
 }
 
 .modal-content-connect .modal-body input{
@@ -450,7 +464,7 @@ input[type=range].slider:focus::-ms-fill-upper {
     color: #737373;
 }
 
-.modal-content-share .modal-body p:first-child{
+.modal-content-share .modal-body p:nth-child(2){
   margin-top: -15px;
   padding: 10px;
   font-weight: bold;
@@ -516,7 +530,7 @@ input[type=range].slider:focus::-ms-fill-upper {
   background-color: #f44336;
   padding: 15px;
   border: none;
-  width: 50%;
+  width: 100%;
   color: white;
   margin: 20px -2px 0px -2px;
 }
@@ -537,7 +551,7 @@ input[type=range].slider:focus::-ms-fill-upper {
   top: 2px;
 }
 
-.modal-body button:nth-child(4){
+.modal-body button:nth-child(5){
   background-color: #e6e6e6;
   color: black;
 }

@@ -103,6 +103,8 @@ $(document).ready(function(){
 
 	$('#close-share').click(function(){
 		$('#share-modal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
 	});	
 
 	$('#canvas-type').change(function(){
