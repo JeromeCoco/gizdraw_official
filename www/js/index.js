@@ -122,16 +122,6 @@ $(document).ready(function(){
 		$('#share-modal').css("display", "block");
 	});
 
-	$('#setCanvasType').click(function(){
-		var canvasType = $('#canvas-type').val();
-		if (canvasType == "Color") {
-			var colorSet = $('#custom-bg-color').val();
-			$('#paint').css("background-color", colorSet);
-		} else if (canvasType == "White") {
-			$('#paint').css("background-color", "white");
-		}
-	});
-
 	$('#open-file').click(function(){
 		/*window.filepicker.setKey('com.example.GizDraw');
 	    window.filepicker.setName('GizDraw');

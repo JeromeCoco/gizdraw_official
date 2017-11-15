@@ -58,6 +58,16 @@
         socket.on("onDisconnectToMobile", function(data){
         	location.reload();
         });
+
+        socket.on("onBgChangeToMobile", function(data){
+        	bgColor = data.bgColor;
+        	bgIsColored = data.bgIsColored;
+        	if (bgIsColored) {
+        		$("#paint").css("background-color", bgColor);
+        	} else {
+        		$("#paint").css("background-color", "#FFFFFF");
+        	}
+        });
     });
 
 	// Connection Function
@@ -91,8 +101,6 @@
 			$("#new-canvas").css("display", "block");
 			$(".secondary").css("display", "block");
         });
-
-
 	}
 
 	// Get Current Tool ID
@@ -179,9 +187,11 @@
 			bgColor = "#FFFFFF";
 			bgIsColored = false;
 		}
+
+		$('#paint').css("background-color", bgColor);
 		
 		if (isConnected) {
-			socket.emit("onBgChangeFromMobile", bgColor);
+			socket.emit("onBgChangeFromMobile", {bgColor:bgColor, bgIsColored:bgIsColored});
 		}
 	});
 

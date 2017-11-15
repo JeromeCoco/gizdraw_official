@@ -40,6 +40,10 @@ body {
   background-color: transparent;
 }
 
+#btnGo:focus{
+  outline: none;
+}
+
 #btnGo img{
   width: 30px;
 }
@@ -502,6 +506,10 @@ input[type=range].slider:focus::-ms-fill-upper {
   padding: 7px;
   width: 130px;
   background-color: white;
+}
+
+.modal-body select:focus, .modal-content-connect .modal-body input:focus{
+  outline: none;
 }
 
 .modal-content-connect .modal-body button{
