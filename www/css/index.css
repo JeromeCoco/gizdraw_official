@@ -487,6 +487,13 @@ input[type=range].slider:focus::-ms-fill-upper {
   margin-right: -13px;
 }
 
+.modal-content-save .modal-body p{
+  padding: 10px;
+  border-bottom: 2px solid #dedede;
+  font-weight: bold;
+  color: #929292;
+}
+
 #loader{
   float: none;
 }

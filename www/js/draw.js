@@ -803,8 +803,8 @@
 		}
 	});
 
-	$("#save-image").click(function(){
-		/*window.Base64ImageSaverPlugin.saveImageDataToLibrary(
+	$("#save-png").click(function(){
+		window.Base64ImageSaverPlugin.saveImageDataToLibrary(
 	        function(msg){
 	            console.log(msg);
 	        },
@@ -822,7 +822,7 @@
 	    	function(b){
 	    		alert('toast error: ' + b)
 	    	}
-	    );*/
+	    );
 	});
 	
 }());
