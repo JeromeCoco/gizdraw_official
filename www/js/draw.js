@@ -44,7 +44,7 @@
             $("#ipaddress").css("display", "none");
             $(".close-connect").css("display", "none");
             $("#btnConnect").css("display", "none");
-            $("#waiting-state").html("<img style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
+            $("#waiting-state").html("<img id='loader' style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
             $("#waiting-state").css("padding", "20px");
             isConnected = true;
         });
@@ -69,10 +69,76 @@
         });
     });
 
+    var convertSetFromLetterToIP = {
+        a : { a : 1, b : 2, c : 3, d : 4, e : 5 },
+        b : { a : 6, b : 7, c : 8, d : 9, e : 10 },
+        c : { a : 11, b : 12, c : 13, d : 14, e : 15 },
+        d : { a : 16, b : 17, c : 18, d : 19, e : 20 },
+        e : { a : 21, b : 22, c : 23, d : 24, e : 25 },
+        f : { a : 26, b : 27, c : 28, d : 29, e : 30 },
+        g : { a : 31, b : 32, c : 33, d : 34, e : 35 },
+        h : { a : 36, b : 37, c : 38, d : 39, e : 40 },
+        i : { a : 41, b : 42, c : 43, d : 44, e : 45 },
+        j : { a : 46, b : 47, c : 48, d : 49, e : 50 },
+        k : { a : 51, b : 52, c : 53, d : 54, e : 55 },
+        l : { a : 56, b : 57, c : 58, d : 59, e : 60 },
+        m : { a : 61, b : 62, c : 63, d : 64, e : 65 },
+        n : { a : 66, b : 67, c : 68, d : 69, e : 70 },
+        o : { a : 71, b : 72, c : 73, d : 74, e : 75 },
+        p : { a : 76, b : 77, c : 78, d : 79, e : 80 },
+        q : { a : 81, b : 82, c : 83, d : 84, e : 85 },
+        r : { a : 86, b : 87, c : 88, d : 89, e : 90 },
+        s : { a : 91, b : 92, c : 93, d : 94, e : 95 },
+        t : { a : 96, b : 97, c : 98, d : 99, e : 100 },
+        u : { a : 101, b : 102, c : 103, d : 104, e : 105 },
+        v : { a : 106, b : 107, c : 108, d : 109, e : 110 },
+        w : { a : 111, b : 112, c : 113, d : 114, e : 115 },
+        x : { a : 116, b : 117, c : 118, d : 119, e : 120 },
+        y : { a : 121, b : 122, c : 123, d : 124, e : 125 },
+        z : { a : 126, b : 127, c : 128, d : 129, e : 130 },
+        A : { a : 131, b : 132, c : 133, d : 134, e : 135 },
+        B : { a : 136, b : 137, c : 138, d : 139, e : 140 },
+        C : { a : 141, b : 142, c : 143, d : 144, e : 145 },
+        D : { a : 146, b : 147, c : 148, d : 149, e : 150 },
+        E : { a : 151, b : 152, c : 153, d : 154, e : 155 },
+        F : { a : 156, b : 157, c : 158, d : 159, e : 160 },
+        G : { a : 161, b : 162, c : 163, d : 164, e : 165 },
+        H : { a : 166, b : 167, c : 168, d : 169, e : 170 },
+        I : { a : 171, b : 172, c : 173, d : 174, e : 175 },
+        J : { a : 176, b : 177, c : 178, d : 179, e : 180 },
+        K : { a : 181, b : 182, c : 183, d : 184, e : 185 },
+        L : { a : 186, b : 187, c : 188, d : 189, e : 190 },
+        M : { a : 191, b : 192, c : 193, d : 194, e : 195 },
+        N : { a : 196, b : 197, c : 198, d : 199, e : 200 },
+        O : { a : 201, b : 202, c : 203, d : 204, e : 205 },
+        P : { a : 206, b : 207, c : 208, d : 209, e : 210 },
+        Q : { a : 211, b : 212, c : 213, d : 214, e : 215 },
+        R : { a : 216, b : 217, c : 218, d : 219, e : 220 },
+        S : { a : 221, b : 222, c : 223, d : 224, e : 225 },
+        T : { a : 226, b : 227, c : 228, d : 229, e : 230 },
+        U : { a : 231, b : 232, c : 233, d : 234, e : 235 },
+        V : { a : 236, b : 237, c : 238, d : 239, e : 240 },
+        W : { a : 241, b : 242, c : 243, d : 244, e : 245 },
+        X : { a : 246, b : 247, c : 248, d : 249, e : 240 },
+        Y : { a : 251, b : 252, c : 253, d : 254, e : 255 }
+    };
+
 	// Connection Function
     function connects(){
 		currentIPaddress = $('#ipaddress').val();
-        socket = io('http://'+currentIPaddress+':3000');
+		// split entered letter
+		var splitLetter = currentIPaddress.split("");
+		var part1 = parseInt(convertSetFromLetterToIP[splitLetter[0]][splitLetter[1]]);
+		var part2 = parseInt(convertSetFromLetterToIP[splitLetter[2]][splitLetter[3]]);
+		var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
+		var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
+
+		//combine converted ip
+		var convertedIp = part1+"."+part2+"."+part3+"."+part4;
+
+		console.log(convertedIp);
+
+        socket = io('http://'+convertedIp+':3000');
 
         socket.on("createCanvasToMobile", function(data){
 			$("#connect-modal").css("display", "none");
@@ -738,7 +804,7 @@
 	});
 
 	$("#save-image").click(function(){
-		window.Base64ImageSaverPlugin.saveImageDataToLibrary(
+		/*window.Base64ImageSaverPlugin.saveImageDataToLibrary(
 	        function(msg){
 	            console.log(msg);
 	        },
@@ -756,7 +822,7 @@
 	    	function(b){
 	    		alert('toast error: ' + b)
 	    	}
-	    );
+	    );*/
 	});
 	
 }());

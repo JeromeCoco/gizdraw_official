@@ -18,7 +18,7 @@ Mobile App
 		Open File (transfer image to PC) - coco
 		Share
 		Save (png, jpg, gdw) - coco
-		Canvas Options (bgcolor[coco], resize[isog], rotate[isog])
+		Canvas Options (resize[isog], rotate[isog])
 
 Desktop App
 	Connect (PC name instead of IP address or converted CODE) - coco
@@ -26,7 +26,7 @@ Desktop App
 	Create new (Size options [aspect ratio, custom]) - coco
 	Open file (transfer image to mobile) - coco
 	Save (png, jpg, gdw) - coco
-	Canvas Options (bgcolor, resize, rotate) - isog
+	Canvas Options (resize, rotate) - isog
 
 	Settings(Canvas View) [while connected]
 		Open file (transfer image to mobile) - coco
@@ -36,7 +36,7 @@ Desktop App
 Tasking (Focus)
 	isog - rotate(urgent), resize(urgent), splashscreen image(urgent), add new preset(anytime)
 	krisha - tools new UI(urgent), blender(anytime), paint bucket(anytime), grid auto straight(anytime)
-	coco - algo(urgent), save options(urgent), bgcolor while connected(urgent), open file(anytime), zoom(anytime)
+	coco - save options(urgent), open file(anytime), zoom(anytime)
 
 DEADLINE
 	urgent - 17

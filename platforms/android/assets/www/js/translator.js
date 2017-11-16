@@ -183,4 +183,4 @@ var convertSet = {
     }
 };
 
-console.log(convertSet);
+console.log(convertSet.g);

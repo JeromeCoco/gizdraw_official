@@ -40,6 +40,10 @@ body {
   background-color: transparent;
 }
 
+#btnGo:focus{
+  outline: none;
+}
+
 #btnGo img{
   width: 30px;
 }
@@ -193,6 +197,10 @@ body {
   padding: 10px;
   border-radius: 5px;
   display: none;
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
 }
 
 .drop-menu ul li{
@@ -327,7 +335,6 @@ input[type=range].slider:focus::-ms-fill-upper {
     position: relative;
     background-color: white;
     margin: auto;
-    border: 1px solid #888;
     width: 50%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
@@ -335,6 +342,13 @@ input[type=range].slider:focus::-ms-fill-upper {
     animation-name: animatetop;
     animation-duration: 0.4s;
     margin-top: 100px;
+}
+
+#canvas-settings-modal .modal-content .modal-body img{
+  width: 25px;
+  float: right;
+  margin-top: -10px;
+  margin-right: -10px;
 }
 
 .modal-content .modal-body div{
@@ -386,7 +400,6 @@ input[type=range].slider:focus::-ms-fill-upper {
     background-color: white;
     margin: auto;
     padding: 5px 0px 0px 0px;
-    border: 1px solid #888;
     width: 50%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
@@ -401,7 +414,6 @@ input[type=range].slider:focus::-ms-fill-upper {
     background-color: white;
     margin: auto;
     padding: 20px 0px 0px 0px;
-    border: 1px solid #888;
     width: 40%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
@@ -411,17 +423,28 @@ input[type=range].slider:focus::-ms-fill-upper {
     margin-top: -90px;
 }
 
-/*.modal-button-cont {
-    display: inline-block;
-    background-color: blue;
-    padding: 9px;
-    width: 43%;
-    margin: 0px -2px;
-}*/
+.modal-content-share .modal-body #close-share{
+  width: 25px;
+  float: right;
+  margin: 0;
+  margin-top: -15px;
+  margin-right: -13px;
+}
 
 .modal-content-connect .modal-body{
   /*margin-left: 80px;*/
   text-align: center;
+}
+
+.modal-content-connect .modal-body img{
+  width: 25px;
+  float: right;
+  margin-top: -15px;
+  margin-right: -13px;
+}
+
+#loader{
+  float: none;
 }
 
 .modal-content-connect .modal-body input{
@@ -442,7 +465,7 @@ input[type=range].slider:focus::-ms-fill-upper {
     color: #737373;
 }
 
-.modal-content-share .modal-body p:first-child{
+.modal-content-share .modal-body p:nth-child(2){
   margin-top: -15px;
   padding: 10px;
   font-weight: bold;
@@ -500,13 +523,18 @@ input[type=range].slider:focus::-ms-fill-upper {
   background-color: white;
 }
 
+.modal-body select:focus, .modal-content-connect .modal-body input:focus{
+  outline: none;
+}
+
 .modal-content-connect .modal-body button{
   background-color: #f44336;
   padding: 15px;
   border: none;
-  width: 50%;
+  width: 100%;
   color: white;
   margin: 20px -2px 0px -2px;
+  outline: none;
 }
 
 .modal-content .modal-body button{
@@ -525,7 +553,7 @@ input[type=range].slider:focus::-ms-fill-upper {
   top: 2px;
 }
 
-.modal-body button:nth-child(4){
+.modal-body button:nth-child(5){
   background-color: #e6e6e6;
   color: black;
 }

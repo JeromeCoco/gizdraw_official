@@ -28,7 +28,6 @@
 	tmp_canvas.height = canvas.height;
 	sketch.appendChild(tmp_canvas);
 	
-
 	var mouse = {x: 0, y: 0};
 	var last_mouse = {x: 0, y: 0};
 
@@ -45,7 +44,7 @@
             $("#ipaddress").css("display", "none");
             $(".close-connect").css("display", "none");
             $("#btnConnect").css("display", "none");
-            $("#waiting-state").html("<img style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
+            $("#waiting-state").html("<img id='loader' style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
             $("#waiting-state").css("padding", "20px");
             isConnected = true;
         });
@@ -57,6 +56,16 @@
 
         socket.on("onDisconnectToMobile", function(data){
         	location.reload();
+        });
+
+        socket.on("onBgChangeToMobile", function(data){
+        	bgColor = data.bgColor;
+        	bgIsColored = data.bgIsColored;
+        	if (bgIsColored) {
+        		$("#paint").css("background-color", bgColor);
+        	} else {
+        		$("#paint").css("background-color", "#FFFFFF");
+        	}
         });
     });
 
@@ -91,8 +100,6 @@
 			$("#new-canvas").css("display", "block");
 			$(".secondary").css("display", "block");
         });
-
-
 	}
 
 	// Get Current Tool ID
@@ -176,7 +183,14 @@
 			bgColor = $('#custom-bg-color').val();
 			bgIsColored = true;
 		} else {
+			bgColor = "#FFFFFF";
 			bgIsColored = false;
+		}
+
+		$('#paint').css("background-color", bgColor);
+		
+		if (isConnected) {
+			socket.emit("onBgChangeFromMobile", {bgColor:bgColor, bgIsColored:bgIsColored});
 		}
 	});
 
@@ -744,5 +758,5 @@
 	    	}
 	    );
 	});
-
+	
 }());

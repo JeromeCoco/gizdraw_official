@@ -103,6 +103,8 @@ $(document).ready(function(){
 
 	$('#close-share').click(function(){
 		$('#share-modal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
 	});	
 
 	$('#canvas-type').change(function(){
@@ -120,16 +122,6 @@ $(document).ready(function(){
 
 	$('#share').click(function(){
 		$('#share-modal').css("display", "block");
-	});
-
-	$('#setCanvasType').click(function(){
-		var canvasType = $('#canvas-type').val();
-		if (canvasType == "Color") {
-			var colorSet = $('#custom-bg-color').val();
-			$('#paint').css("background-color", colorSet);
-		} else if (canvasType == "White") {
-			$('#paint').css("background-color", "white");
-		}
 	});
 
 	$('#open-file').click(function(){
