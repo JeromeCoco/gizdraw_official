@@ -109,6 +109,8 @@ $(document).ready(function(){
 
 	$('.close-connect').click(function(){
 		$('#connect-modal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
 	});
 
 	$('#close-share').click(function(){

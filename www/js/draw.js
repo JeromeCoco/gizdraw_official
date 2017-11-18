@@ -38,16 +38,28 @@
 
 	// Request Connection
 	$("#btnConnect").click(function(){
-        connects();
-        socket.on("connect", function(){
-            socket.emit("sender", "start com");
-            $("#ipaddress").css("display", "none");
-            $(".close-connect").css("display", "none");
-            $("#btnConnect").css("display", "none");
-            $("#waiting-state").html("<img id='loader' style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
-            $("#waiting-state").css("padding", "20px");
-            isConnected = true;
-        });
+		try {
+			connects();
+	        socket.on("connect", function(){
+	            socket.emit("sender", "start com");
+	            $("#ipaddress").css("display", "none");
+	            $(".close-connect").css("display", "none");
+	            $("#btnConnect").css("display", "none");
+	            $("#waiting-state").html("<img id='loader' style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
+	            $("#waiting-state").css("padding", "20px");
+	            isConnected = true;
+	        });
+		} catch(e) {
+			window.plugins.toast.showShortBottom(
+		    	'Please try again.', 
+		    	function(a){
+		    		console.log('toast success: ' + a)
+		    	},
+		    	function(b){
+		    		alert('toast error: ' + b)
+		    	}
+		    );
+		}
         
         socket.on("onClearCanvasToMobile", function(data){
         	resetCanvas();
@@ -126,19 +138,31 @@
 	// Connection Function
     function connects(){
 		currentIPaddress = $('#ipaddress').val();
+
 		// split entered letter
 		var splitLetter = currentIPaddress.split("");
-		var part1 = parseInt(convertSetFromLetterToIP[splitLetter[0]][splitLetter[1]]);
-		var part2 = parseInt(convertSetFromLetterToIP[splitLetter[2]][splitLetter[3]]);
-		var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
-		var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
-
-		//combine converted ip
-		var convertedIp = part1+"."+part2+"."+part3+"."+part4;
-
-		console.log(convertedIp);
-
-        socket = io('http://'+convertedIp+':3000');
+		
+		//check length
+		if (splitLetter.length > 8) {
+			window.plugins.toast.showShortBottom(
+		    	'Please try again.', 
+		    	function(a){
+		    		console.log('toast success: ' + a)
+		    	},
+		    	function(b){
+		    		alert('toast error: ' + b)
+		    	}
+		    );
+		} else {
+			//combine converted ip
+			var part1 = parseInt(convertSetFromLetterToIP[splitLetter[0]][splitLetter[1]]);
+			var part2 = parseInt(convertSetFromLetterToIP[splitLetter[2]][splitLetter[3]]);
+			var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
+			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
+			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
+			//connect 
+	        socket = io('http://'+convertedIp+':3000');
+		}
 
         socket.on("createCanvasToMobile", function(data){
 			$("#connect-modal").css("display", "none");
@@ -815,7 +839,7 @@
 	    );
 
 	    window.plugins.toast.showShortBottom(
-	    	'Image saved to device', 
+	    	'Image saved to device.', 
 	    	function(a){
 	    		console.log('toast success: ' + a)
 	    	},
@@ -823,6 +847,10 @@
 	    		alert('toast error: ' + b)
 	    	}
 	    );
+	});
+
+	$("#save-jpg").click(function(){
+		
 	});
 	
 }());

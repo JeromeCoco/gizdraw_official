@@ -91,14 +91,26 @@ $(document).ready(function(){
 		$('#canvas-settings-modal').css("display", "block");
 	});
 
+	$("#save-image").click(function(){
+		$('#save-modal').css("display", "block");
+	});
+
 	$('.close').click(function(){
 		$('#canvas-settings-modal').css("display", "none");
 		$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
 	});
 
+	$('.close-save').click(function(){
+		$('#save-modal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
+	});
+
 	$('.close-connect').click(function(){
 		$('#connect-modal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
 	});
 
 	$('#close-share').click(function(){
