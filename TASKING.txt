@@ -10,7 +10,7 @@ Mobile App
 	Settings
 		Open File - coco
 		Share
-		Save (jpg, gdw) - coco
+		Save (jpg) - coco
 		Canvas Options (paper, white)
 	
 	Settings(Canvas View) [while connected]
