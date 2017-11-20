@@ -91,11 +91,6 @@
   background-color: #232323;
 }
 
-.active-left {
-  background-color: #cccccc;
-  border-left: 2px solid #f44336;
-}
-
 #pen-color {
   position: relative;
   top: -12px;

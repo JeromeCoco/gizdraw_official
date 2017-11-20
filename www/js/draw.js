@@ -31,6 +31,50 @@
 	var mouse = {x: 0, y: 0};
 	var last_mouse = {x: 0, y: 0};
 
+	$('#pencil').addClass('active');
+	$('#custom-bg-color').css("display", "none");
+	$('#connect-modal').css("display", "none");
+
+	$("#collapse-tools").click(function(){
+		$(".top-menu").toggleClass('tools-hiddens');
+		$(".tools-item").toggleClass('tools-hidden');
+		$("#pen-width").toggleClass('tools-hidden');
+		$(".simpleColorDisplay").toggleClass('tools-hidden');
+		$("#menu-right").toggleClass('tools-hidden');
+		$(".tools-left").toggleClass('tools-hidden');
+	});
+
+	var switchTool = function () {
+		$('.tool').removeClass('active');
+		$('.presets').css("display", "none");
+		$(this).addClass('active');
+	}
+
+	$('#pencil').click(switchTool);
+
+	$('#eraser').click(switchTool);
+
+	$('#blender').click(switchTool);
+
+	$('#color-picker').click(switchTool);
+
+	$('#paint-bucket').click(switchTool);
+
+	$('#shapes').click(switchTool);
+
+	$('#move-tool').click(switchTool);
+
+	$('#brush').click(function(){
+		$('.tool').removeClass('active');
+		$(this).addClass('active');
+		$('.presets').css("display", "inline-block");
+	});
+
+	$('#settings').click(function(){
+		$(this).toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
+	});
+
 	// Detect Connection
 	if (socket != undefined) {
 		connects();
@@ -809,6 +853,9 @@
 	}
 
 	$("#grid").click(function(){
+		$(this).toggleClass('active-grid');
+		$('.grid-svg').toggleClass('show-grid');
+
 		var gridState = $('.grid-svg').hasClass('show-grid');
 		if (isConnected) {
 			if (gridState) {
