@@ -853,4 +853,27 @@
 		
 	});
 	
+	var timeoutId = 0;
+	var onlonghold = function () {
+		$('#tools-modal').fadeIn("slow");
+		$('#tools-modal').css("top", mouse.y-100);
+	    $('#tools-modal').css("left", mouse.x-100);
+	};
+	
+	$('#sketch').bind('touchstart', function(e) {
+	    var parentOffset = $(this).parent().offset();
+		var targetYval = e.targetTouches[0].pageY;
+		var targetXval = e.targetTouches[0].pageX;
+	    mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+		var coor = mouse.x+ ","+ mouse.y;
+	    timeoutId = setTimeout(onlonghold, 500);
+	}).on('touchend touchmove', function() {
+	    clearTimeout(timeoutId);
+	});
+
+	$('#tools-modal img').click(function () {
+	    $('#tools-modal').css("display", "none");
+	});
+	
 }());

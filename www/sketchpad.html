@@ -34,17 +34,14 @@
 			<div class="top-menu">
 		    	<div id="tools-left">
 		    		<img src="img/collapse.svg" id="collapse-tools">
-		    		<img src="img/pencil.svg" class="tools-item tool" id="pencil">
-		    		<img src="img/brush-stroke.svg" class="tools-item tool" id="brush">
-		    		<img src="img/rubber.svg" class="tools-item tool" id="eraser">
-		    		<img src="img/chalk.svg" class="tools-item tool" id="blender">
 		    		<input class='simple_color_live_preview' value='#000' name="penColor" id="pen-color"/>
 		    		<input type="range" class="slider" name="penWidth" max="50" min="1" value="1" id="pen-width"/>
+		    		<img src="img/grid.svg" id="grid" class="tools-item">
 		    	</div>
 		    	<div id="menu-right">
 		    		<i class="fa fa-undo" aria-hidden="true" id="undo"></i>
 		    		<i class="fa fa-repeat" aria-hidden="true" id="redo"></i>
-		    		<i class="fa fa-bars" aria-hidden="true" id="settings"></i>
+		    		<i class="fa fa-cog" aria-hidden="true" id="settings"></i>
 		    		<div class="drop-menu">
 		    			<ul>
 		    				<li class="primary" id="new-canvas">Clear canvas</li>
@@ -59,13 +56,6 @@
 		    			</ul>
 		    		</div>
 		    	</div>
-		  	</div>
-		  	<div class="left-menu">
-		  		<img class="tools-left tool" id="color-picker" src="img/color-picker.svg">
-		  		<img class="tools-left tool" id="paint-bucket" src="img/paint-can.svg">
-		  		<img class="tools-left tool" id="shapes" src="img/polygon.svg">
-		  		<img class="tools-left tool" id="move-tool" src="img/move.svg">
-		  		<img class="tools-left" id="grid" src="img/grid.svg">
 		  	</div>
 	        <div id="bottom-menu">
 				<ul>
@@ -121,6 +111,16 @@
     				<img src="img/facebook.svg">
     			</div>
   			</div>
+		</div>
+		<div id="tools-modal">
+			<img src="img/pencil.svg" id="pencil" class="tool">
+			<img src="img/paint-can.svg" id="paint-bucket" class="tool">
+			<img src="img/brush-stroke.svg" id="brush" class="tool">
+			<img src="img/rubber.svg" id="eraser" class="tool">
+			<img src="img/chalk.svg" id="blender" class="tool">
+			<img src="img/color-picker.svg" id="color-picker" class="tool">
+			<img src="img/polygon.svg" id="shapes" class="tool">
+			<img src="img/move.svg" id="move-tool" class="tool">
 		</div>
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/onsenui.js"></script>

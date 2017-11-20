@@ -32,6 +32,6 @@ Desktop App
 		Canvas Options (bgcolor, resize, rotate) - isog
 
 Tasking (Focus)
-	isog - rotate(20), resize(20), splashscreen image(20), add new preset(anytime)
-	krisha - tools new UI(20), blender(anytime), paint bucket(anytime), grid auto straight(anytime)
+	isog - resize(20), splashscreen image(20), add new preset(anytime)
+	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime)
 	coco - save options(20), open file(anytime), zoom(anytime)

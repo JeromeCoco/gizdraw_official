@@ -1,18 +1,13 @@
 $(document).ready(function(){
+	var grid = 0;
 
 	$('.simple_color_live_preview').simpleColor({ livePreview: true, cellWidth: 15, cellHeight: 15 });
-
-	var grid = 0;
-	
-	//set pencil as starting tool onload
 	$('.tools-item').removeClass('active');
 	$('#pencil').addClass('active');
-	
 	$('#custom-bg-color').css("display", "none");
 	$('#connect-modal').css("display", "none");
 
 	$("#collapse-tools").click(function(){
-		$(".left-menu").toggleClass('tools-hidden');
 		$(".top-menu").toggleClass('tools-hiddens');
 		$(".tools-item").toggleClass('tools-hidden');
 		$("#pen-width").toggleClass('tools-hidden');
