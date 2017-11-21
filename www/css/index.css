@@ -45,7 +45,7 @@
 }
 
 .top-menu {
-  background-color: #111;
+  background-color: #121212;
   width: 100%;
   height: 39px;
   transition: .325s;
@@ -86,10 +86,10 @@
   padding: 8px 12px;
   border-top: 3px solid transparent;
 }
-
+/*
 .active {
   background-color: #232323;
-}
+}*/
 
 #pen-color {
   position: relative;
@@ -602,7 +602,14 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 #tools-modal {
   display: none;
-  background-image: url('../img/tools-modal.png');
+  background-image: url('../img/tools-modal-brush.png');
+  background-image: url('../img/tools-modal-blender.png');
+  background-image: url('../img/tools-modal-eraser.png');
+  background-image: url('../img/tools-modal-colorpicker.png');
+  background-image: url('../img/tools-modal-move.png');
+  background-image: url('../img/tools-modal-shape.png');
+  background-image: url('../img/tools-modal-paintbucket.png');
+  background-image: url('../img/tools-modal-pen.png');
   background-size: 200px 200px; 
   background-repeat: no-repeat;
   position: fixed;

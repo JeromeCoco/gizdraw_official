@@ -68,6 +68,7 @@
 		$('.tool').removeClass('active');
 		$(this).addClass('active');
 		$('.presets').css("display", "inline-block");
+		$("#tools-modal").css("background-image",  "url('img/tools-modal-brush.png')");
 	});
 
 	$('#settings').click(function(){
@@ -920,7 +921,32 @@
 	});
 
 	$('#tools-modal img').click(function () {
-	    $('#tools-modal').css("display", "none");
+		$('#tools-modal').css("display", "none");
+
+		var id = $(this).attr('id');
+		switch (id) {
+			case "pencil":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-pen.png')");
+				break;
+			case "blender":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-blender.png')");
+				break;
+			case "eraser":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-eraser.png')");
+				break;
+			case "color-picker":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-colorpicker.png')");
+				break;
+			case "move-tool":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-move.png')");
+				break;
+			case "shapes":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-shape.png')");
+				break;
+			case "paint-bucket":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-paintbucket.png')");
+				break;
+		}
 	});
 	
 }());
