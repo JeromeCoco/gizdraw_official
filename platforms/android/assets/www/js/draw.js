@@ -31,6 +31,51 @@
 	var mouse = {x: 0, y: 0};
 	var last_mouse = {x: 0, y: 0};
 
+	$('#pencil').addClass('active');
+	$('#custom-bg-color').css("display", "none");
+	$('#connect-modal').css("display", "none");
+
+	$("#collapse-tools").click(function(){
+		$(".top-menu").toggleClass('tools-hiddens');
+		$(".tools-item").toggleClass('tools-hidden');
+		$("#pen-width").toggleClass('tools-hidden');
+		$(".simpleColorDisplay").toggleClass('tools-hidden');
+		$("#menu-right").toggleClass('tools-hidden');
+		$(".tools-left").toggleClass('tools-hidden');
+	});
+
+	var switchTool = function () {
+		$('.tool').removeClass('active');
+		$('.presets').css("display", "none");
+		$(this).addClass('active');
+	}
+
+	$('#pencil').click(switchTool);
+
+	$('#eraser').click(switchTool);
+
+	$('#blender').click(switchTool);
+
+	$('#color-picker').click(switchTool);
+
+	$('#paint-bucket').click(switchTool);
+
+	$('#shapes').click(switchTool);
+
+	$('#move-tool').click(switchTool);
+
+	$('#brush').click(function(){
+		$('.tool').removeClass('active');
+		$(this).addClass('active');
+		$('.presets').css("display", "inline-block");
+		$("#tools-modal").css("background-image",  "url('img/tools-modal-brush.png')");
+	});
+
+	$('#settings').click(function(){
+		$(this).toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
+	});
+
 	// Detect Connection
 	if (socket != undefined) {
 		connects();
@@ -809,6 +854,9 @@
 	}
 
 	$("#grid").click(function(){
+		$(this).toggleClass('active-grid');
+		$('.grid-svg').toggleClass('show-grid');
+
 		var gridState = $('.grid-svg').hasClass('show-grid');
 		if (isConnected) {
 			if (gridState) {
@@ -851,6 +899,54 @@
 
 	$("#save-jpg").click(function(){
 		
+	});
+	
+	var timeoutId = 0;
+	var onlonghold = function () {
+		$('#tools-modal').fadeIn("slow");
+		$('#tools-modal').css("top", mouse.y-100);
+	    $('#tools-modal').css("left", mouse.x-100);
+	};
+	
+	$('#sketch').bind('touchstart', function(e) {
+	    var parentOffset = $(this).parent().offset();
+		var targetYval = e.targetTouches[0].pageY;
+		var targetXval = e.targetTouches[0].pageX;
+	    mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
+		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+		var coor = mouse.x+ ","+ mouse.y;
+	    timeoutId = setTimeout(onlonghold, 500);
+	}).on('touchend touchmove', function() {
+	    clearTimeout(timeoutId);
+	});
+
+	$('#tools-modal img').click(function () {
+		$('#tools-modal').css("display", "none");
+
+		var id = $(this).attr('id');
+		switch (id) {
+			case "pencil":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-pen.png')");
+				break;
+			case "blender":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-blender.png')");
+				break;
+			case "eraser":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-eraser.png')");
+				break;
+			case "color-picker":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-colorpicker.png')");
+				break;
+			case "move-tool":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-move.png')");
+				break;
+			case "shapes":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-shape.png')");
+				break;
+			case "paint-bucket":
+				$("#tools-modal").css("background-image",  "url('img/tools-modal-paintbucket.png')");
+				break;
+		}
 	});
 	
 }());

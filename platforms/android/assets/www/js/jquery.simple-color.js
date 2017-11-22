@@ -192,8 +192,8 @@
       'margin':           '0 0 0 5px',
       'width':            options.totalWidth,
       'height':           options.totalHeight,
-      'top':              '26px',
-      'left':             '-6px',
+      'top':              '30px',
+      'left':             '-196px',
       'position':         'absolute',
       'background-color': '#fff',
       'box-shadow':       'grey 3px 3px 22px -1px'
@@ -206,7 +206,9 @@
       'width':            '30px',
       'height':           '22px',
       'line-height':      options.boxHeight + 'px',
-      'cursor':           'pointer'
+      'cursor':           'pointer',
+      'position':         'relative',
+      'left':             '-190px'
     }, options.displayCSS || {});
 
     // Custom CSS for the input field.
