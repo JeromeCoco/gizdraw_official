@@ -44,10 +44,20 @@
 		$(".tools-left").toggleClass('tools-hidden');
 	});
 
+	function emitActiveTool() {
+		
+	}
+
 	var switchTool = function () {
+		//switch tool
 		$('.tool').removeClass('active');
 		$('.presets').css("display", "none");
 		$(this).addClass('active');
+
+		var activeTool = $(this).attr('id');
+		if (isConnected) {
+			socket.emit("changeToolFromMobile", activeTool);
+		}
 	}
 
 	$('#pencil').click(switchTool);
@@ -69,6 +79,11 @@
 		$(this).addClass('active');
 		$('.presets').css("display", "inline-block");
 		$("#tools-modal").css("background-image",  "url('img/tools-modal-brush.png')");
+		
+		var activeTool = $(this).attr('id');
+		if (isConnected) {
+			socket.emit("changeToolFromMobile", activeTool);
+		}
 	});
 
 	$('#settings').click(function(){
@@ -222,6 +237,10 @@
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#settings").toggleClass('active-menu');
 			$('.drop-menu').toggleClass('show-menu');
+			if ($('#grid').hasClass('active-grid')) {
+				$('#grid').toggleClass('active-grid');
+				$('.grid-svg').toggleClass('show-grid');
+			}
 			//Display Connected State
 			$('#connectedState').css("display", "block");
 			$('.slider').css("top", "25px");
@@ -860,10 +879,11 @@
 		var gridState = $('.grid-svg').hasClass('show-grid');
 		if (isConnected) {
 			if (gridState) {
-				socket.emit("onSendGrid", "showGrid");
-			} else {
 				socket.emit("onSendGrid", "hideGrid");
+			} else {
+				socket.emit("onSendGrid", "showGrid");
 			}
+			$("#grid").css("top", "-68px");
 		}
 	});
 
