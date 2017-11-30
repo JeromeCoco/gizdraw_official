@@ -265,6 +265,7 @@
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#settings").toggleClass('active-menu');
 			$('.drop-menu').toggleClass('show-menu');
+			$(".top-menu").css("height", "40px");
 			if ($('#grid').hasClass('active-grid')) {
 				$('#grid').toggleClass('active-grid');
 				$('.grid-svg').toggleClass('show-grid');
@@ -913,7 +914,7 @@
 			} else {
 				socket.emit("onSendGrid", "showGrid");
 			}
-			$("#grid").css("top", "-68px");
+			$("#grid").css("top", "-66px");
 		}
 	});
 

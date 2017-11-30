@@ -35,3 +35,10 @@ Tasking (Focus)
 	isog - splashscreen image(urgent), add new preset(anytime)
 	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime)
 	coco - save options(urgent), open file(anytime), zoom(anytime)
+
+----------------- TO DO ----------------------
+size position
+textbox for resize
+exit resize mode
+rotate options UI
+----------------------------------------------

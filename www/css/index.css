@@ -64,7 +64,7 @@
 #grid {
   position: relative;
   top: -69px;
-  left: 304px;
+  left: 350px;
 }
 
 .active-grid {
@@ -204,7 +204,7 @@
 
 input[type=range].slider {
   -webkit-appearance: none;
-  width: 190px;
+  width: 240px;
   margin: -1px 15px;
   position: absolute;
   top: 18px;
