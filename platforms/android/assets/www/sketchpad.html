@@ -6,8 +6,6 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <!-- <link rel="stylesheet" type="text/css" href="css/onsen-css-components.css">
-        <link rel="stylesheet" type="text/css" href="css/onsenui.css"> -->
         <title>GIZDRAW</title>
         <link rel="stylesheet" type="text/css" href="">
     </head>
@@ -24,7 +22,7 @@
 		  					</pattern>
 		  					<pattern id="grids" width="80" height="80" patternUnits="userSpaceOnUse">
 		    					<rect width="80" height="80" fill="url(#smallGrid)"/>
-		    					<path d="M 80 0 L 0 0 0 80" fill="none" stroke="black" stroke-width="1"/>
+		    					<path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="1"/>
 		  					</pattern>
 						</defs>
 						<rect width="100%" height="100%" fill="url(#grids)" />
@@ -42,8 +40,6 @@
 		    		<img src="img/undo-arrow.svg" id="undo"/>
 		    		<img src="img/redo-arrow.svg" id="redo"/>
 		    		<img src="img/settings-gears.svg" id="settings"/>
-		    		<!-- <i class="fa fa-repeat" aria-hidden="true" id="redo"></i>
-		    		<i class="fa fa-cog" aria-hidden="true" id="settings"></i> -->
 		    		<div class="drop-menu">
 		    			<ul>
 		    				<li class="primary" id="new-canvas">Clear canvas</li>
@@ -72,7 +68,7 @@
   			<div class="modal-content">
     			<div class="modal-body">
     				<img class="close" src="img/close-button.png"/>
-    				<div><i class="fa fa-clone" aria-hidden="true"></i> Choose Canvas Background</div>
+    				<div><!-- <i class="fa fa-clone" aria-hidden="true"></i> --> Choose Canvas Background</div>
     				<select id="canvas-type">
     					<option>Transparent</option>
     					<option>White</option>
@@ -88,9 +84,9 @@
   			<div class="modal-content-connect">
     			<div class="modal-body" id="waiting-state">
     				<img src="img/close-button.png" class="close-connect">
-    				<div><i class="fa fa-television" aria-hidden="true"></i> Connect To PC</div>
+    				<div> Connect To PC</div>
     				<input type="text" id="ipaddress" placeholder="Enter code..."><br>
-    				<button id="btnConnect"><i class="fa fa-rss" aria-hidden="true"></i> Connect</button>
+    				<button id="btnConnect"><!-- <i class="fa fa-rss" aria-hidden="true"></i>  -->Connect</button>
     			</div>
   			</div>
 		</div>
@@ -98,7 +94,7 @@
   			<div class="modal-content-save">
     			<div class="modal-body">
     				<img src="img/close-button.png" class="close-save">
-    				<div><i class="fa fa-floppy-o" aria-hidden="true"></i> Save as...</div>
+    				<div><!-- <i class="fa fa-floppy-o" aria-hidden="true"></i> --> Save as...</div>
     				<p class="close-save" id="save-png">.png</p>
     				<p id="save-jpg">.jpg</p>
     			</div>
@@ -108,7 +104,7 @@
   			<div class="modal-content-share">
     			<div class="modal-body">
     				<img src="img/close-button.png" id="close-share">
-    				<p><i class="fa fa-share-alt" aria-hidden="true"></i> Share your work!</p>
+    				<p><!-- <i class="fa fa-share-alt" aria-hidden="true"></i> --> Share your work!</p>
     				<img src="img/bluetooth.svg">
     				<img src="img/facebook.svg">
     			</div>
@@ -125,7 +121,6 @@
 			<img src="img/move.svg" id="move-tool" class="tool">
 		</div>
 		<script type="text/javascript" src="cordova.js"></script>
-        <!-- <script type="text/javascript" src="js/onsenui.js"></script> -->
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script src="js/draw.js"></script>

@@ -13,6 +13,7 @@
 	var isDrawing, lastPoint; // Brush preset 3
 	var points = [ ]; // Brush Preset 4
 	var isConnected = false;
+	var canvasPicSrc;
 	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
 	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 
@@ -30,6 +31,13 @@
 	
 	var mouse = {x: 0, y: 0};
 	var last_mouse = {x: 0, y: 0};
+
+	//bg
+	var bgColor;
+	var bgIsColored = false;
+
+	// canvas-resize
+	var newCanvasWidth, newCanvasHeight; 
 
 	$('#pencil').addClass('active');
 	$('#custom-bg-color').css("display", "none");
@@ -139,6 +147,26 @@
         		$("#paint").css("background-color", "#FFFFFF");
         	}
         });
+
+        socket.on("onCanvasResizeToMobile", function(data){
+        	newCanvasWidth = data.canvasSizeWidth;
+        	newCanvasHeight = data.canvasSizeHeight;
+
+        	tmp_canvas.width = newCanvasWidth;
+			tmp_canvas.height = newCanvasHeight;
+			canvas.width = newCanvasWidth;
+			canvas.height = newCanvasHeight;
+			// console.log(newCanvasWidth + "" + newCanvasHeight);
+
+			var canvasPic = new Image();
+	        canvasPic.src = cPushArray[cStep];
+	        canvasPicSrc = cPushArray[cStep];
+	        canvasPic.onload = function () { 
+	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	        	ctx.drawImage(canvasPic, 0, 0); 
+	        }
+	        socket.emit("onSendcStep", {canvasPiccStep:canvasPicSrc});
+        });
     });
 
     var convertSetFromLetterToIP = {
@@ -237,6 +265,7 @@
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#settings").toggleClass('active-menu');
 			$('.drop-menu').toggleClass('show-menu');
+			$(".top-menu").css("height", "40px");
 			if ($('#grid').hasClass('active-grid')) {
 				$('#grid').toggleClass('active-grid');
 				$('.grid-svg').toggleClass('show-grid');
@@ -267,6 +296,10 @@
 		if (toolID == "brush") {
 			brushpreset1();
 		}
+
+		// bug here
+		// undo();		
+
 	});
 
 	// Get Current Preset ID
@@ -329,9 +362,6 @@
 		}
 	});
 
-	var bgColor;
-	var bgIsColored = false;
-
 	$('#setCanvasType').click(function(){
 		if ($('#canvas-type').val() == "Color") {
 			bgColor = $('#custom-bg-color').val();
@@ -371,23 +401,19 @@
 			case 'pencil':
 				ctx.globalCompositeOperation = 'source-over';
 				markerColor = $('#pen-color').val();
+				markerWidth = parseInt($('#pen-width').val());
 				tmp_ctx.strokeStyle = markerColor;
 				tmp_ctx.fillStyle = markerColor;
 				tmp_ctx.shadowBlur = 0;
 				tmp_ctx.lineJoin = 'round';
 				tmp_ctx.lineCap = 'round';
+				tmp_ctx.lineWidth = markerWidth;
 				onPaint();
 			break;
 			case 'color-picker': 
 				ctx.globalCompositeOperation = 'source-over';
 				var canvasPic = new Image();
 				canvasPic.src = cPushArray[cStep];
-
-				// user coordinates
-				var targetYval = e.targetTouches[0].pageY;
-				var targetXval = e.targetTouches[0].pageX;
-				mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
-				mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 
 				// image data and RGB values 
 				var img_data = ctx.getImageData(mouse.x, mouse.y, 1, 1).data;
@@ -453,8 +479,28 @@
 		$('.drop-menu').toggleClass('show-menu');
 	});
 
-	// UNDO event
-	$('#undo').click(function(){
+	// REDO event
+	$('#redo').click(function(){
+		if (cStep < cPushArray.length-1) {
+	        cStep++;
+	        var canvasPic = new Image();
+	        canvasPic.src = cPushArray[cStep];
+	        canvasPic.onload = function () { 
+	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	        	ctx.drawImage(canvasPic, 0, 0); 
+	        }
+
+	        if (isConnected) {
+				socket.emit("onRedo", cPushArray[cStep]);
+			}
+   		}
+
+   		if (isConnected) {
+			socket.emit("cStep", cStep);
+		}
+	});
+
+	function undo() {
 		if (cStep == 0) {
 			resetCanvas();
 		}
@@ -477,28 +523,12 @@
 	    if (isConnected) {
 			socket.emit("cStep", cStep);
 		}
-	});
 
-	// REDO event
-	$('#redo').click(function(){
-		if (cStep < cPushArray.length-1) {
-	        cStep++;
-	        var canvasPic = new Image();
-	        canvasPic.src = cPushArray[cStep];
-	        canvasPic.onload = function () { 
-	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	        	ctx.drawImage(canvasPic, 0, 0); 
-	        }
+		console.log(cStep);
+	};
 
-	        if (isConnected) {
-				socket.emit("onRedo", cPushArray[cStep]);
-			}
-   		}
-
-   		if (isConnected) {
-			socket.emit("cStep", cStep);
-		}
-	});
+	// UNDO event
+	$('#undo').click(undo);
 
 	var onPaint = function() {
 		// Saving all the points in an array
@@ -737,6 +767,7 @@
 				  ctx.strokeStyle = rgbaval+',0.3)';
 				  tmp_ctx.lineWidth = 1;
 				  tmp_ctx.strokeStyle = markerColor;
+				  tmp_ctx.shadowBlur = 0;
 			      ctx.moveTo(lastPoint.x + (dx * 0.2), lastPoint.y + (dy * 0.2));
 			      ctx.lineTo(points[i].x - (dx * 0.2), points[i].y - (dy * 0.2));
 			      ctx.stroke();
@@ -883,7 +914,7 @@
 			} else {
 				socket.emit("onSendGrid", "showGrid");
 			}
-			$("#grid").css("top", "-68px");
+			$("#grid").css("top", "-66px");
 		}
 	});
 
@@ -923,6 +954,10 @@
 	
 	var timeoutId = 0;
 	var onlonghold = function () {
+	   	if (toolID == 'pencil'){
+	   		cPush();
+	   		//undo();
+	   	}
 		$('#tools-modal').fadeIn("slow");
 		$('#tools-modal').css("top", mouse.y-100);
 	    $('#tools-modal').css("left", mouse.x-100);

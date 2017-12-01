@@ -956,7 +956,7 @@
 	var onlonghold = function () {
 	   	if (toolID == 'pencil'){
 	   		cPush();
-	   		undo();
+	   		//undo();
 	   	}
 		$('#tools-modal').fadeIn("slow");
 		$('#tools-modal').css("top", mouse.y-100);
@@ -970,7 +970,7 @@
 	    mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 		var coor = mouse.x+ ","+ mouse.y;
-	    timeoutId = setTimeout(onlonghold, 300);
+	    timeoutId = setTimeout(onlonghold, 500);
 	}).on('touchend touchmove', function() {
 	    clearTimeout(timeoutId);
 	});
