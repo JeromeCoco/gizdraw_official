@@ -29,16 +29,48 @@ Desktop App
 	Settings(Canvas View) [while connected]
 		Open file (transfer image to mobile) - coco
 		Save (png, jpg, gdw) - coco
-		Canvas Options (bgcolor, resize, rotate) - isog
+		Canvas Options (bgcolor, rotate) - isog
+______________________________________________________________________________
+Tasking
+(december 10)
+	isog - add new preset(anytime), splashscreen image, rotate options, limit resizer
 
-Tasking (Focus)
-	isog - splashscreen image(urgent), add new preset(anytime)
-	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime)
-	coco - save options(urgent), open file(anytime), zoom(anytime)
+	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime), bugs(anytime)
 
------------------ TO DO ----------------------
-size position
-textbox for resize
-exit resize mode
-rotate options UI
-----------------------------------------------
+	coco - open file(anytime), save on desktop, zoom, save as jpg on mobile
+
+(december 11)
+	isog - add new preset(anytime), transparent view, paper texture
+
+	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime), bugs(anytime)
+
+	coco - open file(anytime), research for own filename extension, improve UI
+
+(december 14)
+	isog - add new preset(anytime), improve UI, research detect first open of app
+
+	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime), bugs(anytime)
+
+	coco - open file(anytime), work on filename extension, listing of recently opened files
+
+TARGET FOR DEFENSE
+	- UI / UX
+		* tools
+		* rotate options
+		* splashscreen image
+	- Functions
+		* fix bugs
+		* esc button to CANCEL resize
+		* limit resizer (confirm min and max)
+		* save image (BOTH DEVICE)
+		* at least 1 or 2 new tools
+		* grid auto straight
+		* zoom (i hope)
+	- Research
+		* study git
+		* filename extension
+		* build for both apps
+		* recent files
+		* opening image file
+		* finalize tools to implement
+		* share image file

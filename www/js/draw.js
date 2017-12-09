@@ -52,16 +52,9 @@
 		$(".tools-left").toggleClass('tools-hidden');
 	});
 
-	function emitActiveTool() {
-		
-	}
-
 	var switchTool = function () {
 		//switch tool
-		$('.tool').removeClass('active');
 		$('.presets').css("display", "none");
-		$(this).addClass('active');
-
 		var activeTool = $(this).attr('id');
 		if (isConnected) {
 			socket.emit("changeToolFromMobile", activeTool);
@@ -83,10 +76,9 @@
 	$('#move-tool').click(switchTool);
 
 	$('#brush').click(function(){
-		$('.tool').removeClass('active');
-		$(this).addClass('active');
 		$('.presets').css("display", "inline-block");
-		$("#tools-modal").css("background-image",  "url('img/tools-modal-brush.png')");
+		$("#active-tool").html(" ");
+		$("#active-tool").html("<img src='img/brush-stroke.svg'>");
 		
 		var activeTool = $(this).attr('id');
 		if (isConnected) {
@@ -951,6 +943,11 @@
 	$("#save-jpg").click(function(){
 		
 	});
+
+	$("#active-tool").click(function() {
+		$('#tools-modal').fadeIn("slow");
+		$(this).fadeOut('fast');
+	});
 	
 	var timeoutId = 0;
 	var onlonghold = function () {
@@ -975,33 +972,59 @@
 	    clearTimeout(timeoutId);
 	});
 
+	$('#exit-tool').click(function () {
+		$('#active-tool').fadeIn("slow");
+		$('#tools-modal').fadeOut("fast");
+	});
+
 	$('#tools-modal img').click(function () {
-		$('#tools-modal').css("display", "none");
+		$('#active-tool').fadeIn("slow");
+		$('#tools-modal').fadeOut("slow");
 
 		var id = $(this).attr('id');
 		switch (id) {
 			case "pencil":
-				$("#tools-modal").css("background-image",  "url('img/tools-modal-pen.png')");
+				$("#active-tool").html(" ");
+				$("#active-tool").html("<img src='img/pencil.svg'>");
 				break;
 			case "blender":
-				$("#tools-modal").css("background-image",  "url('img/tools-modal-blender.png')");
+				$("#active-tool").html(" ");
+				$("#active-tool").html("<img src='img/chalk.svg'>");
 				break;
 			case "eraser":
-				$("#tools-modal").css("background-image",  "url('img/tools-modal-eraser.png')");
+				$("#active-tool").html(" ");
+				$("#active-tool").html("<img src='img/rubber.svg'>");
 				break;
 			case "color-picker":
-				$("#tools-modal").css("background-image",  "url('img/tools-modal-colorpicker.png')");
+				$("#active-tool").html(" ");
+				$("#active-tool").html("<img src='img/color-picker.svg'>");
 				break;
 			case "move-tool":
-				$("#tools-modal").css("background-image",  "url('img/tools-modal-move.png')");
+				$("#active-tool").html(" ");
+				$("#active-tool").html("<img src='img/move.svg'>");
 				break;
 			case "shapes":
-				$("#tools-modal").css("background-image",  "url('img/tools-modal-shape.png')");
+				$("#active-tool").html(" ");
+				$("#active-tool").html("<img src='img/polygon.svg'>");
 				break;
 			case "paint-bucket":
-				$("#tools-modal").css("background-image",  "url('img/tools-modal-paintbucket.png')");
+				$("#active-tool").html(" ");
+				$("#active-tool").html("<img src='img/paint-can.svg'>");
 				break;
 		}
 	});
+
+	/*$("#tmp_canvas").on('dblclick', function(e){
+		console.log("zoom");
+		var currentView = 100;
+
+		if (e.scale < 1.0) {
+			currentView += 20;
+		} else if (e.scale > 1.0) {
+			currentView -= 20;
+		}
+		$(document).css("zoom", currentView+"%");
+
+	});*/
 	
 }());

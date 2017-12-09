@@ -52,10 +52,6 @@
 		$(".tools-left").toggleClass('tools-hidden');
 	});
 
-	function emitActiveTool() {
-		
-	}
-
 	var switchTool = function () {
 		//switch tool
 		$('.tool').removeClass('active');
@@ -1003,5 +999,18 @@
 				break;
 		}
 	});
+
+	/*$("#tmp_canvas").on('dblclick', function(e){
+		console.log("zoom");
+		var currentView = 100;
+
+		if (e.scale < 1.0) {
+			currentView += 20;
+		} else if (e.scale > 1.0) {
+			currentView -= 20;
+		}
+		$(document).css("zoom", currentView+"%");
+
+	});*/
 	
 }());
