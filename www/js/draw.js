@@ -945,11 +945,11 @@
 	});
 
 	$("#active-tool").click(function() {
-		$('#tools-modal').fadeIn("slow");
+		$('#tools-modal').fadeIn("fast");
 		$(this).fadeOut('fast');
 	});
 	
-	var timeoutId = 0;
+	/*var timeoutId = 0;
 	var onlonghold = function () {
 	   	if (toolID == 'pencil'){
 	   		cPush();
@@ -970,16 +970,16 @@
 	    timeoutId = setTimeout(onlonghold, 500);
 	}).on('touchend touchmove', function() {
 	    clearTimeout(timeoutId);
-	});
+	});*/
 
 	$('#exit-tool').click(function () {
-		$('#active-tool').fadeIn("slow");
+		$('#active-tool').fadeIn("fast");
 		$('#tools-modal').fadeOut("fast");
 	});
 
 	$('#tools-modal img').click(function () {
-		$('#active-tool').fadeIn("slow");
-		$('#tools-modal').fadeOut("slow");
+		$('#active-tool').fadeIn("fast");
+		$('#tools-modal').fadeOut("fast");
 
 		var id = $(this).attr('id');
 		switch (id) {

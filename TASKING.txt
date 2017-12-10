@@ -55,7 +55,6 @@ Tasking
 
 TARGET FOR DEFENSE
 	- UI / UX
-		* tools
 		* rotate options
 		* splashscreen image
 	- Functions
