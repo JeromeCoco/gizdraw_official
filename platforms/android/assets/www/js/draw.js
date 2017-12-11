@@ -89,6 +89,7 @@
 	$('#settings').click(function(){
 		$(this).toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
+		exitTools();
 	});
 
 	// Detect Connection
@@ -945,8 +946,12 @@
 	});
 
 	$("#active-tool").click(function() {
-		$('#tools-modal').fadeIn("slow");
+		$('#tools-modal').fadeIn("fast");
 		$(this).fadeOut('fast');
+		if ($("#settings").hasClass('active-menu')) {
+			$("#settings").toggleClass('active-menu');
+			$('.drop-menu').toggleClass('show-menu');
+		}
 	});
 	
 	/*var timeoutId = 0;
@@ -972,14 +977,16 @@
 	    clearTimeout(timeoutId);
 	});*/
 
-	$('#exit-tool').click(function () {
-		$('#active-tool').fadeIn("slow");
+	function exitTools(){
+		$('#active-tool').fadeIn("fast");
 		$('#tools-modal').fadeOut("fast");
-	});
+	}
+
+	$('#exit-tool').click(exitTools);
 
 	$('#tools-modal img').click(function () {
-		$('#active-tool').fadeIn("slow");
-		$('#tools-modal').fadeOut("slow");
+		$('#active-tool').fadeIn("fast");
+		$('#tools-modal').fadeOut("fast");
 
 		var id = $(this).attr('id');
 		switch (id) {
@@ -1013,18 +1020,5 @@
 				break;
 		}
 	});
-
-	/*$("#tmp_canvas").on('dblclick', function(e){
-		console.log("zoom");
-		var currentView = 100;
-
-		if (e.scale < 1.0) {
-			currentView += 20;
-		} else if (e.scale > 1.0) {
-			currentView -= 20;
-		}
-		$(document).css("zoom", currentView+"%");
-
-	});*/
 	
 }());

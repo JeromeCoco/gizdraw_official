@@ -689,20 +689,20 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 #active-tool {
   background-image: url(../img/activetool.png);
-  background-size: 36px 36px;
+  background-size: 55px 55px;
   background-repeat: no-repeat;
   position: fixed;
   z-index: 1;
   right: 0;
   bottom: 0;
-  width: 36px;
-  height: 36px;
+  width: 55px;
+  height: 55px;
   overflow: auto;
 }
 
 #active-tool img{
-  width: 25px;
+  width: 30px;
   position: relative;
-  top: 8px;
-  left: 8px;
+  top: 17px;
+  left: 17px;
 }
