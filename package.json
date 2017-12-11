@@ -10,13 +10,11 @@
     "author": "Coco Olazo Isog",
     "license": "Apache-2.0",
     "dependencies": {
-        "com.dbaq.cordova.filepickerio": "~0.0.6",
         "cordova-android": "^6.2.3",
         "cordova-base64-image-saver": "file:node_modules\\cordova-base64-image-saver",
         "cordova-browser": "^4.1.0",
         "cordova-plugin-compat": "^1.0.0",
         "cordova-plugin-file": "^4.3.3",
-        "cordova-plugin-filepickerio": "0.0.6",
         "cordova-plugin-screen-orientation": "^2.0.1",
         "cordova-plugin-screenorientation-landscape": "^1.0.22",
         "cordova-plugin-splashscreen": "^4.0.3",
@@ -32,8 +30,7 @@
             "cordova-plugin-splashscreen": {},
             "cordova-plugin-screenorientation-landscape": {},
             "cordova-plugin-screen-orientation": {},
-            "cordova-plugin-file": {},
-            "com.dbaq.cordova.filepickerio": {}
+            "cordova-plugin-file": {}
         },
         "platforms": [
             "android",
