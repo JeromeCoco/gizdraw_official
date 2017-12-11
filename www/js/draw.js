@@ -89,6 +89,7 @@
 	$('#settings').click(function(){
 		$(this).toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
+		exitTools();
 	});
 
 	// Detect Connection
@@ -947,6 +948,10 @@
 	$("#active-tool").click(function() {
 		$('#tools-modal').fadeIn("fast");
 		$(this).fadeOut('fast');
+		if ($("#settings").hasClass('active-menu')) {
+			$("#settings").toggleClass('active-menu');
+			$('.drop-menu').toggleClass('show-menu');
+		}
 	});
 	
 	/*var timeoutId = 0;
@@ -972,10 +977,12 @@
 	    clearTimeout(timeoutId);
 	});*/
 
-	$('#exit-tool').click(function () {
+	function exitTools(){
 		$('#active-tool').fadeIn("fast");
 		$('#tools-modal').fadeOut("fast");
-	});
+	}
+
+	$('#exit-tool').click(exitTools);
 
 	$('#tools-modal img').click(function () {
 		$('#active-tool').fadeIn("fast");
