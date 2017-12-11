@@ -11,7 +11,7 @@ Mobile App
 		Open File - coco
 		Share
 		Save (jpg) - coco
-		Canvas Options (paper, white)
+		Canvas Options (paper, white) - isog
 	
 	Settings(Canvas View) [while connected]
 		Open File (transfer image to PC) - coco
@@ -23,30 +23,23 @@ Desktop App
 	List recently opened files
 	Create new (Size options [aspect ratio, custom]) - coco
 	Open file (transfer image to mobile) - coco
-	Save (png, jpg, gdw) - coco
-	Canvas Options (resize, rotate) - isog
+	Save (jpg, gdw) - coco
+	Canvas Options (rotate) - isog
 
 	Settings(Canvas View) [while connected]
 		Open file (transfer image to mobile) - coco
-		Save (png, jpg, gdw) - coco
-		Canvas Options (bgcolor, rotate) - isog
+		Save (jpg, gdw) - coco
+		Canvas Options (rotate) - isog
 ______________________________________________________________________________
 Tasking
-(december 10)
-	isog - add new preset(anytime), splashscreen image, rotate options, limit resizer
+( december 13 )
+	isog - add new preset(anytime), transparent view, paper texture, limit resizer
 
 	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime), bugs(anytime)
 
-	coco - open file(anytime), save on desktop, zoom, save as jpg on mobile
+	coco - open file(anytime), save options on desktop[jpg, png, gdw], zoom, save as jpg on mobile, menu bar
 
-(december 11)
-	isog - add new preset(anytime), transparent view, paper texture
-
-	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime), bugs(anytime)
-
-	coco - open file(anytime), research for own filename extension, improve UI
-
-(december 14)
+(december 16)
 	isog - add new preset(anytime), improve UI, research detect first open of app
 
 	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime), bugs(anytime)
@@ -57,6 +50,26 @@ TARGET FOR DEFENSE
 	- UI / UX
 		* rotate options
 		* splashscreen image
+		* menu bar
+			File Name
+			File
+				- Create new...
+				- Open
+				- Save as...
+					> png
+					> jpg
+				- Save as gdw
+			Canvas
+				- Clear Canvas
+				- Set background
+				- Rotate
+					> opt 1
+					> opt 2
+					> opt 3
+				- Resize
+			Settings
+				- Disconnect
+				- Exit Canvas
 	- Functions
 		* fix bugs
 		* esc button to CANCEL resize
