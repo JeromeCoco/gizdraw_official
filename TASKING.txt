@@ -37,7 +37,7 @@ Tasking
 
 	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime), bugs(anytime)
 
-	coco - open file(anytime), save options on desktop[jpg, png, gdw], zoom, save as jpg on mobile, menu bar
+	coco - open file(anytime), save options on desktop[gdw], zoom, save as jpg on mobile, menu bar
 
 (december 16)
 	isog - add new preset(anytime), improve UI, research detect first open of app
