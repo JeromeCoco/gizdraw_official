@@ -1,13 +1,4 @@
 Mobile App
-	Paint Bucket - krishasss
-	Hahahahha
-	Blender - krisha
-	Grid (Straight line [vertical,horizontal]) - krisha
-	Brush Preset (Add) - isog
-	Zoom in / Zoom out - coco
-	Shapes - krisha
-	Move Tool - krisha
-
 	Settings
 		Open File - coco
 		Share
