@@ -160,6 +160,18 @@
 	        }
 	        socket.emit("onSendcStep", {canvasPiccStep:canvasPicSrc});
         });
+        socket.on("onReceiveRotationDegrees", function(data){
+        	$("#paint").css({'-webkit-transform' : 'rotate('+ data +'deg)',
+    		'-moz-transform' : 'rotate('+ data +'deg)',
+    		'-ms-transform' : 'rotate('+ data +'deg)',
+    		'transform' : 'rotate('+ data +'deg)'});
+    		// $(tmp_canvas).css({'-webkit-transform' : 'rotate('+ data +'deg)',
+    		// '-moz-transform' : 'rotate('+ data +'deg)',
+    		// '-ms-transform' : 'rotate('+ data +'deg)',
+    		// 'transform' : 'rotate('+ data +'deg)'});
+    		$(tmp_canvas).css({'top': '0px'});
+    		console.log(data);
+        });
     });
 
     var convertSetFromLetterToIP = {
@@ -458,6 +470,7 @@
 		if (isConnected) {
 			socket.emit("onTouchEnd", "touchend");
 		}
+		ctx.save();
 	}, false);
 	
 	$('#new-canvas').click(function(){

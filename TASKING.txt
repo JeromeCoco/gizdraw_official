@@ -1,4 +1,12 @@
 Mobile App
+	Paint Bucket - krisha
+	Blender - krisha
+	Grid (Straight line [vertical,horizontal]) - krisha
+	Brush Preset (Add) - isog
+	Zoom in / Zoom out - coco
+	Shapes - krisha
+	Move Tool - krisha
+
 	Settings
 		Open File - coco
 		Share
@@ -31,37 +39,10 @@ Tasking
 
 	coco - open file(anytime), save options on desktop[gdw], zoom, save as jpg on mobile, menu bar
 
-(december 16)
-	isog - add new preset(anytime), improve UI, research detect first open of app
-
-	krisha - blender(anytime), paint bucket(anytime), grid auto straight(anytime), bugs(anytime)
-
-	coco - open file(anytime), work on filename extension, listing of recently opened files
-
 TARGET FOR DEFENSE
 	- UI / UX
 		* rotate options
 		* splashscreen image
-		* menu bar
-			File Name
-			File
-				- Create new...
-				- Open
-				- Save as...
-					> png
-					> jpg
-				- Save as gdw
-			Canvas
-				- Clear Canvas
-				- Set background
-				- Rotate
-					> opt 1
-					> opt 2
-					> opt 3
-				- Resize
-			Settings
-				- Disconnect
-				- Exit Canvas
 	- Functions
 		* fix bugs
 		* esc button to CANCEL resize
