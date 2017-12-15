@@ -2,7 +2,7 @@
 
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
-	var markerWidth = 5;	
+	var markerWidth;	
 	var markerColor = $('#pen-color').val();
 	var sketch = document.querySelector('#sketch');
 	var sketch_style = getComputedStyle(sketch);
@@ -124,7 +124,7 @@
         
         socket.on("onClearCanvasToMobile", function(data){
         	resetCanvas();
-			var cPushArray = new Array();
+			cPushArray = new Array();
         });
 
         socket.on("onDisconnectToMobile", function(data){
@@ -152,8 +152,14 @@
 			// console.log(newCanvasWidth + "" + newCanvasHeight);
 
 			var canvasPic = new Image();
-	        canvasPic.src = cPushArray[cStep];
-	        canvasPicSrc = cPushArray[cStep];
+	        if (cStep < 0){
+	        	canvasPic.src = canvas.toDataURL();
+	        	canvasPicSrc = canvas.toDataURL();
+	        }
+	        else {
+	        	canvasPic.src = cPushArray[cStep];
+	        	canvasPicSrc = cPushArray[cStep];
+	        }
 	        canvasPic.onload = function () { 
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0); 
@@ -258,6 +264,8 @@
 		}
 
         socket.on("createCanvasToMobile", function(data){
+			cPushArray = new Array();
+			cStep = -1;
 			$("#connect-modal").css("display", "none");
 			// Set Canvas Property
 			canvas.width = parseInt(data.canvasWidth);
@@ -287,6 +295,19 @@
 			$("#share").css("display", "block");
 			$("#new-canvas").css("display", "block");
 			$(".secondary").css("display", "block");
+        
+			if (isConnected) {
+				socket.emit("sendActiveTool", toolID);
+			}
+			if (isConnected) {
+				socket.emit("sendPenColor", markerColor);
+			}
+			if (isConnected) {
+				socket.emit("sendActivePreset", currpreset);
+			}
+			if (isConnected) {
+				socket.emit("sendPenWidth", markerWidth);
+			}	
         });
 	}
 
@@ -475,7 +496,7 @@
 	
 	$('#new-canvas').click(function(){
 		resetCanvas();
-		var cPushArray = new Array();
+		cPushArray = new Array();
 
 		if (isConnected) {
 			socket.emit("onClearCanvasFromMobile", 'clear');
@@ -649,7 +670,6 @@
 
 	// Preset 2 TouchStart Function
 	var brushpreset2 = function () {
-		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
 	
 		points = [ ];
 		tmp_canvas.addEventListener('touchstart', function(e) {
@@ -667,6 +687,7 @@
 			points.push({ x: mouse.x, y: mouse.y });
 			
 			if (toolID == "brush" && currpreset == "preset-second") {
+				tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
 				tmp_ctx.strokeStyle = markerColor;
 				ctx.globalCompositeOperation = 'source-over';
 				OnDrawSec();
@@ -870,7 +891,7 @@
 	// Canvas Reset
 	function resetCanvas(){
 		cStep = -1;
-		var cPushArray = new Array();
+		cPushArray = new Array();
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
