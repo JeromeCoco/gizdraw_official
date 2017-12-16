@@ -39,6 +39,9 @@
 	// canvas-resize
 	var newCanvasWidth, newCanvasHeight; 
 
+	//event log
+	var eventLogLabel;
+
 	$('#pencil').addClass('active');
 	$('#custom-bg-color').css("display", "none");
 	$('#connect-modal').css("display", "none");
@@ -54,7 +57,9 @@
 
 	var switchTool = function () {
 		//switch tool
-		$('.presets').css("display", "none");
+		$('#active-tool').fadeIn("fast");
+		$('#tools-modal').fadeOut("fast");
+		
 		var activeTool = $(this).attr('id');
 		if (isConnected) {
 			socket.emit("changeToolFromMobile", activeTool);
@@ -76,7 +81,7 @@
 	$('#move-tool').click(switchTool);
 
 	$('#brush').click(function(){
-		$('.presets').css("display", "inline-block");
+		$("#brush-preset-container").fadeIn('slow');
 		$("#active-tool").html(" ");
 		$("#active-tool").html("<img src='img/brush-stroke.svg'>");
 		
@@ -139,6 +144,10 @@
         	} else {
         		$("#paint").css("background-color", "#FFFFFF");
         	}
+        	if (isConnected) {
+				eventLogLabel = "Background color change to "+bgColor;	
+				socket.emit("onSendEventLog", eventLogLabel);
+			}
         });
 
         socket.on("onCanvasResizeToMobile", function(data){
@@ -276,6 +285,7 @@
 			$("#paint").css("background-color", data.canvasBackgroundColor);
 			$("#paint").css("box-shadow", "0px 4px 14px grey");
 			$("#sketch").css("background-color", "#d8d8d8");
+			$("#sketch").css("height", "98%");
 			$("#settings").toggleClass('active-menu');
 			$('.drop-menu').toggleClass('show-menu');
 			$(".top-menu").css("height", "40px");
@@ -294,6 +304,7 @@
 			$("#open-file").css("display", "block");
 			$("#share").css("display", "block");
 			$("#new-canvas").css("display", "block");
+			$("#save-image").css("display", "block");
 			$(".secondary").css("display", "block");
         
 			if (isConnected) {
@@ -354,6 +365,11 @@
 		} else {
 			return;
 		}
+
+		if (isConnected) {
+			eventLogLabel = "Change preset to "+currpreset;	
+			socket.emit("onSendEventLog", eventLogLabel);
+		}
 	});
 
 	// Pencil Points
@@ -376,7 +392,9 @@
 		$('#pen-width-label').val(markerWidth);
 		if (isConnected) {
 			socket.emit("sendPenWidth", markerWidth);
-		}	
+			eventLogLabel = "Resize tool width to "+markerWidth;	
+			socket.emit("onSendEventLog", eventLogLabel);
+		}
 	});
 
 	$('#pen-color').change(function () {
@@ -385,6 +403,8 @@
 		tmp_ctx.fillStyle = markerColor;
 		if (isConnected) {
 			socket.emit("sendPenColor", markerColor);
+			eventLogLabel = "Change Tool Color: "+markerColor;	
+			socket.emit("onSendEventLog", eventLogLabel);
 		}
 	});
 
@@ -435,6 +455,10 @@
 				tmp_ctx.lineCap = 'round';
 				tmp_ctx.lineWidth = markerWidth;
 				onPaint();
+				if (isConnected) {
+					eventLogLabel = "Draw";	
+					socket.emit("onSendEventLog", eventLogLabel);
+				}
 			break;
 			case 'color-picker': 
 				ctx.globalCompositeOperation = 'source-over';
@@ -524,6 +548,8 @@
 
    		if (isConnected) {
 			socket.emit("cStep", cStep);
+			eventLogLabel = "Redo";	
+			socket.emit("onSendEventLog", eventLogLabel);
 		}
 	});
 
@@ -549,6 +575,8 @@
 
 	    if (isConnected) {
 			socket.emit("cStep", cStep);
+			eventLogLabel = "Undo";	
+			socket.emit("onSendEventLog", eventLogLabel);
 		}
 
 		console.log(cStep);
@@ -589,6 +617,10 @@
 
 	// Eraser Function
 	var onErase = function() {
+		if (isConnected) {
+			eventLogLabel = "Erase";	
+			socket.emit("onSendEventLog", eventLogLabel);
+		}
 		if (bgIsColored) {
 			eraserColor = bgColor;
 		} else {
@@ -655,6 +687,8 @@
 
 			if (isConnected) {
 				socket.emit("onTouchBrushStart", "brushtouchstart");
+				eventLogLabel = "Draw";	
+				socket.emit("onSendEventLog", eventLogLabel);
 			}
 		});
 
@@ -697,6 +731,8 @@
 
 			if (isConnected) {
 				socket.emit("onTouchBrushStart", "brushtouchstart");
+				eventLogLabel = "Draw";	
+				socket.emit("onSendEventLog", eventLogLabel);
 			}
 		});
 
@@ -763,6 +799,12 @@
 				ctx.globalCompositeOperation = 'source-over';
 				ctx.strokeStyle = markerColor;
 				OnDrawFourth();
+			}
+
+			if (isConnected) {
+				socket.emit("onTouchBrushStart", "brushtouchstart");
+				eventLogLabel = "Draw";	
+				socket.emit("onSendEventLog", eventLogLabel);
 			}
 		});
 
@@ -987,72 +1029,62 @@
 			$('.drop-menu').toggleClass('show-menu');
 		}
 	});
-	
-	/*var timeoutId = 0;
-	var onlonghold = function () {
-	   	if (toolID == 'pencil'){
-	   		cPush();
-	   		//undo();
-	   	}
-		$('#tools-modal').fadeIn("slow");
-		$('#tools-modal').css("top", mouse.y-100);
-	    $('#tools-modal').css("left", mouse.x-100);
-	};
-	
-	$('#sketch').bind('touchstart', function(e) {
-	    var parentOffset = $(this).parent().offset();
-		var targetYval = e.targetTouches[0].pageY;
-		var targetXval = e.targetTouches[0].pageX;
-	    mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
-		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
-		var coor = mouse.x+ ","+ mouse.y;
-	    timeoutId = setTimeout(onlonghold, 500);
-	}).on('touchend touchmove', function() {
-	    clearTimeout(timeoutId);
-	});*/
 
 	function exitTools(){
 		$('#active-tool').fadeIn("fast");
 		$('#tools-modal').fadeOut("fast");
+		$('#brush-preset-container').fadeOut("fast");
 	}
 
 	$('#exit-tool').click(exitTools);
 
 	$('#tools-modal img').click(function () {
-		$('#active-tool').fadeIn("fast");
-		$('#tools-modal').fadeOut("fast");
-
 		var id = $(this).attr('id');
 		switch (id) {
 			case "pencil":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/pencil.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "blender":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/chalk.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "eraser":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/rubber.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "color-picker":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/color-picker.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "move-tool":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/move.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "shapes":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/polygon.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "paint-bucket":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/paint-can.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
+				break;
+			case "brush":
+				$('#tools-modal').fadeIn("fast");
 				break;
 		}
+	});
+
+	$("#brush-preset-container img").click(function() {
+		$("#brush-preset-container, #tools-modal").fadeOut("fast");
+		$("#active-tool").fadeIn("fast");
 	});
 	
 }());
