@@ -7,7 +7,7 @@
 	var sketch = document.querySelector('#sketch');
 	var sketch_style = getComputedStyle(sketch);
 	var toolID = "pencil";
-	var currpreset = "preset-first";
+	var currpreset = "first-preset";
 	var cPushArray = new Array();
 	var cStep = -1;
 	var isDrawing, lastPoint; // Brush preset 3
@@ -145,7 +145,7 @@
         		$("#paint").css("background-color", "#FFFFFF");
         	}
         	if (isConnected) {
-				eventLogLabel = "Background color change to "+bgColor;	
+				eventLogLabel = "Background Color: "+bgColor;	
 				socket.emit("onSendEventLog", eventLogLabel);
 			}
         });
@@ -349,17 +349,14 @@
 
 		if (toolID == "brush"){
 			switch (currpreset) {
-				case 'preset-first':
+				case 'first-preset':
 					brushpreset1();
 				break;
-				case 'preset-second':
+				case 'second-preset':
 					brushpreset2();
 				break;
-				case 'preset-third':
+				case 'third-preset':
 					brushpreset3();
-				break;
-				case 'preset-fourth':
-					brushpreset4();
 				break;
 			}
 		} else {
@@ -367,7 +364,7 @@
 		}
 
 		if (isConnected) {
-			eventLogLabel = "Change preset to "+currpreset;	
+			eventLogLabel = "Change Preset: "+currpreset;	
 			socket.emit("onSendEventLog", eventLogLabel);
 		}
 	});
@@ -392,7 +389,7 @@
 		$('#pen-width-label').val(markerWidth);
 		if (isConnected) {
 			socket.emit("sendPenWidth", markerWidth);
-			eventLogLabel = "Resize tool width to "+markerWidth;	
+			eventLogLabel = "Resize Tool Width: "+markerWidth;	
 			socket.emit("onSendEventLog", eventLogLabel);
 		}
 	});
@@ -677,7 +674,7 @@
 
 			points.push({ x: mouse.x, y: mouse.y });
 
-			if (toolID == "brush" && currpreset == "preset-first") {
+			if (toolID == "brush" && currpreset == "first-preset") {
 				var rgbaval = hexToRgbA(markerColor);
 				tmp_ctx.strokeStyle = rgbaval+',0.3)';
 				tmp_ctx.fillStyle = rgbaval+',0.3)';
@@ -720,7 +717,7 @@
 
 			points.push({ x: mouse.x, y: mouse.y });
 			
-			if (toolID == "brush" && currpreset == "preset-second") {
+			if (toolID == "brush" && currpreset == "second-preset") {
 				tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
 				tmp_ctx.strokeStyle = markerColor;
 				ctx.globalCompositeOperation = 'source-over';
@@ -748,41 +745,11 @@
 
 	// Preset 3 TouchStart Function
 	var brushpreset3 = function() {
-		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
-
-		tmp_canvas.addEventListener('touchstart', function(e) {
-			tmp_canvas.addEventListener('touchmove', OnDrawThird, false);
-			
-			var parentOffset = $(this).parent().offset();
-			var xval = e.pageX - parentOffset.left;
-			var yval = e.pageY - parentOffset.top;
-
-			mouse.x = typeof xval !== 'undefined' ? xval : e.layerX;
-			mouse.y = typeof yval  !== 'undefined' ? yval  : e.layerY;
-
-			isDrawing = true;
-			lastPoint = { x: mouse.x, y: mouse.y };
-
-			if (toolID == "brush" && currpreset == "preset-third") {
-				ctx.globalCompositeOperation = 'source-over';
-				ctx.strokeStyle = markerColor;
-				OnDrawThird();
-			}
-		});
-
-		tmp_canvas.addEventListener("touchend", function() {
-			tmp_canvas.removeEventListener('touchmove', OnDrawThird, false);
-			isDrawing = false;
-		});
-	};
-
-	// Preset 4 TouchStart Function
-	var brushpreset4 = function() {
 		ctx.lineWidth = 1;
 	 	ctx.lineJoin = tmp_ctx.lineCap = 'round';
 		  
 		tmp_canvas.addEventListener('touchstart', function(e) {
-			tmp_canvas.addEventListener('touchmove', OnDrawFourth, false);
+			tmp_canvas.addEventListener('touchmove', OnDrawThird, false);
 			
 			var parentOffset = $(this).parent().offset();
 			var xval = e.pageX - parentOffset.left;
@@ -795,10 +762,10 @@
 	  		isDrawing = true;
 	  		points.push({ x: mouse.x, y: mouse.y });
 			
-			if (toolID == "brush" && currpreset == "preset-fourth") {
+			if (toolID == "brush" && currpreset == "fourth-preset") {
 				ctx.globalCompositeOperation = 'source-over';
 				ctx.strokeStyle = markerColor;
-				OnDrawFourth();
+				OnDrawThird();
 			}
 
 			if (isConnected) {
@@ -809,7 +776,7 @@
 		});
 
 		tmp_canvas.addEventListener("touchend", function() {
-			tmp_canvas.removeEventListener('touchmove', OnDrawFourth, false);
+			tmp_canvas.removeEventListener('touchmove', OnDrawThird, false);
 			isDrawing = false;
 		});
 	};
@@ -828,7 +795,7 @@
 		    var dx = points[i].x - lastPoint.x;
 		    var dy = points[i].y - lastPoint.y;
 		    var d = dx * dx + dy * dy;
-		    if (toolID == "brush" && currpreset == "preset-first") {
+		    if (toolID == "brush" && currpreset == "first-preset") {
 			    if (d < 1000) {
 			      ctx.beginPath();
 			      $('#pen-color').val(markerColor);
@@ -849,7 +816,7 @@
 
 	var OnDrawSec = function (){
 		if (!isDrawing) return;
-		if (toolID == "brush" && currpreset == "preset-second") {
+		if (toolID == "brush" && currpreset == "second-preset") {
 			ctx.beginPath();
 	      	$('#pen-color').val(markerColor);
 		  	ctx.strokeStyle = markerColor;
@@ -864,37 +831,9 @@
 
 	var OnDrawThird = function(){
 		if (!isDrawing) return;
-		if (toolID == "brush" && currpreset == "preset-third") { 
-			var currentPoint = { x: mouse.x, y: mouse.y };
-		  	var dist = distanceBetween(lastPoint, currentPoint);
-		  	var angle = angleBetween(lastPoint, currentPoint);
-		  
-		  	for (var i = 0; i < dist; i+=5) {
-		    	x = lastPoint.x + (Math.sin(angle) * i);
-		    	y = lastPoint.y + (Math.cos(angle) * i);
-		    
-		    	var radgrad = ctx.createRadialGradient(x,y,5,x,y,10);
-
-		    	$('#pen-color').val(markerColor);
-				var rgbaval = hexToRgbA(markerColor);
-		    	radgrad.addColorStop(0, markerColor);
-		    	radgrad.addColorStop(0.5, rgbaval+',0.5)');
-		    	radgrad.addColorStop(1, rgbaval+',0)');
-		    
-		    	tmp_ctx.shadowBlur = 0;
-		    	ctx.fillStyle = radgrad;
-		    	ctx.fillRect(x-15, y-15, 30, 30);
-		  	}
-
-			lastPoint = currentPoint;
-		}
-	};
-
-	var OnDrawFourth = function(){
-		if (!isDrawing) return;
 		  //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 		points.push({ x: mouse.x, y: mouse.y });
-		if (toolID == "brush" && currpreset == "preset-fourth") {
+		if (toolID == "brush" && currpreset == "third-preset") {
 			ctx.beginPath();
 			ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
 			ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
