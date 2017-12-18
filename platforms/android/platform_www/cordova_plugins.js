@@ -1,25 +1,11 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "pluginId": "cordova-plugin-splashscreen",
+        "id": "com.dbaq.cordova.filepickerio.filepickerio",
+        "file": "plugins/com.dbaq.cordova.filepickerio/www/filepickerio.js",
+        "pluginId": "com.dbaq.cordova.filepickerio",
         "clobbers": [
-            "navigator.splashscreen"
-        ]
-    },
-    {
-        "id": "es6-promise-plugin.Promise",
-        "file": "plugins/es6-promise-plugin/www/promise.js",
-        "pluginId": "es6-promise-plugin",
-        "runs": true
-    },
-    {
-        "id": "cordova-plugin-screen-orientation.screenorientation",
-        "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
-        "pluginId": "cordova-plugin-screen-orientation",
-        "clobbers": [
-            "cordova.plugins.screenorientation"
+            "window.filepicker"
         ]
     },
     {
@@ -196,19 +182,33 @@ module.exports = [
         "runs": true
     },
     {
-        "id": "com.dbaq.cordova.filepickerio.filepickerio",
-        "file": "plugins/com.dbaq.cordova.filepickerio/www/filepickerio.js",
-        "pluginId": "com.dbaq.cordova.filepickerio",
+        "id": "es6-promise-plugin.Promise",
+        "file": "plugins/es6-promise-plugin/www/promise.js",
+        "pluginId": "es6-promise-plugin",
+        "runs": true
+    },
+    {
+        "id": "cordova-plugin-screen-orientation.screenorientation",
+        "file": "plugins/cordova-plugin-screen-orientation/www/screenorientation.js",
+        "pluginId": "cordova-plugin-screen-orientation",
         "clobbers": [
-            "window.filepicker"
+            "cordova.plugins.screenorientation"
         ]
     },
     {
-        "id": "org.solderzzc.base64imagesaverplugin.Base64ImageSaverPlugin",
-        "file": "plugins/org.solderzzc.base64imagesaverplugin/www/Base64ImageSaverPlugin.js",
-        "pluginId": "org.solderzzc.base64imagesaverplugin",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "pluginId": "cordova-plugin-splashscreen",
         "clobbers": [
-            "window.Base64ImageSaverPlugin"
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "id": "cordova-plugin-x-socialsharing.SocialSharing",
+        "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
+        "pluginId": "cordova-plugin-x-socialsharing",
+        "clobbers": [
+            "window.plugins.socialsharing"
         ]
     },
     {
@@ -223,21 +223,30 @@ module.exports = [
         "id": "cordova-plugin-x-toast.tests",
         "file": "plugins/cordova-plugin-x-toast/test/tests.js",
         "pluginId": "cordova-plugin-x-toast"
+    },
+    {
+        "id": "org.solderzzc.base64imagesaverplugin.Base64ImageSaverPlugin",
+        "file": "plugins/org.solderzzc.base64imagesaverplugin/www/Base64ImageSaverPlugin.js",
+        "pluginId": "org.solderzzc.base64imagesaverplugin",
+        "clobbers": [
+            "window.Base64ImageSaverPlugin"
+        ]
     }
 ];
 module.exports.metadata = 
 // TOP OF METADATA
 {
-    "cordova-plugin-whitelist": "1.3.2",
-    "cordova-plugin-splashscreen": "4.0.3",
-    "cordova-plugin-screenorientation-landscape": "1.0.22",
-    "es6-promise-plugin": "4.1.0",
-    "cordova-plugin-screen-orientation": "2.0.1",
+    "com.dbaq.cordova.filepickerio": "0.0.6",
     "cordova-plugin-compat": "1.0.0",
     "cordova-plugin-file": "4.3.3",
-    "com.dbaq.cordova.filepickerio": "0.0.6",
-    "org.solderzzc.base64imagesaverplugin": "0.6.0",
-    "cordova-plugin-x-toast": "2.6.0"
+    "es6-promise-plugin": "4.1.0",
+    "cordova-plugin-screen-orientation": "2.0.1",
+    "cordova-plugin-screenorientation-landscape": "1.0.22",
+    "cordova-plugin-splashscreen": "4.0.3",
+    "cordova-plugin-whitelist": "1.3.2",
+    "cordova-plugin-x-socialsharing": "5.2.1",
+    "cordova-plugin-x-toast": "2.6.0",
+    "org.solderzzc.base64imagesaverplugin": "0.6.0"
 };
 // BOTTOM OF METADATA
 });

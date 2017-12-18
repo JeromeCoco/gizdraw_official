@@ -2,12 +2,12 @@
 
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
-	var markerWidth = 5;	
+	var markerWidth;	
 	var markerColor = $('#pen-color').val();
 	var sketch = document.querySelector('#sketch');
 	var sketch_style = getComputedStyle(sketch);
 	var toolID = "pencil";
-	var currpreset = "preset-first";
+	var currpreset = "first-preset";
 	var cPushArray = new Array();
 	var cStep = -1;
 	var isDrawing, lastPoint; // Brush preset 3
@@ -39,6 +39,9 @@
 	// canvas-resize
 	var newCanvasWidth, newCanvasHeight; 
 
+	//event log
+	var eventLogLabel;
+
 	$('#pencil').addClass('active');
 	$('#custom-bg-color').css("display", "none");
 	$('#connect-modal').css("display", "none");
@@ -54,7 +57,9 @@
 
 	var switchTool = function () {
 		//switch tool
-		$('.presets').css("display", "none");
+		$('#active-tool').fadeIn("fast");
+		$('#tools-modal').fadeOut("fast");
+		
 		var activeTool = $(this).attr('id');
 		if (isConnected) {
 			socket.emit("changeToolFromMobile", activeTool);
@@ -76,7 +81,7 @@
 	$('#move-tool').click(switchTool);
 
 	$('#brush').click(function(){
-		$('.presets').css("display", "inline-block");
+		$("#brush-preset-container").fadeIn('slow');
 		$("#active-tool").html(" ");
 		$("#active-tool").html("<img src='img/brush-stroke.svg'>");
 		
@@ -124,7 +129,7 @@
         
         socket.on("onClearCanvasToMobile", function(data){
         	resetCanvas();
-			var cPushArray = new Array();
+			cPushArray = new Array();
         });
 
         socket.on("onDisconnectToMobile", function(data){
@@ -139,6 +144,10 @@
         	} else {
         		$("#paint").css("background-color", "#FFFFFF");
         	}
+        	if (isConnected) {
+				eventLogLabel = "Background Color: "+bgColor;	
+				socket.emit("onSendEventLog", eventLogLabel);
+			}
         });
 
         socket.on("onCanvasResizeToMobile", function(data){
@@ -152,13 +161,31 @@
 			// console.log(newCanvasWidth + "" + newCanvasHeight);
 
 			var canvasPic = new Image();
-	        canvasPic.src = cPushArray[cStep];
-	        canvasPicSrc = cPushArray[cStep];
+	        if (cStep < 0){
+	        	canvasPic.src = canvas.toDataURL();
+	        	canvasPicSrc = canvas.toDataURL();
+	        }
+	        else {
+	        	canvasPic.src = cPushArray[cStep];
+	        	canvasPicSrc = cPushArray[cStep];
+	        }
 	        canvasPic.onload = function () { 
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0); 
 	        }
 	        socket.emit("onSendcStep", {canvasPiccStep:canvasPicSrc});
+        });
+        socket.on("onReceiveRotationDegrees", function(data){
+        	$("#paint").css({'-webkit-transform' : 'rotate('+ data +'deg)',
+    		'-moz-transform' : 'rotate('+ data +'deg)',
+    		'-ms-transform' : 'rotate('+ data +'deg)',
+    		'transform' : 'rotate('+ data +'deg)'});
+    		// $(tmp_canvas).css({'-webkit-transform' : 'rotate('+ data +'deg)',
+    		// '-moz-transform' : 'rotate('+ data +'deg)',
+    		// '-ms-transform' : 'rotate('+ data +'deg)',
+    		// 'transform' : 'rotate('+ data +'deg)'});
+    		$(tmp_canvas).css({'top': '0px'});
+    		console.log(data);
         });
     });
 
@@ -246,6 +273,8 @@
 		}
 
         socket.on("createCanvasToMobile", function(data){
+			cPushArray = new Array();
+			cStep = -1;
 			$("#connect-modal").css("display", "none");
 			// Set Canvas Property
 			canvas.width = parseInt(data.canvasWidth);
@@ -256,6 +285,7 @@
 			$("#paint").css("background-color", data.canvasBackgroundColor);
 			$("#paint").css("box-shadow", "0px 4px 14px grey");
 			$("#sketch").css("background-color", "#d8d8d8");
+			$("#sketch").css("height", "98%");
 			$("#settings").toggleClass('active-menu');
 			$('.drop-menu').toggleClass('show-menu');
 			$(".top-menu").css("height", "40px");
@@ -274,7 +304,21 @@
 			$("#open-file").css("display", "block");
 			$("#share").css("display", "block");
 			$("#new-canvas").css("display", "block");
+			$("#save-image").css("display", "block");
 			$(".secondary").css("display", "block");
+        
+			if (isConnected) {
+				socket.emit("sendActiveTool", toolID);
+			}
+			if (isConnected) {
+				socket.emit("sendPenColor", markerColor);
+			}
+			if (isConnected) {
+				socket.emit("sendActivePreset", currpreset);
+			}
+			if (isConnected) {
+				socket.emit("sendPenWidth", markerWidth);
+			}	
         });
 	}
 
@@ -305,21 +349,23 @@
 
 		if (toolID == "brush"){
 			switch (currpreset) {
-				case 'preset-first':
+				case 'first-preset':
 					brushpreset1();
 				break;
-				case 'preset-second':
+				case 'second-preset':
 					brushpreset2();
 				break;
-				case 'preset-third':
+				case 'third-preset':
 					brushpreset3();
-				break;
-				case 'preset-fourth':
-					brushpreset4();
 				break;
 			}
 		} else {
 			return;
+		}
+
+		if (isConnected) {
+			eventLogLabel = "Change Preset: "+currpreset;	
+			socket.emit("onSendEventLog", eventLogLabel);
 		}
 	});
 
@@ -343,7 +389,9 @@
 		$('#pen-width-label').val(markerWidth);
 		if (isConnected) {
 			socket.emit("sendPenWidth", markerWidth);
-		}	
+			eventLogLabel = "Resize Tool Width: "+markerWidth;	
+			socket.emit("onSendEventLog", eventLogLabel);
+		}
 	});
 
 	$('#pen-color').change(function () {
@@ -352,6 +400,8 @@
 		tmp_ctx.fillStyle = markerColor;
 		if (isConnected) {
 			socket.emit("sendPenColor", markerColor);
+			eventLogLabel = "Change Tool Color: "+markerColor;	
+			socket.emit("onSendEventLog", eventLogLabel);
 		}
 	});
 
@@ -402,6 +452,10 @@
 				tmp_ctx.lineCap = 'round';
 				tmp_ctx.lineWidth = markerWidth;
 				onPaint();
+				if (isConnected) {
+					eventLogLabel = "Draw";	
+					socket.emit("onSendEventLog", eventLogLabel);
+				}
 			break;
 			case 'color-picker': 
 				ctx.globalCompositeOperation = 'source-over';
@@ -458,11 +512,12 @@
 		if (isConnected) {
 			socket.emit("onTouchEnd", "touchend");
 		}
+		ctx.save();
 	}, false);
 	
 	$('#new-canvas').click(function(){
 		resetCanvas();
-		var cPushArray = new Array();
+		cPushArray = new Array();
 
 		if (isConnected) {
 			socket.emit("onClearCanvasFromMobile", 'clear');
@@ -490,6 +545,8 @@
 
    		if (isConnected) {
 			socket.emit("cStep", cStep);
+			eventLogLabel = "Redo";	
+			socket.emit("onSendEventLog", eventLogLabel);
 		}
 	});
 
@@ -515,6 +572,8 @@
 
 	    if (isConnected) {
 			socket.emit("cStep", cStep);
+			eventLogLabel = "Undo";	
+			socket.emit("onSendEventLog", eventLogLabel);
 		}
 
 		console.log(cStep);
@@ -555,6 +614,10 @@
 
 	// Eraser Function
 	var onErase = function() {
+		if (isConnected) {
+			eventLogLabel = "Erase";	
+			socket.emit("onSendEventLog", eventLogLabel);
+		}
 		if (bgIsColored) {
 			eraserColor = bgColor;
 		} else {
@@ -611,7 +674,7 @@
 
 			points.push({ x: mouse.x, y: mouse.y });
 
-			if (toolID == "brush" && currpreset == "preset-first") {
+			if (toolID == "brush" && currpreset == "first-preset") {
 				var rgbaval = hexToRgbA(markerColor);
 				tmp_ctx.strokeStyle = rgbaval+',0.3)';
 				tmp_ctx.fillStyle = rgbaval+',0.3)';
@@ -621,6 +684,8 @@
 
 			if (isConnected) {
 				socket.emit("onTouchBrushStart", "brushtouchstart");
+				eventLogLabel = "Draw";	
+				socket.emit("onSendEventLog", eventLogLabel);
 			}
 		});
 
@@ -636,7 +701,6 @@
 
 	// Preset 2 TouchStart Function
 	var brushpreset2 = function () {
-		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
 	
 		points = [ ];
 		tmp_canvas.addEventListener('touchstart', function(e) {
@@ -653,7 +717,8 @@
 
 			points.push({ x: mouse.x, y: mouse.y });
 			
-			if (toolID == "brush" && currpreset == "preset-second") {
+			if (toolID == "brush" && currpreset == "second-preset") {
+				tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
 				tmp_ctx.strokeStyle = markerColor;
 				ctx.globalCompositeOperation = 'source-over';
 				OnDrawSec();
@@ -663,6 +728,8 @@
 
 			if (isConnected) {
 				socket.emit("onTouchBrushStart", "brushtouchstart");
+				eventLogLabel = "Draw";	
+				socket.emit("onSendEventLog", eventLogLabel);
 			}
 		});
 
@@ -678,41 +745,11 @@
 
 	// Preset 3 TouchStart Function
 	var brushpreset3 = function() {
-		tmp_ctx.lineJoin = tmp_ctx.lineCap = 'round';
-
-		tmp_canvas.addEventListener('touchstart', function(e) {
-			tmp_canvas.addEventListener('touchmove', OnDrawThird, false);
-			
-			var parentOffset = $(this).parent().offset();
-			var xval = e.pageX - parentOffset.left;
-			var yval = e.pageY - parentOffset.top;
-
-			mouse.x = typeof xval !== 'undefined' ? xval : e.layerX;
-			mouse.y = typeof yval  !== 'undefined' ? yval  : e.layerY;
-
-			isDrawing = true;
-			lastPoint = { x: mouse.x, y: mouse.y };
-
-			if (toolID == "brush" && currpreset == "preset-third") {
-				ctx.globalCompositeOperation = 'source-over';
-				ctx.strokeStyle = markerColor;
-				OnDrawThird();
-			}
-		});
-
-		tmp_canvas.addEventListener("touchend", function() {
-			tmp_canvas.removeEventListener('touchmove', OnDrawThird, false);
-			isDrawing = false;
-		});
-	};
-
-	// Preset 4 TouchStart Function
-	var brushpreset4 = function() {
 		ctx.lineWidth = 1;
 	 	ctx.lineJoin = tmp_ctx.lineCap = 'round';
 		  
 		tmp_canvas.addEventListener('touchstart', function(e) {
-			tmp_canvas.addEventListener('touchmove', OnDrawFourth, false);
+			tmp_canvas.addEventListener('touchmove', OnDrawThird, false);
 			
 			var parentOffset = $(this).parent().offset();
 			var xval = e.pageX - parentOffset.left;
@@ -725,15 +762,21 @@
 	  		isDrawing = true;
 	  		points.push({ x: mouse.x, y: mouse.y });
 			
-			if (toolID == "brush" && currpreset == "preset-fourth") {
+			if (toolID == "brush" && currpreset == "fourth-preset") {
 				ctx.globalCompositeOperation = 'source-over';
 				ctx.strokeStyle = markerColor;
-				OnDrawFourth();
+				OnDrawThird();
+			}
+
+			if (isConnected) {
+				socket.emit("onTouchBrushStart", "brushtouchstart");
+				eventLogLabel = "Draw";	
+				socket.emit("onSendEventLog", eventLogLabel);
 			}
 		});
 
 		tmp_canvas.addEventListener("touchend", function() {
-			tmp_canvas.removeEventListener('touchmove', OnDrawFourth, false);
+			tmp_canvas.removeEventListener('touchmove', OnDrawThird, false);
 			isDrawing = false;
 		});
 	};
@@ -752,7 +795,7 @@
 		    var dx = points[i].x - lastPoint.x;
 		    var dy = points[i].y - lastPoint.y;
 		    var d = dx * dx + dy * dy;
-		    if (toolID == "brush" && currpreset == "preset-first") {
+		    if (toolID == "brush" && currpreset == "first-preset") {
 			    if (d < 1000) {
 			      ctx.beginPath();
 			      $('#pen-color').val(markerColor);
@@ -773,7 +816,7 @@
 
 	var OnDrawSec = function (){
 		if (!isDrawing) return;
-		if (toolID == "brush" && currpreset == "preset-second") {
+		if (toolID == "brush" && currpreset == "second-preset") {
 			ctx.beginPath();
 	      	$('#pen-color').val(markerColor);
 		  	ctx.strokeStyle = markerColor;
@@ -788,37 +831,9 @@
 
 	var OnDrawThird = function(){
 		if (!isDrawing) return;
-		if (toolID == "brush" && currpreset == "preset-third") { 
-			var currentPoint = { x: mouse.x, y: mouse.y };
-		  	var dist = distanceBetween(lastPoint, currentPoint);
-		  	var angle = angleBetween(lastPoint, currentPoint);
-		  
-		  	for (var i = 0; i < dist; i+=5) {
-		    	x = lastPoint.x + (Math.sin(angle) * i);
-		    	y = lastPoint.y + (Math.cos(angle) * i);
-		    
-		    	var radgrad = ctx.createRadialGradient(x,y,5,x,y,10);
-
-		    	$('#pen-color').val(markerColor);
-				var rgbaval = hexToRgbA(markerColor);
-		    	radgrad.addColorStop(0, markerColor);
-		    	radgrad.addColorStop(0.5, rgbaval+',0.5)');
-		    	radgrad.addColorStop(1, rgbaval+',0)');
-		    
-		    	tmp_ctx.shadowBlur = 0;
-		    	ctx.fillStyle = radgrad;
-		    	ctx.fillRect(x-15, y-15, 30, 30);
-		  	}
-
-			lastPoint = currentPoint;
-		}
-	};
-
-	var OnDrawFourth = function(){
-		if (!isDrawing) return;
 		  //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 		points.push({ x: mouse.x, y: mouse.y });
-		if (toolID == "brush" && currpreset == "preset-fourth") {
+		if (toolID == "brush" && currpreset == "third-preset") {
 			ctx.beginPath();
 			ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
 			ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
@@ -857,7 +872,7 @@
 	// Canvas Reset
 	function resetCanvas(){
 		cStep = -1;
-		var cPushArray = new Array();
+		cPushArray = new Array();
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
@@ -953,72 +968,62 @@
 			$('.drop-menu').toggleClass('show-menu');
 		}
 	});
-	
-	/*var timeoutId = 0;
-	var onlonghold = function () {
-	   	if (toolID == 'pencil'){
-	   		cPush();
-	   		//undo();
-	   	}
-		$('#tools-modal').fadeIn("slow");
-		$('#tools-modal').css("top", mouse.y-100);
-	    $('#tools-modal').css("left", mouse.x-100);
-	};
-	
-	$('#sketch').bind('touchstart', function(e) {
-	    var parentOffset = $(this).parent().offset();
-		var targetYval = e.targetTouches[0].pageY;
-		var targetXval = e.targetTouches[0].pageX;
-	    mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
-		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
-		var coor = mouse.x+ ","+ mouse.y;
-	    timeoutId = setTimeout(onlonghold, 500);
-	}).on('touchend touchmove', function() {
-	    clearTimeout(timeoutId);
-	});*/
 
 	function exitTools(){
 		$('#active-tool').fadeIn("fast");
 		$('#tools-modal').fadeOut("fast");
+		$('#brush-preset-container').fadeOut("fast");
 	}
 
 	$('#exit-tool').click(exitTools);
 
 	$('#tools-modal img').click(function () {
-		$('#active-tool').fadeIn("fast");
-		$('#tools-modal').fadeOut("fast");
-
 		var id = $(this).attr('id');
 		switch (id) {
 			case "pencil":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/pencil.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "blender":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/chalk.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "eraser":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/rubber.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "color-picker":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/color-picker.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "move-tool":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/move.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "shapes":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/polygon.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "paint-bucket":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/paint-can.svg'>");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");
+				break;
+			case "brush":
+				$('#tools-modal').fadeIn("fast");
 				break;
 		}
+	});
+
+	$("#brush-preset-container img").click(function() {
+		$("#brush-preset-container, #tools-modal").fadeOut("fast");
+		$("#active-tool").fadeIn("fast");
 	});
 	
 }());

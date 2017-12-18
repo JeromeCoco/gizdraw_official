@@ -19,6 +19,7 @@
     "cordova-plugin-screenorientation-landscape": "^1.0.22",
     "cordova-plugin-splashscreen": "^4.0.3",
     "cordova-plugin-whitelist": "^1.3.2",
+    "cordova-plugin-x-socialsharing": "^5.2.1",
     "cordova-plugin-x-toast": "^2.6.0",
     "es6-promise-plugin": "git+https://github.com/vstirbu/PromisesPlugin.git",
     "material-components-web": "^0.18.0",
@@ -33,8 +34,8 @@
       "cordova-plugin-file": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }

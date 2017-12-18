@@ -1,43 +1,46 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "com.dbaq.cordova.filepickerio": {
+      "PACKAGE_NAME": "com.example.GizDraw"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.example.GizDraw"
     },
-    "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        },
-        "cordova-plugin-screenorientation-landscape": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        },
-        "cordova-plugin-screen-orientation": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        },
-        "com.dbaq.cordova.filepickerio": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        },
-        "org.solderzzc.base64imagesaverplugin": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        },
-        "cordova-plugin-x-toast": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        }
+    "cordova-plugin-screen-orientation": {
+      "PACKAGE_NAME": "com.example.GizDraw"
     },
-    "dependent_plugins": {
-        "es6-promise-plugin": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        },
-        "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.example.GizDraw"
-        }
+    "cordova-plugin-screenorientation-landscape": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "cordova-plugin-x-toast": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "org.solderzzc.base64imagesaverplugin": {
+      "PACKAGE_NAME": "com.example.GizDraw"
     }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-compat": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    }
+  }
 }

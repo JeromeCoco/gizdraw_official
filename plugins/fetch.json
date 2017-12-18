@@ -1,82 +1,98 @@
 {
-    "cordova-plugin-whitelist": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-whitelist@1"
-        },
-        "is_top_level": true,
-        "variables": {}
+  "cordova-plugin-whitelist": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-whitelist@1"
     },
-    "cordova-plugin-splashscreen": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-splashscreen@^4.0.3"
-        },
-        "is_top_level": true,
-        "variables": {}
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-splashscreen": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-splashscreen@^4.0.3"
     },
-    "cordova-plugin-screenorientation-landscape": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-screenorientation-landscape"
-        },
-        "is_top_level": true,
-        "variables": {}
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-screenorientation-landscape": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-screenorientation-landscape"
     },
-    "cordova-plugin-screen-orientation": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-screen-orientation"
-        },
-        "is_top_level": true,
-        "variables": {}
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-screen-orientation": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-screen-orientation"
     },
-    "es6-promise-plugin": {
-        "source": {
-            "type": "registry",
-            "id": "https://github.com/vstirbu/PromisesPlugin.git"
-        },
-        "is_top_level": false,
-        "variables": {}
+    "is_top_level": true,
+    "variables": {}
+  },
+  "es6-promise-plugin": {
+    "source": {
+      "type": "registry",
+      "id": "https://github.com/vstirbu/PromisesPlugin.git"
     },
-    "cordova-plugin-file": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-file"
-        },
-        "is_top_level": true,
-        "variables": {}
+    "is_top_level": false,
+    "variables": {}
+  },
+  "cordova-plugin-file": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-file"
     },
-    "cordova-plugin-compat": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-compat@^1.0.0"
-        },
-        "is_top_level": false,
-        "variables": {}
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-compat": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-compat@^1.0.0"
     },
-    "com.dbaq.cordova.filepickerio": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-filepickerio"
-        },
-        "is_top_level": true,
-        "variables": {}
+    "is_top_level": false,
+    "variables": {}
+  },
+  "com.dbaq.cordova.filepickerio": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-filepickerio"
     },
-    "org.solderzzc.base64imagesaverplugin": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-base64-image-saver"
-        },
-        "is_top_level": true,
-        "variables": {}
+    "is_top_level": true,
+    "variables": {}
+  },
+  "org.solderzzc.base64imagesaverplugin": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-base64-image-saver"
     },
-    "cordova-plugin-x-toast": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-x-toast"
-        },
-        "is_top_level": true,
-        "variables": {}
-    }
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-x-toast": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-x-toast"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-x-socialsharing": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-x-socialsharing"
+    },
+    "is_top_level": true,
+    "variables": {}
+  },
+  "cordova-plugin-save-image": {
+    "source": {
+      "type": "registry",
+      "id": "cordova-plugin-save-image@^0.3.0"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
 }
