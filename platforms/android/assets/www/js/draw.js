@@ -543,6 +543,7 @@
 			}
    		}
 
+   		console.log(cStep);
    		if (isConnected) {
 			socket.emit("cStep", cStep);
 			eventLogLabel = "Redo";	
@@ -575,8 +576,6 @@
 			eventLogLabel = "Undo";	
 			socket.emit("onSendEventLog", eventLogLabel);
 		}
-
-		console.log(cStep);
 	};
 
 	// UNDO event
@@ -872,7 +871,6 @@
 	// Canvas Reset
 	function resetCanvas(){
 		cStep = -1;
-		cPushArray = new Array();
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	}
 

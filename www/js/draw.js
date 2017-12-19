@@ -309,17 +309,16 @@
         
 			if (isConnected) {
 				socket.emit("sendActiveTool", toolID);
-			}
-			if (isConnected) {
 				socket.emit("sendPenColor", markerColor);
-			}
-			if (isConnected) {
 				socket.emit("sendActivePreset", currpreset);
-			}
-			if (isConnected) {
 				socket.emit("sendPenWidth", markerWidth);
-			}	
+			}
         });
+
+        socket.on("onResponseArray", function(){
+        	socket.emit("cPushArraySend", cPushArray);
+        });
+
 	}
 
 	// Get Current Tool ID
@@ -543,6 +542,7 @@
 			}
    		}
 
+   		console.log(cStep);
    		if (isConnected) {
 			socket.emit("cStep", cStep);
 			eventLogLabel = "Redo";	
@@ -575,8 +575,6 @@
 			eventLogLabel = "Undo";	
 			socket.emit("onSendEventLog", eventLogLabel);
 		}
-
-		console.log(cStep);
 	};
 
 	// UNDO event
@@ -872,7 +870,6 @@
 	// Canvas Reset
 	function resetCanvas(){
 		cStep = -1;
-		cPushArray = new Array();
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 	}
 
