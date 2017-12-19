@@ -311,17 +311,24 @@
 			$("#paint").css("box-shadow", "0px 4px 14px grey");
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#sketch").css("height", "98%");
-			$("#settings").toggleClass('active-menu');
-			$('.drop-menu').toggleClass('show-menu');
+			
+			if (data.createVersion == "first") {
+				$("#settings").toggleClass('active-menu');
+				$('.drop-menu').toggleClass('show-menu');
+			}
+
 			$(".top-menu").css("height", "40px");
+
 			if ($('#grid').hasClass('active-grid')) {
 				$('#grid').toggleClass('active-grid');
 				$('.grid-svg').toggleClass('show-grid');
 			}
+
 			//Display Connected State
 			$('#connectedState').css("display", "block");
 			$('.slider').css("top", "25px");
 			$('.left-menu').css("height", "80%");
+			
 			//Change menu options
 			$(".primary").css("display", "none");
 			$("#canvas-settings").css("display", "block");
