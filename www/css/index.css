@@ -145,6 +145,7 @@
 }
 
 .grid-svg {
+  height: 99.5%;
   position: absolute;
   left: 0px;
   right: 0;

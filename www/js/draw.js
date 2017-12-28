@@ -1,5 +1,4 @@
 (function() {
-
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth;	
@@ -278,28 +277,27 @@
         		delete data.canvasArray["width"];
         		delete data.canvasArray["height"];
         		delete data.canvasArray["bgColor"];
-        		// console.log(data.canvasArray);
-        		/*cPushArray = data.canvasArray;*/
+        		
         		cPushArray = new Array();
         		for (var i = 0; i < Object.keys(data.canvasArray).length; i++) {
         			cPushArray.push(data.canvasArray[i]);
         		}
-        		// console.log(cPushArray);
+
         		cStep = data.canvasArrayLength-3;
         		console.log(cStep);
         		var canvasPic = new Image();
 				canvasPic.src = data.canvasSrc;
 				canvasPic.onload = function (){ 
-			        	ctx.clearRect(0, 0, canvas.width, canvas.height);
-			        	ctx.drawImage(canvasPic, 0, 0); 
+		        	ctx.clearRect(0, 0, canvas.width, canvas.height);
+		        	ctx.drawImage(canvasPic, 0, 0); 
 			    }
-        	}
-        	else{
+        	} else {
         		cPushArray = new Array();
 				cStep = -1;
         	}
+
 			$("#connect-modal").css("display", "none");
-			// console.log(data.canvasArray);
+			
 			// Set Canvas Property
 			canvas.width = parseInt(data.canvasWidth);
 			canvas.height = parseInt(data.canvasHeight);
@@ -312,11 +310,11 @@
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#sketch").css("height", "98%");
 			
-			if (data.createVersion == "first") {
+			if (data.state == "open" && $("#settings").hasClass('active-menu') == true || data.createVersion == "first") {
 				$("#settings").toggleClass('active-menu');
 				$('.drop-menu').toggleClass('show-menu');
 			}
-
+			
 			$(".top-menu").css("height", "40px");
 
 			if ($('#grid').hasClass('active-grid')) {

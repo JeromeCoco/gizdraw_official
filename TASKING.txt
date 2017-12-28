@@ -1,45 +1,32 @@
-Mobile App
-	Paint Bucket - krisha
-	Blender - krisha
-	Grid (Straight line [vertical,horizontal]) - krisha
-	Brush Preset (Add) - isog
-	Zoom in / Zoom out - coco
-	Shapes - krisha
-	Move Tool - krisha
-
-	Settings
-		Open File - coco
-		Share
-		Save (jpg) - coco
-		Canvas Options (paper, white) - isog
-	
-	Settings(Canvas View) [while connected]
-		Open File (transfer image to PC) - coco
-		Share
-		Canvas Options (resize, rotate) - isog
-
-Desktop App
-	List recently opened files
-	Open file (transfer image to mobile) - coco
-	Save (gdw) - coco
-______________________________________________________________________________
-
-TARGET FOR DEFENSE
-	- UI / UX
-		* splashscreen image
-	- Functions
-		* fix bugs
-		* esc button to CANCEL resize
-		* limit resizer (confirm min and max)
-		* save image (BOTH DEVICE) [mobile-jpg, desktop-gdw]
-		* at least 1 or 2 new tools
-		* grid auto straight
-		* zoom
-	- Research
-		* study git
-		* filename extension
-		* build for both apps
-		* recent files
-		* opening image file
-		* finalize tools to implement
-		* share image file
+*MAIN TASKING*
+	_________________________________________________________
+	coco
+		mobile
+		- open image (tranfer image to pc when connected)
+		- share
+		- save (jpg)
+		desktop
+		- list recent open files
+		- zoom in / zoom out
+		- open image (transfer image to mobile)
+		build
+		- desktop app package / installer
+		- windows service for server
+		- mobile app (ios)
+	_________________________________________________________
+	isog
+		mobile
+		- splash screen image
+		- add brush preset
+		- canvas options (paper texture, transparent) (transfer execution when connected)
+		desktop
+		- canvas option (rotate bugs, limit resizer, esc to cancel resize)
+	_________________________________________________________
+	krisha
+		mobile
+		- paint bucket
+		- blender
+		- shapes
+		- move tool
+		- grid auto straight
+		- bgColor correct approach
