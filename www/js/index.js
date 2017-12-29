@@ -47,27 +47,7 @@ $(document).ready(function(){
 	});
 
 	$('#share').click(function(){
-		$('#share-modal').css("display", "block");
-	});
-
-	$('#open-file').click(function(){
-		/*window.filepicker.setKey('com.example.GizDraw');
-	    window.filepicker.setName('GizDraw');
-	    window.filepicker.pickAndStore({
-	        multiple: false,
-	        mimeTypes: ['image/*',],
-	        services : ['GALLERY'],
-	        maxFiles: 2,
-	        maxSize: (10*1024*1024)
-	    }, {
-	        location : 'S3',
-	        path : '/location/'
-	    }, function(res) {
-	        alert("Success:"+res);
-	    }, function(e) {
-	       	alert("Error:"+e);
-	    });
-	    console.log(window);*/
+		/*$('#share-modal').css("display", "block");*/
 	});
 
 	$('#preset-first').click(function(){

@@ -1,5 +1,4 @@
 (function() {
-
 	var canvas = document.querySelector('#paint');
 	var ctx = canvas.getContext('2d');
 	var markerWidth;	
@@ -278,28 +277,27 @@
         		delete data.canvasArray["width"];
         		delete data.canvasArray["height"];
         		delete data.canvasArray["bgColor"];
-        		// console.log(data.canvasArray);
-        		/*cPushArray = data.canvasArray;*/
+        		
         		cPushArray = new Array();
         		for (var i = 0; i < Object.keys(data.canvasArray).length; i++) {
         			cPushArray.push(data.canvasArray[i]);
         		}
-        		// console.log(cPushArray);
+
         		cStep = data.canvasArrayLength-3;
         		console.log(cStep);
         		var canvasPic = new Image();
 				canvasPic.src = data.canvasSrc;
 				canvasPic.onload = function (){ 
-			        	ctx.clearRect(0, 0, canvas.width, canvas.height);
-			        	ctx.drawImage(canvasPic, 0, 0); 
+		        	ctx.clearRect(0, 0, canvas.width, canvas.height);
+		        	ctx.drawImage(canvasPic, 0, 0); 
 			    }
-        	}
-        	else{
+        	} else {
         		cPushArray = new Array();
 				cStep = -1;
         	}
+
 			$("#connect-modal").css("display", "none");
-			// console.log(data.canvasArray);
+			
 			// Set Canvas Property
 			canvas.width = parseInt(data.canvasWidth);
 			canvas.height = parseInt(data.canvasHeight);
@@ -312,11 +310,11 @@
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#sketch").css("height", "98%");
 			
-			if (data.createVersion == "first") {
+			if (data.state == "open" && $("#settings").hasClass('active-menu') == true || data.createVersion == "first") {
 				$("#settings").toggleClass('active-menu');
 				$('.drop-menu').toggleClass('show-menu');
 			}
-
+			
 			$(".top-menu").css("height", "40px");
 
 			if ($('#grid').hasClass('active-grid')) {
@@ -350,64 +348,18 @@
         socket.on("onResponseArray", function(){
         	socket.emit("cPushArraySend", cPushArray);
         });
-
-   //      socket.on("canvasDetailsReceive", function(data){
-   //      	$("#connect-modal").css("display", "none");
-			// // Set Canvas Property
-			// canvas.width = parseInt(data.canvasWidth);
-			// canvas.height = parseInt(data.canvasHeight);
-			// tmp_canvas.width = parseInt(data.canvasWidth);
-			// tmp_canvas.height = parseInt(data.canvasHeight);
-			// var canvasPic = new Image();
-			// canvasPic.src = data.canvasSrc;
-			// canvasPic.onload = function (){ 
-		 //        	ctx.clearRect(0, 0, canvas.width, canvas.height);
-		 //        	ctx.drawImage(canvasPic, 0, 0); 
-		 //    }
-			// // Display Canvas
-			// $("#paint").css("background-color", data.canvasBackgroundColor);
-			// $("#paint").css("box-shadow", "0px 4px 14px grey");
-			// $("#sketch").css("background-color", "#d8d8d8");
-			// $("#sketch").css("height", "98%");
-			// $("#settings").toggleClass('active-menu');
-			// $('.drop-menu').toggleClass('show-menu');
-			// $(".top-menu").css("height", "40px");
-			// if ($('#grid').hasClass('active-grid')) {
-			// 	$('#grid').toggleClass('active-grid');
-			// 	$('.grid-svg').toggleClass('show-grid');
-			// }
-			// //Display Connected State
-			// $('#connectedState').css("display", "block");
-			// $('.slider').css("top", "25px");
-			// $('.left-menu').css("height", "80%");
-			// //Change menu options
-			// $(".primary").css("display", "none");
-			// $("#canvas-settings").css("display", "block");
-			// $("#canvas-settings").html("Set Background");
-			// $("#open-file").css("display", "block");
-			// $("#share").css("display", "block");
-			// $("#new-canvas").css("display", "block");
-			// $("#save-image").css("display", "block");
-			// $(".secondary").css("display", "block");
-   //      });
-
 	}
 
 	// Get Current Tool ID
 	$('.tool').click( function () {
 		toolID = $(this).attr('id');
-
 		if (isConnected) {
 			socket.emit("sendActiveTool", toolID);
 		}
 
 		if (toolID == "brush") {
 			brushpreset1();
-		}
-
-		// bug here
-		// undo();		
-
+		}		
 	});
 
 	// Get Current Preset ID
@@ -1093,6 +1045,20 @@
 	$("#brush-preset-container img").click(function() {
 		$("#brush-preset-container, #tools-modal").fadeOut("fast");
 		$("#active-tool").fadeIn("fast");
+	});
+
+	$('input[type=file]').change(function(event){
+		var tmppath = URL.createObjectURL(event.target.files[0]);
+	   	console.log(URL.createObjectURL(event.target.files[0]));
+	});
+
+	function displayImageByFileURL(fileEntry) {
+	    var elem = document.getElementById('imageFile');
+	    elem.src = fileEntry.toURL();
+	}
+
+	$("#share").click(function() {
+		window.plugins.socialsharing.share(null, 'Created using GizDraw App.', canvas.toDataURL(), null);
 	});
 	
 }());

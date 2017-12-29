@@ -1,27 +1,27 @@
 *MAIN TASKING*
-	_________________________________________________________
+	___________________________________________
 	coco
 		mobile
-		- open image (tranfer image to pc when connected)
-		- share
+		- open image NOTE:tranfer image to pc when connected
+		- share | (function DONE)
 		- save (jpg)
 		desktop
-		- list recent open files
+		- list recent open files NOTE: check file existence | (listing and direct open function DONE)
 		- zoom in / zoom out
-		- open image (transfer image to mobile)
+		- open image NOTE:transfer image to mobile
 		build
 		- desktop app package / installer
 		- windows service for server
 		- mobile app (ios)
-	_________________________________________________________
+	___________________________________________
 	isog
 		mobile
 		- splash screen image
 		- add brush preset
-		- canvas options (paper texture, transparent) (transfer execution when connected)
+		- canvas options (paper texture, transparent) NOTE:transfer execution when connected
 		desktop
-		- canvas option (rotate bugs, limit resizer, esc to cancel resize)
-	_________________________________________________________
+		- canvas option (rotate bugs, limit resizer, esc to cancel resize) NOTE:transfer execution when connected
+	___________________________________________
 	krisha
 		mobile
 		- paint bucket
@@ -30,3 +30,4 @@
 		- move tool
 		- grid auto straight
 		- bgColor correct approach
+		- NOTE:transfer execution when connected
