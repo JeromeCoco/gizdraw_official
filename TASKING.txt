@@ -3,10 +3,8 @@
 	coco
 		mobile
 		- open image NOTE:tranfer image to pc when connected
-		- share | (function DONE)
 		- save (jpg)
 		desktop
-		- list recent open files NOTE: check file existence | (listing and direct open function DONE)
 		- zoom in / zoom out
 		- open image NOTE:transfer image to mobile
 		build
