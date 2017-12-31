@@ -267,7 +267,7 @@
 			var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
 			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
 			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
-			//connect 
+			
 	        socket = io('http://'+convertedIp+':3000');
 		}
 
@@ -308,7 +308,7 @@
 			$("#paint").css("background-color", data.canvasBackgroundColor);
 			$("#paint").css("box-shadow", "0px 4px 14px grey");
 			$("#sketch").css("background-color", "#d8d8d8");
-			$("#sketch").css("height", "98%");
+			$("#sketch").css("height", "97%");
 			
 			if (data.state == "open" && $("#settings").hasClass('active-menu') == true || data.createVersion == "first") {
 				$("#settings").toggleClass('active-menu');
@@ -1058,7 +1058,11 @@
 	}
 
 	$("#share").click(function() {
-		window.plugins.socialsharing.share(null, 'Created using GizDraw App.', canvas.toDataURL(), null);
+		var today = new Date();
+		var date = today.getFullYear() +""+ (today.getMonth()+1) +""+ today.getDate();
+		var time = today.getHours() +""+ today.getMinutes() +""+ today.getSeconds();
+		var dateTime = date+""+time;
+		window.plugins.socialsharing.share(null, dateTime, canvas.toDataURL(), null);
 	});
 	
 }());
