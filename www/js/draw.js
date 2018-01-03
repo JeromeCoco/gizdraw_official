@@ -9,36 +9,25 @@
 	var currpreset = "first-preset";
 	var cPushArray = new Array();
 	var cStep = -1;
-	var isDrawing, lastPoint; // Brush preset 3
-	var points = [ ]; // Brush Preset 4
+	var isDrawing, lastPoint;
+	var points = [ ];
 	var isConnected = false;
 	var canvasPicSrc;
 	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
 	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
-
-	// Connection
 	var currentIPaddress;
 	var socket;
-
-	// Creating a tmp canvas
 	var tmp_canvas = document.createElement('canvas');
 	var tmp_ctx = tmp_canvas.getContext('2d');
 	tmp_canvas.id = 'tmp_canvas';
 	tmp_canvas.width = canvas.width;
 	tmp_canvas.height = canvas.height;
 	sketch.appendChild(tmp_canvas);
-
 	var mouse = {x: 0, y: 0};
 	var last_mouse = {x: 0, y: 0};
-
-	//bg
 	var bgColor;
 	var bgIsColored = false;
-
-	// canvas-resize
 	var newCanvasWidth, newCanvasHeight;
-
-	//event log
 	var eventLogLabel;
 
 	$('#pencil').addClass('active');
@@ -55,7 +44,6 @@
 	});
 
 	var switchTool = function () {
-		//switch tool
 		$('#active-tool').fadeIn("fast");
 		$('#tools-modal').fadeOut("fast");
 
@@ -96,12 +84,10 @@
 		exitTools();
 	});
 
-	// Detect Connection
 	if (socket != undefined) {
 		connects();
 	}
 
-	// Request Connection
 	$("#btnConnect").click(function(){
 		try {
 			connects();
@@ -152,12 +138,10 @@
         socket.on("onCanvasResizeToMobile", function(data){
         	newCanvasWidth = data.canvasSizeWidth;
         	newCanvasHeight = data.canvasSizeHeight;
-
         	tmp_canvas.width = newCanvasWidth;
 			tmp_canvas.height = newCanvasHeight;
 			canvas.width = newCanvasWidth;
 			canvas.height = newCanvasHeight;
-			// console.log(newCanvasWidth + "" + newCanvasHeight);
 
 			var canvasPic = new Image();
 	        if (cStep < 0){
@@ -168,6 +152,7 @@
 	        	canvasPic.src = cPushArray[cStep];
 	        	canvasPicSrc = cPushArray[cStep];
 	        }
+
 	        canvasPic.onload = function () {
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
@@ -180,12 +165,7 @@
     		'-moz-transform' : 'rotate('+ data +'deg)',
     		'-ms-transform' : 'rotate('+ data +'deg)',
     		'transform' : 'rotate('+ data +'deg)'});
-    		// $(tmp_canvas).css({'-webkit-transform' : 'rotate('+ data +'deg)',
-    		// '-moz-transform' : 'rotate('+ data +'deg)',
-    		// '-ms-transform' : 'rotate('+ data +'deg)',
-    		// 'transform' : 'rotate('+ data +'deg)'});
     		$(tmp_canvas).css({'top': '0px'});
-    		console.log(data);
         });
     });
 
@@ -243,14 +223,10 @@
         Y : { a : 251, b : 252, c : 253, d : 254, e : 255 }
     };
 
-	// Connection Function
     function connects(){
 		currentIPaddress = $('#ipaddress').val();
-
-		// split entered letter
 		var splitLetter = currentIPaddress.split("");
 
-		//check length
 		if (splitLetter.length > 8) {
 			window.plugins.toast.showShortBottom(
 		    	'Please try again.',
@@ -262,13 +238,11 @@
 		    	}
 		    );
 		} else {
-			//combine converted ip
 			var part1 = parseInt(convertSetFromLetterToIP[splitLetter[0]][splitLetter[1]]);
 			var part2 = parseInt(convertSetFromLetterToIP[splitLetter[2]][splitLetter[3]]);
 			var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
 			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
 			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
-
 	        socket = io('http://'+convertedIp+':3000');
 		}
 
@@ -285,9 +259,9 @@
         		}
 
         		cStep = data.canvasArrayLength-3;
-        		console.log(cStep);
         		var canvasPic = new Image();
 				canvasPic.src = data.canvasSrc;
+
 				canvasPic.onload = function (){
 		        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 		        	ctx.drawImage(canvasPic, 0, 0);
@@ -299,13 +273,11 @@
 
 			$("#connect-modal").css("display", "none");
 
-			// Set Canvas Property
 			canvas.width = parseInt(data.canvasWidth);
 			canvas.height = parseInt(data.canvasHeight);
 			tmp_canvas.width = parseInt(data.canvasWidth);
 			tmp_canvas.height = parseInt(data.canvasHeight);
 
-			// Display Canvas
 			$("#paint").css("background-color", data.canvasBackgroundColor);
 			$("#paint").css("box-shadow", "0px 4px 14px grey");
 			$("#sketch").css("background-color", "#d8d8d8");
@@ -323,12 +295,9 @@
 				$('.grid-svg').toggleClass('show-grid');
 			}
 
-			//Display Connected State
 			$('#connectedState').css("display", "block");
 			$('.slider').css("top", "25px");
 			$('.left-menu').css("height", "80%");
-
-			//Change menu options
 			$(".primary").css("display", "none");
 			$("#canvas-settings").css("display", "block");
 			$("#canvas-settings").html("Set Background");
@@ -351,7 +320,6 @@
         });
 	}
 
-	// Get Current Tool ID
 	$('.tool').click( function () {
 		toolID = $(this).attr('id');
 		if (isConnected) {
@@ -363,10 +331,8 @@
 		}
 	});
 
-	// Get Current Preset ID
 	$('.presets').click( function () {
 		currpreset = $(this).attr('id');
-
 		if (isConnected) {
 			socket.emit("sendActivePreset", currpreset);
 		}
@@ -393,7 +359,6 @@
 		}
 	});
 
-	// Pencil Points
 	var ppts = [];
 
 	/* Mouse Capturing Work */
@@ -551,7 +516,6 @@
 		$('.drop-menu').toggleClass('show-menu');
 	});
 
-	// REDO event
 	$('#redo').click(function(){
 		if (cStep < cPushArray.length-1) {
 	        cStep++;
@@ -567,7 +531,6 @@
 			}
    		}
 
-   		console.log(cStep);
    		if (isConnected) {
 			socket.emit("cStep", cStep);
 			eventLogLabel = "Redo";
@@ -584,6 +547,7 @@
 	        cStep--;
 	        var canvasPic = new Image();
 	        var src = cPushArray[cStep];
+
 	        canvasPic.onload = function (){
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
@@ -602,7 +566,6 @@
 		}
 	};
 
-	// UNDO event
 	$('#undo').click(undo);
 
 	var onPaint = function() {
@@ -724,17 +687,13 @@
 
 	// Preset 2 TouchStart Function
 	var brushpreset2 = function () {
-
 		points = [ ];
 		tmp_canvas.addEventListener('touchstart', function(e) {
 			tmp_canvas.addEventListener('touchmove', OnDrawSec, false);
-
 			isDrawing = true;
-
 			var parentOffset = $(this).parent().offset();
 			var xval = e.pageX - parentOffset.left;
 			var yval = e.pageY - parentOffset.top;
-
 			mouse.x = typeof xval !== 'undefined' ? xval : e.layerX;
 			mouse.y = typeof yval  !== 'undefined' ? yval  : e.layerY;
 
@@ -760,8 +719,9 @@
 			tmp_canvas.removeEventListener('touchmove', OnDrawSec, false);
 			isDrawing = false;
 			points.length = 0;
+
 			if (isConnected) {
-			socket.emit("onTouchBrushEnd", "brushtouchend");
+				socket.emit("onTouchBrushEnd", "brushtouchend");
 			}
 		});
 	};
@@ -773,14 +733,11 @@
 
 		tmp_canvas.addEventListener('touchstart', function(e) {
 			tmp_canvas.addEventListener('touchmove', OnDrawThird, false);
-
 			var parentOffset = $(this).parent().offset();
 			var xval = e.pageX - parentOffset.left;
 			var yval = e.pageY - parentOffset.top;
-
 			mouse.x = typeof xval !== 'undefined' ? xval : e.layerX;
 			mouse.y = typeof yval  !== 'undefined' ? yval  : e.layerY;
-
 			points = [ ];
 	  		isDrawing = true;
 	  		points.push({ x: mouse.x, y: mouse.y });
@@ -811,7 +768,6 @@
 		tmp_ctx.moveTo(points[points.length - 2].x, points[points.length - 2].y);
 		tmp_ctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
 		tmp_ctx.stroke();
-
 		var lastPoint = points[points.length-1];
 
 	  	for (var i = 0, len = points.length; i < len; i++) {
@@ -854,7 +810,7 @@
 
 	var OnDrawThird = function(){
 		if (!isDrawing) return;
-		  //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+		//ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 		points.push({ x: mouse.x, y: mouse.y });
 		if (toolID == "brush" && currpreset == "third-preset") {
 			ctx.beginPath();
@@ -892,7 +848,6 @@
 	    cPushArray.push(canvas.toDataURL());
 	}
 
-	// Canvas Reset
 	function resetCanvas(){
 		cStep = -1;
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -908,7 +863,6 @@
 	  return Math.atan2( point2.x - point1.x, point2.y - point1.y );
 	}
 
-	// hex to rgba conversion
 	function hexToRgbA(hex){
 	    var c;
 	    if(/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)){
@@ -921,7 +875,6 @@
 	    }
 	}
 
-	// rgb to hex conversion
 	function rgbToHex(R,G,B) {
 		return toHex(R)+toHex(G)+toHex(B)
 	}

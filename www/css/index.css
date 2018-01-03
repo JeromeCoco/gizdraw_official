@@ -53,12 +53,15 @@
 
 .tools-hidden {
   display: none;
-  transition: .5s;
+  transition: .1s;
 }
 
 .tools-hiddens {
+  opacity: .2;
+  padding: 3px;
   width: 45px;
   transition: .5s;
+  border-bottom-right-radius: 20px;
 }
 
 #grid {
