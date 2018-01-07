@@ -1001,15 +1001,22 @@
 		$("#active-tool").fadeIn("fast");
 	});
 
-	$('input[type=file]').change(function(event){
-		var tmppath = URL.createObjectURL(event.target.files[0]);
-	   	console.log(URL.createObjectURL(event.target.files[0]));
-	});
+  	function loadImage(e) {
+    	var reader = new FileReader();
+    	reader.onload = function(event){
+        	img = new Image();
+        	img.onload = function(){
+          		ctx.drawImage(img,0,0);
+        	}
+        	img.src = event.target.result;
+    	}
+    	reader.readAsDataURL(e.target.files[0]);
+    	$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
+    	return false;    
+  	}
 
-	function displayImageByFileURL(fileEntry) {
-	    var elem = document.getElementById('imageFile');
-	    elem.src = fileEntry.toURL();
-	}
+	$('input[type=file]').change(loadImage);
 
 	$("#share").click(function() {
 		var today = new Date();
