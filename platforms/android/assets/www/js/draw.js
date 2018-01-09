@@ -244,6 +244,7 @@
 			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
 			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
 	        socket = io('http://'+convertedIp+':3000');
+	        StatusBar.hide();
 		}
 
         socket.on("createCanvasToMobile", function(data){
@@ -295,9 +296,9 @@
 				$('.grid-svg').toggleClass('show-grid');
 			}
 
-			$('#connectedState').css("display", "block");
-			$('.slider').css("top", "25px");
-			$('.left-menu').css("height", "80%");
+			$("#connectedState").css("display", "block");
+			$(".drop-menu").css("top", "48px");
+			$(".slider").css("top", "25px");
 			$(".primary").css("display", "none");
 			$("#canvas-settings").css("display", "block");
 			$("#canvas-settings").html("Set Background");
@@ -404,6 +405,7 @@
 		}
 
 		$('#paint').css("background-color", bgColor);
+		$('body').css("background-color", bgColor);
 
 		if (isConnected) {
 			socket.emit("onBgChangeFromMobile", {bgColor:bgColor, bgIsColored:bgIsColored});
@@ -1011,7 +1013,8 @@
         	img.src = event.target.result;
     	}
     	reader.readAsDataURL(e.target.files[0]);
-    	console.log(e.target.files[0]);
+    	$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
     	return false;    
   	}
 

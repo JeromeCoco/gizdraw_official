@@ -168,29 +168,32 @@
 }
 
 .drop-menu {
+  width: 180px;
   z-index: 1;
-  position: absolute; 
-  top: 50px;
-  right: 5px;
+  position: absolute;
+  top: 39px;
+  right: 0;
   background-color: #e6e6e6;
   color: black;
   padding: 10px;
-  border-radius: 5px;
+  border-bottom-left-radius: 10px;
   display: none;
-  -webkit-animation-name: animatetop;
-  -webkit-animation-duration: 0.4s;
-  animation-name: animatetop;
-  animation-duration: 0.4s;
 }
 
 .drop-menu ul li {
   list-style: none;
   font-size: 15px;
-  line-height: 27px;
-  color: black;
+  line-height: 20px;
+  color: #121212;
+  padding: 4px;
+  background: #dedbdb;
+  margin: 10px;
+  border-radius: 30px;
+  text-align: center;
 }
 
 #selectedFile {
+  display: none;
   background-color: #dcdada;
   font-size: 15px;
   width: 205px;
@@ -347,6 +350,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 #setCanvasType {
+  font-size: 14px;
   display: block;
   width: 100%;
   border: none;
@@ -489,7 +493,7 @@ input[type=range].slider:focus::-ms-fill-upper {
   margin-top: 19px;
   border: none;
   padding: 8px;
-  font-size: 15px;
+  font-size: 16px;
   border: 1px solid gray;
   border-radius: 20px;
 }
@@ -546,10 +550,11 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-body select {
-  border-radius: 16px;
+  font-size: 15px;
+  border-radius: 30px;
   margin: 15px 10px;
   padding: 7px;
-  width: 130px;
+  width: 160px;
   background-color: white;
 }
 
@@ -558,6 +563,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-content-connect .modal-body button {
+  font-size: 15px;
   background-color: #f44336;
   padding: 15px;
   border: none;

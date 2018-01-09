@@ -6,7 +6,7 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>GIZDRAW | Mobile App</title>
+        <title>GizDraw | Mobile App</title>
     </head>
     <body>
     	<div id="connectedState"></div>
@@ -40,12 +40,18 @@
 	    		<img src="img/settings-gears.svg" id="settings"/>
 	    		<div class="drop-menu">
 	    			<ul>
-	    				<li class="primary" id="new-canvas">Clear canvas</li>
-	    				<li class="primary" id="open-file"><input id="selectedFile" type="file" name="selectedFile" /></li>
+	    				<li class="primary" id="new-canvas">Clear Canvas</li>
+	    				<li class="primary" id="open-file">
+	    					<!-- <input id="selectedFile" type="file" name="selectedFile" /> -->
+	    					<label for="selectedFile">
+    							Open File...
+							</label>
+							<input id="selectedFile" type="file" name="selectedFile"/>
+	    				</li>
 	    				<li class="primary" id="canvas-settings">Canvas Options</li>
-	    				<li class="primary" id="save-image">Save as...</li>
+	    				<li class="primary" id="save-image">Save As...</li>
 	    				<li class="primary" id="share">Share</li>
-	    				<li class="primary" id="connect-pc">Connect to PC</li>
+	    				<li class="primary" id="connect-pc">Connect To PC</li>
 	    				<li class="secondary" id="disconnect">Disconnect</li>
 	    			</ul>
 	    		</div>

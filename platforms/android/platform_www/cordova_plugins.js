@@ -231,6 +231,14 @@ module.exports = [
         "clobbers": [
             "window.Base64ImageSaverPlugin"
         ]
+    },
+    {
+        "id": "cordova-plugin-statusbar.statusbar",
+        "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
+        "pluginId": "cordova-plugin-statusbar",
+        "clobbers": [
+            "window.StatusBar"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -246,7 +254,8 @@ module.exports.metadata =
     "cordova-plugin-whitelist": "1.3.2",
     "cordova-plugin-x-socialsharing": "5.2.1",
     "cordova-plugin-x-toast": "2.6.0",
-    "org.solderzzc.base64imagesaverplugin": "0.6.0"
+    "org.solderzzc.base64imagesaverplugin": "0.6.0",
+    "cordova-plugin-statusbar": "2.4.1"
 };
 // BOTTOM OF METADATA
 });
