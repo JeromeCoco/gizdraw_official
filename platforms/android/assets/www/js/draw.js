@@ -29,6 +29,7 @@
 	var bgIsColored = false;
 	var newCanvasWidth, newCanvasHeight;
 	var eventLogLabel;
+	var filestate;
 
 	$('#pencil').addClass('active');
 	$('#custom-bg-color').css("display", "none");
@@ -142,9 +143,9 @@
 			tmp_canvas.height = newCanvasHeight;
 			canvas.width = newCanvasWidth;
 			canvas.height = newCanvasHeight;
-
 			var canvasPic = new Image();
-	        if (cStep < 0){
+			console.log(filestate);
+	        if (cStep < 0 || filestate == "open"){
 	        	canvasPic.src = canvas.toDataURL();
 	        	canvasPicSrc = canvas.toDataURL();
 	        }
@@ -244,22 +245,22 @@
 			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
 			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
 	        socket = io('http://'+convertedIp+':3000');
-	        StatusBar.hide();
+	        /*StatusBar.hide();*/
 		}
 
         socket.on("createCanvasToMobile", function(data){
-
         	if(data.state == "open"){
         		delete data.canvasArray["width"];
         		delete data.canvasArray["height"];
         		delete data.canvasArray["bgColor"];
 
+        		filestate = data.state;
         		cPushArray = new Array();
         		for (var i = 0; i < Object.keys(data.canvasArray).length; i++) {
         			cPushArray.push(data.canvasArray[i]);
         		}
 
-        		cStep = data.canvasArrayLength-3;
+        		cStep = data.canvasArrayLength-4;
         		var canvasPic = new Image();
 				canvasPic.src = data.canvasSrc;
 
@@ -280,7 +281,7 @@
 			tmp_canvas.height = parseInt(data.canvasHeight);
 
 			$("#paint").css("background-color", data.canvasBackgroundColor);
-			$("#paint").css("box-shadow", "0px 4px 14px grey");
+			$("#paint").css("box-shadow", "0px 4px 14px grey")
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#sketch").css("height", "97%");
 
@@ -1006,16 +1007,25 @@
   	function loadImage(e) {
     	var reader = new FileReader();
     	reader.onload = function(event){
-        	img = new Image();
-        	img.onload = function(){
-          		ctx.drawImage(img,0,0);
-        	}
-        	img.src = event.target.result;
+    		var canvasPic = new Image();
+	        canvasPic.src = event.target.result;
+	        canvasPic.onload = function () {
+				tmp_canvas.width = canvasPic.width;
+	        	tmp_canvas.height = canvasPic.height;
+	        	canvas.width = canvasPic.width;
+	        	canvas.height = canvasPic.height;
+	        	$("#sketch, body").css("background-color", "#d8d8d8");
+	        	$("#paint").css("box-shadow", "0px 4px 14px grey")
+	        	ctx.drawImage(canvasPic, 0, 0);
+	        	console.log(canvasPic);
+	        }
     	}
+    	cPush();
     	reader.readAsDataURL(e.target.files[0]);
     	$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
-    	return false;    
+
+    	return false;
   	}
 
 	$('input[type=file]').change(loadImage);

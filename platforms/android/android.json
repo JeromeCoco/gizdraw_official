@@ -47,6 +47,10 @@
             {
               "xml": "<feature name=\"StatusBar\"><param name=\"android-package\" value=\"org.apache.cordova.statusbar.StatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"ZoomControl\"><param name=\"android-package\" value=\"com.selfservit.zoom.Zoomcontrol\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -104,6 +108,9 @@
       "PACKAGE_NAME": "com.example.GizDraw"
     },
     "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "cordova-plugin-zoomcontrol": {
       "PACKAGE_NAME": "com.example.GizDraw"
     }
   },
@@ -348,6 +355,14 @@
       "clobbers": [
         "window.StatusBar"
       ]
+    },
+    {
+      "id": "cordova-plugin-zoomcontrol.ZoomControl",
+      "file": "plugins/cordova-plugin-zoomcontrol/www/zoomControl.js",
+      "pluginId": "cordova-plugin-zoomcontrol",
+      "clobbers": [
+        "zoomControl"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -362,6 +377,7 @@
     "cordova-plugin-x-socialsharing": "5.2.1",
     "cordova-plugin-x-toast": "2.6.0",
     "org.solderzzc.base64imagesaverplugin": "0.6.0",
-    "cordova-plugin-statusbar": "2.4.1"
+    "cordova-plugin-statusbar": "2.4.1",
+    "cordova-plugin-zoomcontrol": "1.0.1"
   }
 }

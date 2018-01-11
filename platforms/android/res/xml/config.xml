@@ -32,6 +32,9 @@
         <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="ZoomControl">
+        <param name="android-package" value="com.selfservit.zoom.Zoomcontrol" />
+    </feature>
     <name>GizDraw</name>
     <description>
         A drawing app that will turn your mobile device to a graphic tablet.

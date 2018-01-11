@@ -554,7 +554,7 @@ input[type=range].slider:focus::-ms-fill-upper {
   border-radius: 30px;
   margin: 15px 10px;
   padding: 7px;
-  width: 150px;
+  width: 160px;
   background-color: white;
 }
 

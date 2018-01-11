@@ -239,6 +239,14 @@ module.exports = [
         "clobbers": [
             "window.StatusBar"
         ]
+    },
+    {
+        "id": "cordova-plugin-zoomcontrol.ZoomControl",
+        "file": "plugins/cordova-plugin-zoomcontrol/www/zoomControl.js",
+        "pluginId": "cordova-plugin-zoomcontrol",
+        "clobbers": [
+            "zoomControl"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -255,7 +263,8 @@ module.exports.metadata =
     "cordova-plugin-x-socialsharing": "5.2.1",
     "cordova-plugin-x-toast": "2.6.0",
     "org.solderzzc.base64imagesaverplugin": "0.6.0",
-    "cordova-plugin-statusbar": "2.4.1"
+    "cordova-plugin-statusbar": "2.4.1",
+    "cordova-plugin-zoomcontrol": "1.0.1"
 };
 // BOTTOM OF METADATA
 });

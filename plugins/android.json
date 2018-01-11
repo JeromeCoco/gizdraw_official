@@ -36,6 +36,9 @@
     },
     "cordova-plugin-statusbar": {
       "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "cordova-plugin-zoomcontrol": {
+      "PACKAGE_NAME": "com.example.GizDraw"
     }
   },
   "dependent_plugins": {

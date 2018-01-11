@@ -9,7 +9,7 @@
 		- convert JSON string to binary [write gdw]
 		- convert binary to JSON string [read gdw]
 		- zoom in / zoom out
-		- open image NOTE:transfer image to mobile
+		- open image NOTE: transfer image to mobile
 		build
 		- desktop app package / installer
 		- windows service for server
@@ -17,11 +17,10 @@
 	___________________________________________
 	isog
 		mobile
-		- splash screen image
 		- add brush preset
 		- canvas options (paper texture, transparent) NOTE:transfer execution when connected
 		desktop
-		- canvas option (rotate bugs, limit resizer, esc to cancel resize) NOTE:transfer execution when connected
+		- canvas options (rotate bugs, limit resizer, esc to cancel resize) NOTE:transfer execution when connected
 	___________________________________________
 	krisha
 		mobile
@@ -31,4 +30,16 @@
 		- move tool
 		- grid auto straight
 		- bgColor correct approach
+		- event logs
 		- NOTE:transfer execution when connected
+
+----------------------------------
+		enhancements done
+----------------------------------
+/replace IP to code
+/realtime canvas resize
+/own filename extension
+/rasterize based
+/limit of device (1:1)
+/aspect ratio (applied 16:9)
+/event logs
