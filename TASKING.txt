@@ -1,37 +1,30 @@
-*MAIN TASKING*
-	___________________________________________
-	coco
-		mobile
-		- open image NOTE:tranfer image to pc when connected [open file function DONE]
-		- save (jpg)
-		- zoom in / zoom out NOTE: from open file
-		desktop
-		- convert JSON string to binary [write gdw]
-		- convert binary to JSON string [read gdw]
-		- zoom in / zoom out
-		- open image NOTE: transfer image to mobile
-		build
-		- desktop app package / installer
-		- windows service for server
-		- mobile app (ios)
-	___________________________________________
-	isog
-		mobile
-		- add brush preset
-		- canvas options (paper texture, transparent) NOTE:transfer execution when connected
-		desktop
-		- canvas options (rotate bugs, limit resizer, esc to cancel resize) NOTE:transfer execution when connected
-	___________________________________________
-	krisha
-		mobile
-		- paint bucket
-		- blender
-		- shapes
-		- move tool
-		- grid auto straight
-		- bgColor correct approach
-		- event logs
-		- NOTE:transfer execution when connected
+2 Outputs Every 4 Days
+	January 13-16
+		coco - open image NOTE:tranfer image to pc when connected (mobile) DONE, NOTE: how to set filename
+			- open image NOTE: transfer image to mobile (desktop) NOTE: how to set filename
+		isog - canvas options (rotate bugs, limit resizer, esc to cancel resize) (desktop)
+			- splashscreen
+		krisha - grid auto straight (both)
+			- bgColor correct approach (both)
+			- shapes (both)
+	January 16-19
+		coco - save (jpg) (mobile)
+			- zoom in / zoom out NOTE: from open file (open file not connected) (mobile)
+		isog - canvas options (paper texture, transparent) (both)
+		krisha - event logs full function (desktop)
+			- move tool (both)
+	January 19-22
+		coco - zoom in / zoom out (desktop)
+			- convert JSON string to binary [write gdw], convert binary to JSON string [read gdw] (desktop)
+		isog - add brush preset (both)
+			- rotating brush preset options [UI] (mobile)
+	January 22-31
+		krisha - paint bucket, blender (both)
+		isog - paint bucket, blender (both)
+		coco - build
+			- desktop app package / installer
+			- windows service for server
+			- mobile app (ios) - hoping
 
 ----------------------------------
 		enhancements done

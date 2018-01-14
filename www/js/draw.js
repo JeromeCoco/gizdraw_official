@@ -15,6 +15,8 @@
 	var canvasPicSrc;
 	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
 	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
+	const canvasGetWidth = canvas.width;
+	const canvasGetHeight = canvas.height;
 	var currentIPaddress;
 	var socket;
 	var tmp_canvas = document.createElement('canvas');
@@ -144,7 +146,7 @@
 			canvas.width = newCanvasWidth;
 			canvas.height = newCanvasHeight;
 			var canvasPic = new Image();
-			console.log(filestate);
+			/*console.log(filestate);*/
 	        if (cStep < 0 || filestate == "open"){
 	        	canvasPic.src = canvas.toDataURL();
 	        	canvasPicSrc = canvas.toDataURL();
@@ -517,6 +519,15 @@
 
 		$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
+		if (!isConnected) {
+			canvas.width = canvasGetWidth;
+			canvas.height = canvasGetHeight;
+			tmp_canvas.width = canvas.width;
+			tmp_canvas.height = canvas.height;
+			$("#sketch").css("height", "98%");
+			$("#paint").css("box-shadow", "0px 0px 0px 0px");
+			$("#paint, body").css("background-color", "white");
+		}
 	});
 
 	$('#redo').click(function(){
@@ -1014,14 +1025,28 @@
 	        	tmp_canvas.height = canvasPic.height;
 	        	canvas.width = canvasPic.width;
 	        	canvas.height = canvasPic.height;
-	        	$("#sketch, body").css("background-color", "#d8d8d8");
+	        	$("#paint, #tmp_canvas").css({"position": "absolute","top": "50%","left": "50%", "transform": "translate(-50%, -50%)"});
+	        	$("#sketch").css("background-color", "#d8d8d8");
+	        	$("#sketch").css("height", "100%");
 	        	$("#paint").css("box-shadow", "0px 4px 14px grey")
 	        	ctx.drawImage(canvasPic, 0, 0);
-	        	console.log(canvasPic);
+
+	        	var openImageDetails = {
+	        		image: canvasPic.src,
+	        		width: canvasPic.width,
+	        		height: canvasPic.height
+	        	}
+
+	        	if (isConnected) {
+	        		socket.emit("sendImageToPCFromMobile", openImageDetails);
+	        		$("#sketch").css("height", "97%");
+	        	}
 	        }
     	}
+
     	cPush();
     	reader.readAsDataURL(e.target.files[0]);
+
     	$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
 
