@@ -526,7 +526,7 @@
 			tmp_canvas.height = canvas.height;
 			$("#sketch").css("height", "98%");
 			$("#paint").css("box-shadow", "0px 0px 0px 0px");
-			$("#paint").css("background-color", "white");
+			$("#paint, body").css("background-color", "white");
 		}
 	});
 
@@ -924,15 +924,27 @@
 	});
 
 	$("#save-png").click(function(){
-		window.Base64ImageSaverPlugin.saveImageDataToLibrary(
-	        function(msg){
-	            console.log(msg);
-	        },
-	        function(err){
-	            console.log(err);
-	        },
-	        canvas.toDataURL()
-	    );
+		var cnvsSrc;
+		var canvasPic = new Image();
+        canvasPic.src = canvas.toDataURL();
+        
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvasPic.onload = function () {
+        	ctx.drawImage(canvasPic, 0, 0);
+        	cnvsSrc = canvas.toDataURL();
+
+        	window.Base64ImageSaverPlugin.saveImageDataToLibrary(
+		        function(msg){
+		            console.log(msg);
+		        },
+		        function(err){
+		            console.log(err);
+		        },
+		        cnvsSrc
+		    );
+        }
 
 	    window.plugins.toast.showShortBottom(
 	    	'Image saved to device.',
@@ -1030,11 +1042,24 @@
 	        	$("#sketch").css("height", "100%");
 	        	$("#paint").css("box-shadow", "0px 4px 14px grey")
 	        	ctx.drawImage(canvasPic, 0, 0);
-	        	/*console.log(canvasPic);*/
+
+	        	var openImageDetails = {
+	        		filename: e.target.files[0].name,
+	        		image: canvasPic.src,
+	        		width: canvasPic.width,
+	        		height: canvasPic.height
+	        	}
+
+	        	if (isConnected) {
+	        		socket.emit("sendImageToPCFromMobile", openImageDetails);
+	        		$("#sketch").css("height", "97%");
+	        	}
 	        }
     	}
+
     	cPush();
     	reader.readAsDataURL(e.target.files[0]);
+
     	$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
 

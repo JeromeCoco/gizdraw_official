@@ -1,7 +1,7 @@
 2 Outputs Every 4 Days
 	January 13-16
-		coco - open image NOTE:tranfer image to pc when connected (mobile) DONE, NOTE: how to set filename
-			- open image NOTE: transfer image to mobile (desktop) NOTE: how to set filename
+		coco - open image NOTE:tranfer image to pc when connected (mobile) DONE, NOTE: mouse x mouse y bug
+			- open image NOTE: transfer image to mobile (desktop) 
 		isog - canvas options (rotate bugs, limit resizer, esc to cancel resize) (desktop)
 			- splashscreen
 		krisha - grid auto straight (both)

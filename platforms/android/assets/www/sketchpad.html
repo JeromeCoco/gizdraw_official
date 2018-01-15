@@ -61,7 +61,10 @@
   			<div class="modal-content">
     			<div class="modal-body">
     				<img class="close" src="img/close-button.png"/>
-    				<div><!-- <i class="fa fa-clone" aria-hidden="true"></i> --> Choose Canvas Background</div>
+    				<div>
+    					<img src="img/choose-canvas.svg"/>
+    					<span>Choose Canvas Background</span>
+    				</div>
     				<select id="canvas-type">
     					<option>Transparent</option>
     					<option>White</option>
@@ -77,7 +80,10 @@
   			<div class="modal-content-connect">
     			<div class="modal-body" id="waiting-state">
     				<img src="img/close-button.png" class="close-connect">
-    				<div> Connect To PC</div>
+    				<div>
+    					<img src="img/connect-pc.svg"/>
+    					<span>Connect To PC</span>
+    				</div>
     				<input type="text" id="ipaddress" placeholder="Enter code..."><br>
     				<button id="btnConnect"><!-- <i class="fa fa-rss" aria-hidden="true"></i> -->Connect</button>
     			</div>
@@ -87,19 +93,12 @@
   			<div class="modal-content-save">
     			<div class="modal-body">
     				<img src="img/close-button.png" class="close-save">
-    				<div><!-- <i class="fa fa-floppy-o" aria-hidden="true"></i> --> Save as...</div>
+    				<div>
+    					<img src="img/save.svg"/>
+    					<span>Save as...</span>
+    				</div>
     				<p class="close-save" id="save-png">.png</p>
     				<p id="save-jpg">.jpg</p>
-    			</div>
-  			</div>
-		</div>
-		<div id="share-modal" class="modal-connect">
-  			<div class="modal-content-share">
-    			<div class="modal-body">
-    				<img src="img/close-button.png" id="close-share">
-    				<p><!-- <i class="fa fa-share-alt" aria-hidden="true"></i> --> Share your work!</p>
-    				<img src="img/bluetooth.svg">
-    				<img src="img/facebook.svg">
     			</div>
   			</div>
 		</div>
@@ -120,7 +119,7 @@
 		<div id="brush-preset-container">
 			<img class="presets" src="img/1.png" id="first-preset"/>
 	       	<img class="presets" src="img/2.png" id="second-preset"/>
-	        <img class="presets" src="img/4.png" id="third-preset"/>
+	        <img class="presets" src="img/3.png" id="third-preset"/>
 		</div>
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>

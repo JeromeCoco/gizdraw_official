@@ -342,6 +342,11 @@ input[type=range].slider:focus::-ms-fill-upper {
   margin-right: -10px;
 }
 
+#canvas-settings-modal .modal-content .modal-body div img {
+  float: left;
+  margin-top: -4px;
+}
+
 .modal-content .modal-body div {
   font-weight: bold;
   padding: 12px;
@@ -429,6 +434,12 @@ input[type=range].slider:focus::-ms-fill-upper {
   color: #736f6f;
 }
 
+.modal-content-save .modal-body div img {
+  float: left;
+  margin-top: -2px;
+  width: 19px;
+}
+
 .modal-content-connect .modal-body {
   text-align: center;
 }
@@ -438,6 +449,12 @@ input[type=range].slider:focus::-ms-fill-upper {
   float: right;
   margin-top: -15px;
   margin-right: -13px;
+}
+
+.modal-content-connect .modal-body div img {
+  float: left;
+  margin-top: -4px;
+  margin-right: -8px;
 }
 
 .modal-content-save .modal-body p {
@@ -490,6 +507,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 .modal-body span {
   font-size: 15px;
+  margin-left: 15px;
 }
 
 .modal-body select {

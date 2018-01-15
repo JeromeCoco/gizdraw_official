@@ -924,15 +924,27 @@
 	});
 
 	$("#save-png").click(function(){
-		window.Base64ImageSaverPlugin.saveImageDataToLibrary(
-	        function(msg){
-	            console.log(msg);
-	        },
-	        function(err){
-	            console.log(err);
-	        },
-	        canvas.toDataURL()
-	    );
+		var cnvsSrc;
+		var canvasPic = new Image();
+        canvasPic.src = canvas.toDataURL();
+        
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvasPic.onload = function () {
+        	ctx.drawImage(canvasPic, 0, 0);
+        	cnvsSrc = canvas.toDataURL();
+
+        	window.Base64ImageSaverPlugin.saveImageDataToLibrary(
+		        function(msg){
+		            console.log(msg);
+		        },
+		        function(err){
+		            console.log(err);
+		        },
+		        cnvsSrc
+		    );
+        }
 
 	    window.plugins.toast.showShortBottom(
 	    	'Image saved to device.',
@@ -1032,6 +1044,7 @@
 	        	ctx.drawImage(canvasPic, 0, 0);
 
 	        	var openImageDetails = {
+	        		filename: e.target.files[0].name,
 	        		image: canvasPic.src,
 	        		width: canvasPic.width,
 	        		height: canvasPic.height
