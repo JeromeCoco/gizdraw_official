@@ -32,6 +32,14 @@
 	var newCanvasWidth, newCanvasHeight;
 	var eventLogLabel;
 	var filestate;
+	var firstLaunch = window.localStorage.getItem('launch');
+	
+	if(firstLaunch) {
+		alert("Second Time");
+	} else {
+	  	window.localStorage.setItem('launch', true);
+	  	alert("First Time");
+	}
 
 	$('#pencil').addClass('active');
 	$('#custom-bg-color').css("display", "none");
@@ -147,7 +155,7 @@
 			canvas.height = newCanvasHeight;
 			var canvasPic = new Image();
 			/*console.log(filestate);*/
-	        if (cStep < 0 || filestate == "open"){
+	        if (cStep < 0){
 	        	canvasPic.src = canvas.toDataURL();
 	        	canvasPicSrc = canvas.toDataURL();
 	        }
@@ -319,6 +327,49 @@
 			}
         });
 
+        socket.on("receiveImageToMobileFromPC", function(data){
+        	$("#connect-modal").css("display", "none");
+
+			canvas.width = parseInt(data.width);
+			canvas.height = parseInt(data.height);
+			tmp_canvas.width = parseInt(data.width);
+			tmp_canvas.height = parseInt(data.height);
+
+			$("#paint").css("box-shadow", "0px 4px 14px grey")
+			$("#sketch").css("background-color", "#d8d8d8");
+			$("#sketch").css("height", "97%");
+
+			if (data.state == "open" && $("#settings").hasClass('active-menu') == true || data.createVersion == "first") {
+				$("#settings").toggleClass('active-menu');
+				$('.drop-menu').toggleClass('show-menu');
+			}
+
+			$(".top-menu").css("height", "40px");
+
+			if ($('#grid').hasClass('active-grid')) {
+				$('#grid').toggleClass('active-grid');
+				$('.grid-svg').toggleClass('show-grid');
+			}
+
+			$("#connectedState").css("display", "block");
+			$(".drop-menu").css("top", "48px");
+			$(".slider").css("top", "25px");
+			$(".primary").css("display", "none");
+			$("#canvas-settings").css("display", "block");
+			$("#canvas-settings").html("Set Background");
+			$("#open-file").css("display", "block");
+			$("#share").css("display", "block");
+			$("#new-canvas").css("display", "block");
+			$("#save-image").css("display", "block");
+			$(".secondary").css("display", "block");
+
+			var image = new Image();
+			image.src = data.imageSource;
+			image.onload = function(){
+				ctx.drawImage(image, 0, 0);
+			}
+        });
+
         socket.on("onResponseArray", function(){
         	socket.emit("cPushArraySend", cPushArray);
         });
@@ -417,7 +468,6 @@
 
 	// OnPaint TouchStart
 	tmp_canvas.addEventListener('touchstart', function(e) {
-		tmp_canvas.addEventListener('touchmove', onPaint, false);
 		var parentOffset = $(this).parent().offset();
 		var targetYval = e.targetTouches[0].pageY;
 		var targetXval = e.targetTouches[0].pageX;
@@ -436,6 +486,7 @@
 
 		switch (toolID) {
 			case 'pencil':
+				tmp_canvas.addEventListener('touchmove', onPaint, false);
 				ctx.globalCompositeOperation = 'source-over';
 				markerColor = $('#pen-color').val();
 				markerWidth = parseInt($('#pen-width').val());
@@ -489,12 +540,18 @@
 			case 'eraser':
 				onErase();
 			break;
+			case 'blender':
+				tmp_canvas.addEventListener('touchmove', onDrawLine, false);
+			break;
 		}
 	}, false);
 
 	// Onpaint TouchEnd
 	tmp_canvas.addEventListener('touchend', function() {
 		tmp_canvas.removeEventListener('touchmove', onPaint, false);
+		tmp_canvas.removeEventListener('touchmove', onDrawLine, false);
+		
+		ctx.stroke();
 		// Writing down to real canvas now
 		ctx.drawImage(tmp_canvas, 0, 0);
 		// Storing every strokes to Array
@@ -657,6 +714,16 @@
 		tmp_ctx.stroke();
 	};
 
+	var onDrawLine = function(){
+		var pptsl = ppts.length-1;
+		ppts.push({x: mouse.x, y: mouse.y});
+		ctx.lineWidth = markerWidth;
+		ctx.strokeStyle = markerColor;
+		ctx.beginPath();
+		ctx.moveTo(ppts[0].x, ppts[0].y);
+		ctx.lineTo(ppts[pptsl].x, ppts[pptsl].y);
+	};
+	
 	// Preset 1 TouchStart Function
 	var brushpreset1 = function () {
 		tmp_canvas.addEventListener('touchstart', function(e) {
@@ -988,7 +1055,7 @@
 				break;
 			case "blender":
 				$("#active-tool").html(" ");
-				$("#active-tool").html("<img src='img/chalk.svg'>");
+				$("#active-tool").html("<img src='img/vector.svg'>");
 				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "eraser":
@@ -1037,7 +1104,7 @@
 	        	tmp_canvas.height = canvasPic.height;
 	        	canvas.width = canvasPic.width;
 	        	canvas.height = canvasPic.height;
-	        	$("#paint, #tmp_canvas").css({"position": "absolute","top": "50%","left": "50%", "transform": "translate(-50%, -50%)"});
+	        	/*$("#paint, #tmp_canvas").css({"position": "absolute","top": "50%","left": "50%", "transform": "translate(-50%, -50%)"});*/
 	        	$("#sketch").css("background-color", "#d8d8d8");
 	        	$("#sketch").css("height", "100%");
 	        	$("#paint").css("box-shadow", "0px 4px 14px grey")

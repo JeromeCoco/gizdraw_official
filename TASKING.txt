@@ -1,30 +1,23 @@
-2 Outputs Every 4 Days
-	January 13-16
-		coco - open image NOTE:tranfer image to pc when connected (mobile) DONE, NOTE: mouse x mouse y bug
-			- open image NOTE: transfer image to mobile (desktop) 
-		isog - canvas options (rotate bugs, limit resizer, esc to cancel resize) (desktop)
-			- splashscreen
-		krisha - grid auto straight (both)
-			- bgColor correct approach (both)
-			- shapes (both)
-	January 16-19
-		coco - save (jpg) (mobile)
-			- zoom in / zoom out NOTE: from open file (open file not connected) (mobile)
-		isog - canvas options (paper texture, transparent) (both)
-		krisha - event logs full function (desktop)
-			- move tool (both)
-	January 19-22
-		coco - zoom in / zoom out (desktop)
-			- convert JSON string to binary [write gdw], convert binary to JSON string [read gdw] (desktop)
-		isog - add brush preset (both)
-			- rotating brush preset options [UI] (mobile)
-	January 22-31
-		krisha - paint bucket, blender (both)
-		isog - paint bucket, blender (both)
-		coco - build
-			- desktop app package / installer
-			- windows service for server
-			- mobile app (ios) - hoping
+January 16-20
+	coco - save (jpg) (mobile)
+		- zoom in / zoom out NOTE: from open file (open file not connected) (mobile)
+	isog - canvas options (paper texture, transparent) (both)
+		- canvas options (rotate bugs, limit resizer, esc to cancel resize) (desktop)
+	krisha - move tool (both)
+		- shapes (both)
+January 20-23
+	coco - zoom in / zoom out (desktop)
+		- convert JSON string to binary [write gdw], convert binary to JSON string [read gdw] (desktop)
+	isog - add brush preset (both)
+		- rotating brush preset options [UI] (mobile)
+	krisha - [RESEARCH if applicable] color mode (cmyk, rgb)
+January 23-31
+	krisha - paint bucket, blender (both)
+	isog - color palette
+	coco - splash screen / tutorials
+		- desktop app package / installer
+		- windows service for server
+		- mobile app (ios)
 
 ----------------------------------
 		enhancements done
@@ -32,7 +25,7 @@
 /replace IP to code
 /realtime canvas resize
 /own filename extension
-/rasterize based
-/limit of device (1:1)
 /aspect ratio (applied 16:9)
 /event logs
+/rasterize based
+/limit of device (1:1)
