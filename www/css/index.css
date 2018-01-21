@@ -706,15 +706,13 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .tutorial {
-  font-family: cursive;
-  font-size: 20px;
+  font-size: 18px;
   position: absolute;
   display: none;
 }
 
 .tutorial div{
-  font-size: 20px;
-  font-family: cursive;
+  font-size: 17px;
   color: #f44336;
 }
 
@@ -722,10 +720,9 @@ input[type=range].slider:focus::-ms-fill-upper {
   width: 20px;
 }
 
-#tutorial-1{
+#tutorial-1 {
   top: 100px;
   left: 100px;
-  display: block;
 }
 
 #tutorial-2 {
@@ -744,4 +741,26 @@ input[type=range].slider:focus::-ms-fill-upper {
   top: 50px;
   left: 360px;
   z-index: -1;
+}
+
+#tutorial-5 {
+  top: 50px;
+  left: 440px;
+  z-index: -1;
+}
+
+#tutorial-6 {
+  top: 50px;
+  right: 10px;
+  z-index: -1;
+}
+
+#tutorial-7 {
+  bottom: 50px;
+  right: 10px;
+  z-index: -1;
+}
+
+#tutorial-7 img {
+  -webkit-transform: rotate(180deg);
 }

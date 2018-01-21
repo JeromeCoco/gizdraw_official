@@ -37,13 +37,13 @@
 	if(firstLaunch) {
 	  	$("#tutorial-1").css("display", "none");
 	} else {
-	  	window.localStorage.setItem('launch', true);
 	  	$("#tutorial-1").css("display", "block");
 	}
 
 	$('#pencil').addClass('active');
 	$('#custom-bg-color').css("display", "none");
 	$('#connect-modal').css("display", "none");
+	StatusBar.hide();
 
 	$("#collapse-tools").click(function(){
 		$(".top-menu").toggleClass('tools-hiddens');
@@ -255,7 +255,6 @@
 			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
 			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
 	        socket = io('http://'+convertedIp+':3000');
-	        /*StatusBar.hide();*/
 		}
 
         socket.on("createCanvasToMobile", function(data){
@@ -1156,6 +1155,26 @@
 	$("#tutorial-3 div").click(function(){
 		$("#tutorial-3").fadeOut("slow");
 		$("#tutorial-4").fadeIn("slow");
+	});
+
+	$("#tutorial-4 div").click(function(){
+		$("#tutorial-4").fadeOut("slow");
+		$("#tutorial-5").fadeIn("slow");
+	});
+
+	$("#tutorial-5 div").click(function(){
+		$("#tutorial-5").fadeOut("slow");
+		$("#tutorial-6").fadeIn("slow");
+	});
+
+	$("#tutorial-6 div").click(function(){
+		$("#tutorial-6").fadeOut("slow");
+		$("#tutorial-7").fadeIn("slow");
+	});
+
+	$("#tutorial-7 div").click(function(){
+		$("#tutorial-7").fadeOut("slow");
+		window.localStorage.setItem('launch', true);
 	});
 
 }());
