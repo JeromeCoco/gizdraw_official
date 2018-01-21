@@ -5,7 +5,7 @@
 }
 
 #home-page {
-  background-image: url('../img/splash-screen.png');
+  background-image: url('../img/splash-screen1.png');
   background-size: cover;
   width: 100%;
   height: 100vh;
@@ -703,4 +703,45 @@ input[type=range].slider:focus::-ms-fill-upper {
   top: 15px;
   left: 155px;
   -webkit-transform: rotate(165deg);
+}
+
+.tutorial {
+  font-family: cursive;
+  font-size: 20px;
+  position: absolute;
+  display: none;
+}
+
+.tutorial div{
+  font-size: 20px;
+  font-family: cursive;
+  color: #f44336;
+}
+
+.tutorial img {
+  width: 20px;
+}
+
+#tutorial-1{
+  top: 100px;
+  left: 100px;
+  display: block;
+}
+
+#tutorial-2 {
+  top: 50px;
+  left: 60px;
+  z-index: -1;
+}
+
+#tutorial-3 {
+  top: 50px;
+  left: 200px;
+  z-index: -1;
+}
+
+#tutorial-4 {
+  top: 50px;
+  left: 360px;
+  z-index: -1;
 }

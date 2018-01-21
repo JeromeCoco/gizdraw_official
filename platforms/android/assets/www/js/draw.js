@@ -35,10 +35,10 @@
 	var firstLaunch = window.localStorage.getItem('launch');
 	
 	if(firstLaunch) {
-		alert("Second Time");
+	  	$("#tutorial-1").css("display", "none");
 	} else {
 	  	window.localStorage.setItem('launch', true);
-	  	alert("First Time");
+	  	$("#tutorial-1").css("display", "block");
 	}
 
 	$('#pencil').addClass('active');
@@ -1141,6 +1141,21 @@
 		var time = today.getHours() +""+ today.getMinutes() +""+ today.getSeconds();
 		var dateTime = date+""+time;
 		window.plugins.socialsharing.share(null, dateTime, canvas.toDataURL(), null);
+	});
+
+	$("#tutorial-1 div").click(function(){
+		$("#tutorial-1").fadeOut("slow");
+		$("#tutorial-2").fadeIn("slow");
+	});
+
+	$("#tutorial-2 div").click(function(){
+		$("#tutorial-2").fadeOut("slow");
+		$("#tutorial-3").fadeIn("slow");
+	});
+
+	$("#tutorial-3 div").click(function(){
+		$("#tutorial-3").fadeOut("slow");
+		$("#tutorial-4").fadeIn("slow");
 	});
 
 }());

@@ -1,20 +1,25 @@
-January 16-20
-	coco - save (jpg) (mobile)
-		- zoom in / zoom out NOTE: from open file (open file not connected) (mobile)
-	isog - canvas options (paper texture, transparent) (both)
-		- canvas options (rotate bugs, limit resizer, esc to cancel resize) (desktop)
-	krisha - move tool (both)
+January 16-23
+	coco - splash screen
+		- tutorials
+	isog - canvas options (limit resizer, esc to cancel resize) (desktop)
+		- color palette [idea]
+	krisha - history logs
 		- shapes (both)
-January 20-23
+		- [RESEARCH if applicable] color mode (cmyk, rgb)
+
+January 23-30
 	coco - zoom in / zoom out (desktop)
-		- convert JSON string to binary [write gdw], convert binary to JSON string [read gdw] (desktop)
+		- zoom in / zoom out NOTE: from open file (open file not connected) (mobile)
 	isog - add brush preset (both)
 		- rotating brush preset options [UI] (mobile)
-	krisha - [RESEARCH if applicable] color mode (cmyk, rgb)
-January 23-31
+		- canvas options (rotate bugs)
+	krisha - move tool (both)
+
+January 30-6
 	krisha - paint bucket, blender (both)
-	isog - color palette
-	coco - splash screen / tutorials
+	isog - embed color palette
+		- canvas options (paper texture, transparent) (both)
+	coco - save (jpg) (mobile)
 		- desktop app package / installer
 		- windows service for server
 		- mobile app (ios)
