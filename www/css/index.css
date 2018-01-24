@@ -706,14 +706,22 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .tutorial {
-  font-size: 18px;
+  background-color: #e6e6e6;
+  color: #121212;
+  font-size: 16px;
   position: absolute;
   display: none;
+  padding: 10px;
+  font-style: italic;
+  border-top-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  z-index: -1;
 }
 
 .tutorial div{
-  font-size: 17px;
+  font-size: 15px;
   color: #f44336;
+  font-style: normal;
 }
 
 .tutorial img {
@@ -727,40 +735,56 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 #tutorial-2 {
   top: 50px;
-  left: 60px;
-  z-index: -1;
+  left: 80px;
 }
 
 #tutorial-3 {
   top: 50px;
-  left: 200px;
-  z-index: -1;
+  left: 220px;
 }
 
 #tutorial-4 {
   top: 50px;
-  left: 360px;
-  z-index: -1;
+  left: 387px;
 }
 
 #tutorial-5 {
   top: 50px;
-  left: 440px;
-  z-index: -1;
+  right: 92px;
 }
 
 #tutorial-6 {
   top: 50px;
-  right: 10px;
-  z-index: -1;
+  right: 35px;
 }
 
 #tutorial-7 {
-  bottom: 50px;
-  right: 10px;
-  z-index: -1;
+  bottom: 65px;
+  right: 30px;
 }
 
 #tutorial-7 img {
   -webkit-transform: rotate(180deg);
+}
+
+#tutorial-7 div {
+  color: #f44336;
+}
+
+.animateArrowRight {
+  animation: MoveUpDown .7s linear infinite;
+  position: absolute;
+  right: -25px;
+}
+
+.animateArrowLeft {
+  animation: MoveUpDown .7s linear infinite;
+  position: absolute;
+  left: -25px;
+}
+
+@-webkit-keyframes MoveUpDown {
+  0% { bottom: 0; }
+  50% { bottom: 25px; }
+  100% { bottom: 0; } 
 }

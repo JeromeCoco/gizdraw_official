@@ -12,7 +12,7 @@
 	var isDrawing, lastPoint;
 	var points = [ ];
 	var isConnected = false;
-	var canvasPicSrc;
+	var canvasPicSrc, canvasPic = new Image();
 	canvas.width = parseInt(sketch_style.getPropertyValue('width'));
 	canvas.height = parseInt(sketch_style.getPropertyValue('height'));
 	const canvasGetWidth = canvas.width;
@@ -33,17 +33,18 @@
 	var eventLogLabel;
 	var filestate;
 	var firstLaunch = window.localStorage.getItem('launch');
-	
+	var logstep = -2;
+
 	if(firstLaunch) {
 	  	$("#tutorial-1").css("display", "none");
 	} else {
-	  	window.localStorage.setItem('launch', true);
 	  	$("#tutorial-1").css("display", "block");
 	}
 
 	$('#pencil').addClass('active');
 	$('#custom-bg-color').css("display", "none");
 	$('#connect-modal').css("display", "none");
+	/*StatusBar.hide();*/
 
 	$("#collapse-tools").click(function(){
 		$(".top-menu").toggleClass('tools-hiddens');
@@ -68,7 +69,7 @@
 
 	$('#eraser').click(switchTool);
 
-	$('#blender').click(switchTool);
+	$('#line').click(switchTool);
 
 	$('#color-picker').click(switchTool);
 
@@ -153,7 +154,6 @@
 			tmp_canvas.height = newCanvasHeight;
 			canvas.width = newCanvasWidth;
 			canvas.height = newCanvasHeight;
-			var canvasPic = new Image();
 			/*console.log(filestate);*/
 	        if (cStep < 0){
 	        	canvasPic.src = canvas.toDataURL();
@@ -177,6 +177,14 @@
     		'-ms-transform' : 'rotate('+ data +'deg)',
     		'transform' : 'rotate('+ data +'deg)'});
     		$(tmp_canvas).css({'top': '0px'});
+        });
+
+        socket.on("canvasDetailsReceive", function(data){
+        	canvasPic.src = data;
+			canvasPic.onload = function (){
+	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	        	ctx.drawImage(canvasPic, 0, 0);
+		    }
         });
     });
 
@@ -255,7 +263,6 @@
 			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
 			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
 	        socket = io('http://'+convertedIp+':3000');
-	        /*StatusBar.hide();*/
 		}
 
         socket.on("createCanvasToMobile", function(data){
@@ -271,7 +278,6 @@
         		}
 
         		cStep = data.canvasArrayLength-4;
-        		var canvasPic = new Image();
 				canvasPic.src = data.canvasSrc;
 
 				canvasPic.onload = function (){
@@ -372,6 +378,10 @@
 
         socket.on("onResponseArray", function(){
         	socket.emit("cPushArraySend", cPushArray);
+        });
+
+        socket.on("receiveLogStep", function(data){
+        	logstep = data;
         });
 	}
 
@@ -504,7 +514,6 @@
 			break;
 			case 'color-picker':
 				ctx.globalCompositeOperation = 'source-over';
-				var canvasPic = new Image();
 				canvasPic.src = cPushArray[cStep];
 
 				// image data and RGB values
@@ -540,7 +549,7 @@
 			case 'eraser':
 				onErase();
 			break;
-			case 'blender':
+			case 'line':
 				tmp_canvas.addEventListener('touchmove', onDrawLine, false);
 			break;
 		}
@@ -554,16 +563,26 @@
 		ctx.stroke();
 		// Writing down to real canvas now
 		ctx.drawImage(tmp_canvas, 0, 0);
+		// sending log functions
+		if (isConnected) {
+			socket.emit("sendLogFunctions", {lcStep:cPushArray.length, lcanvasSrc: canvas.toDataURL()});
+		}
+		// checks if user undo from log
+		if (logstep > 0){
+			cStep = logstep;
+		}
 		// Storing every strokes to Array
 		cPush();
 		// Clearing tmp canvas
 		tmp_ctx.clearRect(0, 0, tmp_canvas.width, tmp_canvas.height);
 		// Emptying up Pencil Points
 		ppts = [];
+		// send touchstate
 		if (isConnected) {
-			socket.emit("onTouchEnd", "touchend");
+			socket.emit("onTouchEnd", {logstep:logstep, drawState:"touchend"});
 		}
 		ctx.save();
+		logstep = -2;
 	}, false);
 
 	$('#new-canvas').click(function(){
@@ -590,7 +609,6 @@
 	$('#redo').click(function(){
 		if (cStep < cPushArray.length-1) {
 	        cStep++;
-	        var canvasPic = new Image();
 	        canvasPic.src = cPushArray[cStep];
 	        canvasPic.onload = function () {
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -616,7 +634,6 @@
 
 		if (cStep > 0) {
 	        cStep--;
-	        var canvasPic = new Image();
 	        var src = cPushArray[cStep];
 
 	        canvasPic.onload = function (){
@@ -992,7 +1009,6 @@
 
 	$("#save-png").click(function(){
 		var cnvsSrc;
-		var canvasPic = new Image();
         canvasPic.src = canvas.toDataURL();
         
         ctx.fillStyle = bgColor;
@@ -1053,7 +1069,7 @@
 				$("#active-tool").html("<img src='img/pencil.svg'>");
 				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
-			case "blender":
+			case "line":
 				$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/vector.svg'>");
 				$("#brush-preset-container, #tools-modal").fadeOut("fast");
@@ -1097,7 +1113,6 @@
   	function loadImage(e) {
     	var reader = new FileReader();
     	reader.onload = function(event){
-    		var canvasPic = new Image();
 	        canvasPic.src = event.target.result;
 	        canvasPic.onload = function () {
 				tmp_canvas.width = canvasPic.width;
@@ -1156,6 +1171,26 @@
 	$("#tutorial-3 div").click(function(){
 		$("#tutorial-3").fadeOut("slow");
 		$("#tutorial-4").fadeIn("slow");
+	});
+
+	$("#tutorial-4 div").click(function(){
+		$("#tutorial-4").fadeOut("slow");
+		$("#tutorial-5").fadeIn("slow");
+	});
+
+	$("#tutorial-5 div").click(function(){
+		$("#tutorial-5").fadeOut("slow");
+		$("#tutorial-6").fadeIn("slow");
+	});
+
+	$("#tutorial-6 div").click(function(){
+		$("#tutorial-6").fadeOut("slow");
+		$("#tutorial-7").fadeIn("slow");
+	});
+
+	$("#tutorial-7 div").click(function(){
+		$("#tutorial-7").fadeOut("slow");
+		window.localStorage.setItem('launch', true);
 	});
 
 }());
