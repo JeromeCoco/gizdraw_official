@@ -1045,6 +1045,10 @@
 	});
 
 	$("#active-tool").click(function() {
+		if (!firstLaunch) {
+			$("#tutorial-3").fadeOut("slow");
+			$("#tutorial-4").fadeIn("slow");
+		}
 		$('#tools-modal').fadeIn("fast");
 		$(this).fadeOut('fast');
 		if ($("#settings").hasClass('active-menu')) {
@@ -1063,6 +1067,10 @@
 
 	$('#tools-modal img').click(function () {
 		var id = $(this).attr('id');
+		if (!firstLaunch) {
+			$("#tutorial-4").fadeOut("slow");
+			$("#tutorial-5").fadeIn("slow");
+		}
 		switch (id) {
 			case "pencil":
 				$("#active-tool").html(" ");
@@ -1158,7 +1166,12 @@
 		window.plugins.socialsharing.share(null, dateTime, canvas.toDataURL(), null);
 	});
 
-	$("#tutorial-1 div").click(function(){
+	$("#skip-tutorial").click(function(){
+		$("#tutorial-1").fadeOut("slow");
+	});
+
+	$("#start-tutorial").click(function(){
+		$("#dash img").fadeIn("slow");
 		$("#tutorial-1").fadeOut("slow");
 		$("#tutorial-2").fadeIn("slow");
 	});
@@ -1166,6 +1179,7 @@
 	$("#tutorial-2 div").click(function(){
 		$("#tutorial-2").fadeOut("slow");
 		$("#tutorial-3").fadeIn("slow");
+		$("#dash img").fadeOut("slow");
 	});
 
 	$("#tutorial-3 div").click(function(){
@@ -1190,7 +1204,32 @@
 
 	$("#tutorial-7 div").click(function(){
 		$("#tutorial-7").fadeOut("slow");
-		window.localStorage.setItem('launch', true);
+		$("#tutorial-8").fadeIn("slow");
 	});
 
+	$("#tutorial-8 div").click(function(){
+		$("#tutorial-8").fadeOut("slow");
+		$("#tutorial-9").fadeIn("slow");
+	});
+
+	$("#tutorial-9 div").click(function(){
+		$("#tutorial-9").fadeOut("slow");
+		$("#tutorial-10").fadeIn("slow");
+	});
+
+	$("#tutorial-10 div").click(function(){
+		$("#tutorial-10").fadeOut("slow");
+		$("#tutorial-11").fadeIn("slow");
+	});
+
+	$("#btnOkay").click(function(){
+		$("#tutorial-11").fadeOut("slow");
+		$("#tutorial-12").fadeIn("slow");
+	});
+
+	$("#btnGotIt").click(function(){
+		$("#tutorial-12").fadeOut("slow");
+		window.localStorage.setItem('launch', true);
+		window.location = "sketchpad.html";
+	});
 }());

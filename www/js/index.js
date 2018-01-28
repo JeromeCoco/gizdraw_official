@@ -48,10 +48,6 @@ $(document).ready(function(){
 		$('#connect-modal').css("display", "block");
 	});
 
-	$('#share').click(function(){
-		/*$('#share-modal').css("display", "block");*/
-	});
-
 	$('#preset-first').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
