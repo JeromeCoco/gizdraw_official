@@ -1168,6 +1168,8 @@
 
 	$("#skip-tutorial").click(function(){
 		$("#tutorial-1").fadeOut("slow");
+		$("#tutorial-12").fadeIn("slow");
+		window.localStorage.setItem('launch', true);
 	});
 
 	$("#start-tutorial").click(function(){
@@ -1232,4 +1234,39 @@
 		window.localStorage.setItem('launch', true);
 		window.location = "sketchpad.html";
 	});
+
+	$(".tuts-item").click(function() {
+		var id = $(this).attr('id');
+		var tutorialDesc, tutorialPrev;
+		$("#tuts-preview-container").html(" ");
+		$(".tuts-item").removeClass('active-tuts');
+		$("#"+id).addClass('active-tuts');
+
+		switch (id) {
+			case "tuts-prev-1":
+				tutorialDesc = "To change the active tool, press the lower right corner from the sketchpad and click the desired tool.";
+				tutorialPrev = "<img src='img/t1.png'>"
+				break;
+			case "tuts-prev-2":
+				tutorialDesc = "Change your tool color by pressing the color box and choose from the variety of colors in swatches and palettes.";
+				tutorialPrev = "<img src='img/t2.png'>"
+				break;
+			case "tuts-prev-3":
+				tutorialDesc = "Adjust the tool size by just sliding the range tool.";
+				tutorialPrev = "<img src='img/t3.png'>"
+				break;
+			case "tuts-prev-4":
+				tutorialDesc = "Press the grid icon to show grid lines on your sketchpad.";
+				tutorialPrev = "<img src='img/t4.png'>"
+				break;
+			case "tuts-prev-5":
+				tutorialDesc = "Check the other options like clearing the canvas, opening files, backgroud, saving, sharing and connecting to PC.";
+				tutorialPrev = "<img src='img/t5.png'>"
+				break;
+		}
+
+		$("#tutorial-hint").html(tutorialDesc);
+		$("#tuts-preview-container").html(tutorialPrev);
+	});
+
 }());
