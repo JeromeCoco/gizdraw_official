@@ -446,6 +446,7 @@
 			eventLogLabel = "Resize Tool Width: "+markerWidth;
 			socket.emit("onSendEventLog", eventLogLabel);
 		}
+		$("#marker-width-label").html(markerWidth+"px");
 	});
 
 	$('#pen-color').change(function () {
@@ -587,7 +588,9 @@
 		logstep = -2;
 	}, false);
 
-	$('#new-canvas').click(function(){
+	$('#new-canvas').click(clearCanvas);
+
+	function clearCanvas() {
 		resetCanvas();
 		cPushArray = new Array();
 
@@ -595,18 +598,17 @@
 			socket.emit("onClearCanvasFromMobile", 'clear');
 		}
 
-		$('#settings').toggleClass('active-menu');
-		$('.drop-menu').toggleClass('show-menu');
 		if (!isConnected) {
 			canvas.width = canvasGetWidth;
 			canvas.height = canvasGetHeight;
 			tmp_canvas.width = canvas.width;
 			tmp_canvas.height = canvas.height;
 			$("#sketch").css("height", "98%");
-			$("#paint").css("box-shadow", "0px 0px 0px 0px");
-			$("#paint, body").css("background-color", "white");
+			$("#sketch").css("background-color", "white");
+			$("#paint").css("box-shadow", "0px 0px 0px 0px transparent");
+			$("#paint, body").css("background-color", "transparent");
 		}
-	});
+	}
 
 	$('#redo').click(function(){
 		if (cStep < cPushArray.length-1) {
@@ -1120,6 +1122,7 @@
 	});
 
   	function loadImage(e) {
+  		$("#template-image").attr("src", "");
     	var reader = new FileReader();
     	reader.onload = function(event){
 	        canvasPic.src = event.target.result;
@@ -1271,7 +1274,7 @@
 				tutorialPrev = "<img src='img/t4.png'>"
 				break;
 			case "tuts-prev-5":
-				tutorialDesc = "Check the other options like clearing the canvas, opening files, backgroud, saving, sharing and connecting to PC.";
+				tutorialDesc = "Check the other options like opening files, changing backgroud, saving image, sharing your work, using templaes and connecting to PC.";
 				tutorialPrev = "<img src='img/t5.png'>"
 				break;
 		}
@@ -1280,4 +1283,9 @@
 		$("#tuts-preview-container").html(tutorialPrev);
 	});
 
+	$(".selected-template").click(function () {
+		clearCanvas();
+		var selected = $(this).attr('data-template');
+		$("#template-image").attr('src', 'img/'+selected+'.PNG');
+	});
 }());

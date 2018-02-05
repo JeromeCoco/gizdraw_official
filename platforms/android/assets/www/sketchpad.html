@@ -11,6 +11,7 @@
     <body>
     	<div id="connectedState"></div>
         <div id="sketch">
+        	<img id="template-image" src="">
             <canvas id="paint"></canvas>
             <div class="grid-svg">
 				<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -32,19 +33,19 @@
 	    		<img src="img/collapse.svg" id="collapse-tools">
 	    		<input class='simple_color_live_preview' value='#000' name="penColor" id="pen-color"/>
 	    		<input type="range" class="slider" name="penWidth" max="50" min="1" value="1" id="pen-width"/>
+	    		<span id="marker-width-label">1px</span>
 	    		<img src="img/grid.svg" id="grid" class="tools-item">
 	    	</div>
 	    	<div id="menu-right">
 	    		<img src="img/undo-arrow.svg" id="undo"/>
 	    		<img src="img/redo-arrow.svg" id="redo"/>
+	    		<img src="img/clear.svg" id="new-canvas"/>
 	    		<img src="img/settings-gears.svg" id="settings"/>
 	    		<div class="drop-menu">
 	    			<ul>
-	    				<li class="primary" id="new-canvas">Clear Canvas</li>
 	    				<li class="primary" id="open-file">
-	    					<!-- <input id="selectedFile" type="file" name="selectedFile" /> -->
 	    					<label for="selectedFile">
-    							Open File...
+    							Upload Image
 							</label>
 							<input id="selectedFile" type="file" name="selectedFile"/>
 	    				</li>
@@ -53,6 +54,7 @@
 	    				<li class="primary" id="share">Share</li>
 	    				<li class="primary" id="connect-pc">Connect To PC</li>
 	    				<li class="secondary" id="disconnect">Disconnect</li>
+	    				<li class="primary" id="templates">Templates</li>
 	    				<li class="primary" id="help">Help</li>
 	    			</ul>
 	    		</div>
@@ -223,6 +225,30 @@
     						<td id="btnGotIt">Got it!</td>
     					</tr>
     				</table>
+    			</div>
+  			</div>
+		</div>
+		<div id="templatesmodal" class="modal-templates">
+  			<div class="modal-content-templates">
+    			<div class="modal-body">
+    				<img src="img/close-button.png" class="close-templates">
+    				<p><img src="img/star.svg">Templates</p>
+    				<div class="template-option" id="coloring">Coloring</div>
+    				<div class="template-item" id="coloring-options">
+    					<img class="selected-template" data-template="coloring1" src="img/coloring1.PNG">
+    					<img class="selected-template" data-template="coloring2" src="img/coloring2.PNG">
+    					<img class="selected-template" data-template="coloring3" src="img/coloring3.PNG">
+    					<img class="selected-template" data-template="coloring4" src="img/coloring4.PNG">
+    					<img class="selected-template" data-template="coloring5" src="img/coloring5.PNG">
+    				</div>
+    				<div class="template-option" id="drawing">Tracing</div>
+    				<div class="template-item" id="drawing-options">
+    					<img class="selected-template" data-template="drawing1" src="img/drawing1.PNG">
+    					<img class="selected-template" data-template="drawing2" src="img/drawing2.PNG">
+    					<img class="selected-template" data-template="drawing3" src="img/drawing3.PNG">
+    					<img class="selected-template" data-template="drawing4" src="img/drawing4.PNG">
+    					<img class="selected-template" data-template="drawing5" src="img/drawing5.PNG">
+    				</div>
     			</div>
   			</div>
 		</div>

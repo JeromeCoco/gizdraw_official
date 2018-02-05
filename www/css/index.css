@@ -67,7 +67,7 @@
 #grid {
   position: relative;
   top: -69px;
-  left: 350px;
+  left: 380px;
 }
 
 .active-grid {
@@ -212,7 +212,16 @@ input[type=range].slider {
   margin: -1px 15px;
   position: absolute;
   top: 18px;
-  left: 86px;
+  left: 80px;
+}
+
+#marker-width-label {
+  color: white;
+  position: absolute;
+  top: 13px;
+  z-index: 1;
+  left: 345px;
+  font-size: 13px;
 }
 
 input[type=range].slider:focus {
@@ -424,7 +433,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 .modal-save, .modal-tutor, .modal-templates {
   position: fixed;
   z-index: 2;
-  padding-top: 135px;
+  padding-top: 120px;
   left: 0;
   top: 0;
   width: 100%; 
@@ -928,18 +937,24 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 #tutorial-8 {
   top: 50px;
-  left: 385px;
+  left: 415px;
 }
 
 #tutorial-9 {
   top: 50px;
-  right: 90px;
+  right: 135px;
 }
 
 #tutorial-10 {
   top: 50px;
+  right: 75px;
+}
+
+#tutorial-11 {
+  top: 50px;
   right: 35px;
 }
+
 .animateArrowRight {
   animation: MoveUpDown .7s linear infinite;
   position: absolute;

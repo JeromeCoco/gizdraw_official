@@ -11,6 +11,16 @@ $(document).ready(function(){
 		$('#save-modal').css("display", "block");
 	});
 
+	$("#templates").click(function(){
+		$('#templatesmodal').css("display", "block");
+	});
+
+	$(".close-templates, .selected-template").click(function(){
+		$('#templatesmodal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
+	});
+
 	$('.close').click(function(){
 		$('#canvas-settings-modal').css("display", "none");
 		$('#settings').toggleClass('active-menu');
@@ -90,9 +100,19 @@ $(document).ready(function(){
 	        	position: "bottom",
 	        	addPixelsY: -40  // added a negative value to move it up a bit (default 0)
 	        });
-	        lastTimeBackPress=new Date().getTime();
+	        lastTimeBackPress = new Date().getTime();
 	    }
 	};
 
-	document.addEventListener("backbutton", onBackKeyDown, false); 
+	document.addEventListener("backbutton", onBackKeyDown, false);
+
+	$("#drawing").click(function () {
+		$("#drawing-options").fadeIn('fast');
+		$("#coloring-options").css("display", "none");
+	});
+
+	$("#coloring").click(function () {
+		$("#coloring-options").fadeIn('fast');
+		$("#drawing-options").css("display", "none");
+	});
 });

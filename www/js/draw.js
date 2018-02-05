@@ -446,6 +446,7 @@
 			eventLogLabel = "Resize Tool Width: "+markerWidth;
 			socket.emit("onSendEventLog", eventLogLabel);
 		}
+		$("#marker-width-label").html(markerWidth+"px");
 	});
 
 	$('#pen-color').change(function () {
@@ -587,7 +588,9 @@
 		logstep = -2;
 	}, false);
 
-	$('#new-canvas').click(function(){
+	$('#new-canvas').click(clearCanvas);
+
+	function clearCanvas() {
 		resetCanvas();
 		cPushArray = new Array();
 
@@ -601,10 +604,11 @@
 			tmp_canvas.width = canvas.width;
 			tmp_canvas.height = canvas.height;
 			$("#sketch").css("height", "98%");
+			$("#sketch").css("background-color", "white");
 			$("#paint").css("box-shadow", "0px 0px 0px 0px transparent");
 			$("#paint, body").css("background-color", "transparent");
 		}
-	});
+	}
 
 	$('#redo').click(function(){
 		if (cStep < cPushArray.length-1) {
@@ -614,7 +618,7 @@
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
 	        }
-	        console.log(canvasPic.src);
+	        /*console.log(canvasPic.src);*/
 	        if (isConnected) {
 				socket.emit("onRedo", cPushArray[cStep]);
 			}
@@ -642,7 +646,7 @@
 		 	if (isConnected) {
 				socket.emit("onUndo", cPushArray[cStep]);
 			}
-			console.log(canvasPic.src);
+			/*console.log(canvasPic.src);*/
 	    }
 
 	    if (isConnected) {
@@ -1069,6 +1073,8 @@
 		if (!firstLaunch) {
 			$("#tutorial-4").fadeOut("slow");
 			$("#tutorial-5").fadeIn("slow");
+			window.localStorage.setItem('launch', true);
+			firstLaunch = window.localStorage.getItem('launch');
 		}
 		switch (id) {
 			case "pencil":
@@ -1118,6 +1124,7 @@
 	});
 
   	function loadImage(e) {
+  		$("#template-image").attr("src", "");
     	var reader = new FileReader();
     	reader.onload = function(event){
 	        canvasPic.src = event.target.result;
@@ -1178,7 +1185,6 @@
 	$("#skip-tutorial").click(function(){
 		$("#tutorial-1").fadeOut("slow");
 		$("#tutorial-12").fadeIn("slow");
-		window.localStorage.setItem('launch', true);
 	});
 
 	$("#start-tutorial").click(function(){
@@ -1233,15 +1239,18 @@
 		$("#tutorial-11").fadeIn("slow");
 	});
 
-	$("#btnOkay").click(function(){
+	$("#tutorial-11 div").click(function(){
 		$("#tutorial-11").fadeOut("slow");
 		$("#tutorial-12").fadeIn("slow");
+	});	
+
+	$("#btnOkay").click(function(){
+		$("#tutorial-12").fadeOut("slow");
+		$("#tutorial-13").fadeIn("slow");
 	});
 
 	$("#btnGotIt").click(function(){
-		$("#tutorial-12").fadeOut("slow");
-		window.localStorage.setItem('launch', true);
-		window.location = "sketchpad.html";
+		$("#tutorial-13").fadeOut("slow");
 	});
 
 	$(".tuts-item").click(function() {
@@ -1269,7 +1278,7 @@
 				tutorialPrev = "<img src='img/t4.png'>"
 				break;
 			case "tuts-prev-5":
-				tutorialDesc = "Check the other options like opening files, changing backgroud, saving image, sharing your work, using templaes and connecting to PC.";
+				tutorialDesc = "Check the other options like uploading images, changing backgroud, saving image, sharing your work, using templaes and connecting to PC.";
 				tutorialPrev = "<img src='img/t5.png'>"
 				break;
 		}
@@ -1279,6 +1288,7 @@
 	});
 
 	$(".selected-template").click(function () {
+		clearCanvas();
 		var selected = $(this).attr('data-template');
 		$("#template-image").attr('src', 'img/'+selected+'.PNG');
 	});

@@ -33,6 +33,7 @@
 	    		<img src="img/collapse.svg" id="collapse-tools">
 	    		<input class='simple_color_live_preview' value='#000' name="penColor" id="pen-color"/>
 	    		<input type="range" class="slider" name="penWidth" max="50" min="1" value="1" id="pen-width"/>
+	    		<span id="marker-width-label">1px</span>
 	    		<img src="img/grid.svg" id="grid" class="tools-item">
 	    	</div>
 	    	<div id="menu-right">
@@ -44,7 +45,7 @@
 	    			<ul>
 	    				<li class="primary" id="open-file">
 	    					<label for="selectedFile">
-    							Open File...
+    							Upload Image
 							</label>
 							<input id="selectedFile" type="file" name="selectedFile"/>
 	    				</li>
@@ -182,7 +183,7 @@
 			<div>Next</div>
 		</div>
 		<div class="tutorial" id="tutorial-7">
-			You can adjust your tool size here...
+			Slide to adjust your tool size...
 			<img class="animateArrowLeft" src="img/up-arrow.svg">
 			<div>Next</div>
 		</div>
@@ -197,11 +198,16 @@
 			<div>Next</div>
 		</div>
 		<div class="tutorial" id="tutorial-10">
-			Press here to see other options...
+			Tap to clear canvas...
 			<img class="animateArrowRight" src="img/up-arrow.svg">
-			<div>All right!</div>
+			<div>Next</div>
 		</div>
-		<div id="tutorial-11" class="modal-tutor">
+		<div class="tutorial" id="tutorial-11">
+			Press to see other options...
+			<img class="animateArrowRight" src="img/up-arrow.svg">
+			<div>Next</div>
+		</div>
+		<div id="tutorial-12" class="modal-tutor">
   			<div class="modal-content-tutor">
     			<div class="modal-body">
     				<p>That's it!</p>
@@ -214,7 +220,7 @@
     			</div>
   			</div>
 		</div>
-		<div id="tutorial-12" class="modal-tutor">
+		<div id="tutorial-13" class="modal-tutor">
   			<div class="modal-content-tutor">
     			<div class="modal-body">
     				<p>Help?</p>
@@ -240,7 +246,7 @@
     					<img class="selected-template" data-template="coloring4" src="img/coloring4.PNG">
     					<img class="selected-template" data-template="coloring5" src="img/coloring5.PNG">
     				</div>
-    				<div class="template-option" id="drawing">Drawing</div>
+    				<div class="template-option" id="drawing">Tracing</div>
     				<div class="template-item" id="drawing-options">
     					<img class="selected-template" data-template="drawing1" src="img/drawing1.PNG">
     					<img class="selected-template" data-template="drawing2" src="img/drawing2.PNG">
