@@ -473,6 +473,7 @@
 
 		if (isConnected) {
 			socket.emit("onBgChangeFromMobile", {bgColor:bgColor, bgIsColored:bgIsColored});
+			$('body').css("background-color", "#d8d8d8");
 		}
 	});
 
@@ -547,7 +548,7 @@
 				}
 			break;
 			case 'eraser':
-				onErase();
+				tmp_canvas.addEventListener('touchmove', onErase, false);
 			break;
 			case 'line':
 				tmp_canvas.addEventListener('touchmove', onDrawLine, false);
@@ -559,7 +560,8 @@
 	tmp_canvas.addEventListener('touchend', function() {
 		tmp_canvas.removeEventListener('touchmove', onPaint, false);
 		tmp_canvas.removeEventListener('touchmove', onDrawLine, false);
-		
+		tmp_canvas.removeEventListener('touchmove', onErase, false);
+
 		ctx.stroke();
 		// Writing down to real canvas now
 		ctx.drawImage(tmp_canvas, 0, 0);
@@ -614,7 +616,7 @@
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
 	        }
-
+	        console.log(canvasPic.src);
 	        if (isConnected) {
 				socket.emit("onRedo", cPushArray[cStep]);
 			}
@@ -631,20 +633,18 @@
 		if (cStep == 0) {
 			resetCanvas();
 		}
-
 		if (cStep > 0) {
 	        cStep--;
 	        var src = cPushArray[cStep];
-
+	        canvasPic.src = cPushArray[cStep];
 	        canvasPic.onload = function (){
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
 	        }
-	        canvasPic.src = cPushArray[cStep];
-
 		 	if (isConnected) {
 				socket.emit("onUndo", cPushArray[cStep]);
 			}
+			console.log(canvasPic.src);
 	    }
 
 	    if (isConnected) {
@@ -1010,8 +1010,9 @@
 	$("#save-png").click(function(){
 		var cnvsSrc;
         canvasPic.src = canvas.toDataURL();
-        
-        ctx.fillStyle = bgColor;
+        if(bgColor){
+        	ctx.fillStyle = bgColor;
+        }
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         canvasPic.onload = function () {
@@ -1045,6 +1046,10 @@
 	});
 
 	$("#active-tool").click(function() {
+		if (!firstLaunch) {
+			$("#tutorial-3").fadeOut("slow");
+			$("#tutorial-4").fadeIn("slow");
+		}
 		$('#tools-modal').fadeIn("fast");
 		$(this).fadeOut('fast');
 		if ($("#settings").hasClass('active-menu')) {
@@ -1063,6 +1068,10 @@
 
 	$('#tools-modal img').click(function () {
 		var id = $(this).attr('id');
+		if (!firstLaunch) {
+			$("#tutorial-4").fadeOut("slow");
+			$("#tutorial-5").fadeIn("slow");
+		}
 		switch (id) {
 			case "pencil":
 				$("#active-tool").html(" ");
@@ -1155,10 +1164,27 @@
 		var date = today.getFullYear() +""+ (today.getMonth()+1) +""+ today.getDate();
 		var time = today.getHours() +""+ today.getMinutes() +""+ today.getSeconds();
 		var dateTime = date+""+time;
-		window.plugins.socialsharing.share(null, dateTime, canvas.toDataURL(), null);
+		var cnvsSrc;
+        canvasPic.src = canvas.toDataURL();
+        
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvasPic.onload = function () {
+        	ctx.drawImage(canvasPic, 0, 0);
+        	cnvsSrc = canvas.toDataURL();
+			window.plugins.socialsharing.share(null, dateTime, cnvsSrc, null);
+		}
 	});
 
-	$("#tutorial-1 div").click(function(){
+	$("#skip-tutorial").click(function(){
+		$("#tutorial-1").fadeOut("slow");
+		$("#tutorial-12").fadeIn("slow");
+		window.localStorage.setItem('launch', true);
+	});
+
+	$("#start-tutorial").click(function(){
+		$("#dash img").fadeIn("slow");
 		$("#tutorial-1").fadeOut("slow");
 		$("#tutorial-2").fadeIn("slow");
 	});
@@ -1166,6 +1192,7 @@
 	$("#tutorial-2 div").click(function(){
 		$("#tutorial-2").fadeOut("slow");
 		$("#tutorial-3").fadeIn("slow");
+		$("#dash img").fadeOut("slow");
 	});
 
 	$("#tutorial-3 div").click(function(){
@@ -1190,7 +1217,67 @@
 
 	$("#tutorial-7 div").click(function(){
 		$("#tutorial-7").fadeOut("slow");
+		$("#tutorial-8").fadeIn("slow");
+	});
+
+	$("#tutorial-8 div").click(function(){
+		$("#tutorial-8").fadeOut("slow");
+		$("#tutorial-9").fadeIn("slow");
+	});
+
+	$("#tutorial-9 div").click(function(){
+		$("#tutorial-9").fadeOut("slow");
+		$("#tutorial-10").fadeIn("slow");
+	});
+
+	$("#tutorial-10 div").click(function(){
+		$("#tutorial-10").fadeOut("slow");
+		$("#tutorial-11").fadeIn("slow");
+	});
+
+	$("#btnOkay").click(function(){
+		$("#tutorial-11").fadeOut("slow");
+		$("#tutorial-12").fadeIn("slow");
+	});
+
+	$("#btnGotIt").click(function(){
+		$("#tutorial-12").fadeOut("slow");
 		window.localStorage.setItem('launch', true);
+		window.location = "sketchpad.html";
+	});
+
+	$(".tuts-item").click(function() {
+		var id = $(this).attr('id');
+		var tutorialDesc, tutorialPrev;
+		$("#tuts-preview-container").html(" ");
+		$(".tuts-item").removeClass('active-tuts');
+		$("#"+id).addClass('active-tuts');
+
+		switch (id) {
+			case "tuts-prev-1":
+				tutorialDesc = "To change the active tool, press the lower right corner from the sketchpad and click the desired tool.";
+				tutorialPrev = "<img src='img/t1.png'>"
+				break;
+			case "tuts-prev-2":
+				tutorialDesc = "Change your tool color by pressing the color box and choose from the variety of colors in swatches and palettes.";
+				tutorialPrev = "<img src='img/t2.png'>"
+				break;
+			case "tuts-prev-3":
+				tutorialDesc = "Adjust the tool size by just sliding the range tool.";
+				tutorialPrev = "<img src='img/t3.png'>"
+				break;
+			case "tuts-prev-4":
+				tutorialDesc = "Press the grid icon to show grid lines on your sketchpad.";
+				tutorialPrev = "<img src='img/t4.png'>"
+				break;
+			case "tuts-prev-5":
+				tutorialDesc = "Check the other options like clearing the canvas, opening files, backgroud, saving, sharing and connecting to PC.";
+				tutorialPrev = "<img src='img/t5.png'>"
+				break;
+		}
+
+		$("#tutorial-hint").html(tutorialDesc);
+		$("#tuts-preview-container").html(tutorialPrev);
 	});
 
 }());

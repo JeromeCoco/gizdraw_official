@@ -53,6 +53,7 @@
 	    				<li class="primary" id="share">Share</li>
 	    				<li class="primary" id="connect-pc">Connect To PC</li>
 	    				<li class="secondary" id="disconnect">Disconnect</li>
+	    				<li class="primary" id="help">Help</li>
 	    			</ul>
 	    		</div>
 	    	</div>
@@ -102,6 +103,26 @@
     			</div>
   			</div>
 		</div>
+		<div id="tuts-modal" class="modal-tuts">
+  			<div class="modal-content-tuts">
+    			<div class="modal-body">
+    				<img src="img/close-button.png" class="close-tuts">
+    				<ul>
+    					<li id="tuts-prev-1" class="tuts-item active-tuts">Change active tool.</li>
+    					<li id="tuts-prev-2" class="tuts-item">Choose tool color.</li>
+    					<li id="tuts-prev-3" class="tuts-item">Adjust tool size.</li>
+    					<li id="tuts-prev-4" class="tuts-item">Show grid lines.</li>
+    					<li id="tuts-prev-5" class="tuts-item">See other options.</li>
+    				</ul>
+    				<div id="tuts-preview-container">
+    					<img src="img/t1.png">
+    				</div>
+    				<div id="tutorial-hint">
+    					To change the active tool, press the lower right corner from the sketchpad and click the desired tool.
+    				</div>
+    			</div>
+  			</div>
+		</div>
 		<div id="tools-modal">
 			<img src="img/pencil.svg" id="pencil" class="tool">
 			<img src="img/brush-stroke.svg" id="brush" class="tool">
@@ -121,39 +142,89 @@
 	       	<img class="presets" src="img/2.png" id="second-preset"/>
 	        <img class="presets" src="img/3.png" id="third-preset"/>
 		</div>
-		<div class="tutorial" id="tutorial-1">
-			Welcome! Try to draw here...
-			<div>Next</div>
+		<div id="tutorial-1" class="modal-tutor">
+  			<div class="modal-content-tutor">
+    			<div class="modal-body">
+    				<p>Welcome to GizDraw!</p>
+    				<div>You can start a quick tutorial from here.</div>
+    				<table>
+    					<tr>
+    						<td id="start-tutorial">Start</td>
+    						<td id="skip-tutorial">Skip</td>
+    					</tr>
+    				</table>
+    			</div>
+  			</div>
 		</div>
 		<div class="tutorial" id="tutorial-2">
-			<img class="animateArrowLeft" src="img/up-arrow.svg">
-			Press to choose a color...
+			This is your canvas. Try to draw...
 			<div>Next</div>
+		</div>
+		<div id="dash">
+			<img src="img/dash-lines.png">
 		</div>
 		<div class="tutorial" id="tutorial-3">
-			<img class="animateArrowLeft" src="img/up-arrow.svg">
-			Adjust your tool size...
-			<div>Next</div>
+			Tap to see your tools...
+			<img class="animateArrowRight" src="img/up-arrow.svg">
 		</div>
 		<div class="tutorial" id="tutorial-4">
-			<img class="animateArrowLeft" src="img/up-arrow.svg">
-			Press to show grid...
-			<div>Next</div>
+			Choose pencil to set your active drawing tool...
+			<img class="animateArrowRight" src="img/up-arrow.svg">
 		</div>
 		<div class="tutorial" id="tutorial-5">
-			Undo and redo...
-			<img class="animateArrowRight" src="img/up-arrow.svg">
+			You can also choose other tools later...
 			<div>Next</div>
 		</div>
 		<div class="tutorial" id="tutorial-6">
-			More options...
-			<img class="animateArrowRight" src="img/up-arrow.svg">
+			Press here to choose a color...
+			<img class="animateArrowLeft" src="img/up-arrow.svg">
 			<div>Next</div>
 		</div>
 		<div class="tutorial" id="tutorial-7">
-			And here's your tools!
+			You can adjust your tool size here...
+			<img class="animateArrowLeft" src="img/up-arrow.svg">
+			<div>Next</div>
+		</div>
+		<div class="tutorial" id="tutorial-8">
+			Tap to show grid...
+			<img class="animateArrowLeft" src="img/up-arrow.svg">
+			<div>Next</div>
+		</div>
+		<div class="tutorial" id="tutorial-9">
+			You can also undo and redo strokes...
 			<img class="animateArrowRight" src="img/up-arrow.svg">
-			<div>Got it!</div>
+			<div>Next</div>
+		</div>
+		<div class="tutorial" id="tutorial-10">
+			Press here to see other options...
+			<img class="animateArrowRight" src="img/up-arrow.svg">
+			<div>All right!</div>
+		</div>
+		<div id="tutorial-11" class="modal-tutor">
+  			<div class="modal-content-tutor">
+    			<div class="modal-body">
+    				<p>That's it!</p>
+    				<div>You can start to draw now.</div>
+    				<table>
+    					<tr>
+    						<td id="btnOkay">Okay</td>
+    					</tr>
+    				</table>
+    			</div>
+  			</div>
+		</div>
+		<div id="tutorial-12" class="modal-tutor">
+  			<div class="modal-content-tutor">
+    			<div class="modal-body">
+    				<p>Help?</p>
+    				<div>Check the quick tutorials from options.</div>
+    				<table>
+    					<tr>
+    						<td id="btnGotIt">Got it!</td>
+    					</tr>
+    				</table>
+    			</div>
+  			</div>
 		</div>
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>

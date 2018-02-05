@@ -23,6 +23,12 @@ $(document).ready(function(){
 		$('.drop-menu').toggleClass('show-menu');
 	});
 
+	$('.close-tuts').click(function(){
+		$('#tuts-modal').css("display", "none");
+		$('#settings').toggleClass('active-menu');
+		$('.drop-menu').toggleClass('show-menu');
+	});
+
 	$('.close-connect').click(function(){
 		$('#connect-modal').css("display", "none");
 		$('#settings').toggleClass('active-menu');
@@ -48,8 +54,8 @@ $(document).ready(function(){
 		$('#connect-modal').css("display", "block");
 	});
 
-	$('#share').click(function(){
-		/*$('#share-modal').css("display", "block");*/
+	$("#help").click(function() {
+		$('#tuts-modal').css("display", "block");
 	});
 
 	$('#preset-first').click(function(){

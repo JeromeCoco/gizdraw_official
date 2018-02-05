@@ -473,6 +473,7 @@
 
 		if (isConnected) {
 			socket.emit("onBgChangeFromMobile", {bgColor:bgColor, bgIsColored:bgIsColored});
+			$('body').css("background-color", "#d8d8d8");
 		}
 	});
 
@@ -547,7 +548,7 @@
 				}
 			break;
 			case 'eraser':
-				onErase();
+				tmp_canvas.addEventListener('touchmove', onErase, false);
 			break;
 			case 'line':
 				tmp_canvas.addEventListener('touchmove', onDrawLine, false);
@@ -559,7 +560,8 @@
 	tmp_canvas.addEventListener('touchend', function() {
 		tmp_canvas.removeEventListener('touchmove', onPaint, false);
 		tmp_canvas.removeEventListener('touchmove', onDrawLine, false);
-		
+		tmp_canvas.removeEventListener('touchmove', onErase, false);
+
 		ctx.stroke();
 		// Writing down to real canvas now
 		ctx.drawImage(tmp_canvas, 0, 0);
@@ -593,16 +595,14 @@
 			socket.emit("onClearCanvasFromMobile", 'clear');
 		}
 
-		$('#settings').toggleClass('active-menu');
-		$('.drop-menu').toggleClass('show-menu');
 		if (!isConnected) {
 			canvas.width = canvasGetWidth;
 			canvas.height = canvasGetHeight;
 			tmp_canvas.width = canvas.width;
 			tmp_canvas.height = canvas.height;
 			$("#sketch").css("height", "98%");
-			$("#paint").css("box-shadow", "0px 0px 0px 0px");
-			$("#paint, body").css("background-color", "white");
+			$("#paint").css("box-shadow", "0px 0px 0px 0px transparent");
+			$("#paint, body").css("background-color", "transparent");
 		}
 	});
 
@@ -614,7 +614,7 @@
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
 	        }
-
+	        console.log(canvasPic.src);
 	        if (isConnected) {
 				socket.emit("onRedo", cPushArray[cStep]);
 			}
@@ -631,20 +631,18 @@
 		if (cStep == 0) {
 			resetCanvas();
 		}
-
 		if (cStep > 0) {
 	        cStep--;
 	        var src = cPushArray[cStep];
-
+	        canvasPic.src = cPushArray[cStep];
 	        canvasPic.onload = function (){
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
 	        }
-	        canvasPic.src = cPushArray[cStep];
-
 		 	if (isConnected) {
 				socket.emit("onUndo", cPushArray[cStep]);
 			}
+			console.log(canvasPic.src);
 	    }
 
 	    if (isConnected) {
@@ -1010,8 +1008,9 @@
 	$("#save-png").click(function(){
 		var cnvsSrc;
         canvasPic.src = canvas.toDataURL();
-        
-        ctx.fillStyle = bgColor;
+        if(bgColor){
+        	ctx.fillStyle = bgColor;
+        }
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         canvasPic.onload = function () {
@@ -1163,7 +1162,17 @@
 		var date = today.getFullYear() +""+ (today.getMonth()+1) +""+ today.getDate();
 		var time = today.getHours() +""+ today.getMinutes() +""+ today.getSeconds();
 		var dateTime = date+""+time;
-		window.plugins.socialsharing.share(null, dateTime, canvas.toDataURL(), null);
+		var cnvsSrc;
+        canvasPic.src = canvas.toDataURL();
+        
+        ctx.fillStyle = bgColor;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvasPic.onload = function () {
+        	ctx.drawImage(canvasPic, 0, 0);
+        	cnvsSrc = canvas.toDataURL();
+			window.plugins.socialsharing.share(null, dateTime, cnvsSrc, null);
+		}
 	});
 
 	$("#skip-tutorial").click(function(){
@@ -1260,7 +1269,7 @@
 				tutorialPrev = "<img src='img/t4.png'>"
 				break;
 			case "tuts-prev-5":
-				tutorialDesc = "Check the other options like clearing the canvas, opening files, backgroud, saving, sharing and connecting to PC.";
+				tutorialDesc = "Check the other options like opening files, changing backgroud, saving image, sharing your work, using templaes and connecting to PC.";
 				tutorialPrev = "<img src='img/t5.png'>"
 				break;
 		}
@@ -1269,4 +1278,8 @@
 		$("#tuts-preview-container").html(tutorialPrev);
 	});
 
+	$(".selected-template").click(function () {
+		var selected = $(this).attr('data-template');
+		$("#template-image").attr('src', 'img/'+selected+'.PNG');
+	});
 }());
