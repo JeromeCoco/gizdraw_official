@@ -6,6 +6,7 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="spectrum/spectrum.css">
         <title>GizDraw | Mobile App</title>
     </head>
     <body>
@@ -31,21 +32,22 @@
 		<div class="top-menu">
 	    	<div id="tools-left">
 	    		<img src="img/collapse.svg" id="collapse-tools">
-	    		<input class='simple_color_live_preview' value='#000' name="penColor" id="pen-color"/>
+	    		<!-- <input class='simple_color_live_preview' value='#000' name="penColor" id="pen-color"/> -->
+	    		<input type="text" class="pen-color-class" id="pen-color">
 	    		<input type="range" class="slider" name="penWidth" max="50" min="1" value="1" id="pen-width"/>
 	    		<span id="marker-width-label">1px</span>
 	    		<img src="img/grid.svg" id="grid" class="tools-item">
+	    		<img src="img/clear.svg" id="new-canvas"/>
 	    	</div>
 	    	<div id="menu-right">
 	    		<img src="img/undo-arrow.svg" id="undo"/>
 	    		<img src="img/redo-arrow.svg" id="redo"/>
-	    		<img src="img/clear.svg" id="new-canvas"/>
 	    		<img src="img/settings-gears.svg" id="settings"/>
 	    		<div class="drop-menu">
 	    			<ul>
 	    				<li class="primary" id="open-file">
 	    					<label for="selectedFile">
-    							Upload Image
+    							Open Image
 							</label>
 							<input id="selectedFile" type="file" name="selectedFile"/>
 	    				</li>
@@ -134,7 +136,7 @@
 			<img src="img/polygon.svg" id="shapes" class="tool">
 			<img src="img/move.svg" id="move-tool" class="tool">
 			<img src="img/paint-can.svg" id="paint-bucket" class="tool">
-			<img src="img/cancel.png" id="exit-tool" class="tool">
+			<img src="img/cancel.png" id="exit-tool">
 		</div>
 		<div id="active-tool">
 			<img src="img/pencil.svg">
@@ -183,7 +185,7 @@
 			<div>Next</div>
 		</div>
 		<div class="tutorial" id="tutorial-7">
-			You can adjust your tool size here...
+			Slide to adjust your tool size...
 			<img class="animateArrowLeft" src="img/up-arrow.svg">
 			<div>Next</div>
 		</div>
@@ -193,16 +195,21 @@
 			<div>Next</div>
 		</div>
 		<div class="tutorial" id="tutorial-9">
+            Tap to clear canvas...
+			<img class="animateArrowLeft" src="img/up-arrow.svg">
+			<div>Next</div>
+		</div>
+		<div class="tutorial" id="tutorial-10">
 			You can also undo and redo strokes...
 			<img class="animateArrowRight" src="img/up-arrow.svg">
 			<div>Next</div>
 		</div>
-		<div class="tutorial" id="tutorial-10">
-			Press here to see other options...
+		<div class="tutorial" id="tutorial-11">
+			Press to see other options...
 			<img class="animateArrowRight" src="img/up-arrow.svg">
-			<div>All right!</div>
+			<div>Next</div>
 		</div>
-		<div id="tutorial-11" class="modal-tutor">
+		<div id="tutorial-12" class="modal-tutor">
   			<div class="modal-content-tutor">
     			<div class="modal-body">
     				<p>That's it!</p>
@@ -215,7 +222,7 @@
     			</div>
   			</div>
 		</div>
-		<div id="tutorial-12" class="modal-tutor">
+		<div id="tutorial-13" class="modal-tutor">
   			<div class="modal-content-tutor">
     			<div class="modal-body">
     				<p>Help?</p>
@@ -234,20 +241,34 @@
     				<img src="img/close-button.png" class="close-templates">
     				<p><img src="img/star.svg">Templates</p>
     				<div class="template-option" id="coloring">Coloring</div>
-    				<div class="template-item" id="coloring-options">
-    					<img class="selected-template" data-template="coloring1" src="img/coloring1.PNG">
-    					<img class="selected-template" data-template="coloring2" src="img/coloring2.PNG">
-    					<img class="selected-template" data-template="coloring3" src="img/coloring3.PNG">
-    					<img class="selected-template" data-template="coloring4" src="img/coloring4.PNG">
-    					<img class="selected-template" data-template="coloring5" src="img/coloring5.PNG">
-    				</div>
     				<div class="template-option" id="drawing">Tracing</div>
+                    <div class="template-item" id="coloring-options">
+                        <p>Beginner</p>
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring5-beginner" src="img/coloring5-beginner.PNG">
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring6-beginner" src="img/coloring6-beginner.PNG">
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring8-beginner" src="img/coloring8-beginner.PNG">
+                        <p>Intermediate</p>
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring1-intermediate" src="img/coloring1-intermediate.PNG">
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring3-intermediate" src="img/coloring3-intermediate.PNG">
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring7-intermediate" src="img/coloring7-intermediate.PNG">
+                        <p>Pro</p>
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring2-pro" src="img/coloring2-pro.PNG">
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring4-pro" src="img/coloring4-pro.PNG">
+                        <img class="selected-template" data-template-type="coloring" data-template="coloring9-pro" src="img/coloring9-pro.PNG">
+                    </div>
     				<div class="template-item" id="drawing-options">
-    					<img class="selected-template" data-template="drawing1" src="img/drawing1.PNG">
-    					<img class="selected-template" data-template="drawing2" src="img/drawing2.PNG">
-    					<img class="selected-template" data-template="drawing3" src="img/drawing3.PNG">
-    					<img class="selected-template" data-template="drawing4" src="img/drawing4.PNG">
-    					<img class="selected-template" data-template="drawing5" src="img/drawing5.PNG">
+    					<p>Beginner</p>
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing1-beginner" src="img/drawing1-beginner.PNG">
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing2-beginner" src="img/drawing2-beginner.PNG">
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing3-beginner" src="img/drawing3-beginner.PNG">
+                        <p>Intermediate</p>
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing5-intermediate" src="img/drawing5-intermediate.PNG">
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing6-intermediate" src="img/drawing6-intermediate.PNG">
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing9-intermediate" src="img/drawing9-intermediate.PNG">
+                        <p>Pro</p>
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing4-pro" src="img/drawing4-pro.PNG">
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing7-pro" src="img/drawing7-pro.PNG">
+                        <img class="selected-template" data-template-type="drawing" data-template="drawing8-pro" src="img/drawing8-pro.PNG">
     				</div>
     			</div>
   			</div>
@@ -258,5 +279,6 @@
         <script src="js/draw.js"></script>
         <script src="js/socket.io.js"></script>
         <script src="js/jquery.simple-color.js"></script>
+        <script src="spectrum/spectrum.js"></script>
     </body>
 </html>

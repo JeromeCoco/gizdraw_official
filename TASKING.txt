@@ -1,19 +1,19 @@
-February 1-6
+February 7
 	krisha - focus on bugs (check saving transparent/bgcolored, sharing transparent/bgcolored)
-		- color mode on save (cmyk, rgb) (desktop) [NOTE: hanap ka nalang css pampatingkad ng kulay ng base64]
-	isog - canvas options (rotate) (desktop)
-		- color swatch with palette (mobile)
-	coco - enhance tutorial / splashscreens
-		- templates (draw, coloring)
+		- snap to grid
+		
+	isog - paint bucket
 
 February 6-16
 	coco  - zoom in / zoom out (mobile)
 		- desktop app package / installer
 		- windows service for server
 		- mobile app (ios)
-	krisha - shapes, move tool, paint bucket
+	krisha - shapes, move tool
 		- save with template, save without template
-	isog - canvas options (paper texture, transparent) (both)
+		- color mode on save (cmyk, rgb) (desktop) [NOTE: hanap ka nalang css pampatingkad ng kulay ng base64]
+	isog - canvas options (rotate) (desktop)
+		- canvas options (paper texture, transparent) (both)
 		- canvas options (esc to cancel resize) (desktop) [NOTE: Wag na ilimit, rollback mo dating codes]
 		- add brush preset (both) [NOTE: mga dalawa pa singit mo lang sa UI ng presets]
 
@@ -29,20 +29,23 @@ February 6-16
 /limit of device (1:1)
 /tutorials
 /splash screen
-
+/history logs
+/templates
+/category
+/color palette
 ---------------------------------
 		FULL SIMULATION
 ---------------------------------
 Tutorial
 Show Tools
 Clear, Undo, Redo
-*Show Templates
+Show Templates
 Canvas Options
 	*BG Color or White
 	Transparent
 	*Paper Texture
 Save
-	Save image
+	Save rgb image
 	*Save cmyk format
 	*Save with template
 Share
