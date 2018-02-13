@@ -473,7 +473,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 .modal-content-templates {
   position: relative;
-  background-color: #e7e7e7;
+  background-color: #ececec;
   margin: auto;
   padding: 20px 0px 0px 0px;
   width: 390px;
@@ -508,9 +508,11 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-content-templates .modal-body .template-option {
-  padding: 7px;
+  padding: 7px 25px;
   font-size: 15px;
   display: inline;
+  border: 1px solid #dddcdc;
+  border-radius: 30px;
 }
 
 .modal-content-templates .modal-body .template-item img {
@@ -1031,10 +1033,15 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 #coloring {
   background-color: white;
-  border-top-right-radius: 5px;
+  margin-left: 15px;
+}
+
+#drawing {
+  background-color: #dddcdc;
 }
 
 .template-item {
+  margin-top: 20px;
   height: 205px;
   overflow-x: hidden;
   background-color: white;

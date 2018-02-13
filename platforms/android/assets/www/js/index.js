@@ -111,8 +111,6 @@ $(document).ready(function(){
 		$("#coloring-options").css("display", "none");
 		$(this).css("background", "white");
 		$("#coloring").css("background", "#e7e7e7");
-		$("#drawing").css("border-top-right-radius", "5px");
-		$("#drawing").css("border-top-left-radius", "5px");
 	});
 
 	$("#coloring").click(function () {
@@ -120,6 +118,5 @@ $(document).ready(function(){
 		$("#drawing-options").css("display", "none");
 		$(this).css("background", "white");
 		$("#drawing").css("background", "#e7e7e7");
-		$("#coloring").css("border-top-right-radius", "5px");
 	});
 });

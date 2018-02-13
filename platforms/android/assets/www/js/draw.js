@@ -34,6 +34,7 @@
 	var filestate;
 	var firstLaunch = window.localStorage.getItem('launch');
 	var logstep = -2;
+	var snap, gridState, prvX, prvY;
 
 	if(firstLaunch) {
 	  	$("#tutorial-1").css("display", "none");
@@ -495,20 +496,34 @@
 		var targetXval = e.targetTouches[0].pageX;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
-
+		prvX = mouse.x;
+		prvY = mouse.y;
 		ppts.push({x: mouse.x, y: mouse.y});
-
 		if (isConnected) {
-			socket.emit("onTouchStart", "touchstart");
-		}
-
-		if (isConnected) {
+			socket.emit("onTouchStart", {state:"touchstart", mX:prvX, mY:prvY});
 			socket.emit("sendCoordinates", {x: mouse.x, y: mouse.y});
 		}
 
 		switch (toolID) {
 			case 'pencil':
-				tmp_canvas.addEventListener('touchmove', onPaint, false);
+				snap = mouse.x % 8;
+				if(gridState){
+					if (snap<=2) {
+						tmp_canvas.addEventListener('touchmove', onSnap, false);
+						tmp_canvas.removeEventListener('touchmove', onPaint, false);
+					} else {
+						tmp_canvas.addEventListener('touchmove', onPaint, false);
+						tmp_canvas.removeEventListener('touchmove', onSnap, false);
+					}
+				} else {
+					tmp_canvas.addEventListener('touchmove', onPaint, false);
+					tmp_canvas.removeEventListener('touchmove', onSnap, false);
+				}
+
+				if (isConnected) {
+					socket.emit("sendSnap", snap);
+				}
+
 				ctx.globalCompositeOperation = 'source-over';
 				markerColor = $('#pen-color').val();
 				markerWidth = parseInt($('#pen-width').val());
@@ -518,7 +533,6 @@
 				tmp_ctx.lineJoin = 'round';
 				tmp_ctx.lineCap = 'round';
 				tmp_ctx.lineWidth = markerWidth;
-				onPaint();
 				if (isConnected) {
 					eventLogLabel = "Draw";
 					socket.emit("onSendEventLog", eventLogLabel);
@@ -598,7 +612,12 @@
 		logstep = -2;
 	}, false);
 
-	$('#new-canvas').click(clearCanvas);
+	$('#new-canvas').click(function(){
+		var confirmation = confirm("Are you sure you want to clear canvas?");
+		if (confirmation) {
+			clearCanvas();
+		}
+	});
 
 	function clearCanvas() {
 		resetCanvas();
@@ -753,6 +772,23 @@
 		ctx.lineTo(ppts[pptsl].x, ppts[pptsl].y);
 	};
 	
+	var onSnap = function(){
+		var pptsl = ppts.length-1;
+		ppts.push({x: mouse.x, y: mouse.y});
+		ctx.lineWidth = markerWidth;
+		ctx.strokeStyle = markerColor;
+		ctx.lineJoin = 'round';
+		ctx.lineCap = 'round';
+		ctx.beginPath();
+		var dx = mouse.x - prvX;
+		var dy = mouse.y - prvY;
+		ctx.moveTo(ppts[0].x, ppts[0].y);
+		if(Math.abs(dx) > Math.abs(dy)){
+			ctx.lineTo(mouse.x, prvY);
+		} else {
+			ctx.lineTo(prvX, mouse.y);
+		}
+	}
 	// Preset 1 TouchStart Function
 	var brushpreset1 = function () {
 		tmp_canvas.addEventListener('touchstart', function(e) {
@@ -1000,7 +1036,7 @@
 		$(this).toggleClass('active-grid');
 		$('.grid-svg').toggleClass('show-grid');
 
-		var gridState = $('.grid-svg').hasClass('show-grid');
+		gridState = $('.grid-svg').hasClass('show-grid');
 		if (isConnected) {
 			if (gridState) {
 				socket.emit("onSendGrid", "hideGrid");
