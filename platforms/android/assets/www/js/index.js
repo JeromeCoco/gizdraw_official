@@ -7,10 +7,6 @@ $(document).ready(function(){
 		$('#canvas-settings-modal').css("display", "block");
 	});
 
-	$("#save-image").click(function(){
-		$('#save-modal').css("display", "block");
-	});
-
 	$("#templates").click(function(){
 		$('#templatesmodal').css("display", "block");
 	});

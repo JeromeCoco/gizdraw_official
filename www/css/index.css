@@ -508,7 +508,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 }
 
 .modal-content-templates .modal-body .template-option {
-  padding: 7px 25px;
+  padding: 7px 60px;
   font-size: 15px;
   display: inline;
   border: 1px solid #dddcdc;

@@ -2,8 +2,7 @@ February 11-15
 	coco  - zoom in / zoom out (mobile)
 		- qr code reader (mobile)
 		- desktopapp tutorials
-	krisha - fix bugs (check saving transparent/bgcolored, sharing transparent/bgcolored)
-		- save with template, save without template
+	krisha - save with template, save without template
 		- color mode on save (cmyk, rgb) (desktop)
 	isog - paint bucket
 		- canvas options (rotate) (desktop)
@@ -90,3 +89,17 @@ Connect
 	Draw
 	Save png/jpg
 	Disconnect
+
+enhanced
+	- saving / sharing bugs
+	- added templates
+	- clearing templates options
+	- produce qr code
+	- natest na yung zoom (test lang xD)
+clarify
+	- digital signature
+	- ilang templates
+	- rotate options
+	- 
+
+	coloring.ws

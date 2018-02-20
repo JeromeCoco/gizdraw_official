@@ -35,6 +35,8 @@
 	var firstLaunch = window.localStorage.getItem('launch');
 	var logstep = -2;
 	var snap, gridState, prvX, prvY;
+	var onTemplate = false;
+	var imgSrc;
 
 	if(firstLaunch) {
 	  	$("#tutorial-1").css("display", "none");
@@ -51,12 +53,11 @@
 		$(".top-menu").toggleClass('tools-hiddens');
 		$(".tools-item").toggleClass('tools-hidden');
 		$("#pen-width").toggleClass('tools-hidden');
-		$(".sp-replacer, .sp-light, .full-spectrum").toggleClass('tools-hidden');
 		$(".sp-preview").toggleClass('tools-hidden');
-		/*$(".simpleColorDisplay").toggleClass('tools-hidden');*/
 		$("#menu-right").toggleClass('tools-hidden');
 		$(".tools-left").toggleClass('tools-hidden');
 		$("#marker-width-label").toggleClass('tools-hidden');
+		$("#new-canvas").toggleClass('tools-hidden');
 	});
 
 	var switchTool = function () {
@@ -117,6 +118,7 @@
 	            $("#grid").css("top", "8px");
 	            $("#marker-width-label").css("top", "20px");
 	            $("#new-canvas").css("top", "8px");
+	            $("#connectedState").css("display", "block");
 	            $(".sp-replacer, .sp-light, .full-spectrum").css("top", "13px");
 	            isConnected = true;
 	        });
@@ -325,7 +327,6 @@
 				$('.grid-svg').toggleClass('show-grid');
 			}
 
-			$("#connectedState").css("display", "block");
 			$(".drop-menu").css("top", "48px");
 			$(".slider").css("top", "25px");
 			$(".primary").css("display", "none");
@@ -369,7 +370,6 @@
 				$('.grid-svg').toggleClass('show-grid');
 			}
 
-			$("#connectedState").css("display", "block");
 			$(".drop-menu").css("top", "48px");
 			$(".slider").css("top", "25px");
 			$(".primary").css("display", "none");
@@ -508,7 +508,7 @@
 			case 'pencil':
 				snap = mouse.x % 8;
 				if(gridState){
-					if (snap<=2) {
+					if (snap <= 3) {
 						tmp_canvas.addEventListener('touchmove', onSnap, false);
 						tmp_canvas.removeEventListener('touchmove', onPaint, false);
 					} else {
@@ -613,9 +613,19 @@
 	}, false);
 
 	$('#new-canvas').click(function(){
-		var confirmation = confirm("Are you sure you want to clear canvas?");
-		if (confirmation) {
+		var confirmation1 = confirm("Are you sure you want to clear canvas?");
+		if (confirmation1) {
 			clearCanvas();
+		}
+
+		if (onTemplate) {
+			if (confirmation1) {
+				var confirmation2 = confirm("Clear template?");
+				if (confirmation2) {
+					$('#template-image').removeAttr('src');
+					onTemplate = false;
+				}
+			}
 		}
 	});
 
@@ -1055,13 +1065,21 @@
 		}
 	});
 
-	$("#save-png").click(function(){
+	$("#save-image").click(function(){
+		$('#save-modal').css("display", "block");
+		if (onTemplate) {
+			$(".primary-saving").css("display", "none");
+			$(".secondary-saving").css("display", "block");
+		} else {
+			$(".primary-saving").css("display", "block");
+			$(".secondary-saving").css("display", "none");
+		}
+	});
+
+	$(".save-png").click(function(){
 		var cnvsSrc;
         canvasPic.src = canvas.toDataURL();
-        if(bgIsColored){
-        	ctx.fillStyle = bgColor;
-        }
-
+        (bgIsColored)?ctx.fillStyle = bgColor: ctx.fillStyle = "rgba(255,255,255,0)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         canvasPic.onload = function () {
@@ -1090,8 +1108,42 @@
 	    );
 	});
 
-	$("#save-jpg").click(function(){
+	$("#save-template").click(function() {
+		var cnvsSrc, cnvsSrcs;
+		cnvsSrcs = canvas.toDataURL();
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+		canvasPic.src = canvas.toDataURL(imgSrc);
+		console.log(canvas.toDataURL(imgSrc));
+		canvasPic.onload = function () {
+			ctx.drawImage(canvasPic,0,0);
+		}
 
+        canvasPic.src = cnvsSrcs;
+        ctx.fillStyle = "#FFF";
+        // (bgIsColored)?ctx.fillStyle = bgColor: ctx.fillStyle = "#FFF";
+        canvasPic.onload = function () {
+        	ctx.drawImage(canvasPic, 0, 0);
+        	cnvsSrc = canvas.toDataURL();
+        	console.log(cnvsSrc);
+        	window.Base64ImageSaverPlugin.saveImageDataToLibrary(
+		        function(msg){
+		            console.log(msg);
+		        },
+		        function(err){
+		            console.log(err);
+		        },
+		        cnvsSrc
+		    );
+        }
+	    window.plugins.toast.showShortBottom(
+	    	'Image saved to device.',
+	    	function(a){
+	    		console.log('toast success: ' + a)
+	    	},
+	    	function(b){
+	    		alert('toast error: ' + b)
+	    	}
+	    );
 	});
 
 	$("#active-tool").click(function() {
@@ -1218,10 +1270,7 @@
 		var dateTime = date+""+time;
 		var cnvsSrc;
         canvasPic.src = canvas.toDataURL();
-        
-        if(bgIsColored){
-        	ctx.fillStyle = bgColor;
-        }
+        (bgIsColored)?ctx.fillStyle = bgColor: ctx.fillStyle = "rgba(255,255,255,0)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         canvasPic.onload = function () {
@@ -1349,6 +1398,9 @@
 		}
 
 		$("#template-image").attr('src', 'img/'+selected+'.PNG');
+		onTemplate = true;
+		imgSrc = $(this).attr("src");
+		console.log(imgSrc);
 	});
 
 	$(function(){
