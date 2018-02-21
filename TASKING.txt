@@ -1,22 +1,19 @@
-February 11-15
+February 21-25
 	coco  - zoom in / zoom out (mobile)
 		- qr code reader (mobile)
 		- desktopapp tutorials
-	krisha - save with template, save without template
-		- color mode on save (cmyk, rgb) (desktop)
-	isog - paint bucket
-		- canvas options (rotate) (desktop)
-		- establish stable network connection for exhibit
-
-February 18-25
-	coco - desktop app package / installer
+		- desktop app package / installer
 		- windows service for server
 		- mobile app (ios)
 		- embed connection tutorials video
-	krisha - shapes, move tool
+	krisha - save with template, save without template
+		- color mode on save (cmyk, rgb) (desktop)
+		- shapes, move tool
 	isog - canvas options (paper texture, transparent) (both)
 		- canvas options (esc to cancel resize) (desktop) [NOTE: Wag na ilimit, rollback mo dating codes]
 		- add brush preset (both) [NOTE: mga dalawa pa singit mo lang sa UI ng presets]
+		- paint bucket
+		- canvas options (rotate) (desktop)
 
 ----------------------------------
 		enhancements done
@@ -89,17 +86,3 @@ Connect
 	Draw
 	Save png/jpg
 	Disconnect
-
-enhanced
-	- saving / sharing bugs
-	- added templates
-	- clearing templates options
-	- produce qr code
-	- natest na yung zoom (test lang xD)
-clarify
-	- digital signature
-	- ilang templates
-	- rotate options
-	- 
-
-	coloring.ws

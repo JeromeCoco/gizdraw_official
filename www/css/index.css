@@ -848,7 +848,7 @@ input[type=range].slider:focus::-ms-fill-upper {
   left: 17px;
 }
 
-#brush-preset-container{
+#brush-preset-container {
   display: none;
   background-image: url(../img/activetool.png);
   background-size: 260px 260px;
@@ -875,8 +875,8 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 #brush-preset-container img:nth-child(2){
   position: relative;
-  top: 95px;
-  left: -40px;
+  top: 85px;
+  left: 55px;
   -webkit-transform: rotate(135deg);
 }
 
@@ -885,6 +885,56 @@ input[type=range].slider:focus::-ms-fill-upper {
   top: 15px;
   left: 155px;
   -webkit-transform: rotate(165deg);
+}
+
+#brush-preset-container #shapes-container img{
+  width: 35px;
+  height: 35px;
+  z-index: 3;
+}
+
+#shapes-container img:nth-child(1){
+  position: relative;
+  top: 210px;
+  left: 15px;
+}
+
+#shapes-container img:nth-child(2){
+  position: relative;
+  top: 120px;
+  left: 33px;
+  -webkit-transform: rotate(-70deg);
+}
+
+#shapes-container img:nth-child(3){
+  position: relative;
+  top: 43px;
+  left: 63px;
+  -webkit-transform: rotate(5deg);
+}
+
+#shapes-container img:nth-child(4){
+  position: relative;
+  top: -43px;
+  left: 103px;
+  -webkit-transform: rotate(-39deg);
+}
+
+#shapes-container #stroke-color, #shapes-container #fill-color{
+  position: relative;
+  top: -104px;
+  -webkit-transform: rotate(-23deg);
+  left: 157px;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+}
+
+#shapes-container #fill-color{
+  top: -146px;
+  -webkit-transform: rotate(-11deg);
+  left: 200px;
 }
 
 .tutorial {

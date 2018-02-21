@@ -80,11 +80,24 @@
 
 	$('#paint-bucket').click(switchTool);
 
-	$('#shapes').click(switchTool);
+	$('#shapes').click(function(){
+		$(".presets").css("display", "none");
+		$(".shape-option, #stroke-color, #fill-color").css("display", "block");
+		$("#brush-preset-container").fadeIn('slow');
+		$("#active-tool").html(" ");
+		$("#active-tool").html("<img src='img/polygon.svg'>");
+
+		var activeTool = $(this).attr('id');
+		if (isConnected) {
+			socket.emit("changeToolFromMobile", activeTool);
+		}
+	});
 
 	$('#move-tool').click(switchTool);
 
 	$('#brush').click(function(){
+		$(".presets").css("display", "block");
+		$(".shape-option, #stroke-color, #fill-color").css("display", "none");
 		$("#brush-preset-container").fadeIn('slow');
 		$("#active-tool").html(" ");
 		$("#active-tool").html("<img src='img/brush-stroke.svg'>");
@@ -120,6 +133,7 @@
 	            $("#new-canvas").css("top", "8px");
 	            $("#connectedState").css("display", "block");
 	            $(".sp-replacer, .sp-light, .full-spectrum").css("top", "13px");
+	            $('#template-image').removeAttr('src');
 	            isConnected = true;
 	        });
 		} catch(e) {
@@ -164,12 +178,10 @@
 			tmp_canvas.height = newCanvasHeight;
 			canvas.width = newCanvasWidth;
 			canvas.height = newCanvasHeight;
-			/*console.log(filestate);*/
-	        if (cStep < 0){
+	        if (cStep < 0) {
 	        	canvasPic.src = canvas.toDataURL();
 	        	canvasPicSrc = canvas.toDataURL();
-	        }
-	        else {
+	        } else {
 	        	canvasPic.src = cPushArray[cStep];
 	        	canvasPicSrc = cPushArray[cStep];
 	        }
@@ -1202,9 +1214,10 @@
 				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "shapes":
-				$("#active-tool").html(" ");
+				/*$("#active-tool").html(" ");
 				$("#active-tool").html("<img src='img/polygon.svg'>");
-				$("#brush-preset-container, #tools-modal").fadeOut("fast");
+				$("#brush-preset-container, #tools-modal").fadeOut("fast");*/
+				$('#tools-modal').fadeIn("fast");
 				break;
 			case "paint-bucket":
 				$("#active-tool").html(" ");
@@ -1363,23 +1376,23 @@
 		switch (id) {
 			case "tuts-prev-1":
 				tutorialDesc = "To change the active tool, press the lower right corner from the sketchpad and click the desired tool.";
-				tutorialPrev = "<img src='img/t1.png'>"
+				tutorialPrev = "<img src='img/help/t1.png'>"
 				break;
 			case "tuts-prev-2":
 				tutorialDesc = "Change your tool color by pressing the color box and choose from the variety of colors in swatches and palettes.";
-				tutorialPrev = "<img src='img/t2.png'>"
+				tutorialPrev = "<img src='img/help/t2.png'>"
 				break;
 			case "tuts-prev-3":
 				tutorialDesc = "Adjust the tool size by just sliding the range tool.";
-				tutorialPrev = "<img src='img/t3.png'>"
+				tutorialPrev = "<img src='img/help/t3.png'>"
 				break;
 			case "tuts-prev-4":
 				tutorialDesc = "Press the grid icon to show grid lines on your sketchpad.";
-				tutorialPrev = "<img src='img/t4.png'>"
+				tutorialPrev = "<img src='img/help/t4.png'>"
 				break;
 			case "tuts-prev-5":
 				tutorialDesc = "Check the other options like uploading images, changing backgroud, saving image, sharing your work, using templaes and connecting to PC.";
-				tutorialPrev = "<img src='img/t5.png'>"
+				tutorialPrev = "<img src='img/help/t5.png'>"
 				break;
 		}
 
@@ -1397,7 +1410,7 @@
 			$("#template-image").css("z-index", "0");
 		}
 
-		$("#template-image").attr('src', 'img/'+selected+'.PNG');
+		$("#template-image").attr('src', 'img/templates/'+selected+'.PNG');
 		onTemplate = true;
 		imgSrc = $(this).attr("src");
 		console.log(imgSrc);
