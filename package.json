@@ -15,6 +15,7 @@
     "cordova-browser": "^4.1.0",
     "cordova-plugin-compat": "^1.0.0",
     "cordova-plugin-file": "^4.3.3",
+    "cordova-plugin-qrscanner": "^2.5.0",
     "cordova-plugin-screen-orientation": "^2.0.1",
     "cordova-plugin-screenorientation-landscape": "^1.0.22",
     "cordova-plugin-splashscreen": "^4.0.3",

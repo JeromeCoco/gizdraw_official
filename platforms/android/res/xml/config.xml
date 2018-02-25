@@ -35,6 +35,9 @@
     <feature name="ZoomControl">
         <param name="android-package" value="com.selfservit.zoom.Zoomcontrol" />
     </feature>
+    <feature name="QRScanner">
+        <param name="android-package" value="com.bitpay.cordova.qrscanner.QRScanner" />
+    </feature>
     <name>GizDraw</name>
     <description>
         A drawing app that will turn your mobile device to a graphic tablet.

@@ -247,6 +247,14 @@ module.exports = [
         "clobbers": [
             "zoomControl"
         ]
+    },
+    {
+        "id": "cordova-plugin-qrscanner.QRScanner",
+        "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
+        "pluginId": "cordova-plugin-qrscanner",
+        "clobbers": [
+            "QRScanner"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -264,7 +272,8 @@ module.exports.metadata =
     "cordova-plugin-x-toast": "2.6.0",
     "org.solderzzc.base64imagesaverplugin": "0.6.0",
     "cordova-plugin-statusbar": "2.4.1",
-    "cordova-plugin-zoomcontrol": "1.0.1"
+    "cordova-plugin-zoomcontrol": "1.0.1",
+    "cordova-plugin-qrscanner": "2.5.0"
 };
 // BOTTOM OF METADATA
 });

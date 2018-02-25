@@ -51,6 +51,10 @@
             {
               "xml": "<feature name=\"ZoomControl\"><param name=\"android-package\" value=\"com.selfservit.zoom.Zoomcontrol\" /></feature>",
               "count": 1
+            },
+            {
+              "xml": "<feature name=\"QRScanner\"><param name=\"android-package\" value=\"com.bitpay.cordova.qrscanner.QRScanner\" /></feature>",
+              "count": 1
             }
           ]
         }
@@ -61,6 +65,18 @@
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
               "count": 4
+            },
+            {
+              "xml": "<uses-permission android:name=\"android.permission.CAMERA\" android:required=\"false\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-feature android:name=\"android.hardware.camera\" android:required=\"false\" />",
+              "count": 1
+            },
+            {
+              "xml": "<uses-feature android:name=\"android.hardware.camera.front\" android:required=\"false\" />",
+              "count": 1
             }
           ],
           "/manifest/application": [
@@ -111,6 +127,9 @@
       "PACKAGE_NAME": "com.example.GizDraw"
     },
     "cordova-plugin-zoomcontrol": {
+      "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "cordova-plugin-qrscanner": {
       "PACKAGE_NAME": "com.example.GizDraw"
     }
   },
@@ -363,6 +382,14 @@
       "clobbers": [
         "zoomControl"
       ]
+    },
+    {
+      "id": "cordova-plugin-qrscanner.QRScanner",
+      "file": "plugins/cordova-plugin-qrscanner/www/www.min.js",
+      "pluginId": "cordova-plugin-qrscanner",
+      "clobbers": [
+        "QRScanner"
+      ]
     }
   ],
   "plugin_metadata": {
@@ -378,6 +405,7 @@
     "cordova-plugin-x-toast": "2.6.0",
     "org.solderzzc.base64imagesaverplugin": "0.6.0",
     "cordova-plugin-statusbar": "2.4.1",
-    "cordova-plugin-zoomcontrol": "1.0.1"
+    "cordova-plugin-zoomcontrol": "1.0.1",
+    "cordova-plugin-qrscanner": "2.5.0"
   }
 }

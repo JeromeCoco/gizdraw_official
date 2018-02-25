@@ -10,282 +10,290 @@
         <title>GizDraw | Mobile App</title>
     </head>
     <body>
-    	<div id="connectedState"></div>
-        <div id="sketch">
-        	<img id="template-image" src="">
-            <canvas id="paint"></canvas>
-            <div class="grid-svg">
-				<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-					<defs>
-	  					<pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
-	    					<path d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" stroke-width="0.5"/>
-	  					</pattern>
-	  					<pattern id="grids" width="80" height="80" patternUnits="userSpaceOnUse">
-	    					<rect width="80" height="80" fill="url(#smallGrid)"/>
-	    					<path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="1"/>
-	  					</pattern>
-					</defs>
-					<rect width="100%" height="100%" fill="url(#grids)" />
-				</svg>
-			</div>
-        </div>
-		<div class="top-menu">
-	    	<div id="tools-left">
-	    		<img src="img/collapse.svg" id="collapse-tools">
-	    		<!-- <input class='simple_color_live_preview' value='#000' name="penColor" id="pen-color"/> -->
-	    		<input type="text" class="pen-color-class" id="pen-color">
-	    		<input type="range" class="slider" name="penWidth" max="50" min="1" value="1" id="pen-width"/>
-	    		<span id="marker-width-label">1px</span>
-	    		<img src="img/grid.svg" id="grid" class="tools-item">
-	    		<img src="img/clear.svg" id="new-canvas"/>
-	    	</div>
-	    	<div id="menu-right">
-	    		<img src="img/undo-arrow.svg" id="undo"/>
-	    		<img src="img/redo-arrow.svg" id="redo"/>
-	    		<img src="img/settings-gears.svg" id="settings"/>
-	    		<div class="drop-menu">
-	    			<ul>
-	    				<li class="primary" id="open-file">
-	    					<label for="selectedFile">
-    							Open Image
-							</label>
-							<input id="selectedFile" type="file" name="selectedFile"/>
-	    				</li>
-	    				<li class="primary" id="canvas-settings">Canvas Options</li>
-	    				<li class="primary" id="save-image">Save As...</li>
-	    				<li class="primary" id="share">Share</li>
-	    				<li class="primary" id="connect-pc">Connect To PC</li>
-	    				<li class="secondary" id="disconnect">Disconnect</li>
-	    				<li class="primary" id="templates">Templates</li>
-	    				<li class="primary" id="help">Help</li>
-	    			</ul>
-	    		</div>
-	    	</div>
-	  	</div>
-        <div id="canvas-settings-modal" class="modal">
-  			<div class="modal-content">
-    			<div class="modal-body">
-    				<img class="close" src="img/close-button.png"/>
-    				<div>
-    					<img src="img/choose-canvas.svg"/>
-    					<span>Choose Canvas Background</span>
-    				</div>
-    				<select id="canvas-type">
-    					<option>Transparent</option>
-    					<option>White</option>
-    					<option>Color</option>
-    					<option>Paper Texture</option>
-    				</select>
-    				<input type="color" id="custom-bg-color" />
-    				<button class="close" id="setCanvasType">Set Background</button>
+        <div id="mainFrame">
+        	<div id="connectedState"></div>
+            <div id="sketch">
+            	<img id="template-image" src="">
+                <canvas id="paint"></canvas>
+                <div class="grid-svg">
+    				<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    					<defs>
+    	  					<pattern id="smallGrid" width="8" height="8" patternUnits="userSpaceOnUse">
+    	    					<path d="M 8 0 L 0 0 0 8" fill="none" stroke="gray" stroke-width="0.5"/>
+    	  					</pattern>
+    	  					<pattern id="grids" width="80" height="80" patternUnits="userSpaceOnUse">
+    	    					<rect width="80" height="80" fill="url(#smallGrid)"/>
+    	    					<path d="M 80 0 L 0 0 0 80" fill="none" stroke="gray" stroke-width="1"/>
+    	  					</pattern>
+    					</defs>
+    					<rect width="100%" height="100%" fill="url(#grids)" />
+    				</svg>
     			</div>
-  			</div>
-		</div>
-		<div id="connect-modal" class="modal-connect">
-  			<div class="modal-content-connect">
-    			<div class="modal-body" id="waiting-state">
-    				<img src="img/close-button.png" class="close-connect">
-    				<div>
-    					<img src="img/connect-pc.svg"/>
-    					<span>Connect To PC</span>
-    				</div>
-    				<input type="text" id="ipaddress" placeholder="Enter code..."><br>
-    				<button id="btnConnect"><!-- <i class="fa fa-rss" aria-hidden="true"></i> -->Connect</button>
-    			</div>
-  			</div>
-		</div>
-		<div id="save-modal" class="modal-save">
-  			<div class="modal-content-save">
-    			<div class="modal-body">
-    				<img src="img/close-button.png" class="close-save">
-    				<div>
-    					<img src="img/save.svg"/>
-    					<span>Save format...</span>
-    				</div>
-    				<p class="primary-saving close-save save-png" id="save-png">.png</p>
-    				<p class="primary-saving" id="save-jpg">.jpg</p>
-                    <p class="secondary-saving" id="save-template">Save with template</p>
-                    <p class="secondary-saving save-png" id="save-jpg">Save without template</p>
-    			</div>
-  			</div>
-		</div>
-		<div id="tuts-modal" class="modal-tuts">
-  			<div class="modal-content-tuts">
-    			<div class="modal-body">
-    				<img src="img/close-button.png" class="close-tuts">
-    				<ul>
-    					<li id="tuts-prev-1" class="tuts-item active-tuts">Change active tool.</li>
-    					<li id="tuts-prev-2" class="tuts-item">Choose tool color.</li>
-    					<li id="tuts-prev-3" class="tuts-item">Adjust tool size.</li>
-    					<li id="tuts-prev-4" class="tuts-item">Show grid lines.</li>
-    					<li id="tuts-prev-5" class="tuts-item">See other options.</li>
-    				</ul>
-    				<div id="tuts-preview-container">
-    					<img src="img/help/t1.png">
-    				</div>
-    				<div id="tutorial-hint">
-    					To change the active tool, press the lower right corner from the sketchpad and click the desired tool.
-    				</div>
-    			</div>
-  			</div>
-		</div>
-		<div id="tools-modal">
-			<img src="img/pencil.svg" id="pencil" class="tool">
-			<img src="img/brush-stroke.svg" id="brush" class="tool">
-			<img src="img/vector.svg" id="line" class="tool">
-			<img src="img/rubber.svg" id="eraser" class="tool">
-			<img src="img/color-picker.svg" id="color-picker" class="tool">
-			<img src="img/polygon.svg" id="shapes" class="tool">
-			<img src="img/move.svg" id="move-tool" class="tool">
-			<img src="img/paint-can.svg" id="paint-bucket" class="tool">
-			<img src="img/cancel.png" id="exit-tool">
-		</div>
-		<div id="active-tool">
-			<img src="img/pencil.svg">
-		</div>
-		<div id="brush-preset-container">
-			<img class="presets" src="img/presets/1.png" id="first-preset"/>
-	       	<img class="presets" src="img/presets/2.png" id="second-preset"/>
-	        <img class="presets" src="img/presets/3.png" id="third-preset"/>
-            <div id="shapes-container">
-                <img class="shape-option" src="img/shapes/circle.svg"/>
-                <img class="shape-option" src="img/shapes/heart.svg"/>
-                <img class="shape-option" src="img/shapes/triangle.svg"/>
-                <img class="shape-option" src="img/shapes/square.svg"/>
-                <input type="color" id="stroke-color">
-                <input type="color" id="fill-color">
             </div>
-		</div>
-		<div id="tutorial-1" class="modal-tutor">
-  			<div class="modal-content-tutor">
-    			<div class="modal-body">
-    				<p>Welcome to GizDraw!</p>
-    				<div>You can start a quick tutorial from here.</div>
-    				<table>
-    					<tr>
-    						<td id="start-tutorial">Start</td>
-    						<td id="skip-tutorial">Skip</td>
-    					</tr>
-    				</table>
-    			</div>
-  			</div>
-		</div>
-		<div class="tutorial" id="tutorial-2">
-			This is your canvas. Try to draw...
-			<div>Next</div>
-		</div>
-		<div id="dash">
-			<img src="img/dash-lines.png">
-		</div>
-		<div class="tutorial" id="tutorial-3">
-			Tap to see your tools...
-			<img class="animateArrowRight" src="img/up-arrow.svg">
-		</div>
-		<div class="tutorial" id="tutorial-4">
-			Choose pencil to set your active drawing tool...
-			<img class="animateArrowRight" src="img/up-arrow.svg">
-		</div>
-		<div class="tutorial" id="tutorial-5">
-			You can also choose other tools later...
-			<div>Next</div>
-		</div>
-		<div class="tutorial" id="tutorial-6">
-			Press here to choose a color...
-			<img class="animateArrowLeft" src="img/up-arrow.svg">
-			<div>Next</div>
-		</div>
-		<div class="tutorial" id="tutorial-7">
-			Slide to adjust your tool size...
-			<img class="animateArrowLeft" src="img/up-arrow.svg">
-			<div>Next</div>
-		</div>
-		<div class="tutorial" id="tutorial-8">
-			Tap to show grid...
-			<img class="animateArrowLeft" src="img/up-arrow.svg">
-			<div>Next</div>
-		</div>
-		<div class="tutorial" id="tutorial-9">
-            Tap to clear canvas...
-			<img class="animateArrowLeft" src="img/up-arrow.svg">
-			<div>Next</div>
-		</div>
-		<div class="tutorial" id="tutorial-10">
-			You can also undo and redo strokes...
-			<img class="animateArrowRight" src="img/up-arrow.svg">
-			<div>Next</div>
-		</div>
-		<div class="tutorial" id="tutorial-11">
-			Press to see other options...
-			<img class="animateArrowRight" src="img/up-arrow.svg">
-			<div>Next</div>
-		</div>
-		<div id="tutorial-12" class="modal-tutor">
-  			<div class="modal-content-tutor">
-    			<div class="modal-body">
-    				<p>That's it!</p>
-    				<div>You can start to draw now.</div>
-    				<table>
-    					<tr>
-    						<td id="btnOkay">Okay</td>
-    					</tr>
-    				</table>
-    			</div>
-  			</div>
-		</div>
-		<div id="tutorial-13" class="modal-tutor">
-  			<div class="modal-content-tutor">
-    			<div class="modal-body">
-    				<p>Help?</p>
-    				<div>Check the quick tutorials from options.</div>
-    				<table>
-    					<tr>
-    						<td id="btnGotIt">Got it!</td>
-    					</tr>
-    				</table>
-    			</div>
-  			</div>
-		</div>
-		<div id="templatesmodal" class="modal-templates">
-  			<div class="modal-content-templates">
-    			<div class="modal-body">
-    				<img src="img/close-button.png" class="close-templates">
-    				<p><img src="img/star.svg">Templates</p>
-    				<div class="template-option" id="coloring">Coloring</div>
-    				<div class="template-option" id="drawing">Tracing</div>
-                    <div class="template-item" id="coloring-options">
-                        <p>Beginner</p>
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring5-beginner" src="img/templates/coloring5-beginner.PNG">
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring6-beginner" src="img/templates/coloring6-beginner.PNG">
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring8-beginner" src="img/templates/coloring8-beginner.PNG">
-                        <p>Intermediate</p>
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring1-intermediate" src="img/templates/coloring1-intermediate.PNG">
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring3-intermediate" src="img/templates/coloring3-intermediate.PNG">
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring7-intermediate" src="img/templates/coloring7-intermediate.PNG">
-                        <p>Pro</p>
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring2-pro" src="img/templates/coloring2-pro.PNG">
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring4-pro" src="img/templates/coloring4-pro.PNG">
-                        <img class="selected-template" data-template-type="coloring" data-template="coloring9-pro" src="img/templates/coloring9-pro.PNG">
-                    </div>
-    				<div class="template-item" id="drawing-options">
-    					<p>Beginner</p>
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing1-beginner" src="img/templates/drawing1-beginner.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing2-beginner" src="img/templates/drawing2-beginner.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing3-beginner" src="img/templates/drawing3-beginner.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing10-beginner" src="img/templates/drawing10-beginner.PNG">
-                        <p>Intermediate</p>
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing5-intermediate" src="img/templates/drawing5-intermediate.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing6-intermediate" src="img/templates/drawing6-intermediate.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing9-intermediate" src="img/templates/drawing9-intermediate.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing12-intermediate" src="img/templates/drawing12-intermediate.PNG">
-                        <p>Pro</p>
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing4-pro" src="img/templates/drawing4-pro.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing7-pro" src="img/templates/drawing7-pro.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing8-pro" src="img/templates/drawing8-pro.PNG">
-                        <img class="selected-template" data-template-type="drawing" data-template="drawing11-pro" src="img/templates/drawing11-pro.PNG">
-    				</div>
-    			</div>
-  			</div>
-		</div>
+    		<div class="top-menu">
+    	    	<div id="tools-left">
+    	    		<img src="img/collapse.svg" id="collapse-tools">
+    	    		<!-- <input class='simple_color_live_preview' value='#000' name="penColor" id="pen-color"/> -->
+    	    		<input type="text" class="pen-color-class" id="pen-color">
+    	    		<input type="range" class="slider" name="penWidth" max="50" min="1" value="1" id="pen-width"/>
+    	    		<span id="marker-width-label">1px</span>
+    	    		<img src="img/grid.svg" id="grid" class="tools-item">
+    	    		<img src="img/clear.svg" id="new-canvas"/>
+    	    	</div>
+    	    	<div id="menu-right">
+    	    		<img src="img/undo-arrow.svg" id="undo"/>
+    	    		<img src="img/redo-arrow.svg" id="redo"/>
+    	    		<img src="img/settings-gears.svg" id="settings"/>
+    	    		<div class="drop-menu">
+    	    			<ul>
+    	    				<li class="primary" id="open-file">
+    	    					<label for="selectedFile">
+        							Open Image
+    							</label>
+    							<input id="selectedFile" type="file" name="selectedFile"/>
+    	    				</li>
+    	    				<li class="primary" id="canvas-settings">Canvas Options</li>
+    	    				<li class="primary" id="save-image">Save As...</li>
+    	    				<li class="primary" id="share">Share</li>
+    	    				<li class="primary" id="connect-pc">Connect To PC</li>
+    	    				<li class="secondary" id="disconnect">Disconnect</li>
+    	    				<li class="primary" id="templates">Templates</li>
+    	    				<li class="primary" id="help">Help</li>
+    	    			</ul>
+    	    		</div>
+    	    	</div>
+    	  	</div>
+            <div id="canvas-settings-modal" class="modal">
+      			<div class="modal-content">
+        			<div class="modal-body">
+        				<img class="close" src="img/close-button.png"/>
+        				<div>
+        					<img src="img/choose-canvas.svg"/>
+        					<span>Choose Canvas Background</span>
+        				</div>
+        				<select id="canvas-type">
+        					<option>Transparent</option>
+        					<option>White</option>
+        					<option>Color</option>
+        					<option>Paper Texture</option>
+        				</select>
+        				<input type="color" id="custom-bg-color" />
+        				<button class="close" id="setCanvasType">Set Background</button>
+        			</div>
+      			</div>
+    		</div>
+    		<div id="connect-modal" class="modal-connect">
+      			<div class="modal-content-connect">
+        			<div class="modal-body" id="waiting-state">
+        				<img src="img/close-button.png" class="close-connect">
+        				<div>
+        					<img src="img/connect-pc.svg"/>
+        					<span>Connect To PC</span>
+        				</div>
+        				<input type="text" id="ipaddress" placeholder="Enter code..."><br>
+        				<button id="btnConnect">Connect</button>
+                        <div id="split">or</div>
+                        <button id="scanQr">Scan QR Code</button>
+        			</div>
+      			</div>
+    		</div>
+    		<div id="save-modal" class="modal-save">
+      			<div class="modal-content-save">
+        			<div class="modal-body">
+        				<img src="img/close-button.png" class="close-save">
+        				<div>
+        					<img src="img/save.svg"/>
+        					<span>Save format...</span>
+        				</div>
+        				<p class="primary-saving close-save save-png" id="save-png">.png</p>
+        				<p class="primary-saving" id="save-jpg">.jpg</p>
+                        <p class="secondary-saving" id="save-template">Save with template</p>
+                        <p class="secondary-saving save-png" id="save-jpg">Save without template</p>
+        			</div>
+      			</div>
+    		</div>
+    		<div id="tuts-modal" class="modal-tuts">
+      			<div class="modal-content-tuts">
+        			<div class="modal-body">
+        				<img src="img/close-button.png" class="close-tuts">
+        				<ul>
+        					<li id="tuts-prev-1" class="tuts-item active-tuts">Change active tool.</li>
+        					<li id="tuts-prev-2" class="tuts-item">Choose tool color.</li>
+        					<li id="tuts-prev-3" class="tuts-item">Adjust tool size.</li>
+        					<li id="tuts-prev-4" class="tuts-item">Show grid lines.</li>
+        					<li id="tuts-prev-5" class="tuts-item">See other options.</li>
+        				</ul>
+        				<div id="tuts-preview-container">
+        					<img src="img/help/t1.png">
+        				</div>
+        				<div id="tutorial-hint">
+        					To change the active tool, press the lower right corner from the sketchpad and click the desired tool.
+        				</div>
+        			</div>
+      			</div>
+    		</div>
+    		<div id="tools-modal">
+    			<img src="img/pencil.svg" id="pencil" class="tool">
+    			<img src="img/brush-stroke.svg" id="brush" class="tool">
+    			<img src="img/vector.svg" id="line" class="tool">
+    			<img src="img/rubber.svg" id="eraser" class="tool">
+    			<img src="img/color-picker.svg" id="color-picker" class="tool">
+    			<img src="img/polygon.svg" id="shapes" class="tool">
+    			<img src="img/move.svg" id="move-tool" class="tool">
+    			<img src="img/paint-can.svg" id="paint-bucket" class="tool">
+    			<img src="img/cancel.png" id="exit-tool">
+    		</div>
+    		<div id="active-tool">
+    			<img src="img/pencil.svg">
+    		</div>
+    		<div id="brush-preset-container">
+    			<img class="presets" src="img/presets/1.png" id="first-preset"/>
+    	       	<img class="presets" src="img/presets/2.png" id="second-preset"/>
+    	        <img class="presets" src="img/presets/3.png" id="third-preset"/>
+                <div id="shapes-container">
+                    <img class="shape-option" src="img/shapes/circle.svg"/>
+                    <img class="shape-option" src="img/shapes/heart.svg"/>
+                    <img class="shape-option" src="img/shapes/triangle.svg"/>
+                    <img class="shape-option" src="img/shapes/square.svg"/>
+                    <input type="color" id="stroke-color">
+                    <input type="color" id="fill-color">
+                </div>
+    		</div>
+    		<div id="tutorial-1" class="modal-tutor">
+      			<div class="modal-content-tutor">
+        			<div class="modal-body">
+        				<p>Welcome to GizDraw!</p>
+        				<div>You can start a quick tutorial from here.</div>
+        				<table>
+        					<tr>
+        						<td id="start-tutorial">Start</td>
+        						<td id="skip-tutorial">Skip</td>
+        					</tr>
+        				</table>
+        			</div>
+      			</div>
+    		</div>
+    		<div class="tutorial" id="tutorial-2">
+    			This is your canvas. Try to draw...
+    			<div>Next</div>
+    		</div>
+    		<div id="dash">
+    			<img src="img/dash-lines.png">
+    		</div>
+    		<div class="tutorial" id="tutorial-3">
+    			Tap to see your tools...
+    			<img class="animateArrowRight" src="img/up-arrow.svg">
+    		</div>
+    		<div class="tutorial" id="tutorial-4">
+    			Choose pencil to set your active drawing tool...
+    			<img class="animateArrowRight" src="img/up-arrow.svg">
+    		</div>
+    		<div class="tutorial" id="tutorial-5">
+    			You can also choose other tools later...
+    			<div>Next</div>
+    		</div>
+    		<div class="tutorial" id="tutorial-6">
+    			Press here to choose a color...
+    			<img class="animateArrowLeft" src="img/up-arrow.svg">
+    			<div>Next</div>
+    		</div>
+    		<div class="tutorial" id="tutorial-7">
+    			Slide to adjust your tool size...
+    			<img class="animateArrowLeft" src="img/up-arrow.svg">
+    			<div>Next</div>
+    		</div>
+    		<div class="tutorial" id="tutorial-8">
+    			Tap to show grid...
+    			<img class="animateArrowLeft" src="img/up-arrow.svg">
+    			<div>Next</div>
+    		</div>
+    		<div class="tutorial" id="tutorial-9">
+                Tap to clear canvas...
+    			<img class="animateArrowLeft" src="img/up-arrow.svg">
+    			<div>Next</div>
+    		</div>
+    		<div class="tutorial" id="tutorial-10">
+    			You can also undo and redo strokes...
+    			<img class="animateArrowRight" src="img/up-arrow.svg">
+    			<div>Next</div>
+    		</div>
+    		<div class="tutorial" id="tutorial-11">
+    			Press to see other options...
+    			<img class="animateArrowRight" src="img/up-arrow.svg">
+    			<div>Next</div>
+    		</div>
+    		<div id="tutorial-12" class="modal-tutor">
+      			<div class="modal-content-tutor">
+        			<div class="modal-body">
+        				<p>That's it!</p>
+        				<div>You can start to draw now.</div>
+        				<table>
+        					<tr>
+        						<td id="btnOkay">Okay</td>
+        					</tr>
+        				</table>
+        			</div>
+      			</div>
+    		</div>
+    		<div id="tutorial-13" class="modal-tutor">
+      			<div class="modal-content-tutor">
+        			<div class="modal-body">
+        				<p>Help?</p>
+        				<div>Check the quick tutorials from options.</div>
+        				<table>
+        					<tr>
+        						<td id="btnGotIt">Got it!</td>
+        					</tr>
+        				</table>
+        			</div>
+      			</div>
+    		</div>
+    		<div id="templatesmodal" class="modal-templates">
+      			<div class="modal-content-templates">
+        			<div class="modal-body">
+        				<img src="img/close-button.png" class="close-templates">
+        				<p><img src="img/star.svg">Templates</p>
+        				<div class="template-option" id="coloring">Coloring</div>
+        				<div class="template-option" id="drawing">Tracing</div>
+                        <div class="template-item" id="coloring-options">
+                            <p>Beginner</p>
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring5-beginner" src="img/templates/coloring5-beginner.PNG">
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring6-beginner" src="img/templates/coloring6-beginner.PNG">
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring8-beginner" src="img/templates/coloring8-beginner.PNG">
+                            <p>Intermediate</p>
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring1-intermediate" src="img/templates/coloring1-intermediate.PNG">
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring3-intermediate" src="img/templates/coloring3-intermediate.PNG">
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring7-intermediate" src="img/templates/coloring7-intermediate.PNG">
+                            <p>Pro</p>
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring2-pro" src="img/templates/coloring2-pro.PNG">
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring4-pro" src="img/templates/coloring4-pro.PNG">
+                            <img class="selected-template" data-template-type="coloring" data-template="coloring9-pro" src="img/templates/coloring9-pro.PNG">
+                        </div>
+        				<div class="template-item" id="drawing-options">
+        					<p>Beginner</p>
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing1-beginner" src="img/templates/drawing1-beginner.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing2-beginner" src="img/templates/drawing2-beginner.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing3-beginner" src="img/templates/drawing3-beginner.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing10-beginner" src="img/templates/drawing10-beginner.PNG">
+                            <p>Intermediate</p>
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing5-intermediate" src="img/templates/drawing5-intermediate.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing6-intermediate" src="img/templates/drawing6-intermediate.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing9-intermediate" src="img/templates/drawing9-intermediate.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing12-intermediate" src="img/templates/drawing12-intermediate.PNG">
+                            <p>Pro</p>
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing4-pro" src="img/templates/drawing4-pro.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing7-pro" src="img/templates/drawing7-pro.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing8-pro" src="img/templates/drawing8-pro.PNG">
+                            <img class="selected-template" data-template-type="drawing" data-template="drawing11-pro" src="img/templates/drawing11-pro.PNG">
+        				</div>
+        			</div>
+      			</div>
+    		</div>
+        </div>
+        <div id="qr-view">
+            <img src="img/logo2.png">
+            
+        </div>
 		<script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

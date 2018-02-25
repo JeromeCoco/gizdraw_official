@@ -18,6 +18,8 @@
 	const canvasGetWidth = canvas.width;
 	const canvasGetHeight = canvas.height;
 	var currentIPaddress;
+	var isFromQrScanner = false;
+	var globaIpFromScanner;
 	var socket;
 	var tmp_canvas = document.createElement('canvas');
 	var tmp_ctx = tmp_canvas.getContext('2d');
@@ -42,6 +44,87 @@
 	  	$("#tutorial-1").css("display", "none");
 	} else {
 	  	$("#tutorial-1").css("display", "block");
+	}
+
+	$("#scanQr").click(function(){
+		QRScanner.scan(displayContents);
+		QRScanner.show();
+		$("#mainFrame").css("display", "none");
+		$("#qr-view").css("display", "block");
+	});
+
+	function displayContents(err, text){
+  		if(err){
+    		alert("An error occured:" + err);
+  		} else {
+    		isFromQrScanner = true;
+    		globaIpFromScanner = text;
+			$("#qr-view").css("display", "none");
+			$("#mainFrame").css("display", "block");
+			QRScanner.hide();
+			connects();
+			socket.on("connect", function(){
+	            socket.emit("sender", "start com");
+	            $("#ipaddress").css("display", "none");
+	            $(".close-connect").css("display", "none");
+	            $("#btnConnect").css("display", "none");
+	            $("#waiting-state").html("<img id='loader' style='width:100px' src='img/Loading_icon.gif'><br/><p style='color:green;font-weight:bold;'>Successfully connected.</p> Waiting for canvas details...");
+	            $("#waiting-state").css("padding", "20px");
+	            $("#grid").css("top", "8px");
+	            $("#marker-width-label").css("top", "20px");
+	            $("#new-canvas").css("top", "8px");
+	            $("#connectedState").css("display", "block");
+	            $(".sp-replacer, .sp-light, .full-spectrum").css("top", "13px");
+	            $('#template-image').removeAttr('src');
+	            isConnected = true;
+	        });
+
+	        socket.on("onClearCanvasToMobile", function(data){
+	        	resetCanvas();
+				cPushArray = new Array();
+	        });
+
+	        socket.on("onDisconnectToMobile", function(data){
+	        	location.reload();
+	        });
+
+	        socket.on("onBgChangeToMobile", function(data){
+	        	bgColor = data.bgColor;
+	        	bgIsColored = data.bgIsColored;
+	        	if (bgIsColored) {
+	        		$("#paint").css("background-color", bgColor);
+	        	} else {
+	        		$("#paint").css("background-color", "#FFFFFF");
+	        	}
+	        	if (isConnected) {
+					eventLogLabel = "Background Color: "+bgColor;
+					socket.emit("onSendEventLog", eventLogLabel);
+				}
+	        });
+
+	        socket.on("onCanvasResizeToMobile", function(data){
+	        	newCanvasWidth = data.canvasSizeWidth;
+	        	newCanvasHeight = data.canvasSizeHeight;
+
+	        	tmp_canvas.width = newCanvasWidth;
+				tmp_canvas.height = newCanvasHeight;
+				canvas.width = newCanvasWidth;
+				canvas.height = newCanvasHeight;
+		        if (cStep < 0) {
+		        	canvasPic.src = canvas.toDataURL();
+		        	canvasPicSrc = canvas.toDataURL();
+		        } else {
+		        	canvasPic.src = cPushArray[cStep];
+		        	canvasPicSrc = cPushArray[cStep];
+		        }
+
+		        canvasPic.onload = function () {
+		        	ctx.clearRect(0, 0, canvas.width, canvas.height);
+		        	ctx.drawImage(canvasPic, 0, 0);
+		        }
+		        socket.emit("onSendcStep", {canvasPiccStep:canvasPicSrc});
+	        });
+  		}
 	}
 
 	$('#pencil').addClass('active');
@@ -119,6 +202,7 @@
 	}
 
 	$("#btnConnect").click(function(){
+		isFromQrScanner = false;
 		try {
 			connects();
 	        socket.on("connect", function(){
@@ -174,6 +258,7 @@
         socket.on("onCanvasResizeToMobile", function(data){
         	newCanvasWidth = data.canvasSizeWidth;
         	newCanvasHeight = data.canvasSizeHeight;
+
         	tmp_canvas.width = newCanvasWidth;
 			tmp_canvas.height = newCanvasHeight;
 			canvas.width = newCanvasWidth;
@@ -269,10 +354,15 @@
     };
 
     function connects(){
-		currentIPaddress = $('#ipaddress').val();
+    	if (isFromQrScanner) {
+    		currentIPaddress = globaIpFromScanner;
+    	} else {
+    		currentIPaddress = $('#ipaddress').val();
+    	}
+
 		var splitLetter = currentIPaddress.split("");
 
-		if (splitLetter.length > 8) {
+		/*if (splitLetter.length > 9) {
 			window.plugins.toast.showShortBottom(
 		    	'Please try again.',
 		    	function(a){
@@ -288,8 +378,16 @@
 			var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
 			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
 			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
+			alert("converted"+convertedIp);
 	        socket = io('http://'+convertedIp+':3000');
-		}
+		}*/
+
+		var part1 = parseInt(convertSetFromLetterToIP[splitLetter[0]][splitLetter[1]]);
+		var part2 = parseInt(convertSetFromLetterToIP[splitLetter[2]][splitLetter[3]]);
+		var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
+		var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
+		var convertedIp = part1+"."+part2+"."+part3+"."+part4;
+        socket = io('http://'+convertedIp+':3000');
 
         socket.on("createCanvasToMobile", function(data){
         	if(data.state == "open"){
@@ -406,6 +504,10 @@
 
         socket.on("receiveLogStep", function(data){
         	logstep = data;
+        });
+
+        socket.on("receiveCSize", function(data) {
+        	alert(data);
         });
 	}
 
@@ -545,6 +647,7 @@
 				tmp_ctx.lineJoin = 'round';
 				tmp_ctx.lineCap = 'round';
 				tmp_ctx.lineWidth = markerWidth;
+				onPaint();
 				if (isConnected) {
 					eventLogLabel = "Draw";
 					socket.emit("onSendEventLog", eventLogLabel);
@@ -579,7 +682,7 @@
 				tmp_ctx.strokeStyle = markerColor;
 				tmp_ctx.fillStyle = markerColor;
 				$('.simpleColorDisplay').css('background-color', markerColor);
-
+				$('.sp-preview-inner').css('background-color', markerColor);
 				if (isConnected) {
 					socket.emit("onColorSend", markerColor);
 				}
@@ -910,7 +1013,7 @@
 	  		isDrawing = true;
 	  		points.push({ x: mouse.x, y: mouse.y });
 
-			if (toolID == "brush" && currpreset == "fourth-preset") {
+			if (toolID == "brush" && currpreset == "third-preset") {
 				ctx.globalCompositeOperation = 'source-over';
 				ctx.strokeStyle = markerColor;
 				OnDrawThird();
@@ -1123,7 +1226,6 @@
 	$("#save-template").click(function() {
 		var cnvsSrc, cnvsSrcs;
 		cnvsSrcs = canvas.toDataURL();
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
 		canvasPic.src = canvas.toDataURL(imgSrc);
 		console.log(canvas.toDataURL(imgSrc));
 		canvasPic.onload = function () {

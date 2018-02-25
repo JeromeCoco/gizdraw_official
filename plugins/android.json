@@ -39,6 +39,9 @@
     },
     "cordova-plugin-zoomcontrol": {
       "PACKAGE_NAME": "com.example.GizDraw"
+    },
+    "cordova-plugin-qrscanner": {
+      "PACKAGE_NAME": "com.example.GizDraw"
     }
   },
   "dependent_plugins": {
