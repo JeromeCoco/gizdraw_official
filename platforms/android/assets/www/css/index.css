@@ -1141,3 +1141,13 @@ input[type=range].slider:focus::-ms-fill-upper {
   bottom: 0;
   width: 70px;
 }
+
+#cancelQr {
+  position: absolute;
+  right: 0;
+  border: 1px solid white;
+  color: white;
+  padding: 7px 18px;
+  margin: 10px;
+  border-radius: 25px;
+}
