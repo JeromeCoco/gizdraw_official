@@ -1151,3 +1151,18 @@ input[type=range].slider:focus::-ms-fill-upper {
   margin: 10px;
   border-radius: 25px;
 }
+
+#qr-view p {
+  text-align: center;
+  margin: 10px;
+  color: white;
+  position: absolute;
+  bottom: 0;
+  margin-left: 70px;
+  margin-bottom: 10px;
+}
+
+#zoomLabel {
+  position: absolute;
+  bottom: 0;
+}

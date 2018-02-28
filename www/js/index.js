@@ -11,7 +11,7 @@ $(document).ready(function(){
 		$('#templatesmodal').css("display", "block");
 	});
 
-	$(".close-templates, .selected-template").click(function(){
+	$(". ").click(function(){
 		$('#templatesmodal').css("display", "none");
 		$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
@@ -35,7 +35,7 @@ $(document).ready(function(){
 		$('.drop-menu').toggleClass('show-menu');
 	});
 
-	$('.close-connect').click(function(){
+	$('. ').click(function(){
 		$('#connect-modal').css("display", "none");
 		$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
@@ -56,7 +56,7 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#connect-pc').click(function(){
+	$(' ').click(function(){
 		$('#connect-modal').css("display", "block");
 	});
 
@@ -69,12 +69,12 @@ $(document).ready(function(){
 		$(this).addClass('active-preset');
 	});
 
-	$('#preset-second').click(function(){
+	$('').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
 	});
 
-	$('#preset-third').click(function(){
+	$('').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
 	});

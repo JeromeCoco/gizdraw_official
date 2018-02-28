@@ -43,6 +43,7 @@
 	var evCache = new Array();
 	var prevDiff = -1;
 	var currentView = 100;
+	var canvasOffset = $('#tmp_canvas').offset();
 
 	if(firstLaunch) {
 	  	$("#tutorial-1").css("display", "none");
@@ -370,6 +371,9 @@
     };
 
     function connects(){
+    	$("#sketch").css("zoom", "100%");
+    	currentView = 100;
+    	$("#zoomLabel").html(currentView+"%");
     	initZoom();
     	if (isFromQrScanner) {
     		currentIPaddress = globaIpFromScanner;
@@ -522,10 +526,6 @@
         socket.on("receiveLogStep", function(data){
         	logstep = data;
         });
-
-        socket.on("receiveCSize", function(data) {
-        	alert(data);
-        });
 	}
 
 	$('.tool').click( function () {
@@ -571,10 +571,17 @@
 
 	/* Mouse Capturing Work */
 	tmp_canvas.addEventListener('touchmove', function(e) {
+
 		var targetYval = e.targetTouches[0].pageY;
 		var targetXval = e.targetTouches[0].pageX;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
+		// // mouse.x = e.targetTouches[0].pageX - canvasOffset.left;
+		// // mouse.y = e.targetTouches[0].pageY - canvasOffset.top;
+		// mouse.x = e.layerX;
+		// mouse.y = e.layerY;
+		console.log(mouse.x, mouse.y);
+
 		if (isConnected) {
 			socket.emit("sendCoordinates", {x: mouse.x, y: mouse.y});
 		}
@@ -629,6 +636,7 @@
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 		prvX = mouse.x;
 		prvY = mouse.y;
+		console.log(mouse.x, mouse.y);
 		ppts.push({x: mouse.x, y: mouse.y});
 		if (isConnected) {
 			socket.emit("onTouchStart", {state:"touchstart", mX:prvX, mY:prvY});
@@ -745,6 +753,16 @@
 	}, false);
 
 	$('#new-canvas').click(function(){
+		var el = document.getElementById("sketch");
+	    el.onpointerdown = null;
+	    el.onpointermove = null;
+	    el.onpointerup = null;
+	    el.onpointercancel = null;
+	    el.onpointerout = null;
+	    el.onpointerleave = null;
+		$("#sketch").css("zoom", "100%");
+		currentView = 100;
+		$("#zoomLabel").html(currentView+"%");
 		var confirmation1 = confirm("Are you sure you want to clear canvas?");
 		if (confirmation1) {
 			clearCanvas();
@@ -1355,6 +1373,9 @@
 	});
 
   	function loadImage(e) {
+  		$("#sketch").css("zoom", "100%");
+  		currentView = 100;
+  		$("#zoomLabel").html(currentView+"%");
   		initZoom();
   		$("#template-image").attr("src", "");
     	var reader = new FileReader();
@@ -1530,6 +1551,9 @@
 			$("#template-image").css("z-index", "0");
 		}
 
+		$("#sketch").css("zoom", "100%");
+		currentView = 100;
+		$("#zoomLabel").html(currentView+"%");
 		$("#template-image").attr('src', 'img/templates/'+selected+'.PNG');
 		onTemplate = true;
 		imgSrc = $(this).attr("src");
@@ -1649,6 +1673,7 @@
 	                /*log("Pinch moving OUT -> Zoom in", ev);*/
                     currentView += 1;
                     ev.target.style.zoom = currentView+"%";
+                    $("#zoomLabel").html(currentView+"%");
                     /*$("#percent").innerHTML = currentView+"%";*/
                     /*ev.target.style.background = "pink";*/
 	            }
@@ -1657,6 +1682,7 @@
 	                /*log("Pinch moving IN -> Zoom out",ev);*/
                     currentView -= 1;
                     ev.target.style.zoom = currentView+"%";
+                    $("#zoomLabel").html(currentView+"%");
                     /*document.getElementById("percent").innerHTML = currentView+"%";
                     ev.target.style.background = "lightblue";*/
 	            }

@@ -1,6 +1,5 @@
 February 21-25
-	coco  - zoom in / zoom out (mobile)
-		- desktopapp tutorials
+	coco - desktopapp tutorials
 		- embed connection tutorials video
 		__________________________________
 		
