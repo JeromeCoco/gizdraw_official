@@ -1532,7 +1532,7 @@
 				tutorialPrev = "<img src='img/help/t4.png'>"
 				break;
 			case "tuts-prev-5":
-				tutorialDesc = "Check the other options like uploading images, changing backgroud, saving image, sharing your work, using templaes and connecting to PC.";
+				tutorialDesc = "Check the other options like uploading images, changing backgroud, saving image, sharing your work, using templates and connecting to PC.";
 				tutorialPrev = "<img src='img/help/t5.png'>"
 				break;
 		}

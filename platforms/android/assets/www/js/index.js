@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var lastTimeBackPress=0;
 	var timePeriodToExit=2000;
-	$('.simple_color_live_preview').simpleColor({ livePreview: true, cellWidth: 15, cellHeight: 15 });
+	$('.simple_color_l	ive_preview').simpleColor({ livePreview: true, cellWidth: 15, cellHeight: 15 });
 	
 	$('#canvas-settings').click(function(){
 		$('#canvas-settings-modal').css("display", "block");

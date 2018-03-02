@@ -1,20 +1,18 @@
-February 21-25
-	coco - desktopapp tutorials
-		- embed connection tutorials video
-		__________________________________
-		
-		- desktop app package / installer
-		- windows service for server
-		- mobile app (ios)
-	krisha - save with template, save without template
-		- color mode on save (cmyk, rgb) (desktop)
-		- shapes, move tool
+----------------------------------
+TASKING - [March 1-7]
+	coco - optimize zoom (mobile) - RECENT
+		- random splash screen (mobile)
+		- project templates to desktop - RECENT
+	krisha - save with template, save without template (mobile)
+		- canvas options - color mode (cmyk, rgb) (desktop)
+		- shapes, move tool (both)
+		- optimize grid lines (both) - 	RECENT
 	isog - canvas options (paper texture, transparent) (both)
-		- canvas options (esc to cancel resize) (desktop) [NOTE: Wag na ilimit, rollback mo dating codes]
-		- add brush preset (both) [NOTE: mga dalawa pa singit mo lang sa UI ng presets]
-		- paint bucket
-		- canvas options (rotate) (desktop)
-
+		- canvas options (esc to cancel resize) (desktop)
+		- add brush preset (both)
+		- paint bucket (both)
+		- canvas options (rotate) (both)
+		- advertisement video (youtube and embed on website)
 ----------------------------------
 		enhancements done
 ----------------------------------

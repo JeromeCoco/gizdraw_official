@@ -367,6 +367,8 @@ input[type=range].slider:focus::-ms-fill-upper {
   display: block;
   width: 100%;
   border: none;
+  background-color: #e6e6e6;
+  color: black;
 }
 
 .modal-tuts {
@@ -730,6 +732,8 @@ input[type=range].slider:focus::-ms-fill-upper {
   padding: 3px;
   position: relative;
   top: 2px;
+  border: none;
+  background: #e6e6e6;
 }
 
 .modal-body button:nth-child(5) {
@@ -1165,4 +1169,8 @@ input[type=range].slider:focus::-ms-fill-upper {
 #zoomLabel {
   position: absolute;
   bottom: 0;
+}
+
+#canvas-mode {
+  margin: 0px 0px 15px 10px;
 }

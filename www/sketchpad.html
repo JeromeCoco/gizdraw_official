@@ -56,7 +56,7 @@
     	    				<li class="primary" id="canvas-settings">Canvas Options</li>
     	    				<li class="primary" id="save-image">Save As...</li>
     	    				<li class="primary" id="share">Share</li>
-    	    				<li class="primary" id="show-connect">Connect To PC</li>
+    	    				<li class="primary" id="connect-pc">Connect To PC</li>
     	    				<li class="secondary" id="disconnect">Disconnect</li>
     	    				<li class="primary" id="templates">Templates</li>
     	    				<li class="primary" id="help">Help</li>
@@ -70,7 +70,7 @@
         				<img class="close" src="img/close-button.png"/>
         				<div>
         					<img src="img/choose-canvas.svg"/>
-        					<span>Choose Canvas Background</span>
+        					<span>Canvas Options</span>
         				</div>
         				<select id="canvas-type">
         					<option>Transparent</option>
@@ -79,7 +79,11 @@
         					<option>Paper Texture</option>
         				</select>
         				<input type="color" id="custom-bg-color" />
-        				<button class="close" id="setCanvasType">Set Background</button>
+                        <select id="canvas-mode">
+                            <option>RGB <span>(Default)</span></option>
+                            <option>CMYK</option>
+                        </select>
+        				<button class="close" id="setCanvasType">Set Canvas</button>
         			</div>
       			</div>
     		</div>

@@ -11,12 +11,7 @@ $(document).ready(function(){
 		$('#templatesmodal').css("display", "block");
 	});
 
-<<<<<<< HEAD
-	$(". ").click(function(){
-=======
-	//1
 	$(".close-templates, .selected-template").click(function(){
->>>>>>> aeron
 		$('#templatesmodal').css("display", "none");
 		$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
@@ -40,12 +35,7 @@ $(document).ready(function(){
 		$('.drop-menu').toggleClass('show-menu');
 	});
 
-<<<<<<< HEAD
-	$('. ').click(function(){
-=======
-	//2
 	$('.close-connect').click(function(){
->>>>>>> aeron
 		$('#connect-modal').css("display", "none");
 		$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
@@ -66,7 +56,6 @@ $(document).ready(function(){
 		}
 	});
 
-	//3
 	$('#connect-pc').click(function(){
 		$('#connect-modal').css("display", "block");
 	});
@@ -80,13 +69,11 @@ $(document).ready(function(){
 		$(this).addClass('active-preset');
 	});
 
-	//4
 	$('#preset-second').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
 	});
 
-	//5
 	$('#preset-third').click(function(){
 		$('.presets').removeClass('active-preset');
 		$(this).addClass('active-preset');
