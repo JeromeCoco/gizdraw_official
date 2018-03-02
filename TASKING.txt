@@ -1,7 +1,6 @@
 ----------------------------------
 TASKING - [March 1-7]
 	coco - optimize zoom (mobile) - RECENT
-		- random splash screen (mobile)
 		- project templates to desktop - RECENT
 	krisha - save with template, save without template (mobile)
 		- canvas options - color mode (cmyk, rgb) (desktop)
