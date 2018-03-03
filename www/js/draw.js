@@ -383,26 +383,6 @@
 
 		var splitLetter = currentIPaddress.split("");
 
-		/*if (splitLetter.length > 9) {
-			window.plugins.toast.showShortBottom(
-		    	'Please try again.',
-		    	function(a){
-		    		console.log('toast success: ' + a)
-		    	},
-		    	function(b){
-		    		alert('toast error: ' + b)
-		    	}
-		    );
-		} else {
-			var part1 = parseInt(convertSetFromLetterToIP[splitLetter[0]][splitLetter[1]]);
-			var part2 = parseInt(convertSetFromLetterToIP[splitLetter[2]][splitLetter[3]]);
-			var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
-			var part4 = parseInt(convertSetFromLetterToIP[splitLetter[6]][splitLetter[7]]);
-			var convertedIp = part1+"."+part2+"."+part3+"."+part4;
-			alert("converted"+convertedIp);
-	        socket = io('http://'+convertedIp+':3000');
-		}*/
-
 		var part1 = parseInt(convertSetFromLetterToIP[splitLetter[0]][splitLetter[1]]);
 		var part2 = parseInt(convertSetFromLetterToIP[splitLetter[2]][splitLetter[3]]);
 		var part3 = parseInt(convertSetFromLetterToIP[splitLetter[4]][splitLetter[5]]);
@@ -485,7 +465,8 @@
 			tmp_canvas.width = parseInt(data.width);
 			tmp_canvas.height = parseInt(data.height);
 
-			$("#paint").css("box-shadow", "0px 4px 14px grey")
+			$("#paint").css("box-shadow", "0px 4px 14px grey");
+			$("#paint").css("background", "white");
 			$("#sketch").css("background-color", "#d8d8d8");
 			$("#sketch").css("height", "97%");
 
@@ -511,6 +492,11 @@
 			$("#new-canvas").css("display", "block");
 			$("#save-image").css("display", "block");
 			$(".secondary").css("display", "block");
+			
+			if ($('#settings').hasClass('active-menu')) {
+				$('#settings').toggleClass('active-menu');
+				$('.drop-menu').toggleClass('show-menu');
+			}
 
 			var image = new Image();
 			image.src = data.imageSource;
@@ -576,11 +562,11 @@
 		var targetXval = e.targetTouches[0].pageX;
 		mouse.x = typeof targetXval !== 'undefined' ? targetXval : e.layerX;
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
-		// // mouse.x = e.targetTouches[0].pageX - canvasOffset.left;
-		// // mouse.y = e.targetTouches[0].pageY - canvasOffset.top;
+		// mouse.x = e.targetTouches[0].pageX - canvasOffset.left;
+		// mouse.y = e.targetTouches[0].pageY - canvasOffset.top;
 		// mouse.x = e.layerX;
 		// mouse.y = e.layerY;
-		console.log(mouse.x, mouse.y);
+		// console.log(mouse.x, mouse.y);
 
 		if (isConnected) {
 			socket.emit("sendCoordinates", {x: mouse.x, y: mouse.y});
@@ -598,17 +584,6 @@
 		}
 		$("#marker-width-label").html(markerWidth+"px");
 	});
-
-	/*$('#pen-color').change(function () {
-		markerColor = $(this).val();
-		tmp_ctx.strokeStyle = markerColor;
-		tmp_ctx.fillStyle = markerColor;
-		if (isConnected) {
-			socket.emit("sendPenColor", markerColor);
-			eventLogLabel = "Change Tool Color: "+markerColor;
-			socket.emit("onSendEventLog", eventLogLabel);
-		}
-	});*/
 
 	$('#setCanvasType').click(function(){
 		if ($('#canvas-type').val() == "Color") {
@@ -636,7 +611,6 @@
 		mouse.y = typeof targetYval  !== 'undefined' ? targetYval  : e.layerY;
 		prvX = mouse.x;
 		prvY = mouse.y;
-		console.log(mouse.x, mouse.y);
 		ppts.push({x: mouse.x, y: mouse.y});
 		if (isConnected) {
 			socket.emit("onTouchStart", {state:"touchstart", mX:prvX, mY:prvY});
@@ -835,7 +809,6 @@
 		 	if (isConnected) {
 				socket.emit("onUndo", cPushArray[cStep]);
 			}
-			/*console.log(canvasPic.src);*/
 	    }
 
 	    if (isConnected) {
@@ -1203,7 +1176,6 @@
 			} else {
 				socket.emit("onSendGrid", "showGrid");
 			}
-			/*$("#grid").css("top", "-66px");*/
 		}
 	});
 
@@ -1269,7 +1241,6 @@
 
         canvasPic.src = cnvsSrcs;
         ctx.fillStyle = "#FFF";
-        // (bgIsColored)?ctx.fillStyle = bgColor: ctx.fillStyle = "#FFF";
         canvasPic.onload = function () {
         	ctx.drawImage(canvasPic, 0, 0);
         	cnvsSrc = canvas.toDataURL();
@@ -1351,9 +1322,6 @@
 				$("#brush-preset-container, #tools-modal").fadeOut("fast");
 				break;
 			case "shapes":
-				/*$("#active-tool").html(" ");
-				$("#active-tool").html("<img src='img/polygon.svg'>");
-				$("#brush-preset-container, #tools-modal").fadeOut("fast");*/
 				$('#tools-modal').fadeIn("fast");
 				break;
 			case "paint-bucket":
@@ -1386,7 +1354,6 @@
 	        	tmp_canvas.height = canvasPic.height;
 	        	canvas.width = canvasPic.width;
 	        	canvas.height = canvasPic.height;
-	        	/*$("#paint, #tmp_canvas").css({"position": "absolute","top": "50%","left": "50%", "transform": "translate(-50%, -50%)"});*/
 	        	$("#sketch").css("background-color", "#d8d8d8");
 	        	$("#sketch").css("height", "100%");
 	        	$("#paint").css("box-shadow", "0px 4px 14px grey")

@@ -2,6 +2,8 @@
 TASKING - [March 1-7]
 	coco - optimize zoom (mobile) - RECENT
 		- project templates to desktop - RECENT
+		- save jpg (mobile)
+		- open image (desktop)
 	krisha - save with template, save without template (mobile)
 		- canvas options - color mode (cmyk, rgb) (desktop)
 		- shapes, move tool (both)
