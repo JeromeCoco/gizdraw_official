@@ -1182,3 +1182,7 @@ input[type=range].slider:focus::-ms-fill-upper {
 #canvas-mode {
   margin: 0px 0px 15px 10px;
 }
+
+#disconnect {
+  display: none;
+}

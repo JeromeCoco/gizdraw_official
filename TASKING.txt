@@ -1,9 +1,10 @@
 ----------------------------------
 TASKING - [March 1-7]
 	coco - optimize zoom (mobile) - RECENT
-		- project templates to desktop - RECENT
+		- template chooser UI (desktop)
 		- save jpg (mobile)
-		- open image (desktop)
+		- tracing bugs on mobile while connected
+		- save with name (desktop)
 	krisha - save with template, save without template (mobile)
 		- canvas options - color mode (cmyk, rgb) (desktop)
 		- shapes, move tool (both)
@@ -33,6 +34,7 @@ TASKING - [March 1-7]
 /produce qr code
 /snap on grid
 /qr code reader
+/leave canvas checker
 ---------------------------------
 		FULL SIMULATION
 ---------------------------------
