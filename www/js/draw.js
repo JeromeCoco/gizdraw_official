@@ -145,6 +145,7 @@
 	        socket.on("onClearTemplateToMobile", function(){
 	        	$('#template-image').removeAttr('src');
 				onTemplate = false;
+				$("#paint").css("background", "white");
 	        });
   		}
 	}
@@ -323,6 +324,7 @@
         socket.on("onClearTemplateToMobile", function(){
         	$('#template-image').removeAttr('src');
 			onTemplate = false;
+			$("#paint").css("background", "white");
         });
     });
 
@@ -746,6 +748,7 @@
 					$('#template-image').removeAttr('src');
 					onTemplate = false;
 					socket.emit("onClearTemplateFromMobile", 'clear');
+					$("#paint").css("background", "white");
 				}
 			}
 		}
@@ -1512,13 +1515,15 @@
 		var templateType = $(this).attr('data-template-type');
 		if (templateType == "drawing") {
 			$("#template-image").css("z-index", "-1");
+			$("#paint").css("background", "transparent");
 		} else {
 			$("#template-image").css("z-index", "0");
+			$("#paint").css("background", "white");
 		}
 
-		/*$("#sketch").css("zoom", "100%");
+		$("#sketch").css("zoom", "100%");
 		currentView = 100;
-		$("#zoomLabel").html(currentView+"%");*/
+		$("#zoomLabel").html(currentView+"%");
 		$("#template-image").attr('src', 'img/templates/'+selected+'.PNG');
 		onTemplate = true;
 		imgSrc = $(this).attr("src");

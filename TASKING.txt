@@ -5,6 +5,9 @@ TASKING - [March 1-7]
 		- save jpg (mobile)
 		- tracing bugs on mobile while connected
 		- save with name (desktop)
+			- open file (both) - *Untitled
+			- template (both) - *Untitled
+			- prompts to enter filename if untitled
 	krisha - save with template, save without template (mobile)
 		- canvas options - color mode (cmyk, rgb) (desktop)
 		- shapes, move tool (both)
