@@ -5,10 +5,18 @@
 }
 
 #home-page {
-  background-image: url('../img/splash-screen1.png');
+  background-image: url('../img/splashscreen/main.png');
   background-size: cover;
   width: 100%;
   height: 100vh;
+}
+
+#home-page img {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  margin: 5px;
+  width: 75px;
 }
 
 #btnContainer {
@@ -1173,4 +1181,8 @@ input[type=range].slider:focus::-ms-fill-upper {
 
 #canvas-mode {
   margin: 0px 0px 15px 10px;
+}
+
+#disconnect {
+  display: none;
 }
