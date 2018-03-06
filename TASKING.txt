@@ -1,19 +1,13 @@
 ----------------------------------
-TASKING - [March 1-7]
+TASKING - [March 5-7]
 	coco - optimize zoom (mobile) - RECENT
 		- template chooser UI (desktop)
 		- save jpg (mobile)
-		- tracing bugs on mobile while connected
 		- save with name (desktop)
-			- open file (both) - *Untitled
-			- template (both) - *Untitled
-			- prompts to enter filename if untitled
-	krisha - save with template, save without template (mobile)
-		- canvas options - color mode (cmyk, rgb) (desktop)
+	krisha - canvas options - color mode (cmyk, rgb) (desktop)
 		- shapes, move tool (both)
 		- optimize grid lines (both) - 	RECENT
-	isog - canvas options (paper texture, transparent) (both)
-		- canvas options (esc to cancel resize) (desktop)
+	isog - canvas options (esc to cancel resize) (desktop)
 		- add brush preset (both)
 		- paint bucket (both)
 		- canvas options (rotate) (both)

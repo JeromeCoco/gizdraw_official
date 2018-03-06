@@ -44,7 +44,7 @@
 	var prevDiff = -1;
 	var currentView = 100;
 	var canvasOffset = $('#tmp_canvas').offset();
-
+	var  buttonID;
 	if(firstLaunch) {
 	  	$("#tutorial-1").css("display", "none");
 	} else {
@@ -152,7 +152,7 @@
 
 	$('#pencil').addClass('active');
 	$('#custom-bg-color').css("display", "none");
-	$('#connect-modal').css("display", "none");
+	$('#connect-pcmodal').css("display", "none");
 	/*StatusBar.hide();*/
 
 	$("#collapse-tools").click(function(){
@@ -426,7 +426,8 @@
 				cStep = -1;
         	}
 
-			$("#connect-modal").css("display", "none");
+			$("#connect-pcmodal").css("display", "none");
+			$("#disconnect").css("display", "block");
 
 			canvas.width = parseInt(data.canvasWidth);
 			canvas.height = parseInt(data.canvasHeight);
@@ -464,7 +465,8 @@
         });
 
         socket.on("receiveImageToMobileFromPC", function(data){
-        	$("#connect-modal").css("display", "none");
+        	$("#connect-pcmodal").css("display", "none");
+        	$("#disconnect").css("display", "block");
 
 			canvas.width = parseInt(data.width);
 			canvas.height = parseInt(data.height);
@@ -491,7 +493,9 @@
 			$(".drop-menu").css("top", "48px");
 			$(".slider").css("top", "25px");
 			$("#connect-pc").css("display", "none");
-			
+			$('#template-image').removeAttr('src');
+			onTemplate = false;
+
 			if ($('#settings').hasClass('active-menu')) {
 				$('#settings').toggleClass('active-menu');
 				$('.drop-menu').toggleClass('show-menu');
@@ -779,6 +783,7 @@
 	        cStep++;
 	        canvasPic.src = cPushArray[cStep];
 	        canvasPic.onload = function () {
+	        	ctx.globalCompositeOperation = 'source-over';
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
 	        }
@@ -804,6 +809,7 @@
 	        var src = cPushArray[cStep];
 	        canvasPic.src = cPushArray[cStep];
 	        canvasPic.onload = function (){
+	        	ctx.globalCompositeOperation = 'source-over';
 	        	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	        	ctx.drawImage(canvasPic, 0, 0);
 	        }
@@ -1180,6 +1186,10 @@
 		}
 	});
 
+	$('#connect-pc').click(save_first);
+
+	$("#templates").click(save_first);
+
 	$("#disconnect").click(function(){
 		var confirmation = confirm("Are you sure you want to disconnect?");
 		if (confirmation) {
@@ -1232,20 +1242,18 @@
 	});
 
 	$("#save-template").click(function() {
-		var cnvsSrc, cnvsSrcs;
-		cnvsSrcs = canvas.toDataURL();
-		canvasPic.src = canvas.toDataURL(imgSrc);
-		console.log(canvas.toDataURL(imgSrc));
-		canvasPic.onload = function () {
-			ctx.drawImage(canvasPic,0,0);
-		}
-
-        canvasPic.src = cnvsSrcs;
-        ctx.fillStyle = "#FFF";
-        canvasPic.onload = function () {
+		var cnvsSrc, imgEl;
+		canvasPic.src = canvas.toDataURL();
+   		canvasPic.onload = function () {
+        	ctx.clearRect(0, 0, canvas.width, canvas.height);
         	ctx.drawImage(canvasPic, 0, 0);
+        }
+        imgEl = document.getElementById("template-image");
+        
+        $('#template-image').attr('crossOrigin', 'Anonymous');
+        canvasPic.onload = function () {
+        	ctx.drawImage(imgEl, 0, 0);
         	cnvsSrc = canvas.toDataURL();
-        	console.log(cnvsSrc);
         	window.Base64ImageSaverPlugin.saveImageDataToLibrary(
 		        function(msg){
 		            console.log(msg);
@@ -1256,6 +1264,7 @@
 		        cnvsSrc
 		    );
         }
+
 	    window.plugins.toast.showShortBottom(
 	    	'Image saved to device.',
 	    	function(a){
@@ -1697,5 +1706,27 @@
 	            break;
 	        }
 	    }
+	}
+
+	function save_first() {
+		buttonID = $(this).attr('id');
+		// console.log(buttonID+'modal');
+		if (cStep < 0){
+			$('#'+buttonID+'modal').css("display", "block");
+		}else {
+			var confirmation = confirm("Do you want to save this first?");
+		}
+		if (confirmation) {
+			$('#save-modal').css("display", "block");
+			if (onTemplate) {
+				$(".primary-saving").css("display", "none");
+				$(".secondary-saving").css("display", "block");
+			} else {
+				$(".primary-saving").css("display", "block");
+				$(".secondary-saving").css("display", "none");
+			}
+		}else {
+			$('#'+buttonID+'modal').css("display", "block");
+		}
 	}
 }());

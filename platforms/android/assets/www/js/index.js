@@ -7,9 +7,9 @@ $(document).ready(function(){
 		$('#canvas-settings-modal').css("display", "block");
 	});
 
-	$("#templates").click(function(){
-		$('#templatesmodal').css("display", "block");
-	});
+	// $("#templates").click(function(){
+	// 	$('#templatesmodal').css("display", "block");
+	// });
 
 	$(".close-templates, .selected-template").click(function(){
 		$('#templatesmodal').css("display", "none");
@@ -36,7 +36,7 @@ $(document).ready(function(){
 	});
 
 	$('.close-connect').click(function(){
-		$('#connect-modal').css("display", "none");
+		$('#connect-pcmodal').css("display", "none");
 		$('#settings').toggleClass('active-menu');
 		$('.drop-menu').toggleClass('show-menu');
 	});
@@ -56,9 +56,9 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#connect-pc').click(function(){
-		$('#connect-modal').css("display", "block");
-	});
+	// $('#connect-pc').click(function(){
+	// 	$('#connect-pcmodal').css("display", "block");
+	// });
 
 	$("#help").click(function() {
 		$('#tuts-modal').css("display", "block");

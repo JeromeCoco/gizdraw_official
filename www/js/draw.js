@@ -427,6 +427,7 @@
         	}
 
 			$("#connect-pcmodal").css("display", "none");
+			$("#disconnect").css("display", "block");
 
 			canvas.width = parseInt(data.canvasWidth);
 			canvas.height = parseInt(data.canvasHeight);
@@ -465,6 +466,7 @@
 
         socket.on("receiveImageToMobileFromPC", function(data){
         	$("#connect-pcmodal").css("display", "none");
+        	$("#disconnect").css("display", "block");
 
 			canvas.width = parseInt(data.width);
 			canvas.height = parseInt(data.height);
@@ -491,7 +493,9 @@
 			$(".drop-menu").css("top", "48px");
 			$(".slider").css("top", "25px");
 			$("#connect-pc").css("display", "none");
-			
+			$('#template-image').removeAttr('src');
+			onTemplate = false;
+
 			if ($('#settings').hasClass('active-menu')) {
 				$('#settings').toggleClass('active-menu');
 				$('.drop-menu').toggleClass('show-menu');
@@ -1238,20 +1242,18 @@
 	});
 
 	$("#save-template").click(function() {
-		var cnvsSrc, cnvsSrcs;
-		cnvsSrcs = canvas.toDataURL();
-		canvasPic.src = canvas.toDataURL(imgSrc);
-		console.log(canvas.toDataURL(imgSrc));
-		canvasPic.onload = function () {
-			ctx.drawImage(canvasPic,0,0);
-		}
-
-        canvasPic.src = cnvsSrcs;
-        ctx.fillStyle = "#FFF";
-        canvasPic.onload = function () {
+		var cnvsSrc, imgEl;
+		canvasPic.src = canvas.toDataURL();
+   		canvasPic.onload = function () {
+        	ctx.clearRect(0, 0, canvas.width, canvas.height);
         	ctx.drawImage(canvasPic, 0, 0);
+        }
+        imgEl = document.getElementById("template-image");
+        
+        $('#template-image').attr('crossOrigin', 'Anonymous');
+        canvasPic.onload = function () {
+        	ctx.drawImage(imgEl, 0, 0);
         	cnvsSrc = canvas.toDataURL();
-        	console.log(cnvsSrc);
         	window.Base64ImageSaverPlugin.saveImageDataToLibrary(
 		        function(msg){
 		            console.log(msg);
@@ -1262,6 +1264,7 @@
 		        cnvsSrc
 		    );
         }
+
 	    window.plugins.toast.showShortBottom(
 	    	'Image saved to device.',
 	    	function(a){

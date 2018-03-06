@@ -1,15 +1,11 @@
 $(document).ready(function(){
 	var lastTimeBackPress=0;
 	var timePeriodToExit=2000;
-	$('.simple_color_l	ive_preview').simpleColor({ livePreview: true, cellWidth: 15, cellHeight: 15 });
+	$('.simple_color_live_preview').simpleColor({ livePreview: true, cellWidth: 15, cellHeight: 15 });
 	
 	$('#canvas-settings').click(function(){
 		$('#canvas-settings-modal').css("display", "block");
-	});
-
-	// $("#templates").click(function(){
-	// 	$('#templatesmodal').css("display", "block");
-	// });
+	});	
 
 	$(".close-templates, .selected-template").click(function(){
 		$('#templatesmodal').css("display", "none");
@@ -55,10 +51,6 @@ $(document).ready(function(){
 			$('#custom-bg-color').fadeOut('slow');
 		}
 	});
-
-	// $('#connect-pc').click(function(){
-	// 	$('#connect-pcmodal').css("display", "block");
-	// });
 
 	$("#help").click(function() {
 		$('#tuts-modal').css("display", "block");
